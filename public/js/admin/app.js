@@ -7542,6 +7542,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "getListCard": () => (/* binding */ getListCard),
 /* harmony export */   "storeCard": () => (/* binding */ storeCard),
 /* harmony export */   "register": () => (/* binding */ register),
+/* harmony export */   "login": () => (/* binding */ login),
 /* harmony export */   "checkCardIsExists": () => (/* binding */ checkCardIsExists),
 /* harmony export */   "removeCard": () => (/* binding */ removeCard),
 /* harmony export */   "CardDTO": () => (/* binding */ CardDTO)
@@ -7577,6 +7578,13 @@ function register(data) {
     password: data.password
   };
   return _axios__WEBPACK_IMPORTED_MODULE_0__.default.post('/card/register', params);
+}
+function login(data) {
+  var params = {
+    email: data.email,
+    password: data.password
+  };
+  return _axios__WEBPACK_IMPORTED_MODULE_0__.default.post('/card/login', params);
 }
 function checkCardIsExists(data) {
   var params = {

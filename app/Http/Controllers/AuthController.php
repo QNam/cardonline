@@ -16,7 +16,7 @@ class AuthController extends Controller
         $cardContent = Card::where('email', $request->email)->first();
 
         if(!$cardContent) {
-            return $this->sendBadRequest();
+            return $this->sendUnauthorized();
         }
 
         if(!Hash::check($request->password, $cardContent->password)) {
@@ -32,6 +32,7 @@ class AuthController extends Controller
     public function register(RegisterRequest $request) {
         $card = new Card();
         $emailExists = Card::checkEmailExists($request->email);
+        $cardIdExists = Card::checkCardExists($request->id);
 
         if($emailExists) {
             $rep = [
@@ -44,15 +45,25 @@ class AuthController extends Controller
             return $this->sendBadRequest($rep);
         }
 
+        if(!$cardIdExists) {
+            $rep = [
+                "error" => [
+                    "id" => [
+                        "The id is not allow."
+                    ]
+                ]
+            ];
+            return $this->sendBadRequest($rep);
+        }
+
         $data = [
             'userName' => $request->userName,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'id' =>  $request->id
         ];
 
         try {
-            $card->insert($data);
+            $card->where('id', $request->id)->update($data);
             return $this->sendSuccess();
         } catch (\Exception $e) {
             return $this->sendServerError($e);

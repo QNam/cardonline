@@ -21,7 +21,7 @@
                         <label for="">Mã số thẻ</label>
                         <input type="text" class="form-control" placeholder="Card Number" :class="{'form-control-error': submited && !$v.cardId.required}" v-model.trim="$v.cardId.$model">
                         <span class="error" v-if="submited && !$v.cardId.required">Mã số thẻ không được bỏ trống ! </span>
-                        <span class="error" v-if="!cardIdUnique">Mã số thẻ không đúng hoặc đã được sử dụng ! </span>
+                        <span class="error" v-if="!cardIdExists">Mã số thẻ không đúng hoặc đã được sử dụng ! </span>
                     </div>
                     <div class="form-group mt-3">
                         <label for="">Mật khẩu</label>
@@ -58,7 +58,7 @@ export default {
 
             submited: false,
             emailUnique: true,
-            cardIdUnique: true,
+            cardIdExists: true,
 
             loadingSubmit: false
         }
@@ -85,7 +85,9 @@ export default {
     },
 
     mounted() { 
-      
+        if(this.$route.query && typeof this.$route.query.id !== 'undefined') {
+            this.cardId = this.$route.query.id
+        }
     },
 
     methods: {
@@ -101,10 +103,10 @@ export default {
             const cardIdExists = await this.checkCardIsExists(this.cardId)
             const emailExists = await this.checkCardIsExists(this.email, 'email')
             
-            this.cardIdUnique = !cardIdExists
+            this.cardIdExists = cardIdExists
             this.emailUnique = !emailExists
 
-            if(!this.cardIdUnique || !this.emailUnique) {
+            if(!this.cardIdExists || !this.emailUnique) {
                 this.loadingSubmit = false
                 return false
             }
@@ -120,9 +122,10 @@ export default {
                 await register(params)
 
                 this.$router.push({ name: 'Login' })
-                
+                this.loadingSubmit = false
             } catch($e) {
                 console.log($e)
+                this.loadingSubmit = false
                 this.$notify({
                     type: 'error',
                     text: 'Có lỗi xảy ra! Vui lòng thử lại sau.'

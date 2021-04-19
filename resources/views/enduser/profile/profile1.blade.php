@@ -141,12 +141,14 @@
         padding-top: 150px
     }
     .profile__content {
+        padding: 24px;
+        min-height: 80vh;
         background-color: #fff;
         border-radius: 12px;
         box-shadow: 0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 1%);
         margin-top: -75px;
         border-bottom-left-radius: 0px;
-        border-bottom-right-radius: 0px
+        border-bottom-right-radius: 0px;
     }
     .profile__avatar {
         width: 172px;
@@ -162,10 +164,6 @@
         width: 100%;
         height: 100%;
         object-fit: cover
-    }
-
-    .profile__content {
-        padding: 24px;
     }
 
     .profile__content h1 {

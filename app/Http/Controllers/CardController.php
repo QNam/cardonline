@@ -110,8 +110,20 @@ class CardController extends Controller
         $themeAllow = [1];
         $themeId = 1;
 
-        if(!$cardContent) {
+        if(!$cardContent) { 
             return redirect()->route('Register');
+        }
+
+        if($cardContent['email'] == "") {
+            return redirect()->route('Register', ['id' => $cardContent['id']]);
+        }
+
+        if(!$cardContent['avatar_img'] || $cardContent['avatar_img'] == "") {
+            $cardContent['avatar_img'] = 'https://www.ro-spain.com/wp-content/uploads/2018/07/default-avatar.png';
+        }
+
+        if(!$cardContent['background_img'] || $cardContent['background_img'] == "") {
+            $cardContent['background_img'] = 'https://cover-talk.zadn.vn/0/f/3/a/1/4345cc7015c1bbcae0d24e8a26ec3ae5.jpg';
         }
 
         if( in_array($cardContent->theme,$themeAllow) ) {
@@ -121,9 +133,35 @@ class CardController extends Controller
         $view = 'enduser/profile/profile' . $themeId;
         $cardLink = $cardContent->links()->get();
         
+        $count = 0;
         forEach($cardLink as &$link) {
             $link->name = \Config::get('variable.social_data.' . $link->type . '.name');
             $link->thumb = \Config::get('variable.social_data.' . $link->type . '.thumb');
+            $count++;
+        }
+
+        $cardLinkEmail = [
+            "link_id" => $count,
+            "type" => "gmail",
+            "link" => $cardContent['gmail'],
+            "card_id" => $cardContent['id'],
+            "name" => \Config::get('variable.social_data.gmail.name'),
+            "thumb" => \Config::get('variable.social_data.gmail.thumb')
+        ];
+        
+        $cardLink->push($cardLinkEmail);
+
+        if($cardContent['phoneNumber']) {
+            $cardLinkPhone = [
+                "link_id" => $count + 1,
+                "type" => "phone",
+                "link" => $cardContent['phoneNumber'],
+                "card_id" => $cardContent['id'],
+                "name" => \Config::get('variable.social_data.phone.name'),
+                "thumb" => \Config::get('variable.social_data.phone.thumb')
+            ];
+
+            $cardLink->push($cardLinkPhone);
         }
 
         return view($view, ['card' => $cardContent, 'cardLink' => $cardLink]);

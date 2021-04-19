@@ -32,6 +32,15 @@ export function register(data) {
     return http.post('/card/register', params)
 }
 
+export function login(data) {
+    const params = {
+        email: data.email,
+        password: data.password,
+    }
+
+    return http.post('/card/login', params)
+}
+
 
 export function checkCardIsExists(data) {
     const params = {
