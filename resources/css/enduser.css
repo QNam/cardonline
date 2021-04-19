@@ -1,0 +1,90 @@
+* {
+    padding: 0; 
+    margin: 0; 
+    color: #333; 
+    /* font-family: 'Poppins', sans-serif; */
+}
+p,h1,h2,h3,h4,h5,h6,ul,li,label {
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    text-decoration: none!important;
+    color: #333;
+}
+
+li {
+    list-style: none!important;
+}
+
+.authForm .form-check-label {
+    font-weight: 500;
+}
+.authForm .form-group label {
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+.authForm .form-group input{
+    padding: 11px;
+    border-radius: 4px;
+}
+
+.authForm .form-group input::placeholder {
+    color: #ccc;
+}
+.authForm button {
+    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 10%), 0 4px 6px -2px rgb(0 0 0 / 5%);
+    padding: 12px 24px;
+    color: #fff;
+    font-weight: 700;
+    background-color: #333
+}
+
+.authForm button:hover {
+    color: #fff;
+    background-color: #333;
+}
+
+.authForm {
+    margin-bottom: 40px
+}
+.authForm__wrap {
+    width: 100%;
+    border-radius: 12px;
+    padding: 32px;
+    background-color: rgb(226, 232, 240)
+}
+
+.authForm__wrap>h3 {
+    font-weight: 700;
+}
+
+
+
+.authForm__footer {
+    display: flex;
+    padding: 0px 8px;
+    align-items: center;
+    justify-content: space-between
+}
+
+.authForm__footer a {
+    font-size: 14px;
+    color: #333;
+}
+
+@media only screen and (max-width: 565px) {
+    .authForm__wrap{
+        padding: 24px;
+    }
+}
+
+.fade-enter, .fade-leave-top {
+    opacity: 0;
+    transform: translateX(2em);
+}
+
+.fade-enter-active, .fade-leave-active {
+    transition: all .5s ease;
+} 
