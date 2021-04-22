@@ -143,10 +143,14 @@ class CardController extends Controller
 
         if(!$cardContent['avatar_img'] || $cardContent['avatar_img'] == "") {
             $cardContent['avatar_img'] = 'https://www.ro-spain.com/wp-content/uploads/2018/07/default-avatar.png';
+        } else {
+            $cardContent['avatar_img'] = env('MIX_APP_UPLOADFILE_URL') . $cardContent['avatar_img'];
         }
 
         if(!$cardContent['background_img'] || $cardContent['background_img'] == "") {
             $cardContent['background_img'] = 'https://cover-talk.zadn.vn/0/f/3/a/1/4345cc7015c1bbcae0d24e8a26ec3ae5.jpg';
+        } else {
+            $cardContent['background_img'] = env('MIX_APP_UPLOADFILE_URL') . $cardContent['background_img'];
         }
 
         if( in_array($cardContent->theme,$themeAllow) ) {
@@ -197,7 +201,7 @@ class CardController extends Controller
             $cardContent = $card->where('id', $request->id)->first();
             $cardLink = $cardContent->links()->get();
             $cardContent['links'] = $cardLink;
-            
+
             if($cardContent) {
                 return $this->sendSuccess($cardContent);
             } else {
