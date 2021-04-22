@@ -17,6 +17,10 @@ class Response {
         return Response::sendResponse(400, $data, $message);
     }
 
+    static public function sendNotFoundRequest($data = [], $message = "Not Found") {
+        return Response::sendResponse(404, $data, $message);
+    }
+
     static public function sendServerError($data = [], $message = "Server Error") {
         return Response::sendResponse(500, $data, $message);
     }

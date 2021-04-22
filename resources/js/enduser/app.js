@@ -13,9 +13,12 @@ import router from './router';
 import http from '../axios'
 import Vuelidate from 'vuelidate'
 import Notifications from 'vue-notification'
+import ElementUI from 'element-ui';
+import 'element-ui/lib/theme-chalk/index.css';
 
 Vue.use(Vuelidate)
 Vue.use(Notifications)
+Vue.use(ElementUI);
 
 Vue.prototype.$http = http;
 

@@ -1,5 +1,5 @@
 import http from '../axios'
-import {toQrcode} from '../ultis'
+import {toQrcode, getUrlImage} from '../ultis'
 
 export function getListCard(data) {
     return http.get('/card/getList', {
@@ -10,12 +10,36 @@ export function getListCard(data) {
     })
 }
 
+export function getCardById(id) {
+    return http.get('/card/getById', {
+        params: { 
+            id
+        }
+    })
+}
+
 export function storeCard(data) {
     const params = {
         id: data.id,
         userName: data.userName,
         phoneNumber: data.phoneNumber,
         email: data.email,
+    }
+
+    if(data && data.descr) {
+        params.descr = data.descr
+    }
+
+    if(data && data.background_img) {
+        params.background_img = data.background_img
+    }
+
+    if(data && data.avatar_img) {
+        params.avatar_img = data.avatar_img
+    }
+
+    if(data && data.links) {
+        params.links = data.links
     }
 
     return http.post('/card', params)
@@ -59,13 +83,27 @@ export function removeCard(cardId) {
 }
 
 export class CardDTO {
-    constructor(card = {}) {
-        this.id = typeof card.id !== 'undefined' ? card.id : null
-        this.userName = card.userName ? card.userName : ''
-        this.phoneNumber = card.phoneNumber ? card.phoneNumber : ''
-        this.email = card.email ? card.email : ''
-        this.scanNumber = card.scanNumber ? card.scanNumber : ''
-        this.activeTime = card.activeTime ? card.activeTime : ''
+    constructor(card = null) {
+        this.id = card && typeof card.id !== 'undefined' ? card.id : null
+        this.userName = card && card.userName ? card.userName : ''
+        this.phoneNumber = card && card.phoneNumber ? card.phoneNumber : ''
+        this.email = card && card.email ? card.email : ''
+        this.descr = card && card.descr ? card.descr : ''
+        this.scanNumber = card && card.scanNumber ? card.scanNumber : ''
+        this.activeTime = card && card.activeTime ? card.activeTime : ''
         this.qrCode = toQrcode(process.env.MIX_APP_URL + this.id)
+        this.avatar_img = card && card.avatar_img && card.avatar_img != "" ? card.avatar_img  : ''
+        this.avatar_img_url = card && card.avatar_img && card.avatar_img != "" ? getUrlImage(card.avatar_img)  : 'https://www.ro-spain.com/wp-content/uploads/2018/07/default-avatar.png'
+        this.background_img = card && card.background_img && card.background_img != "" ? card.background_img : ''
+        this.background_img_url = card && card.background_img && card.background_img != "" ? getUrlImage(card.background_img) : 'https://cover-talk.zadn.vn/0/f/3/a/1/4345cc7015c1bbcae0d24e8a26ec3ae5.jpg'
+
+        this.links = card && card.links ? card.links : null
+    }
+
+    static setDefaultLinksFormat(links = null) {
+        return {
+            type: links && links.type ? links.type : "",
+            link: links && links.link ? links.link : ""
+        }
     }
 }

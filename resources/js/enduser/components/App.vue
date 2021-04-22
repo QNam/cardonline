@@ -1,11 +1,18 @@
 <template>
-  <div class="mainPage">
+  <div>
+    <template v-if="$route.name == 'EditCard'">
+      <router-view></router-view>
+    </template>  
+    <template v-else>
+      <div class="mainPage">
       <navbar />
       <notifications position="top right"/>
       <transition>
         <router-view></router-view>
       </transition>
       <Footer />
+      </div>
+    </template>
   </div>
 </template>
 

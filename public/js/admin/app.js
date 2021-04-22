@@ -7540,6 +7540,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_3__.default({
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "getListCard": () => (/* binding */ getListCard),
+/* harmony export */   "getCardById": () => (/* binding */ getCardById),
 /* harmony export */   "storeCard": () => (/* binding */ storeCard),
 /* harmony export */   "register": () => (/* binding */ register),
 /* harmony export */   "login": () => (/* binding */ login),
@@ -7551,6 +7552,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ultis__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../ultis */ "./resources/js/ultis.js");
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
 
 
 function getListCard(data) {
@@ -7561,6 +7566,13 @@ function getListCard(data) {
     }
   });
 }
+function getCardById(id) {
+  return _axios__WEBPACK_IMPORTED_MODULE_0__.default.get('/card/getById', {
+    params: {
+      id: id
+    }
+  });
+}
 function storeCard(data) {
   var params = {
     id: data.id,
@@ -7568,6 +7580,23 @@ function storeCard(data) {
     phoneNumber: data.phoneNumber,
     email: data.email
   };
+
+  if (data && data.descr) {
+    params.descr = data.descr;
+  }
+
+  if (data && data.background_img) {
+    params.background_img = data.background_img;
+  }
+
+  if (data && data.avatar_img) {
+    params.avatar_img = data.avatar_img;
+  }
+
+  if (data && data.links) {
+    params.links = data.links;
+  }
+
   return _axios__WEBPACK_IMPORTED_MODULE_0__.default.post('/card', params);
 }
 function register(data) {
@@ -7599,19 +7628,40 @@ function removeCard(cardId) {
   };
   return _axios__WEBPACK_IMPORTED_MODULE_0__.default.post('/card/remove', params);
 }
-var CardDTO = function CardDTO() {
-  var card = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+var CardDTO = /*#__PURE__*/function () {
+  function CardDTO() {
+    var card = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
 
-  _classCallCheck(this, CardDTO);
+    _classCallCheck(this, CardDTO);
 
-  this.id = typeof card.id !== 'undefined' ? card.id : null;
-  this.userName = card.userName ? card.userName : '';
-  this.phoneNumber = card.phoneNumber ? card.phoneNumber : '';
-  this.email = card.email ? card.email : '';
-  this.scanNumber = card.scanNumber ? card.scanNumber : '';
-  this.activeTime = card.activeTime ? card.activeTime : '';
-  this.qrCode = (0,_ultis__WEBPACK_IMPORTED_MODULE_1__.toQrcode)("http://cardonline.local/" + this.id);
-};
+    this.id = card && typeof card.id !== 'undefined' ? card.id : null;
+    this.userName = card && card.userName ? card.userName : '';
+    this.phoneNumber = card && card.phoneNumber ? card.phoneNumber : '';
+    this.email = card && card.email ? card.email : '';
+    this.descr = card && card.descr ? card.descr : '';
+    this.scanNumber = card && card.scanNumber ? card.scanNumber : '';
+    this.activeTime = card && card.activeTime ? card.activeTime : '';
+    this.qrCode = (0,_ultis__WEBPACK_IMPORTED_MODULE_1__.toQrcode)("http://cardonline.local/" + this.id);
+    this.avatar_img = card && card.avatar_img && card.avatar_img != "" ? card.avatar_img : '';
+    this.avatar_img_url = card && card.avatar_img && card.avatar_img != "" ? (0,_ultis__WEBPACK_IMPORTED_MODULE_1__.getUrlImage)(card.avatar_img) : 'https://www.ro-spain.com/wp-content/uploads/2018/07/default-avatar.png';
+    this.background_img = card && card.background_img && card.background_img != "" ? card.background_img : '';
+    this.background_img_url = card && card.background_img && card.background_img != "" ? (0,_ultis__WEBPACK_IMPORTED_MODULE_1__.getUrlImage)(card.background_img) : 'https://cover-talk.zadn.vn/0/f/3/a/1/4345cc7015c1bbcae0d24e8a26ec3ae5.jpg';
+    this.links = card && card.links ? card.links : null;
+  }
+
+  _createClass(CardDTO, null, [{
+    key: "setDefaultLinksFormat",
+    value: function setDefaultLinksFormat() {
+      var links = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+      return {
+        type: links && links.type ? links.type : "",
+        link: links && links.link ? links.link : ""
+      };
+    }
+  }]);
+
+  return CardDTO;
+}();
 
 /***/ }),
 
@@ -7648,7 +7698,8 @@ window.http = http;
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "toQrcode": () => (/* binding */ toQrcode)
+/* harmony export */   "toQrcode": () => (/* binding */ toQrcode),
+/* harmony export */   "getUrlImage": () => (/* binding */ getUrlImage)
 /* harmony export */ });
 function toQrcode(string) {
   var size = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'md';
@@ -7662,6 +7713,9 @@ function toQrcode(string) {
   }
 
   return "https://chart.googleapis.com/chart?chs=".concat(size, "&cht=qr&chl=").concat(string, "&choe=UTF-8");
+}
+function getUrlImage(imageName) {
+  return "//cardonline.local/images/" + imageName;
 }
 
 /***/ }),

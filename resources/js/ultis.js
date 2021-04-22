@@ -8,3 +8,7 @@ export function toQrcode(string, size = 'md') {
     }
     return `https://chart.googleapis.com/chart?chs=${size}&cht=qr&chl=${string}&choe=UTF-8`
 }
+
+export function getUrlImage(imageName) {
+    return process.env.MIX_APP_UPLOADFILE_URL + imageName
+}

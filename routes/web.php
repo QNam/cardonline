@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use Illuminate\Support\Facades\Auth;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -24,6 +24,12 @@ Route::get('/login',  function(){
 Route::get('/register',  function(){
     return view('enduser/app');
 })->name('Register');
+
+Route::middleware(['web'])->group(function () {
+    Route::get('/edit/{id}',  function(){
+        return view('enduser/app');
+    })->name('EditUser');
+});
 
 // Route::post('/register', 'App\Http\Controllers\AuthController@register');
 Route::get('/quantri/{any?}', App\Http\Controllers\Admin\DashboardController::class);

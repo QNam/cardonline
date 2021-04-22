@@ -25,6 +25,8 @@ class Card extends Authenticatable {
         'phoneNumber',
         'created_at',
         'updated_at',
+        'background_img',
+        'avatar_img',
     ];
 
     public function links()

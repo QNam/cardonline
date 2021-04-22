@@ -31,4 +31,8 @@ class Controller extends BaseController
     public function sendUnauthorized($data = [], $message = "Unauthorized") {
         return Response::sendUnauthorized($data, $message);
     }
+
+    public function sendNotFoundRequest($data = [], $message = "Not Found") {
+        return Response::sendNotFoundRequest($data, $message);
+    }
 } 

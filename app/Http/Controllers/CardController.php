@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Card;
+use App\Models\CardLinks;
 
 class CardController extends Controller
 {
@@ -50,10 +51,15 @@ class CardController extends Controller
     }
 
     public function storeCard(Request $request) {
+        $card = new Card();
+        $cardLink = new CardLinks();
         $param = [
             'userName' => $request->userName,
             'email' => $request->email,
             'phoneNumber' => $request->phoneNumber,
+            'descr' => $request->descr,
+            'background_img' => $request->background_img,
+            'avatar_img' => $request->avatar_img
         ];
 
         try {
@@ -61,6 +67,23 @@ class CardController extends Controller
                 ['id' => $request->id],
                 $param
             );
+
+            //BUG WHEN LINKS IS EMPTY !!!
+            if($request->links) {
+                $linksInsert = [];
+                foreach($request->links as $value) {
+                    $tmp = [
+                        'card_id' => $request->id,
+                        'type' => $value['type'],
+                        'link' => $value['link']
+                    ];
+
+                    array_push($linksInsert, $tmp);
+                }
+
+                $cardLink->where('card_id', $request->id)->delete();
+                $cardLink->insert($linksInsert);
+            }
 
             $rep = [
                 'success' => true,
@@ -165,5 +188,23 @@ class CardController extends Controller
         }
 
         return view($view, ['card' => $cardContent, 'cardLink' => $cardLink]);
+    }
+
+    public function getById(Request $request) {
+        try {
+            $card = new Card();
+
+            $cardContent = $card->where('id', $request->id)->first();
+            $cardLink = $cardContent->links()->get();
+            $cardContent['links'] = $cardLink;
+            
+            if($cardContent) {
+                return $this->sendSuccess($cardContent);
+            } else {
+                return $this->sendNotFoundRequest();
+            }
+        } catch (\Exception $e) {
+            return $this->sendServerError($e);
+        }
     }
 }

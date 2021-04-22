@@ -24,4 +24,7 @@ Route::post('/card/login', 'App\Http\Controllers\AuthController@Login');
 Route::post('/card/exists', 'App\Http\Controllers\CardController@cardIsExists');
 Route::get('/card/getList', 'App\Http\Controllers\CardController@getListCard');
 Route::post('/card', 'App\Http\Controllers\CardController@storeCard');
+Route::get('/card/getById', 'App\Http\Controllers\CardController@getById');
 Route::post('/card/remove', 'App\Http\Controllers\CardController@removeCard');
+
+Route::post('/media/uploadImage', 'App\Http\Controllers\MediaController@uploadImage');
