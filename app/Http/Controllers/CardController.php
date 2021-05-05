@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Card;
 use App\Models\CardLinks;
+use JeroenDesloovere\VCard\VCard;
 
 class CardController extends Controller
 {
@@ -192,6 +193,26 @@ class CardController extends Controller
         }
 
         return view($view, ['card' => $cardContent, 'cardLink' => $cardLink]);
+    }
+
+    public function saveProfileToPhone(Request $request) {
+        $card = new Card();
+
+        $cardContent = $card->where('id', $request->id)->first();
+        $cardLink = $cardContent->links()->get();
+        $cardContent['links'] = $cardLink;
+
+        $vcard = new VCard();
+
+        $vcard->addName("", $cardContent->userName, "", "", "");
+        $vcard->addEmail($cardContent->email);
+        $vcard->addPhoneNumber($cardContent->phoneNumber, 'PREF;WORK');
+        // $vcard->addAddress(null, null, 'street', 'worktown', null, 'workpostcode', 'Belgium');
+        // $vcard->addLabel('street, worktown, workpostcode Belgium');
+        // $vcard->addURL('http://www.jeroendesloovere.be');
+        //$vcard->addPhoto(__DIR__ . '/landscape.jpeg');
+
+        return $vcard->download();
     }
 
     public function getById(Request $request) {

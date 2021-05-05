@@ -31,10 +31,12 @@ Route::middleware(['web'])->group(function () {
     })->name('EditUser');
 });
 
+Route::get('/saveToPhone/{id}', 'App\Http\Controllers\CardController@saveProfileToPhone')->name('SaveToPhone');
+
 // Route::post('/register', 'App\Http\Controllers\AuthController@register');
 Route::get('/quantri/{any?}', App\Http\Controllers\Admin\DashboardController::class);
 
-Route::get('/{any?}',  'App\Http\Controllers\CardController@profile')->name('Profile');
+Route::get('/{any?}', 'App\Http\Controllers\CardController@profile')->name('Profile');
 
 // Route::get('/quantri', 'App\Http\Controllers\Admin\DashboardController@index');
 

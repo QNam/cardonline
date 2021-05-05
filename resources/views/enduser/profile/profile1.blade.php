@@ -27,8 +27,9 @@
                 @endif
 
                 <div class="profile_connect">
-                    <a href="">Lưu danh bạ</a>
+                    <a href="{{ route('SaveToPhone', ['id' => $card->id]) }}">Lưu danh bạ</a>
                     <a href="">Kết nối</a>
+                    {{-- <a href="wtai://wp/ap;0386055556;nam doan quoc">TEXT</a> --}}
                 </div>
 
                 <div class="profile__socials">
