@@ -212,7 +212,12 @@ class CardController extends Controller
         // $vcard->addURL('http://www.jeroendesloovere.be');
         //$vcard->addPhoto(__DIR__ . '/landscape.jpeg');
 
-        return $vcard->download();
+        // return $vcard->download();
+        return Response::make(
+            $this->vcard->getOutput(),
+            200,
+            $this->vcard->getHeaders(true)
+        );
     }
 
     public function getById(Request $request) {
