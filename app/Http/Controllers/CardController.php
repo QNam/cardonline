@@ -215,9 +215,9 @@ class CardController extends Controller
 
         // return $vcard->download();
         return Response::make(
-            $this->vcard->getOutput(),
+            $vcard->getOutput(),
             200,
-            $this->vcard->getHeaders(true)
+            $vcard->getHeaders(true)
         );
     }
 
