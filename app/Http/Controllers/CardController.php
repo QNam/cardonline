@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Card;
 use App\Models\CardLinks;
 use JeroenDesloovere\VCard\VCard;
+use Illuminate\Support\Facades\Response;
 
 class CardController extends Controller
 {
