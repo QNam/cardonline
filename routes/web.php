@@ -13,23 +13,25 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-Route::get('/', function () {
-    return redirect()->route('Login');
-});
+Route::group(['middleware' => ['web']], function () {
+    Route::get('/', function () {
+        return redirect()->route('Login');
+    });
 
-Route::get('/login',  function(){
-    return view('enduser/app');
-})->name('Login');
+    Route::get('/login',  function(){
+        return view('enduser/app');
+    })->name('Login');
+    
+    Route::get('/register',  function(){
+        return view('enduser/app');
+    })->name('Register');
 
-Route::get('/register',  function(){
-    return view('enduser/app');
-})->name('Register');
-
-Route::middleware(['web'])->group(function () {
     Route::get('/edit/{id}',  function(){
         return view('enduser/app');
     })->name('EditUser');
 });
+
+
 
 Route::get('/saveToPhone/{id}', 'App\Http\Controllers\CardController@saveProfileToPhone')->name('SaveToPhone');
 

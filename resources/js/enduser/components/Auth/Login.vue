@@ -86,8 +86,8 @@ export default {
                 const rep = await login(params)
                 const user = rep.data.data.data;
 
-                this.$router.push({ name: 'EditCard', params: { id: user.id } })
-                // window.location = process.env.MIX_APP_URL + user.id
+                // this.$router.push({ name: 'EditCard', params: { id: user.id } })
+                window.location = process.env.MIX_APP_URL + 'edit/' +  user.id
 
                 this.loginLoading = false
             } catch(e) {

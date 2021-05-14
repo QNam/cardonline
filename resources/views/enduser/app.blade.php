@@ -15,6 +15,8 @@
 <body>
     <div id="app"></div>
     <link rel="stylesheet" href="{{ mix('css/enduser.css') }}">
+    <link rel="stylesheet" href="{{ mix('css/app.css') }}">
+    
     <script src="{{ mix('js/enduser/app.js') }}" type="text/javascript"></script>
 </body>
 </html>

@@ -28,3 +28,6 @@ Route::get('/card/getById', 'App\Http\Controllers\CardController@getById');
 Route::post('/card/remove', 'App\Http\Controllers\CardController@removeCard');
 
 Route::post('/media/uploadImage', 'App\Http\Controllers\MediaController@uploadImage');
+Route::post('/card/saveAvatar', 'App\Http\Controllers\CardController@saveAvatar');
+Route::post('/card/saveBackground', 'App\Http\Controllers\CardController@saveBackground');
+Route::post('/card/removeLink', 'App\Http\Controllers\CardController@removeCardLink');

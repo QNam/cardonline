@@ -18,6 +18,20 @@ export function getCardById(id) {
     })
 }
 
+export function saveCardAvatar(id, imageName) {
+    return http.post('/card/saveAvatar', { 
+            id,
+            avatar_img: imageName
+        })
+}
+
+export function saveCardBackground(id, imageName) {
+    return http.post('/card/saveBackground', { 
+            id,
+            background_img: imageName
+        })
+}
+
 export function storeCard(data) {
     const params = {
         id: data.id,
@@ -80,6 +94,13 @@ export function removeCard(cardId) {
         id: cardId
     }
     return http.post('/card/remove', params)
+}
+
+export function removeCardLink(link_id) {
+    const params = {
+        link_id
+    }
+    return http.post('/card/removeLink', params)
 }
 
 export class CardDTO {

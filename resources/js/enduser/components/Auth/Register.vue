@@ -128,7 +128,7 @@ export default {
                 this.loadingSubmit = false
                 this.$notify({
                     type: 'error',
-                    text: 'Có lỗi xảy ra! Vui lòng thử lại sau.'
+                    message: 'Có lỗi xảy ra! Vui lòng thử lại sau.'
                 });
             }
         },

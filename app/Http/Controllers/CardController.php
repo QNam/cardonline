@@ -52,9 +52,74 @@ class CardController extends Controller
         }
     }
 
+    public function saveAvatar(Request $request) {
+        $card = new Card();
+        $params = [
+            'avatar_img' => $request->avatar_img
+        ];
+        
+        try {
+            $card->where('id', $request->id)->update($params);
+            
+            $rep = [
+                'success' => true,
+                'data' => $params
+            ];
+            return $this->sendSuccess($rep);
+        } catch (\Exception $e) {
+            $rep = [
+                'success' => false,
+                'data' => $e
+            ];
+            return $this->sendServerError($e);
+        }
+    }
+
+    public function saveBackground(Request $request) {
+        $card = new Card();
+        $params = [
+            'background_img' => $request->background_img,
+        ];
+        
+        try {
+            $card->where('id', $request->id)->update($params);
+            
+            $rep = [
+                'success' => true,
+                'data' => $params
+            ];
+            return $this->sendSuccess($rep);
+        } catch (\Exception $e) {
+            $rep = [
+                'success' => false,
+                'data' => $e
+            ];
+            return $this->sendServerError($e);
+        }
+    }
+
+    public function removeCardLink(Request $request) {
+        $cardLink = new CardLinks();
+        try {
+            $cardLink->where('link_id', $request->link_id)->delete();
+
+            $rep = [
+                'success' => true,
+                'data' => []
+            ];
+        } catch (\Exception $e) {            
+            $rep = [
+                'success' => false,
+                'data' => []
+            ];
+        }
+    }
+
     public function storeCard(Request $request) {
         $card = new Card();
         $cardLink = new CardLinks();
+        $param = [];
+
         $param = [
             'userName' => $request->userName,
             'email' => $request->email,
@@ -92,7 +157,6 @@ class CardController extends Controller
                 'data' => $param
             ];
         } catch (\Exception $e) {
-            dd($e);
             $rep = [
                 'success' => false,
                 'data' => []

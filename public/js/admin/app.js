@@ -7541,11 +7541,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "getListCard": () => (/* binding */ getListCard),
 /* harmony export */   "getCardById": () => (/* binding */ getCardById),
+/* harmony export */   "saveCardAvatar": () => (/* binding */ saveCardAvatar),
+/* harmony export */   "saveCardBackground": () => (/* binding */ saveCardBackground),
 /* harmony export */   "storeCard": () => (/* binding */ storeCard),
 /* harmony export */   "register": () => (/* binding */ register),
 /* harmony export */   "login": () => (/* binding */ login),
 /* harmony export */   "checkCardIsExists": () => (/* binding */ checkCardIsExists),
 /* harmony export */   "removeCard": () => (/* binding */ removeCard),
+/* harmony export */   "removeCardLink": () => (/* binding */ removeCardLink),
 /* harmony export */   "CardDTO": () => (/* binding */ CardDTO)
 /* harmony export */ });
 /* harmony import */ var _axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../axios */ "./resources/js/axios.js");
@@ -7571,6 +7574,18 @@ function getCardById(id) {
     params: {
       id: id
     }
+  });
+}
+function saveCardAvatar(id, imageName) {
+  return _axios__WEBPACK_IMPORTED_MODULE_0__.default.post('/card/saveAvatar', {
+    id: id,
+    avatar_img: imageName
+  });
+}
+function saveCardBackground(id, imageName) {
+  return _axios__WEBPACK_IMPORTED_MODULE_0__.default.post('/card/saveBackground', {
+    id: id,
+    background_img: imageName
   });
 }
 function storeCard(data) {
@@ -7627,6 +7642,12 @@ function removeCard(cardId) {
     id: cardId
   };
   return _axios__WEBPACK_IMPORTED_MODULE_0__.default.post('/card/remove', params);
+}
+function removeCardLink(link_id) {
+  var params = {
+    link_id: link_id
+  };
+  return _axios__WEBPACK_IMPORTED_MODULE_0__.default.post('/card/removeLink', params);
 }
 var CardDTO = /*#__PURE__*/function () {
   function CardDTO() {
