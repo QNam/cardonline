@@ -6,7 +6,7 @@
     <template v-else>
       <div class="mainPage">
       <navbar />
-      <notifications position="top right"/>
+      <!-- <notifications position="top right"/> -->
       <transition>
         <router-view></router-view>
       </transition>

@@ -3,7 +3,9 @@
       <nav class="navbar">
             <div class="container">
                 <div class="navbar__wrap">
-                    <a href="" class="navbar__logo">logo</a>
+                    <a href="" class="navbar__logo">
+                        <img src="/static/imgs/logo.png" alt="" style="width: 120px">
+                    </a>
                     <ul>
                         <li><a href=""><i class="fab fa-facebook-f"></i></a></li>
                         <li><a href=""><i class="fab fa-youtube"></i></a></li>
@@ -16,7 +18,9 @@
         <nav class="navbar--mobile">
             <div class="container">
                 <div class="navbar--mobile__wrap">
-                    <a href="">logo</a>
+                    <a href="">
+                        <img src="/static/imgs/logo.png" alt="" style="width: 120px">
+                    </a>
                     <li class="nav-item dropdown">
                         <a class="nav-link" href="#" id="navbar--mobile" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="fas fa-bars" aria-hidden="true"></i>

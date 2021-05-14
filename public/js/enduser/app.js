@@ -6501,46 +6501,47 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _this.$v.$touch();
 
                 if (!_this.$v.$invalid) {
-                  _context.next = 5;
-                  break;
-                }
-
-                return _context.abrupt("return", false);
-
-              case 5:
-                _context.next = 7;
-                return _this.checkCardIsExists(_this.cardId);
-
-              case 7:
-                cardIdExists = _context.sent;
-                _context.next = 10;
-                return _this.checkCardIsExists(_this.email, 'email');
-
-              case 10:
-                emailExists = _context.sent;
-                _this.cardIdExists = cardIdExists;
-                _this.emailUnique = !emailExists;
-
-                if (!(!_this.cardIdExists || !_this.emailUnique)) {
-                  _context.next = 16;
+                  _context.next = 6;
                   break;
                 }
 
                 _this.loadingSubmit = false;
                 return _context.abrupt("return", false);
 
-              case 16:
+              case 6:
+                _context.next = 8;
+                return _this.checkCardIsExists(_this.cardId);
+
+              case 8:
+                cardIdExists = _context.sent;
+                _context.next = 11;
+                return _this.checkCardIsExists(_this.email, 'email');
+
+              case 11:
+                emailExists = _context.sent;
+                _this.cardIdExists = cardIdExists;
+                _this.emailUnique = !emailExists;
+
+                if (!(!_this.cardIdExists || !_this.emailUnique)) {
+                  _context.next = 17;
+                  break;
+                }
+
+                _this.loadingSubmit = false;
+                return _context.abrupt("return", false);
+
+              case 17:
                 params = {
                   cardId: _this.cardId,
                   userName: _this.userName,
                   email: _this.email,
                   password: _this.password
                 };
-                _context.prev = 17;
-                _context.next = 20;
+                _context.prev = 18;
+                _context.next = 21;
                 return (0,_api_card__WEBPACK_IMPORTED_MODULE_1__.register)(params);
 
-              case 20:
+              case 21:
                 _this.$router.push({
                   name: 'Login'
                 });
@@ -6549,23 +6550,21 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _context.next = 29;
                 break;
 
-              case 24:
-                _context.prev = 24;
-                _context.t0 = _context["catch"](17);
+              case 25:
+                _context.prev = 25;
+                _context.t0 = _context["catch"](18);
                 console.log(_context.t0);
-                _this.loadingSubmit = false;
-
-                _this.$notify({
-                  type: 'error',
-                  message: 'Có lỗi xảy ra! Vui lòng thử lại sau.'
-                });
+                _this.loadingSubmit = false; // this.$notify({
+                //     type: 'error',
+                //     message: 'Có lỗi xảy ra! Vui lòng thử lại sau.'
+                // });
 
               case 29:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[17, 24]]);
+        }, _callee, null, [[18, 25]]);
       }))();
     },
     checkCardIsExists: function checkCardIsExists(value) {
@@ -6623,10 +6622,6 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-//
-//
-//
-//
 //
 //
 //
@@ -7060,6 +7055,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+//
+//
+//
+//
 //
 //
 //
@@ -50380,8 +50379,6 @@ var render = function() {
               [
                 _c("navbar"),
                 _vm._v(" "),
-                _c("notifications", { attrs: { position: "top right" } }),
-                _vm._v(" "),
                 _c("transition", [_c("router-view")], 1),
                 _vm._v(" "),
                 _c("Footer")
@@ -51074,38 +51071,14 @@ var render = function() {
                   {
                     key: "right",
                     fn: function() {
-                      return [
-                        _c(
-                          "a",
-                          {
-                            on: {
-                              click: function($event) {
-                                $event.stopPropagation()
-                                return _vm.saveCard($event)
-                              }
-                            }
-                          },
-                          [
-                            _vm.loadingSave
-                              ? _c("van-loading", {
-                                  attrs: { type: "spinner", color: "#1989fa" }
-                                })
-                              : _c(
-                                  "span",
-                                  { staticClass: "van-nav-bar__text" },
-                                  [_vm._v("Lưu")]
-                                )
-                          ],
-                          1
-                        )
-                      ]
+                      return undefined
                     },
                     proxy: true
                   }
                 ],
                 null,
                 false,
-                2282855543
+                3743218793
               )
             }),
             _vm._v(" "),
@@ -51442,7 +51415,10 @@ var staticRenderFns = [
         _c("div", { staticClass: "container" }, [
           _c("div", { staticClass: "navbar__wrap" }, [
             _c("a", { staticClass: "navbar__logo", attrs: { href: "" } }, [
-              _vm._v("logo")
+              _c("img", {
+                staticStyle: { width: "120px" },
+                attrs: { src: "/static/imgs/logo.png", alt: "" }
+              })
             ]),
             _vm._v(" "),
             _c("ul", [
@@ -51477,7 +51453,12 @@ var staticRenderFns = [
       _c("nav", { staticClass: "navbar--mobile" }, [
         _c("div", { staticClass: "container" }, [
           _c("div", { staticClass: "navbar--mobile__wrap" }, [
-            _c("a", { attrs: { href: "" } }, [_vm._v("logo")]),
+            _c("a", { attrs: { href: "" } }, [
+              _c("img", {
+                staticStyle: { width: "120px" },
+                attrs: { src: "/static/imgs/logo.png", alt: "" }
+              })
+            ]),
             _vm._v(" "),
             _c("li", { staticClass: "nav-item dropdown" }, [
               _c(

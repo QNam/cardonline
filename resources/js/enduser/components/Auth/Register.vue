@@ -97,6 +97,7 @@ export default {
             this.$v.$touch()
 
             if(this.$v.$invalid) {
+                this.loadingSubmit = false
                 return false
             } 
 
@@ -126,10 +127,10 @@ export default {
             } catch($e) {
                 console.log($e)
                 this.loadingSubmit = false
-                this.$notify({
-                    type: 'error',
-                    message: 'Có lỗi xảy ra! Vui lòng thử lại sau.'
-                });
+                // this.$notify({
+                //     type: 'error',
+                //     message: 'Có lỗi xảy ra! Vui lòng thử lại sau.'
+                // });
             }
         },
 

@@ -64,10 +64,6 @@
                 @click-left="tab = 1"
             >
             <template #right>
-                <a @click.stop="saveCard">
-                    <van-loading v-if="loadingSave" type="spinner" color="#1989fa" />
-                    <span v-else class="van-nav-bar__text">Lưu</span>
-                </a>
             </template>
             </van-nav-bar>
             <div v-if="cardContent.links" class="profileEdit__social">

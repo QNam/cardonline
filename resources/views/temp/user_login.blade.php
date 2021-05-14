@@ -17,7 +17,9 @@
         <nav class="navbar">
             <div class="container">
                 <div class="navbar__wrap">
-                    <a href="" class="navbar__logo">aaaa</a>
+                    <a href="" class="navbar__logo d-block">
+                        <img src="{{ asset('static/imgs/logo.png') }}" alt="">
+                    </a>
                     <ul>
                         <li><a href=""><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
                         <li><a href=""><i class="fa fa-youtube" aria-hidden="true"></i></a></li>
@@ -30,7 +32,9 @@
         <nav class="navbar--mobile">
             <div class="container">
                 <div class="navbar--mobile__wrap">
-                    <a href="">logo</a>
+                    <a href="" class="d-block">
+                        <img src="{{ asset('static/imgs/logo.png') }}" alt="">
+                    </a>
                     <li class="nav-item dropdown">
                         <a class="nav-link" href="#" id="navbar--mobile" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="fa fa-bars" aria-hidden="true"></i>
