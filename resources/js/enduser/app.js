@@ -12,6 +12,7 @@ import App from './components/App.vue'
 import router from './router';
 import http from '../axios'
 import Vuelidate from 'vuelidate'
+import store from './store/index'
 // import Notifications from 'vue-notification'
 // import ElementUI from 'element-ui';
 // import 'element-ui/lib/theme-chalk/index.css';
@@ -30,6 +31,7 @@ Vue.prototype.$http = http;
 const app = new Vue({
     el: '#app',
     router,
+    store,
     // components: { App }
     render: renderComponent => renderComponent(App)
 });

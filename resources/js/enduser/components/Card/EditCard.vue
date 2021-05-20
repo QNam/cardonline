@@ -1,6 +1,5 @@
 <template>
     <div class="profileEdit">
-        
         <template v-if="tab == 1">
             <van-nav-bar
                 title="Chỉnh sửa trang cá nhân"
@@ -10,12 +9,13 @@
                 @click-left="onClickLeftNavbar"
             >
             <template #right>
-                <a @click.stop="saveCard">
-                    <van-loading v-if="loadingSave" type="spinner" color="#1989fa" />
-                    <span v-else class="van-nav-bar__text">Lưu</span>
+                <van-loading v-if="loadingSave" type="spinner" color="#1989fa" />
+                <a  v-else @click.stop="saveCard">
+                    <span class="van-nav-bar__text">Lưu</span>
                 </a>
             </template>
             </van-nav-bar>
+            <card-background />
             <!-- <div class="profile_sum mb-4" :style="{'background-image': 'url(' + cardContent.background_img_url + ')'}">
                 <input type="file" id="uploadBackground" class="d-none" @change="onBackgroundChanged">
                 <div class="d-flex align-items-center justify-content-between">
@@ -24,34 +24,37 @@
                     </label>
                 </div>
             </div> -->
-            <div class="profileEdit_avatar">
-                <img :src="cardContent.avatar_img_url" alt="">
-                <label class="profileEdit_avatar__upload" for="uploadAvatar">
-                    <i class="fas fa-camera"></i>
-                </label>
-                <input type="file" id="uploadAvatar" class="d-none" @change="onAvatarChanged">
-            </div>
+            <template  v-if="cardContent && cardContent.id"> 
+                <card-avatar :img="cardContent.avatar_img_url" />
+            </template>
             <div class="profileEdit_name">
-                <input type="text" v-model="cardContent.userName" class="mt-3">
+                <input type="text" class="mt-3"
+                    :value="cardContent.userName" 
+                    @change="$store.commit('SET_CARD_NAME', $event.target.value)">
             </div>
             <div class="container pb-5">
                 <div class="form-group mb-3">
                     <label for="" class="mb-2">Email</label>
-                    <input type="text" v-model="cardContent.email" class="form-control form-control-custom">
+                    <input type="text" 
+                        :value="cardContent.email" 
+                        @change="$store.commit('SET_CARD_EMAIL', $event.target.value)" 
+                        class="form-control form-control-custom">
                 </div>
                 <div class="form-group mb-3">
                     <label for="" class="mb-2">Số điện thoại</label>
-                    <input type="text" v-model="cardContent.phoneNumber" class="form-control form-control-custom">
+                    <input type="text" 
+                        :value="cardContent.phoneNumber" 
+                        @change="$store.commit('SET_CARD_PHONE_NUMBER', $event.target.value)" 
+                        class="form-control form-control-custom">
                 </div>
                 <div class="form-group mb-4">
                     <label for="" class="mb-2">Mô tả bản thân</label>
-                    <textarea class="form-control form-control-custom" v-model="cardContent.descr"></textarea>
+                    <textarea class="form-control form-control-custom" 
+                        :value="cardContent.descr" 
+                        @change="$store.commit('SET_CARD_DESC', $event.target.value)"></textarea>
                 </div>
 
                 <a href="javascript:;" style="color: #1989fa" @click.stop="tab = 2">Chỉnh sửa liên kết MXH</a>
-                <!-- <div class="profileEdit__save text-end mt-3" :class="{'loadingSave': loadingSave}">
-                    <button @click="saveCard"><span class="d-none me-2"><i class="fas fa-circle-notch fa-spin"></i></span>Lưu</button>
-                </div> -->
             </div>
         </template>
         
@@ -66,7 +69,7 @@
             <template #right>
             </template>
             </van-nav-bar>
-            <div v-if="cardContent.links" class="profileEdit__social">
+            <div class="profileEdit__social">
                 <van-empty v-if="cardContent.links.length <= 0" description="Chưa có liên kết MXH nào !" />
 
                 <template v-else>
@@ -75,7 +78,7 @@
                         v-for="link, key in cardContent.links" 
                         :key="key"
                         @click="openEditSocialLink(link)"
-                        draggable="true">
+                    >
                         <img :src="listSocial[link.type].thumb" style="width: 35px; height: 35px" alt="">
                         <h5>{{ listSocial[link.type].name }}</h5>
                         <van-icon v-if="loadingRemoveLink[link.link_id] === false || Object.keys(loadingRemoveLink).length == 0" 
@@ -88,16 +91,21 @@
                 </template>
                 <van-button color="#1989fa" class=" w-100" @click="selectSocialNetwork = true"> <b class="text-light">Thêm liên kết</b></van-button>
                 
-                <van-popup @closed="resetEditLinks" v-model="selectSocialNetwork" round position="bottom" :style="{ height: '70%' }" >
+                <van-popup @closed="$store.commit('RESET_SOCIAL_EDIT')" v-model="selectSocialNetwork" round position="bottom" :style="{ height: '70%' }" >
                     <div class="px-3 pt-4">
                         <div class="d-flex align-items-center justify-content-between">
                             <h4>Mạng xã hội</h4>
-                            <img v-if="socialEdit.name" :src="listSocial[socialEdit.name].thumb" style="width: 30px; height: 30px" alt="">
+                            <img v-if="socialEdit.type" :src="listSocial[socialEdit.type].thumb" style="width: 30px; height: 30px" alt="">
                         </div>
                         
                         <div class="mt-4">
                             <div class="d-flex">
-                                <input ref="editSocialLink" type="text" v-model="socialEdit.link" class="ps-0 rounded-0 form-control border-start-0 border-end-0 border-top-0 " placeholder="Đường dẫn">
+                                <input ref="editSocialLink" type="text" 
+                                    class="ps-0 rounded-0 form-control border-start-0 border-end-0 border-top-0 " 
+                                    placeholder="Đường dẫn"
+                                    :value="socialEdit.link"
+                                    @change="$store.commit('SET_SOCIAL_EDIT', {link: $event.target.value})" 
+                                >
                                 <div>
                                     <van-loading v-if="loadingSave" type="spinner" color="#1989fa" />
                                     <span v-else class="van-nav-bar__text cursor-pointer" @click="saveSocicalLink">Lưu</span>
@@ -115,46 +123,50 @@
                 </van-popup>
             </div>
         </template>
+        
     </div>
 </template>
 
 <script>
 
 import { getCardById, CardDTO, storeCard, saveCardAvatar, saveCardBackground, removeCardLink} from '../../../api/card'
-import { uploadImage } from '../../../api/image'
+import { uploadImage, uploadImageBase64 } from '../../../api/image'
 import { getUrlImage } from '../../../ultis'
+import CardAvatar from './CardAvatar'
+import CardBackground from './CardBackground'
+import { mapActions, mapState } from 'vuex'
 
 export default {
+    components: {
+        CardAvatar,
+        CardBackground
+    },
     data() {
         return {
-            cardContent: new CardDTO(),
             tab: 1,
             listSocial: [],
             selectSocialNetwork: false,
             loadingRemoveLink: {},
             loadingSave: false,
             loadingFetch: false,
-            socialEdit: {
-                id: null,
-                name: null,
-                link: null
-            }
         }
     },
     mounted() {
         this.getCardInfo()
         this.listSocial = JSON.parse(window.SOCIAL_NETWORKS)
     },
+    computed: {
+        ...mapState({
+            cardContent: state => state.card.cardContent,
+            socialEdit: state => state.card.socialEdit
+        }),
+    },
     methods: {
-        resetEditLinks() {
-            this.socialEdit.id = null
-            this.socialEdit.name = null
-            this.socialEdit.link = null
-        },
-
         onSelectSocial(social) {
-            this.socialEdit.name = social
-            this.socialEdit.link = this.listSocial[social]['uri']
+            this.$store.commit('SET_SOCIAL_EDIT', {
+                type: social,
+                link: this.listSocial[social]['uri']
+            })
             this.$refs.editSocialLink.focus()
         },
 
@@ -163,18 +175,22 @@ export default {
         },
 
         openEditSocialLink(link) {
-            this.socialEdit.id = link.link_id
-            this.socialEdit.name = link.type
-            this.socialEdit.link = link.link
+            this.$store.commit('SET_SOCIAL_EDIT', {
+                id: link.link_id, 
+                type: link.type,
+                link: link.link
+            })
 
             this.selectSocialNetwork = true
         },
+
         async removeSocialLink(link) {
             this.loadingRemoveLink[link.link_id] = true
             try {
                 await removeCardLink(link.link_id)
                 this.loadingRemoveLink = {}
-                this.cardContent.links = this.cardContent.links.filter( val => val.link_id != link.link_id)
+                const links = this.cardContent.links.filter( val => val.link_id != link.link_id)
+                this.$store.commit('SET_CARD_LINKS', links)
             } catch (error) {
                 console.log(error)
                 this.loadingRemoveLink = {}
@@ -185,49 +201,35 @@ export default {
 
         async saveSocicalLink() {
             if(!this.socialEdit.id) {
-                this.cardContent.links.push({
+                const link = {
                     card_id: this.cardContent.id,
                     link: this.socialEdit.link,
-                    type: this.socialEdit.name
-                })
+                    type: this.socialEdit.type
+                }
+                this.$store.commit('PUSH_CARD_LINKS', link)
             } else {
-                this.cardContent.links = this.cardContent.links.map( val => {
+                const links = this.cardContent.links.map( val => {
                     if(val.link_id == this.socialEdit.id) {
                         val.card_id = this.cardContent.id,
                         val.link = this.socialEdit.link,
-                        val.type = this.socialEdit.name
+                        val.type = this.socialEdit.type
                     }
 
                     return val
                 })
+                
+                this.$store.commit('SET_CARD_LINKS', links)
             }
-            await this.saveCard()
+
             this.selectSocialNetwork = false
+            await this.saveCard()
         },
         
         async getCardInfo() {
+            const cardId = this.$route.params.id
             this.loadingFetch = true
-            const rep = await getCardById(this.$route.params.id)
-            const data = rep.data.data
-
-            this.cardContent = new CardDTO(data)
-            
-            if(!this.cardContent.links) {
-                this.cardContent.links = []
-                this.cardContent.links.push(CardDTO.setDefaultLinksFormat())
-            }
+            await this.$store.dispatch('getCardInfo', {id: cardId})
             this.loadingFetch = false
-        },
-
-
-        async onAvatarChanged(event) {
-            const image = event.target.files[0]
-            const rep = await uploadImage({image})
-            saveCardAvatar(this.cardContent.id, rep.data.data.img)
-            const img = getUrlImage(rep.data.data.img)
-
-            this.cardContent.avatar_img = rep.data.data.img
-            this.cardContent.avatar_img_url = img
         },
 
         async onBackgroundChanged(event) {
@@ -240,22 +242,19 @@ export default {
             this.cardContent.background_img_url = img
         },
 
-        async saveCard() {
-            const params = {
-                id: this.cardContent.id,
-                userName: this.cardContent.userName,
-                phoneNumber: this.cardContent.phoneNumber,
-                email: this.cardContent.email,
-                descr: this.cardContent.descr,
-                background_img: this.cardContent.background_img,
-                avatar_img: this.cardContent.avatar_img,
-                links: this.cardContent.links
-            }
+        async saveCardAvatar(data) {
+            const rep = await uploadImageBase64(data.img)
+            saveCardAvatar(this.cardContent.id, rep.data.data.img)
+            const img = getUrlImage(rep.data.data.img)
 
+            this.cardContent.avatar_img = rep.data.data.img
+            this.cardContent.avatar_img_url = img
+        },
+
+        async saveCard() {
             this.loadingSave = true
-            
             try {
-                await storeCard(params)
+                await this.$store.dispatch('saveCard')
                 this.$notify({ type: 'success', message: 'Lưu thành công !', duration: 1000 })
                 this.getCardInfo()
             } catch(e) {
@@ -305,20 +304,12 @@ export default {
 .profileEdit__back {
     -webkit-text-stroke: 2px #fff; /* width and color */
 }
-.profile_sum {
-    margin-top: 50px;
-    min-height: 350px;
-    padding: 20px;
-    background-color: #ccc;
-    border-bottom-left-radius: 20px;
-    border-bottom-right-radius: 20px;
-}
 
 .profileEdit_name {
     display: flex;
     align-items: center;
     justify-content: center;
-     margin-bottom: 40px;
+    margin-bottom: 40px;
 }
 
 .profileEdit_bg {
@@ -327,41 +318,6 @@ export default {
     background-color: #fff;
     border: none;
     font-weight: 500;
-}
-
-.profileEdit_avatar {
-    margin-top: 80px;
-    width: 172px;
-    height: 172px;
-    border-radius: 50%;
-    margin-left: auto;
-    margin-right: auto;
-    text-align: center;
-    position: relative;
-}
-
-.profileEdit_avatar__upload {
-    position: absolute;
-    bottom: 2px;
-    right: 20px;
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    background-color: #242526;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.profileEdit_avatar__upload i {
-    color: #fff;
-}
-
-.profileEdit_avatar img {
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    border-radius: 100%;
 }
 
 .profileEdit_name input {

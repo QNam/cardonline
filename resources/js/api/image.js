@@ -8,3 +8,9 @@ export function uploadImage(params) {
         }
     })
 }
+
+export function uploadImageBase64(img) {
+    return http.post('/media/uploadImageBase64', {
+        image: img
+    })
+}
