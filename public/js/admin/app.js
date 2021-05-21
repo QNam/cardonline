@@ -7657,6 +7657,7 @@ var CardDTO = /*#__PURE__*/function () {
 
     this.id = card && typeof card.id !== 'undefined' ? card.id : null;
     this.userName = card && card.userName ? card.userName : '';
+    this.url = card && typeof card.id !== 'undefined' ? "http://cardonline.local/" + this.id : '';
     this.phoneNumber = card && card.phoneNumber ? card.phoneNumber : '';
     this.email = card && card.email ? card.email : '';
     this.descr = card && card.descr ? card.descr : '';

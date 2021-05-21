@@ -20,14 +20,6 @@
                 </template>
                 </van-nav-bar>
                 <card-background />
-                <!-- <div class="profile_sum mb-4" :style="{'background-image': 'url(' + cardContent.background_img_url + ')'}">
-                    <input type="file" id="uploadBackground" class="d-none" @change="onBackgroundChanged">
-                    <div class="d-flex align-items-center justify-content-between">
-                        <label for="uploadBackground" class="d-inline-block profileEdit_bg">
-                            <i class="fas fa-camera me-1"></i> Chỉnh sửa ảnh bìa
-                        </label>
-                    </div>
-                </div> -->
                 <template  v-if="cardContent && cardContent.id"> 
                     <card-avatar />
                 </template>
@@ -57,9 +49,19 @@
                             :value="cardContent.descr" 
                             @change="$store.commit('SET_CARD_DESC', $event.target.value)"></textarea>
                     </div>
-
-                    <a style="color: #1989fa" @click.stop="tab = 2">Chỉnh sửa liên kết MXH</a>
                 </div>
+
+                <van-popup v-model="showQr">
+                    <img :src="cardContent.qrCode" alt="">
+                </van-popup>
+                <img :src="cardContent.qrCode" class="d-none" alt="cache">
+
+                <van-tabbar v-model="tab">
+                    <van-tabbar-item name="1" icon="home-o"></van-tabbar-item>
+                    <van-tabbar-item @click="showQr = true" name="1" icon="qr"></van-tabbar-item>
+                    <van-tabbar-item name="2" icon="setting-o"></van-tabbar-item>
+                    <van-tabbar-item @click="goToProfile" icon="user-o"></van-tabbar-item>
+                </van-tabbar>
             </template>
             
             <template v-if="tab == 2">
@@ -153,6 +155,7 @@ export default {
     data() {
         return {
             tab: 1,
+            showQr: false,
             listSocial: [],
             selectSocialNetwork: false,
             loadingRemoveLink: {},
@@ -171,6 +174,10 @@ export default {
         }),
     },
     methods: {
+        goToProfile() {
+            window.location.href = this.cardContent.url
+        },
+
         onSelectSocial(social) {
             this.$store.commit('SET_SOCIAL_EDIT', {
                 type: social,

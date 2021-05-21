@@ -7029,6 +7029,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
 
 
 
@@ -7045,6 +7047,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   data: function data() {
     return {
       tab: 1,
+      showQr: false,
       listSocial: [],
       selectSocialNetwork: false,
       loadingRemoveLink: {},
@@ -7065,6 +7068,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }
   })),
   methods: {
+    goToProfile: function goToProfile() {
+      window.location.href = this.cardContent.url;
+    },
     onSelectSocial: function onSelectSocial(social) {
       this.$store.commit('SET_SOCIAL_EDIT', {
         type: social,
@@ -7614,6 +7620,7 @@ var CardDTO = /*#__PURE__*/function () {
 
     this.id = card && typeof card.id !== 'undefined' ? card.id : null;
     this.userName = card && card.userName ? card.userName : '';
+    this.url = card && typeof card.id !== 'undefined' ? "http://cardonline.local/" + this.id : '';
     this.phoneNumber = card && card.phoneNumber ? card.phoneNumber : '';
     this.email = card && card.email ? card.email : '';
     this.descr = card && card.descr ? card.descr : '';
@@ -52370,22 +52377,68 @@ var render = function() {
                             }
                           }
                         })
-                      ]),
-                      _vm._v(" "),
-                      _c(
-                        "a",
-                        {
-                          staticStyle: { color: "#1989fa" },
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "van-popup",
+                      {
+                        model: {
+                          value: _vm.showQr,
+                          callback: function($$v) {
+                            _vm.showQr = $$v
+                          },
+                          expression: "showQr"
+                        }
+                      },
+                      [
+                        _c("img", {
+                          attrs: { src: _vm.cardContent.qrCode, alt: "" }
+                        })
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c("img", {
+                      staticClass: "d-none",
+                      attrs: { src: _vm.cardContent.qrCode, alt: "cache" }
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "van-tabbar",
+                      {
+                        model: {
+                          value: _vm.tab,
+                          callback: function($$v) {
+                            _vm.tab = $$v
+                          },
+                          expression: "tab"
+                        }
+                      },
+                      [
+                        _c("van-tabbar-item", {
+                          attrs: { name: "1", icon: "home-o" }
+                        }),
+                        _vm._v(" "),
+                        _c("van-tabbar-item", {
+                          attrs: { name: "1", icon: "qr" },
                           on: {
                             click: function($event) {
-                              $event.stopPropagation()
-                              _vm.tab = 2
+                              _vm.showQr = true
                             }
                           }
-                        },
-                        [_vm._v("Chỉnh sửa liên kết MXH")]
-                      )
-                    ])
+                        }),
+                        _vm._v(" "),
+                        _c("van-tabbar-item", {
+                          attrs: { name: "2", icon: "setting-o" }
+                        }),
+                        _vm._v(" "),
+                        _c("van-tabbar-item", {
+                          attrs: { icon: "user-o" },
+                          on: { click: _vm.goToProfile }
+                        })
+                      ],
+                      1
+                    )
                   ]
                 : _vm._e(),
               _vm._v(" "),

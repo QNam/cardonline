@@ -107,6 +107,7 @@ export class CardDTO {
     constructor(card = null) {
         this.id = card && typeof card.id !== 'undefined' ? card.id : null
         this.userName = card && card.userName ? card.userName : ''
+        this.url = card && typeof card.id !== 'undefined' ? process.env.MIX_APP_URL + this.id : ''
         this.phoneNumber = card && card.phoneNumber ? card.phoneNumber : ''
         this.email = card && card.email ? card.email : ''
         this.descr = card && card.descr ? card.descr : ''
