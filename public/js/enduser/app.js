@@ -52212,7 +52212,6 @@ var render = function() {
                 "a",
                 {
                   staticStyle: { color: "#1989fa" },
-                  attrs: { href: "javascript:;" },
                   on: {
                     click: function($event) {
                       $event.stopPropagation()
@@ -52368,7 +52367,8 @@ var render = function() {
                         [
                           _c("h4", [_vm._v("Mạng xã hội")]),
                           _vm._v(" "),
-                          _vm.socialEdit.type
+                          _vm.socialEdit.type &&
+                          _vm.listSocial[_vm.socialEdit.type]
                             ? _c("img", {
                                 staticStyle: { width: "30px", height: "30px" },
                                 attrs: {
@@ -52426,25 +52426,27 @@ var render = function() {
                         [
                           _vm._l(_vm.listSocial, function(social, skey) {
                             return [
-                              _c(
-                                "a",
-                                {
-                                  key: skey,
-                                  staticClass: "col-2 mb-4 cusor-pointer",
-                                  on: {
-                                    click: function($event) {
-                                      $event.stopPropagation()
-                                      return _vm.onSelectSocial(skey)
-                                    }
-                                  }
-                                },
-                                [
-                                  _c("img", {
-                                    staticClass: "img-fluid",
-                                    attrs: { src: social.thumb, alt: "" }
-                                  })
-                                ]
-                              )
+                              social.show
+                                ? _c(
+                                    "a",
+                                    {
+                                      key: skey,
+                                      staticClass: "col-2 mb-4 cusor-pointer",
+                                      on: {
+                                        click: function($event) {
+                                          $event.stopPropagation()
+                                          return _vm.onSelectSocial(skey)
+                                        }
+                                      }
+                                    },
+                                    [
+                                      _c("img", {
+                                        staticClass: "img-fluid",
+                                        attrs: { src: social.thumb, alt: "" }
+                                      })
+                                    ]
+                                  )
+                                : _vm._e()
                             ]
                           })
                         ],

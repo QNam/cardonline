@@ -181,5 +181,9 @@
         position: absolute;
         z-index: -1;
     }
+    .profile__background img {
+        max-width: 100%;
+        height: auto;
+    }
 </style>
 @endsection

@@ -54,7 +54,7 @@
                         @change="$store.commit('SET_CARD_DESC', $event.target.value)"></textarea>
                 </div>
 
-                <a href="javascript:;" style="color: #1989fa" @click.stop="tab = 2">Chỉnh sửa liên kết MXH</a>
+                <a style="color: #1989fa" @click.stop="tab = 2">Chỉnh sửa liên kết MXH</a>
             </div>
         </template>
         
@@ -95,7 +95,7 @@
                     <div class="px-3 pt-4">
                         <div class="d-flex align-items-center justify-content-between">
                             <h4>Mạng xã hội</h4>
-                            <img v-if="socialEdit.type" :src="listSocial[socialEdit.type].thumb" style="width: 30px; height: 30px" alt="">
+                            <img v-if="socialEdit.type && listSocial[socialEdit.type]" :src="listSocial[socialEdit.type].thumb" style="width: 30px; height: 30px" alt="">
                         </div>
                         
                         <div class="mt-4">
@@ -114,7 +114,7 @@
                         </div>
                         <div class="row mt-4">
                             <template v-for="(social, skey) in listSocial"> 
-                                <a class="col-2 mb-4 cusor-pointer" :key="skey" @click.stop="onSelectSocial(skey)">
+                                <a class="col-2 mb-4 cusor-pointer" v-if="social.show" :key="skey" @click.stop="onSelectSocial(skey)">
                                     <img :src="social.thumb" class="img-fluid" alt="">
                                 </a>
                             </template>
