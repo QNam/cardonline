@@ -95,7 +95,7 @@
                     <div class="px-3 pt-4">
                         <div class="d-flex align-items-center justify-content-between">
                             <h4>Mạng xã hội</h4>
-                            <img v-if="socialEdit.type && listSocial[socialEdit.type]" :src="listSocial[socialEdit.type].thumb" style="width: 30px; height: 30px" alt="">
+                            <img v-if="listSocial && listSocial[socialEdit.type]" :src="listSocial[socialEdit.type].thumb" style="width: 30px; height: 30px" alt="">
                         </div>
                         
                         <div class="mt-4">
@@ -154,6 +154,7 @@ export default {
     mounted() {
         this.getCardInfo()
         this.listSocial = JSON.parse(window.SOCIAL_NETWORKS)
+        console.log(this.listSocial)
     },
     computed: {
         ...mapState({

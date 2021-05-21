@@ -7045,6 +7045,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   mounted: function mounted() {
     this.getCardInfo();
     this.listSocial = JSON.parse(window.SOCIAL_NETWORKS);
+    console.log(this.listSocial);
   },
   computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_6__.mapState)({
     cardContent: function cardContent(state) {
@@ -52367,8 +52368,7 @@ var render = function() {
                         [
                           _c("h4", [_vm._v("Mạng xã hội")]),
                           _vm._v(" "),
-                          _vm.socialEdit.type &&
-                          _vm.listSocial[_vm.socialEdit.type]
+                          _vm.listSocial && _vm.listSocial[_vm.socialEdit.type]
                             ? _c("img", {
                                 staticStyle: { width: "30px", height: "30px" },
                                 attrs: {
