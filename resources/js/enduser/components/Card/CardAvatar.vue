@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="profileEdit_avatar">
-            <img :src="imagePreview" alt="">
+            <img :src="cardContent.avatar_img_url" alt="">
             <label class="profileEdit_avatar__upload" for="uploadAvatar">
                 <i class="fas fa-camera"></i>
             </label>
@@ -29,7 +29,7 @@
 
 <script>
 import PhotoEditor from '../Template/PhotoEditor'
-import { mapActions } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 
 export default {
     props: {
@@ -50,11 +50,12 @@ export default {
             loadingSave: false
         }
     },
+    computed: {
+        ...mapState({
+            cardContent: state => state.card.cardContent,
+        }),
+    },
     methods: {
-        ...mapActions([
-            'uploadAvatar'
-        ]),
-
         onClickLeftMDEditImage() {
             this.modalEditImage = false
         },
@@ -83,6 +84,7 @@ export default {
 
 <style scoped>
 .profileEdit_avatar {
+    border: 7px solid #fff;
     margin-top: -130px;
     width: 172px;
     height: 172px;

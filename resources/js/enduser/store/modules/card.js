@@ -23,6 +23,16 @@ export default {
             state.cardContent.avatar_img_url = img
         },
 
+        async uploadBackground({state}, image) {
+            const rep = await uploadImageBase64(image)
+            const data = rep.data.data
+            saveCardBackground(state.cardContent.id, data.img)
+            const img = getUrlImage(data.img)
+
+            state.cardContent.background_img = data.img
+            state.cardContent.background_img_url = img
+        },
+
         async getCardInfo({commit}, params) {
             const rep = await getCardById(params.id)
             const data = rep.data.data

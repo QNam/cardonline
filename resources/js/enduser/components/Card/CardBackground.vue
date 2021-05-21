@@ -68,8 +68,11 @@ export default {
             this.modalEditImage = true
         },
 
-        saveImage() {
-
+        async saveImage() {
+            this.loadingSave = true
+            await this.$store.dispatch('uploadBackground', this.imageCroped)
+            this.loadingSave = false
+            this.modalEditImage = false
         },
 
         onChangePhotoEditor(img) {
@@ -81,11 +84,21 @@ export default {
 
 <style scoped>
 .profile_sum {
+    background-size: cover;
     margin-top: 50px;
-    min-height: 350px;
+    min-height: 256px;
     padding: 20px;
     background-color: #ccc;
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
 }
+
+.profileEdit_bg {
+    padding: 4px 16px;
+    border-radius: 8px;
+    background-color: #fff;
+    border: none;
+    font-weight: 500;
+}
+
 </style>

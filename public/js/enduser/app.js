@@ -6677,7 +6677,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       loadingSave: false
     };
   },
-  methods: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapActions)(['uploadAvatar'])), {}, {
+  computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapState)({
+    cardContent: function cardContent(state) {
+      return state.card.cardContent;
+    }
+  })),
+  methods: {
     onClickLeftMDEditImage: function onClickLeftMDEditImage() {
       this.modalEditImage = false;
     },
@@ -6729,7 +6734,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         }, _callee2);
       }))();
     }
-  })
+  }
 });
 
 /***/ }),
@@ -6745,8 +6750,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _Template_PhotoEditor__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Template/PhotoEditor */ "./resources/js/enduser/components/Template/PhotoEditor.vue");
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _Template_PhotoEditor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Template/PhotoEditor */ "./resources/js/enduser/components/Template/PhotoEditor.vue");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -6787,7 +6800,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
-    PhotoEditor: _Template_PhotoEditor__WEBPACK_IMPORTED_MODULE_0__.default
+    PhotoEditor: _Template_PhotoEditor__WEBPACK_IMPORTED_MODULE_1__.default
   },
   data: function data() {
     return {
@@ -6801,7 +6814,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }
     };
   },
-  computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapState)({
+  computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapState)({
     cardContent: function cardContent(state) {
       return state.card.cardContent;
     }
@@ -6816,7 +6829,30 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.imageEdit = URL.createObjectURL(image);
       this.modalEditImage = true;
     },
-    saveImage: function saveImage() {},
+    saveImage: function saveImage() {
+      var _this = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _this.loadingSave = true;
+                _context.next = 3;
+                return _this.$store.dispatch('uploadBackground', _this.imageCroped);
+
+              case 3:
+                _this.loadingSave = false;
+                _this.modalEditImage = false;
+
+              case 5:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }))();
+    },
     onChangePhotoEditor: function onChangePhotoEditor(img) {
       this.imageCroped = img;
     }
@@ -7790,23 +7826,26 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee);
       }))();
     },
-    getCardInfo: function getCardInfo(_ref2, params) {
+    uploadBackground: function uploadBackground(_ref2, image) {
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
-        var commit, rep, data;
+        var state, rep, data, img;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
-                commit = _ref2.commit;
+                state = _ref2.state;
                 _context2.next = 3;
-                return (0,_api_card__WEBPACK_IMPORTED_MODULE_2__.getCardById)(params.id);
+                return (0,_api_image__WEBPACK_IMPORTED_MODULE_1__.uploadImageBase64)(image);
 
               case 3:
                 rep = _context2.sent;
                 data = rep.data.data;
-                commit('SET_CARD_CONTENT', data);
+                (0,_api_card__WEBPACK_IMPORTED_MODULE_2__.saveCardBackground)(state.cardContent.id, data.img);
+                img = (0,_ultis__WEBPACK_IMPORTED_MODULE_3__.getUrlImage)(data.img);
+                state.cardContent.background_img = data.img;
+                state.cardContent.background_img_url = img;
 
-              case 6:
+              case 9:
               case "end":
                 return _context2.stop();
             }
@@ -7814,14 +7853,38 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee2);
       }))();
     },
-    saveCard: function saveCard(_ref3) {
+    getCardInfo: function getCardInfo(_ref3, params) {
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
-        var state, params;
+        var commit, rep, data;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
           while (1) {
             switch (_context3.prev = _context3.next) {
               case 0:
-                state = _ref3.state;
+                commit = _ref3.commit;
+                _context3.next = 3;
+                return (0,_api_card__WEBPACK_IMPORTED_MODULE_2__.getCardById)(params.id);
+
+              case 3:
+                rep = _context3.sent;
+                data = rep.data.data;
+                commit('SET_CARD_CONTENT', data);
+
+              case 6:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3);
+      }))();
+    },
+    saveCard: function saveCard(_ref4) {
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4() {
+        var state, params;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
+          while (1) {
+            switch (_context4.prev = _context4.next) {
+              case 0:
+                state = _ref4.state;
                 params = {
                   id: state.cardContent.id,
                   userName: state.cardContent.userName,
@@ -7832,18 +7895,18 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   avatar_img: state.cardContent.avatar_img,
                   links: state.cardContent.links
                 };
-                _context3.next = 4;
+                _context4.next = 4;
                 return (0,_api_card__WEBPACK_IMPORTED_MODULE_2__.storeCard)(params);
 
               case 4:
-                return _context3.abrupt("return", _context3.sent);
+                return _context4.abrupt("return", _context4.sent);
 
               case 5:
               case "end":
-                return _context3.stop();
+                return _context4.stop();
             }
           }
-        }, _callee3);
+        }, _callee4);
       }))();
     }
   },
@@ -8189,7 +8252,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.profileEdit_avatar[data-v-07e0d114] {\n    margin-top: -130px;\n    width: 172px;\n    height: 172px;\n    border-radius: 50%;\n    margin-left: auto;\n    margin-right: auto;\n    text-align: center;\n    position: relative;\n}\n.profileEdit_avatar__upload[data-v-07e0d114] {\n    position: absolute;\n    bottom: 2px;\n    right: 20px;\n    width: 32px;\n    height: 32px;\n    border-radius: 50%;\n    background-color: #242526;\n    display: inline-flex;\n    align-items: center;\n    justify-content: center;\n}\n.profileEdit_avatar__upload i[data-v-07e0d114] {\n    color: #fff;\n}\n.profileEdit_avatar img[data-v-07e0d114] {\n    width: 100%;\n    height: 100%;\n    overflow: hidden;\n    border-radius: 100%;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.profileEdit_avatar[data-v-07e0d114] {\n    border: 7px solid #fff;\n    margin-top: -130px;\n    width: 172px;\n    height: 172px;\n    border-radius: 50%;\n    margin-left: auto;\n    margin-right: auto;\n    text-align: center;\n    position: relative;\n}\n.profileEdit_avatar__upload[data-v-07e0d114] {\n    position: absolute;\n    bottom: 2px;\n    right: 20px;\n    width: 32px;\n    height: 32px;\n    border-radius: 50%;\n    background-color: #242526;\n    display: inline-flex;\n    align-items: center;\n    justify-content: center;\n}\n.profileEdit_avatar__upload i[data-v-07e0d114] {\n    color: #fff;\n}\n.profileEdit_avatar img[data-v-07e0d114] {\n    width: 100%;\n    height: 100%;\n    overflow: hidden;\n    border-radius: 100%;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -8213,7 +8276,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.profile_sum[data-v-9f10a36a] {\n    margin-top: 50px;\n    min-height: 350px;\n    padding: 20px;\n    background-color: #ccc;\n    border-bottom-left-radius: 20px;\n    border-bottom-right-radius: 20px;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.profile_sum[data-v-9f10a36a] {\n    background-size: cover;\n    margin-top: 50px;\n    min-height: 256px;\n    padding: 20px;\n    background-color: #ccc;\n    border-bottom-left-radius: 20px;\n    border-bottom-right-radius: 20px;\n}\n.profileEdit_bg[data-v-9f10a36a] {\n    padding: 4px 16px;\n    border-radius: 8px;\n    background-color: #fff;\n    border: none;\n    font-weight: 500;\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -8261,7 +8324,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.profileEdit__social[data-v-26959832] {\n    margin-top: 50px;\n    padding: 16px;\n}\n.profileEdit[data-v-26959832] {\n    padding-bottom: 40px;\n    /* background-color: #F9FAFC; */\n}\n.profileEdit__back[data-v-26959832] {\n    -webkit-text-stroke: 2px #fff; /* width and color */\n}\n.profileEdit_name[data-v-26959832] {\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    margin-bottom: 40px;\n}\n.profileEdit_bg[data-v-26959832] {\n    padding: 4px 16px;\n    border-radius: 8px;\n    background-color: #fff;\n    border: none;\n    font-weight: 500;\n}\n.profileEdit_name input[data-v-26959832] {\n    border: none;\n    outline: none;\n    background-color: transparent;\n    text-align: center;\n    font-size: 24px;\n}\n.profileEdit_name input[data-v-26959832]:focus {\n    border-bottom: 2px solid rgb(145, 143, 143);\n}\n.form-control.form-control-custom[data-v-26959832] {\n    background: #FFFFFF;\n    padding: 8px 0px;\n    border: none;\n    border-top: 1px solid #dedee0;\n    box-sizing: border-box;\n    border-radius: 0;\n}\n.form-control[data-v-26959832]:focus {\n    outline: none;\n    box-shadow: none;\n    border-color: #dedee0;\n}\n.form-group label[data-v-26959832]{\n    font-style: normal;\n    font-weight: 500;\n    font-size: 16px;\n    line-height: 19px;\n\n    /* anvuinew/gray80 */\n\n    color: #646D84;\n}\n.profileEdit__save button[data-v-26959832] {\n    /* align-items: center;\n    justify-content: center; */\n    padding: 4px 24px;\n    border-radius: 4px;\n    background-color: rgb(57 117 237);\n    color: #fff;\n    font-weight: 700;\n    border: none;\n}\n.profile_sum .dropdown  button[data-v-26959832]{\n    border-radius: 50%;\n    width: 32px;\n    height: 32px;\n    background-color: #fff;\n    border: none;\n}\n.loadingSave[data-v-26959832] {\n    opacity: .5;\n    pointer-events: none;\n}\n.loadingSave span[data-v-26959832] {\n    display: inline!important;\n}\n.loadingSave span i[data-v-26959832] {\n    color: #fff;\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.profileEdit__social[data-v-26959832] {\n    margin-top: 50px;\n    padding: 16px;\n}\n.profileEdit[data-v-26959832] {\n    padding-bottom: 40px;\n    /* background-color: #F9FAFC; */\n}\n.profileEdit__back[data-v-26959832] {\n    -webkit-text-stroke: 2px #fff; /* width and color */\n}\n.profileEdit_name[data-v-26959832] {\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    margin-bottom: 40px;\n}\n.profileEdit_name input[data-v-26959832] {\n    border: none;\n    outline: none;\n    background-color: transparent;\n    text-align: center;\n    font-size: 24px;\n}\n.profileEdit_name input[data-v-26959832]:focus {\n    border-bottom: 2px solid rgb(145, 143, 143);\n}\n.form-control.form-control-custom[data-v-26959832] {\n    background: #FFFFFF;\n    padding: 8px 0px;\n    border: none;\n    border-top: 1px solid #dedee0;\n    box-sizing: border-box;\n    border-radius: 0;\n    font-weight: bold;\n    font-size: 18px;\n    color: #333333d9;\n}\n.form-control[data-v-26959832]:focus {\n    outline: none;\n    box-shadow: none;\n    border-color: #dedee0;\n}\n.form-group label[data-v-26959832]{\n    font-style: normal;\n    font-weight: 500;\n    font-size: 16px;\n    line-height: 19px;\n\n    /* anvuinew/gray80 */\n\n    color: #646D84;\n}\n.profileEdit__save button[data-v-26959832] {\n    /* align-items: center;\n    justify-content: center; */\n    padding: 4px 24px;\n    border-radius: 4px;\n    background-color: rgb(57 117 237);\n    color: #fff;\n    font-weight: 700;\n    border: none;\n}\n.profile_sum .dropdown  button[data-v-26959832]{\n    border-radius: 50%;\n    width: 32px;\n    height: 32px;\n    background-color: #fff;\n    border: none;\n}\n.loadingSave[data-v-26959832] {\n    opacity: .5;\n    pointer-events: none;\n}\n.loadingSave span[data-v-26959832] {\n    display: inline!important;\n}\n.loadingSave span i[data-v-26959832] {\n    color: #fff;\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -51763,7 +51826,7 @@ var render = function() {
     "div",
     [
       _c("div", { staticClass: "profileEdit_avatar" }, [
-        _c("img", { attrs: { src: _vm.imagePreview, alt: "" } }),
+        _c("img", { attrs: { src: _vm.cardContent.avatar_img_url, alt: "" } }),
         _vm._v(" "),
         _vm._m(0),
         _vm._v(" "),
@@ -52066,11 +52129,7 @@ var render = function() {
             _c("card-background"),
             _vm._v(" "),
             _vm.cardContent && _vm.cardContent.id
-              ? [
-                  _c("card-avatar", {
-                    attrs: { img: _vm.cardContent.avatar_img_url }
-                  })
-                ]
+              ? [_c("card-avatar")]
               : _vm._e(),
             _vm._v(" "),
             _c("div", { staticClass: "profileEdit_name" }, [

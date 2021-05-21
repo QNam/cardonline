@@ -25,7 +25,7 @@
                 </div>
             </div> -->
             <template  v-if="cardContent && cardContent.id"> 
-                <card-avatar :img="cardContent.avatar_img_url" />
+                <card-avatar />
             </template>
             <div class="profileEdit_name">
                 <input type="text" class="mt-3"
@@ -312,14 +312,6 @@ export default {
     margin-bottom: 40px;
 }
 
-.profileEdit_bg {
-    padding: 4px 16px;
-    border-radius: 8px;
-    background-color: #fff;
-    border: none;
-    font-weight: 500;
-}
-
 .profileEdit_name input {
     border: none;
     outline: none;
@@ -338,7 +330,11 @@ export default {
     border-top: 1px solid #dedee0;
     box-sizing: border-box;
     border-radius: 0;
+    font-weight: bold;
+    font-size: 18px;
+    color: #333333d9;
 }
+
 .form-control:focus {
     outline: none;
     box-shadow: none;
