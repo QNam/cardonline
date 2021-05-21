@@ -1,130 +1,137 @@
 <template>
-    <div class="profileEdit">
-        <template v-if="tab == 1">
-            <van-nav-bar
-                title="Chỉnh sửa trang cá nhân"
-                left-text="Back"
-                left-arrow
-                fixed
-                @click-left="onClickLeftNavbar"
-            >
-            <template #right>
-                <van-loading v-if="loadingSave" type="spinner" color="#1989fa" />
-                <a  v-else @click.stop="saveCard">
-                    <span class="van-nav-bar__text">Lưu</span>
-                </a>
-            </template>
-            </van-nav-bar>
-            <card-background />
-            <!-- <div class="profile_sum mb-4" :style="{'background-image': 'url(' + cardContent.background_img_url + ')'}">
-                <input type="file" id="uploadBackground" class="d-none" @change="onBackgroundChanged">
-                <div class="d-flex align-items-center justify-content-between">
-                    <label for="uploadBackground" class="d-inline-block profileEdit_bg">
-                        <i class="fas fa-camera me-1"></i> Chỉnh sửa ảnh bìa
-                    </label>
-                </div>
-            </div> -->
-            <template  v-if="cardContent && cardContent.id"> 
-                <card-avatar />
-            </template>
-            <div class="profileEdit_name">
-                <input type="text" class="mt-3"
-                    :value="cardContent.userName" 
-                    @change="$store.commit('SET_CARD_NAME', $event.target.value)">
-            </div>
-            <div class="container pb-5">
-                <div class="form-group mb-3">
-                    <label for="" class="mb-2">Email</label>
-                    <input type="text" 
-                        :value="cardContent.email" 
-                        @change="$store.commit('SET_CARD_EMAIL', $event.target.value)" 
-                        class="form-control form-control-custom">
-                </div>
-                <div class="form-group mb-3">
-                    <label for="" class="mb-2">Số điện thoại</label>
-                    <input type="text" 
-                        :value="cardContent.phoneNumber" 
-                        @change="$store.commit('SET_CARD_PHONE_NUMBER', $event.target.value)" 
-                        class="form-control form-control-custom">
-                </div>
-                <div class="form-group mb-4">
-                    <label for="" class="mb-2">Mô tả bản thân</label>
-                    <textarea class="form-control form-control-custom" 
-                        :value="cardContent.descr" 
-                        @change="$store.commit('SET_CARD_DESC', $event.target.value)"></textarea>
-                </div>
-
-                <a style="color: #1989fa" @click.stop="tab = 2">Chỉnh sửa liên kết MXH</a>
-            </div>
+    <main>
+        <template v-if="loadingFetch">
+            <loading-full />
         </template>
-        
-        <template v-if="tab == 2">
-            <van-nav-bar
-                title="Chỉnh sửa liên kết MXH"
-                left-text="Back"
-                left-arrow
-                fixed
-                @click-left="tab = 1"
-            >
-            <template #right>
-            </template>
-            </van-nav-bar>
-            <div class="profileEdit__social">
-                <van-empty v-if="cardContent.links.length <= 0" description="Chưa có liên kết MXH nào !" />
-
-                <template v-else>
-                <div class="qncard mb-4">
-                    <div class="sociallItem mb-4 rounded-3 px-4 py-3 shadow d-flex align-items-center justify-content-between" 
-                        v-for="link, key in cardContent.links" 
-                        :key="key"
-                        @click="openEditSocialLink(link)"
-                    >
-                        <img :src="listSocial[link.type].thumb" style="width: 35px; height: 35px" alt="">
-                        <h5>{{ listSocial[link.type].name }}</h5>
-                        <van-icon v-if="loadingRemoveLink[link.link_id] === false || Object.keys(loadingRemoveLink).length == 0" 
-                                    name="cross" 
-                                    v-on:click.stop.prevent="removeSocialLink(link)" />
-                        <van-loading v-if="loadingRemoveLink[link.link_id] === true" type="spinner" />
-                    </div>
-                </div> 
-
+        <div v-else class="profileEdit">
+            <template v-if="tab == 1">
+                <van-nav-bar
+                    title="Chỉnh sửa trang cá nhân"
+                    left-text="Back"
+                    left-arrow
+                    fixed
+                    @click-left="onClickLeftNavbar"
+                >
+                <template #right>
+                    <van-loading v-if="loadingSave" type="spinner" color="#1989fa" />
+                    <a  v-else @click.stop="saveCard">
+                        <span class="van-nav-bar__text">Lưu</span>
+                    </a>
                 </template>
-                <van-button color="#1989fa" class=" w-100" @click="selectSocialNetwork = true"> <b class="text-light">Thêm liên kết</b></van-button>
-                
-                <van-popup @closed="$store.commit('RESET_SOCIAL_EDIT')" v-model="selectSocialNetwork" round position="bottom" :style="{ height: '70%' }" >
-                    <div class="px-3 pt-4">
-                        <div class="d-flex align-items-center justify-content-between">
-                            <h4>Mạng xã hội</h4>
-                            <img v-if="listSocial && listSocial[socialEdit.type]" :src="listSocial[socialEdit.type].thumb" style="width: 30px; height: 30px" alt="">
-                        </div>
-                        
-                        <div class="mt-4">
-                            <div class="d-flex">
-                                <input ref="editSocialLink" type="text" 
-                                    class="ps-0 rounded-0 form-control border-start-0 border-end-0 border-top-0 " 
-                                    placeholder="Đường dẫn"
-                                    :value="socialEdit.link"
-                                    @change="$store.commit('SET_SOCIAL_EDIT', {link: $event.target.value})" 
-                                >
-                                <div>
-                                    <van-loading v-if="loadingSave" type="spinner" color="#1989fa" />
-                                    <span v-else class="van-nav-bar__text cursor-pointer" @click="saveSocicalLink">Lưu</span>
-                                </div>
-                            </div> 
-                        </div>
-                        <div class="row mt-4">
-                            <template v-for="(social, skey) in listSocial"> 
-                                <a class="col-2 mb-4 cusor-pointer" v-if="social.show" :key="skey" @click.stop="onSelectSocial(skey)">
-                                    <img :src="social.thumb" class="img-fluid" alt="">
-                                </a>
-                            </template>
-                        </div>
+                </van-nav-bar>
+                <card-background />
+                <!-- <div class="profile_sum mb-4" :style="{'background-image': 'url(' + cardContent.background_img_url + ')'}">
+                    <input type="file" id="uploadBackground" class="d-none" @change="onBackgroundChanged">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <label for="uploadBackground" class="d-inline-block profileEdit_bg">
+                            <i class="fas fa-camera me-1"></i> Chỉnh sửa ảnh bìa
+                        </label>
                     </div>
-                </van-popup>
-            </div>
-        </template>
-        
-    </div>
+                </div> -->
+                <template  v-if="cardContent && cardContent.id"> 
+                    <card-avatar />
+                </template>
+                <div class="profileEdit_name">
+                    <input type="text" class="mt-3"
+                        :value="cardContent.userName" 
+                        @change="$store.commit('SET_CARD_NAME', $event.target.value)">
+                </div>
+                <div class="container pb-5">
+                    <div class="form-group mb-3">
+                        <label for="" class="mb-2">Email</label>
+                        <input type="text" 
+                            :value="cardContent.email" 
+                            @change="$store.commit('SET_CARD_EMAIL', $event.target.value)" 
+                            class="form-control form-control-custom">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="" class="mb-2">Số điện thoại</label>
+                        <input type="text" 
+                            :value="cardContent.phoneNumber" 
+                            @change="$store.commit('SET_CARD_PHONE_NUMBER', $event.target.value)" 
+                            class="form-control form-control-custom">
+                    </div>
+                    <div class="form-group mb-4">
+                        <label for="" class="mb-2">Mô tả bản thân</label>
+                        <textarea class="form-control form-control-custom" 
+                            :value="cardContent.descr" 
+                            @change="$store.commit('SET_CARD_DESC', $event.target.value)"></textarea>
+                    </div>
+
+                    <a style="color: #1989fa" @click.stop="tab = 2">Chỉnh sửa liên kết MXH</a>
+                </div>
+            </template>
+            
+            <template v-if="tab == 2">
+                <van-nav-bar
+                    title="Chỉnh sửa liên kết MXH"
+                    left-text="Back"
+                    left-arrow
+                    fixed
+                    @click-left="tab = 1"
+                >
+                <template #right>
+                </template>
+                </van-nav-bar>
+                <div class="profileEdit__social">
+                    <van-empty v-if="cardContent.links.length <= 0" description="Chưa có liên kết MXH nào !" />
+
+                    <template v-else>
+                    <div class="qncard mb-4">
+                        <div class="sociallItem mb-4 rounded-3 px-4 py-3 shadow d-flex align-items-center justify-content-between" 
+                            v-for="link, key in cardContent.links" 
+                            :key="key"
+                            @click="openEditSocialLink(link)"
+                        >
+                        <template v-if="listSocial && listSocial[link.type]">
+                            <img :src="listSocial[link.type].thumb" style="width: 35px; height: 35px" alt="">
+                            <h5>{{ listSocial[link.type].name }}</h5>
+                            <van-icon v-if="loadingRemoveLink[link.link_id] === false || Object.keys(loadingRemoveLink).length == 0" 
+                                        name="cross" 
+                                        v-on:click.stop.prevent="removeSocialLink(link)" />
+                            <van-loading v-if="loadingRemoveLink[link.link_id] === true" type="spinner" />
+                        </template>
+                        </div>
+                    </div> 
+
+                    </template>
+                    <van-button color="#1989fa" class=" w-100" @click="selectSocialNetwork = true"> <b class="text-light">Thêm liên kết</b></van-button>
+                    
+                    <van-popup @closed="$store.commit('RESET_SOCIAL_EDIT')" v-model="selectSocialNetwork" round position="bottom" :style="{ height: '70%' }" >
+                        <div class="px-3 pt-4">
+                            <div class="d-flex align-items-center justify-content-between">
+                                <h4>Mạng xã hội</h4>
+                                <img v-if="listSocial && listSocial[socialEdit.type] && socialEdit.type" :src="listSocial[socialEdit.type].thumb" style="width: 30px; height: 30px" alt="">
+                            </div>
+                            
+                            <div class="mt-4">
+                                <div class="d-flex">
+                                    <input ref="editSocialLink" type="text" 
+                                        class="ps-0 rounded-0 form-control border-start-0 border-end-0 border-top-0 " 
+                                        placeholder="Đường dẫn"
+                                        :value="socialEdit.link"
+                                        @change="$store.commit('SET_SOCIAL_EDIT', {link: $event.target.value})" 
+                                    >
+                                    <div>
+                                        <van-loading v-if="loadingSave" type="spinner" color="#1989fa" />
+                                        <span v-else class="van-nav-bar__text cursor-pointer" @click="saveSocicalLink">Lưu</span>
+                                    </div>
+                                </div> 
+                            </div>
+                            <div class="row mt-4">
+                                <template v-for="(social, skey) in listSocial"> 
+                                    <a class="col-2 mb-4 cusor-pointer" v-if="social.show" :key="skey" @click.stop="onSelectSocial(skey)">
+                                        <img :src="social.thumb" class="img-fluid" alt="">
+                                    </a>
+                                </template>
+                            </div>
+                        </div>
+                    </van-popup>
+                </div>
+            </template>
+            
+        </div>
+    </main>
 </template>
 
 <script>
@@ -134,12 +141,14 @@ import { uploadImage, uploadImageBase64 } from '../../../api/image'
 import { getUrlImage } from '../../../ultis'
 import CardAvatar from './CardAvatar'
 import CardBackground from './CardBackground'
+import LoadingFull from '../Loading/LoadingFull'
 import { mapActions, mapState } from 'vuex'
 
 export default {
     components: {
         CardAvatar,
-        CardBackground
+        CardBackground,
+        LoadingFull
     },
     data() {
         return {
@@ -148,13 +157,12 @@ export default {
             selectSocialNetwork: false,
             loadingRemoveLink: {},
             loadingSave: false,
-            loadingFetch: false,
+            loadingFetch: true,
         }
     },
     mounted() {
         this.getCardInfo()
         this.listSocial = JSON.parse(window.SOCIAL_NETWORKS)
-        console.log(this.listSocial)
     },
     computed: {
         ...mapState({
