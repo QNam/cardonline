@@ -86,7 +86,7 @@
                         <template v-if="listSocial && listSocial[link.type]">
                             <img :src="listSocial[link.type].thumb" style="width: 35px; height: 35px" alt="">
                             <h5>{{ listSocial[link.type].name }}</h5>
-                            <van-icon v-if="loadingRemoveLink[link.link_id] === false || Object.keys(loadingRemoveLink).length == 0" 
+                            <van-icon v-if="!loadingRemoveLink[link.link_id] || Object.keys(loadingRemoveLink).length == 0" 
                                         name="cross" 
                                         v-on:click.stop.prevent="removeSocialLink(link)" />
                             <van-loading v-if="loadingRemoveLink[link.link_id] === true" type="spinner" />
@@ -194,7 +194,10 @@ export default {
         },
 
         async removeSocialLink(link) {
-            this.loadingRemoveLink[link.link_id] = true
+            let tmp = {}
+            tmp[link.link_id] = true
+            this.loadingRemoveLink = tmp
+            
             try {
                 await removeCardLink(link.link_id)
                 this.loadingRemoveLink = {}
@@ -264,8 +267,8 @@ export default {
             this.loadingSave = true
             try {
                 await this.$store.dispatch('saveCard')
+                await this.getCardInfo()
                 this.$notify({ type: 'success', message: 'Lưu thành công !', duration: 1000 })
-                this.getCardInfo()
             } catch(e) {
                 console.log(e)
             } finally {

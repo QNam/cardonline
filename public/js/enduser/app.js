@@ -7087,17 +7087,19 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var _this = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-        var links;
+        var tmp, links;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                _this.loadingRemoveLink[link.link_id] = true;
-                _context.prev = 1;
-                _context.next = 4;
+                tmp = {};
+                tmp[link.link_id] = true;
+                _this.loadingRemoveLink = tmp;
+                _context.prev = 3;
+                _context.next = 6;
                 return (0,_api_card__WEBPACK_IMPORTED_MODULE_1__.removeCardLink)(link.link_id);
 
-              case 4:
+              case 6:
                 _this.loadingRemoveLink = {};
                 links = _this.cardContent.links.filter(function (val) {
                   return val.link_id != link.link_id;
@@ -7105,21 +7107,21 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
                 _this.$store.commit('SET_CARD_LINKS', links);
 
-                _context.next = 13;
+                _context.next = 15;
                 break;
 
-              case 9:
-                _context.prev = 9;
-                _context.t0 = _context["catch"](1);
+              case 11:
+                _context.prev = 11;
+                _context.t0 = _context["catch"](3);
                 console.log(_context.t0);
                 _this.loadingRemoveLink = {};
 
-              case 13:
+              case 15:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[1, 9]]);
+        }, _callee, null, [[3, 11]]);
       }))();
     },
     saveSocicalLink: function saveSocicalLink() {
@@ -7263,33 +7265,35 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                 return _this6.$store.dispatch('saveCard');
 
               case 4:
+                _context6.next = 6;
+                return _this6.getCardInfo();
+
+              case 6:
                 _this6.$notify({
                   type: 'success',
                   message: 'Lưu thành công !',
                   duration: 1000
                 });
 
-                _this6.getCardInfo();
-
-                _context6.next = 11;
+                _context6.next = 12;
                 break;
 
-              case 8:
-                _context6.prev = 8;
+              case 9:
+                _context6.prev = 9;
                 _context6.t0 = _context6["catch"](1);
                 console.log(_context6.t0);
 
-              case 11:
-                _context6.prev = 11;
+              case 12:
+                _context6.prev = 12;
                 _this6.loadingSave = false;
-                return _context6.finish(11);
+                return _context6.finish(12);
 
-              case 14:
+              case 15:
               case "end":
                 return _context6.stop();
             }
           }
-        }, _callee6, null, [[1, 8, 11, 14]]);
+        }, _callee6, null, [[1, 9, 12, 15]]);
       }))();
     }
   }
@@ -52470,9 +52474,9 @@ var render = function() {
                                               )
                                             ]),
                                             _vm._v(" "),
-                                            _vm.loadingRemoveLink[
+                                            !_vm.loadingRemoveLink[
                                               link.link_id
-                                            ] === false ||
+                                            ] ||
                                             Object.keys(_vm.loadingRemoveLink)
                                               .length == 0
                                               ? _c("van-icon", {
