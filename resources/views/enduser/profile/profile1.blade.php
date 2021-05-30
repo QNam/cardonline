@@ -84,7 +84,7 @@
                <div id="ProfileWrapper">
                   <div class="flex-row" style="text-align: center; padding-top: 1px; overflow: hidden;">
                     @foreach ($cardLink as $link)
-                    @if($link && $link['link'])
+                    @if($link && $link['type'])
                      <div class="grid-square-normal">
                         <a rel="noopener" target="_blank" href="{{ $link['link'] }}" class="socialTitles d-block">
                         <img alt="{{ $card->userName }}" class="shadow" style="width: 100%; height: 100%;" 
@@ -92,6 +92,7 @@
                             {{ $link['name'] }}
                         </a>
                     </div>
+                    @endif
                     @endforeach
                   </div>
                </div>
