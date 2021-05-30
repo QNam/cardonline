@@ -1,19 +1,19 @@
 <!doctype html>
 <html lang="en">
    <head>
-      {{-- <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"> --}}
-      <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('static/imgs/logo.png') }}">
-      <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('static/imgs/logo.png') }}">
-      {{-- <link rel="manifest" href="/site.webmanifest">
-      <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#000000"> --}}
+      <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+      <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+      <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+      <link rel="manifest" href="/site.webmanifest">
+      <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#000000">
       <meta name="msapplication-TileColor" content="#000000">
       <meta name="theme-color" content="#ffffff">
-      <meta property="og:image" content="{{ $card->background_img }}">
+      <meta property="og:image" content="https://poplme.co/photos/4822_abf6e89a6b3d99a2420b91f1854d9533.jpg">
       <meta property="og:image:type" content="image/png">
       <meta property="og:image:width" content="1024">
       <meta property="og:image:height" content="1024">
       <!--<link rel="apple-touch-icon" sizes="180x180" href="https://poplme.co/assets/frontend/images/favicons/apple-touch-icon.png?v=algq7zqq6R">-->
-      {{-- <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png">
+      <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png">
       <link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png">
       <link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png">
       <link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png">
@@ -21,28 +21,32 @@
       <link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon-76x76.png">
       <link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png">
       <link rel="apple-touch-icon" sizes="60x60" href="/apple-touch-icon-60x60.png">
-      <link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png"> --}}
-      <link rel="shortcut icon" href="{{ asset('static/imgs/logo.png') }}">
-      <meta name="apple-mobile-web-app-title" content="FUKI">
-      <meta name="application-name" content="FUKI">
+      <link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
+      <!--<link rel="icon" type="image/png" sizes="32x32" href="https://poplme.co/assets/frontend/images/favicons/favicon-32x32.png?v=algq7zqq6R">-->
+      <!--<link rel="icon" type="image/png" sizes="16x16" href="https://poplme.co/assets/frontend/images/favicons/favicon-16x16.png?v=algq7zqq6R">-->
+      <!--<link rel="manifest" href="/site.webmanifest?v=algq7zqq6R">-->
+      <!--<link rel="mask-icon" href="https://poplme.co/assets/frontend/images/safari-pinned-tab.svg?v=algq7zqq6R" color="#00aced">-->
+      <link rel="shortcut icon" href="/favicon.ico?v=algq7zqq6R">
+      <meta name="apple-mobile-web-app-title" content="Popl">
+      <meta name="application-name" content="Popl">
       <!--<meta name="msapplication-TileColor" content="#00aced">-->
-      {{-- <meta name="msapplication-TileImage" content="https://poplme.co/assets/frontend/images/favicons/mstile-310x310.png?v=algq7zqq6R">
+      <meta name="msapplication-TileImage" content="https://poplme.co/assets/frontend/images/favicons/mstile-310x310.png?v=algq7zqq6R">
       <meta name="msapplication-TileImage" content="https://poplme.co/assets/frontend/images/favicons/mstile-310x150.png?v=algq7zqq6R">
       <meta name="msapplication-TileImage" content="https://poplme.co/assets/frontend/images/favicons/mstile-150x150.png?v=algq7zqq6R">
       <meta name="msapplication-TileImage" content="https://poplme.co/assets/frontend/images/favicons/mstile-144x144.png?v=algq7zqq6R">
-      <meta name="msapplication-TileImage" content="https://poplme.co/assets/frontend/images/favicons/mstile-70x70.png?v=algq7zqq6R"> --}}
+      <meta name="msapplication-TileImage" content="https://poplme.co/assets/frontend/images/favicons/mstile-70x70.png?v=algq7zqq6R">
       <!--<meta name="theme-color" content="#00aced">-->
       <meta charset="utf-8">
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
       <meta http-equiv="Content-Language" content="en">
       <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-      <title>{{ $card->userName }}</title>
-      <meta property="og:title" content="{{ $card->userName }}" data-react-helmet="true">
+      <title>Popl - Jason</title>
+      <meta property="og:title" content="Popl - Jason" data-react-helmet="true">
       <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, shrink-to-fit=no, user-scalable=no" />
-      <meta name="description" content="{{ $card->descr }}">
-      <meta property="og:description" content="{{ $card->descr }}">
+      <meta name="description" content="Popl profile">
+      <meta property="og:description" content="Popl profile">
       <meta name="msapplication-tap-highlight" content="no">
-      <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('static/imgs/logo.png') }}">
+      <link rel="icon" type="image/png" sizes="16x16" href="https://poplme.co/assets/frontend/images/blue_popl.png">
       <link rel="stylesheet" href="https://poplme.co/assets/plugins/jquery/intlTelInput.min.css" type="text/css" >
       <link rel="stylesheet" href="https://poplme.co/assets/plugins/jquery/jquery-ui.css" type="text/css" >
       <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -50,48 +54,164 @@
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
       <link href="https://poplme.co/assets/plugins/font-awesome-5.12.0/css/all.css" rel="stylesheet">
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css"/>
+      <style>
+         .swiper-container {
+         width: 100%;
+         height: 100%;
+         position: absolute;
+         }
+         .swiper-slide {
+         -webkit-transform: translateZ(0);
+         -webkit-backface-visibility: hidden;
+         }
+         .swiper-button-prev:after,
+         .swiper-button-next:after {
+         font-size: 26px;
+         top: 50%;
+         position: fixed;
+         }
+         .swiper-button-disabled {
+         opacity: 0.2 !important;
+         }
+      </style>
    </head>
-   <body class="bodyBusiness">
+   <body>
+
+      <div class="topPad" style="height: 55px"></div>
       <div class="container">
          <div class="row">
             <div class="col-md-3 col-xs-12 col-lg-3"></div>
             <div class="col-md-6 col-xs-12 col-lg-6 shadowProfile">
                <div class="profile">
                   <div id="profile-image" class="profile-image">
-                     <div class="profile-photo-wrapper">
-                        <img alt="profile picture" id="profile_picture_id" src="{{ $card->background_img }}">
-                    </div>
+                     <div class="profile-photo-wrapper"><img alt="profile picture" id="profile_picture_id" src="https://poplme.co/photos/4822_a458a152168ad7c7a08747652ee9e05f.jpg"></div>
+                     <!--<img  id="profile_picture_id" src="https://poplme.co/photos/4822_abf6e89a6b3d99a2420b91f1854d9533.jpg">-->
                   </div>
+                  <img alt="Popl Pro" onclick="BuyPoplPro()" class="shadow" style="position: absolute; width: 32px; height: 32px; top: 15px; left: 15px" src="https://poplme.co/assets/frontend/images/icons/Probutton.png">
                   <div class="logo shadow" style="width: 80px; height: 80px; border-radius: 40px; position: absolute; right: 20px; top: 155px; float: right; background-color: white; vertical-align: middle; fill: blue">
-                    <img src="{{ $card->avatar_img }}" style="height: 100%; border-radius: 40px; border: 3px; object-fit: scale-down; width: 100%; margin-right: 20px; display: block; margin: 0 auto"></img>
+                     <img src="https://poplme.co/logos/4822_a18e8d99d7db9ad4e45e9a8ebd1980ae.jpg" style="height: 100%; border-radius: 40px; border: 3px; object-fit: scale-down; width: 100%; margin-right: 20px; display: block; margin: 0 auto"></img>
                   </div>
                   <div class="NewName" style="font-size: 28px !important;">
-                     <a id="nameWebview" style="text-align: left">{{ $card->userName }}</a>
-                     {{-- <a  href="https://poplme.co/verified">
+                     <a id="nameWebview" style="text-align: left">Popl Pay™️</a>
+                     <a  href="https://poplme.co/verified">
                      <img alt="verified popl symbol" src="https://poplme.co/assets/frontend/images/icons/verified-blue.png" width="28px" style="padding-bottom: 4px;"/></h2>
-                     </a> --}}
+                     </a>
                   </div>
-                  <div class="flex-row" style="font-size: 18px !important; color: grey; text-align: center; width: 100%; padding-top: 0px; margin-bottom: 14px; font-family: proxima-nova, Arial, Helvetica, sans-serif; font-weight: 400; font-style: normal;">
-                     <a id="nameWebviewA" style="text-align: center">{{ $card->descr }}</a> 
-                  </div>        
+                  <input id="copyName" type="text" value="poplme.co/jason" hidden>
+                  <div onclick="copyToClipboard()" class="flex-row" style="font-size: 18px !important; color: grey; text-align: center; width: 100%; padding-top: 0px; margin-bottom: 14px; font-family: proxima-nova, Arial, Helvetica, sans-serif; font-weight: 400; font-style: normal;">
+                     <a id="nameWebviewA" style="text-align: center">poplme.co/jason</a> 
+                     <!--<a style="background-color: black; height: 50px; width: 100px"></a>-->
+                  </div>
+                  <div style=" text-align: center; margin-right: 25px; margin-left: 25px; margin-bottom: 20px">
+                     <p id="bio_change" class="bio" style=" line-height: 21px; word-break: keep-all;">Tap to Pay™️</p>
+                  </div>
+                  <p id="username" hidden>https://poplme.co/jason</p>
+                  <script>
+                     function copyToClipboard() {
+                     const str = document.getElementById('username').innerText;
+                     const el = document.createElement('textarea');
+                     el.value = str;
+                     el.setAttribute('readonly', '');
+                     el.style.position = 'absolute';
+                     el.style.left = '-9999px';
+                     document.body.appendChild(el);
+                     el.select();
+                     document.execCommand('copy');
+                     document.body.removeChild(el);
+                     alert('Popl link copied!');
+                     }
+                  </script>            
                </div>
              
                <div class="d-flex flex-row bd-highlight justify-content-center" style="margin-left: 8.7%; margin-right: 8.7%;">
-                  <a rel="noopener" target="_blank" class="btn btn-primary AddBtn connectButton" style="padding: 7px; border-radius: 10px; font-size: 20px; margin-right: 10px; width: auto" href="{{ route('SaveToPhone', ['id' => $card->id]) }}"><b>Lưu liên hệ</b></a>
-                  {{-- <a id="edit" onclick="IncView('42','4822','CONCT')" style="padding: 7px; border-radius: 10px; font-size: 20px" data-toggle="modal" data-target="#myModal" class="btn btn-primary AddBtn connectButton"><b>Connect</b></a> --}}
+                  <a rel="noopener" id="addTo" onclick="IncView('43','4822','ADDCT')" target="_blank" class="btn btn-primary AddBtn connectButton" style="padding: 7px; border-radius: 10px; font-size: 20px; margin-right: 10px" href="https://poplme.co/addtocontacts/4822/"><b>Add contact</b></a>
+                  <a id="edit" onclick="IncView('42','4822','CONCT')" style="padding: 7px; border-radius: 10px; font-size: 20px" data-toggle="modal" data-target="#myModal" class="btn btn-primary AddBtn connectButton"><b>Connect</b></a>
                </div>
            
                <div id="ProfileWrapper">
-                  <div class="flex-row" style="text-align: center; padding-top: 1px; overflow: hidden;">
-                    @foreach ($cardLink as $link)
-                     <div class="grid-square-normal">
-                        <a rel="noopener" target="_blank" href="{{ $link['link'] }}" class="socialTitles d-block">
-                        <img alt="{{ $card->userName }}" class="shadow" style="width: 100%; height: 100%;" 
-                            src="{{ $link['thumb'] }}">
-                            {{ $link['name'] }}
+                  <div  class="flex-row" style="text-align: center; padding-top: 1px; overflow: hidden;">
+                     <div class="grid-square-normal" data-link-id="22">
+                        <a id="Contact Card" rel="noopener" target="_blank" href="https://poplme.co/addtocontacts/4822/" class="socialTitles" style="font-size: 14px;" onclick="IncView('22','4822','sYZX1'); vcard();">
+                        <img alt="Contacts logo for popl" class="shadow" style="width: 100%; height: 100%;" src="https://poplme.co/assets/frontend/images/icons/contacts.png">
+                        Contact Card
                         </a>
-                    </div>
-                    @endforeach
+                     </div>
+                     <div class="grid-square-normal" data-link-id="6">
+                        <a id="Facebook" rel="noopener" target="_blank" href="fb://profile/1236091806" class="socialTitles" onclick="IncView('6','4822','9sqOJ')">
+                        <img alt="facebook logo in blue" class="shadow" style="width: 100%; height: 100%;" src="https://poplme.co/assets/frontend/images/icons/facebookicon.png">
+                        Facebook
+                        </a>
+                     </div>
+                     <div class="grid-square-video" data-link-id="39" data-link-hash="r0jA6" onclick="IncView('39','4822','r0jA6')">
+                        <iframe class="shadow" width="85%" height="230" src="https://www.youtube.com/embed/sIr-QH6iYw0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" style="border-radius: 33px; margin-top: 25px" onclick="IncView('39','4822','r0jA6')"></iframe>
+                     </div>
+                     <div class="grid-square-normal" data-link-id="37">
+                        <a id="portfolio" rel="noopener" target="_blank" href="https://firebasestorage.googleapis.com/v0/b/poplco.appspot.com/o/4822-file-1611795725070?alt=media" class="socialTitles" onclick="IncView('37','4822','GOlv1')">
+                        <img alt="Resume" class="shadow" style="width: 100%; height: 100%;" src="https://poplme.co/assets/frontend/images/icons/fileWhite.png">
+                        portfolio
+                        </a>
+                     </div>
+                     <div class="grid-square-normal" data-link-id="37">
+                        <a id="popl prime" rel="noopener" target="_blank" href="https://firebasestorage.googleapis.com/v0/b/poplco.appspot.com/o/4822-image-1611790258901?alt=media" class="socialTitles" onclick="IncView('37','4822','4SdMj')">
+                        <img alt="Resume" class="shadow" style="width: 100%; height: 100%;" src="https://firebasestorage.googleapis.com/v0/b/poplco.appspot.com/o/4822-icon-1612680822060629759?alt=media">
+                        popl prime
+                        </a>
+                     </div>
+                     <div class="grid-square-normal" data-link-id="3">
+                        <a id="dm me" rel="noopener" target="_blank" href="https://instagram.com/jasonalco" class="socialTitles" onclick="IncView('3','4822','2jekO')">
+                        <img alt="insta logo in purple" class="shadow" style="width: 100%; height: 100%;" src="https://poplme.co/assets/frontend/images/icons/insta.png">
+                        dm me
+                        </a>
+                     </div>
+                     <div class="grid-square-normal" data-link-id="5">
+                        <a id="tweet" rel="noopener" target="_blank" href="https://twitter.com/poplco" class="socialTitles" onclick="IncView('5','4822','MZULt')">
+                        <img alt="twitter logo in blue" class="shadow" style="width: 100%; height: 100%;" src="https://poplme.co/assets/frontend/images/icons/twitter.png">
+                        tweet
+                        </a>
+                     </div>
+                     <div class="grid-square-normal" data-link-id="11">
+                        <a id="Popl" rel="noopener" target="_blank" href="https://www.tiktok.com/@popl" class="socialTitles" onclick="IncView('11','4822','eYQtH')">
+                        <img alt="tiktok logo for popl" class="shadow" style="width: 100%; height: 100%;" src="https://poplme.co/assets/frontend/images/icons/tiktoknew.png">
+                        Popl
+                        </a>
+                     </div>
+                     <div class="grid-square-normal" data-link-id="27">
+                        <a id="FT me" rel="noopener" target="_blank" href="facetime:5108478748" class="socialTitles" onclick="IncView('27','4822','Avcnq')">
+                        <img alt="FaceTime number" class="shadow" style="width: 100%; height: 100%;" src="https://poplme.co/assets/frontend/images/icons/facetimePro.png">
+                        FT me
+                        </a>
+                     </div>
+                     <div class="grid-square-normal" data-link-id="37">
+                        <a id="Suriname" rel="noopener" target="_blank" href="https://firebasestorage.googleapis.com/v0/b/poplco.appspot.com/o/4822-file-1611822874098?alt=media" class="socialTitles" onclick="IncView('37','4822','xmUy1')">
+                        <img alt="Resume" class="shadow" style="width: 100%; height: 100%;" src="https://firebasestorage.googleapis.com/v0/b/poplco.appspot.com/o/4822-icon-1612317426075266180?alt=media">
+                        Suriname
+                        </a>
+                     </div>
+                     <div class="grid-square-normal" data-link-id="10">
+                        <a id="YouTube" rel="noopener" target="_blank" href="https://youtube.com/channel/UCQKT5Xlndffvt1JBScnUjvw" class="socialTitles" onclick="IncView('10','4822','8tHyd')">
+                        <img alt="youtube logo in red" class="shadow" style="width: 100%; height: 100%;" src="https://poplme.co/assets/frontend/images/icons/youtube.png">
+                        YouTube
+                        </a>
+                     </div>
+                     <div class="grid-square-normal" data-link-id="30">
+                        <a id="Podcasts" rel="noopener" target="_blank" href="https://podcasts.apple.com/us/podcast/wearelatech-los-angeles-startups-podcast-hosted-by/id922313515?i=1000480168104" class="socialTitles" onclick="IncView('30','4822','eBv7E')">
+                        <img alt="Apple podcast link" class="shadow" style="width: 100%; height: 100%;" src="https://poplme.co/assets/frontend/images/icons/podcasts.png">
+                        Podcasts
+                        </a>
+                     </div>
+                     <div class="grid-square-normal" data-link-id="37">
+                        <a id="My ID" rel="noopener" target="_blank" href="https://firebasestorage.googleapis.com/v0/b/poplco.appspot.com/o/4822-image-1611823459276?alt=media" class="socialTitles" onclick="IncView('37','4822','oriCQ')">
+                        <img alt="Resume" class="shadow" style="width: 100%; height: 100%;" src="https://poplme.co/assets/frontend/images/icons/fileWhite.png">
+                        My ID
+                        </a>
+                     </div>
+                     <div class="grid-square-normal" data-link-id="10">
+                        <a id="YouTube" rel="noopener" target="_blank" href="https://youtu.be/SBQH2CD1dP8" class="socialTitles" onclick="IncView('10','4822','jzOqq')">
+                        <img alt="youtube logo in red" class="shadow" style="width: 100%; height: 100%;" src="https://poplme.co/assets/frontend/images/icons/youtube.png">
+                        YouTube
+                        </a>
+                     </div>
+                     <div class="grid-square-normal" style="visibility: hidden"><a class="socialTitles"><img style="width: 100%; height: 100%" src="https://poplme.co/assets/frontend/images/icons/mailicon.png">Mail</a></div>
                   </div>
                </div>
                <!-- show nothing -->

@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Auth;
 
 Route::group(['middleware' => ['web']], function () {
     Route::get('/', function () {
-        return view('enduser/test');
+        return view('enduser/test2');
     });
 
     Route::get('/login',  function(){

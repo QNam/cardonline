@@ -21,7 +21,7 @@
 </head>
 
 <body>
-	<div id="canvas">
+	<div id="canvas" style="background-color: #000">
 		<div id="box_wrapper">
 
 			<!-- template sections -->
@@ -34,7 +34,7 @@
 							<div class="row">
 								<div class="col-12 my-0 mx-0 d-flex justify-content-between align-items-center">
 									<a href="https://html.modernwebtemplates.com/way2go/" class="logo">
-										<img src="{{ asset('imgs/logo.png') }}" alt="">
+										<img src="{{ asset('imgs/logo_w.png') }}" alt="">
 									</a>
 									<span
 										class="toggle_menu toggle_menu_side header-slide toggle_menu_special"><span></span></span>
@@ -995,10 +995,11 @@
 									<div class="intro_layers_wrapper">
 										<div class="intro_layers">
 											<div class="intro_layer" data-animation="fadeInRight">
-												<img src="{{ asset('imgs/slide-logo') }}.png" class="pull-left" alt="slide-img">
+												<img src="{{ asset('imgs/banner1.jpg') }}" class="pull-left" alt="slide-img">
 											</div>
 											<div class="intro_layer text-right" data-animation="fadeInLeft">
-												<p class="title">way<span class="red">2</span><span class="light"><br>Meet Digital<br>Enterpreneur</span></p>
+												<p class="title">FUKI<span class="red">4.0</span>
+													<span class="light"><br>Thẻ cá nhân thông minh</span></p>
 											</div>
 										</div> <!-- eof .intro_layers -->
 									</div> <!-- eof .intro_layers_wrapper -->
