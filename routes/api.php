@@ -33,3 +33,4 @@ Route::post('/media/uploadImageBase64', 'App\Http\Controllers\MediaController@up
 Route::post('/card/saveAvatar', 'App\Http\Controllers\CardController@saveAvatar');
 Route::post('/card/saveBackground', 'App\Http\Controllers\CardController@saveBackground');
 Route::post('/card/removeLink', 'App\Http\Controllers\CardController@removeCardLink');
+Route::post('/card/genCard', 'App\Http\Controllers\CardController@genCard');

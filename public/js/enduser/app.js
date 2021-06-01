@@ -7504,6 +7504,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "getListCard": () => (/* binding */ getListCard),
 /* harmony export */   "getCardById": () => (/* binding */ getCardById),
+/* harmony export */   "genCard": () => (/* binding */ genCard),
 /* harmony export */   "saveCardAvatar": () => (/* binding */ saveCardAvatar),
 /* harmony export */   "saveCardBackground": () => (/* binding */ saveCardBackground),
 /* harmony export */   "storeCard": () => (/* binding */ storeCard),
@@ -7527,6 +7528,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 function getListCard(data) {
   return _axios__WEBPACK_IMPORTED_MODULE_0__.default.get('/card/getList', {
     params: {
+      getForExport: data.getForExport,
       page: data.page,
       limit: data.limit
     }
@@ -7537,6 +7539,12 @@ function getCardById(id) {
     params: {
       id: id
     }
+  });
+}
+function genCard(params) {
+  return _axios__WEBPACK_IMPORTED_MODULE_0__.default.post('/card/genCard', {
+    from: params.from,
+    to: params.to
   });
 }
 function saveCardAvatar(id, imageName) {
@@ -8021,7 +8029,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "toQrcode": () => (/* binding */ toQrcode),
-/* harmony export */   "getUrlImage": () => (/* binding */ getUrlImage)
+/* harmony export */   "getUrlImage": () => (/* binding */ getUrlImage),
+/* harmony export */   "exportExcel": () => (/* binding */ exportExcel)
 /* harmony export */ });
 function toQrcode(string) {
   var size = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'md';
@@ -8038,6 +8047,27 @@ function toQrcode(string) {
 }
 function getUrlImage(imageName) {
   return "//cardonline.local/images/" + imageName;
+}
+function exportExcel(element, fileName) {
+  setTimeout(function () {
+    var tableEP = $(element).tableExport({
+      headings: true,
+      // (Boolean), display table headings (th/td elements) in the <thead>
+      footers: true,
+      // (Boolean), display table footers (th/td elements) in the <tfoot>
+      formats: ["xlsx"],
+      // (String[]), filetypes for the export
+      filename: fileName,
+      // (id, String), filename for the downloaded file
+      bootstrap: false,
+      // (Boolean), style buttons using bootstrap
+      exportButtons: false
+    });
+    var getEp = tableEP.getExportData();
+    var exportData = getEp[Object.keys(getEp)[0]]['xlsx'];
+    tableEP.export2file(exportData.data, exportData.mimeType, exportData.filename, exportData.fileExtension);
+    tableEP.remove();
+  }, 200);
 }
 
 /***/ }),

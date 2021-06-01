@@ -16,39 +16,89 @@ class CardController extends Controller
         $card = new Card();
         $limit = $request->limit ? $request->limit : 15;
         $page = $request->page ? $request->page : 15;
+        $getForExport = $request->getForExport ? $request->getForExport : false;
 
-        $listCard = $card->paginate($limit, ['*'], 'page', $page);
-        
-        $paginationInfo = [
-            'total' => $listCard->total(),
-            'currentPage' => $listCard->currentPage(),
-            'lastPage' => $listCard->lastPage(),
-            'hasPages' => $listCard->hasPages(),
-        ];
+        if($getForExport) {
+            $listCard = $card->where('email', null)->get();
 
-        $rep = [
-            'success' => true, 
-            'data' => $listCard->items(),
-            'pagination' => $paginationInfo
-        ];
+            $rep = [
+                'success' => true, 
+                'data' => $listCard,
+            ];
+        } else {
+            $listCard = $card->paginate($limit, ['*'], 'page', $page);
+
+            $paginationInfo = [
+                'total' => $listCard->total(),
+                'currentPage' => $listCard->currentPage(),
+                'lastPage' => $listCard->lastPage(),
+                'hasPages' => $listCard->hasPages(),
+            ];
+    
+            $rep = [
+                'success' => true, 
+                'data' => $listCard->items(),
+                'pagination' => $paginationInfo
+            ];
+        }
 
         return response()->json($rep);
     }
 
+    function genCard(Request $request) {
+        $card = new Card();
+        $from = $request->from;
+        $to = $request->to;
+
+        try {
+            $listCard = range($from, $to);
+            $params = [];
+            foreach($listCard as &$value) {
+                $tmp = [
+                    'id' => $value,
+                    'theme' => 1,
+                    'userName' => 'Người dùng ' . $value
+                ];
+
+                array_push($params, $tmp);
+            }
+
+            $card->insert($params);
+
+            $rep = [
+                'success' => true,
+                'data' => $params
+            ];
+            return $this->sendSuccess($rep);
+        } catch (\Exception $e) {       
+            $rep = [
+                'success' => false,
+                'data' => []
+            ];
+            return $this->sendServerError($e);
+        }
+    }
+
     function removeCard(Request $request) {
         $card = new Card();
+        $cardLink = new CardLinks();
+
         try {
+            $cardLink->where('card_id', $request->id)->delete();
             $card->where('id', $request->id)->delete();
 
             $rep = [
                 'success' => true,
                 'data' => []
             ];
-        } catch (\Exception $e) {            
+            return $this->sendSuccess($rep);
+        } catch (\Exception $e) {   
+            dd($e);         
             $rep = [
                 'success' => false,
                 'data' => []
             ];
+            return $this->sendServerError($e);
         }
     }
 
@@ -107,11 +157,13 @@ class CardController extends Controller
                 'success' => true,
                 'data' => []
             ];
+            return $this->sendSuccess($rep);
         } catch (\Exception $e) {            
             $rep = [
                 'success' => false,
                 'data' => []
             ];
+            return $this->sendServerError($e);
         }
     }
 

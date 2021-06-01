@@ -4,6 +4,7 @@ import {toQrcode, getUrlImage} from '../ultis'
 export function getListCard(data) {
     return http.get('/card/getList', {
         params: { 
+            getForExport: data.getForExport,
             page: data.page,
             limit: data.limit
         }
@@ -15,6 +16,13 @@ export function getCardById(id) {
         params: { 
             id
         }
+    })
+}
+
+export function genCard(params) {
+    return http.post('/card/genCard', { 
+        from: params.from,
+        to: params.to,
     })
 }
 

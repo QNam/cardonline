@@ -22,10 +22,6 @@
       <link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png">
       <link rel="apple-touch-icon" sizes="60x60" href="/apple-touch-icon-60x60.png">
       <link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
-      <!--<link rel="icon" type="image/png" sizes="32x32" href="https://poplme.co/assets/frontend/images/favicons/favicon-32x32.png?v=algq7zqq6R">-->
-      <!--<link rel="icon" type="image/png" sizes="16x16" href="https://poplme.co/assets/frontend/images/favicons/favicon-16x16.png?v=algq7zqq6R">-->
-      <!--<link rel="manifest" href="/site.webmanifest?v=algq7zqq6R">-->
-      <!--<link rel="mask-icon" href="https://poplme.co/assets/frontend/images/safari-pinned-tab.svg?v=algq7zqq6R" color="#00aced">-->
       <link rel="shortcut icon" href="/favicon.ico?v=algq7zqq6R">
       <meta name="apple-mobile-web-app-title" content="Popl">
       <meta name="application-name" content="Popl">

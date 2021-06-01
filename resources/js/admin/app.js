@@ -14,6 +14,9 @@ import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 import http from '../axios'
 
+window.$ = window.jQuery = require('jquery');
+window.TableExport = require('tableexport');
+
 Vue.prototype.$http = http;
 
 Vue.use(ElementUI);

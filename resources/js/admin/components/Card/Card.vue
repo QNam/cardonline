@@ -6,6 +6,8 @@
             </div>
             <div class="col">
                 <div class="text-end">
+                    <el-button type="success" @click="exportExcel"><i class="fa fa-plus me-2" aria-hidden="true"></i>Xuất Excel</el-button>
+                    <el-button type="primary" @click="toggleGenCard = true"><i class="fa fa-plus me-2" aria-hidden="true"></i>Tự động tạo thẻ</el-button>
                     <el-button type="primary" @click="openFormCard(null)"><i class="fa fa-plus me-2" aria-hidden="true"></i>Thêm thẻ</el-button>
                 </div>  
             </div>
@@ -107,11 +109,50 @@
                 <el-button type="primary" @click="saveCard">Lưu</el-button>
             </span>
         </el-dialog>
+
+        <el-dialog :visible.sync="toggleGenCard">
+            <div slot="title">
+                <h5>Tự động tạo thẻ</h5>
+            </div>
+            <div class="d-flex">
+                <el-input type="number" class="me-3" v-model="genCard.from" placeholder="Từ"></el-input>
+                <el-input type="number" v-model="genCard.to" placeholder="Đến"></el-input>
+            </div>
+            <span slot="footer" class="dialog-footer">
+                <el-button @click="toggleGenCard = false">Hủy</el-button>
+                <el-button type="primary" @click="doGenCard">Lưu</el-button>
+            </span>
+        </el-dialog>
+        
+        <div id="table-export" class="d-none">
+            <table>
+                <thead>
+                    <th>STT</th>
+                    <th>Mã thẻ</th>
+                    <th>Mã QR</th>
+                    <th>Link mã QR</th>
+                </thead>
+                <tbody>
+                    <tr v-for="(card, index) in listCardExport" :key="index">
+                        <td>{{ index + 1 }}</td>
+                        <td>{{ card.id }}</td>
+                        <td>
+                            <img :src="card.qrCode" alt="">
+                        </td>
+                        <td>
+                            {{ card.qrCode }}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
     </div>
 </template>
 
 <script>
 import * as cardApi from '../../../api/card'
+import { exportExcel } from '../../../ultis'
 import Pagination from '../Template/Paginate'
 
 export default {
@@ -119,13 +160,19 @@ export default {
     data() {
         return {
             toogleFormCard: false,
+            toggleGenCard: false,
             cardSelected: new cardApi.CardDTO(),
             filter: {
                 page: 1,
                 limit: 15,
                 totalPage: 1,
             },
+            genCard: {
+                from: null,
+                to: null
+            },
             listCard: [],
+            listCardExport: [],
             loadGetCard: false,
             loadSaveCard: false
         }
@@ -155,6 +202,20 @@ export default {
                 console.error(error);
             }
             this.loadGetCard = false
+        },
+
+        async getAllCard() {
+            const params = {
+                page: 0,
+                limit: 1000000,
+                getForExport: true
+            }
+            const response = await cardApi.getListCard(params);
+            const data = response.data.data
+
+            this.listCardExport = data.map((val) => {
+                return new cardApi.CardDTO(val)
+            })
         },
         
         paginateCard(page) {
@@ -188,6 +249,44 @@ export default {
                     message: 'Có lỗi xảy ra vui lòng thử lại sau !'
                 });
             }
+        },
+
+        async doGenCard() {
+            let params = {
+                from: this.genCard.from,
+                to: this.genCard.to
+            }
+            try {
+                await cardApi.genCard(params);
+                this.$notify.success({
+                    title: 'Success',
+                    message: 'Lưu thành công !'
+                });
+                this.toggleGenCard = false
+                this.getListCard()
+            } catch(e) {
+                this.toggleGenCard = false
+                this.$notify.error({
+                    title: 'Error',
+                    message: 'Có lỗi xảy ra! Vui lòng chắc chắn không có mã thẻ nào trong khoảng bị trùng mã'
+                });
+            }
+        },
+
+        async exportExcel() {
+            this.$notify.info({
+                title: 'info',
+                message: 'Lấy dữ liệu export !'
+            });
+
+            await this.getAllCard()
+            this.$notify.info({
+                title: 'info',
+                message: 'Lấy xong dữ liệu sẵn sàng export xin chờ trong 2s !'
+            });
+            setTimeout(function() {
+                exportExcel('#table-export','DANH_SACH_THE' + (new Date()).getTime())
+            }, 2000)
         },
 
         saveCard() {
