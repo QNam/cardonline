@@ -19,7 +19,7 @@
                     <th>Mã thẻ</th>
                     <th>Chủ thẻ</th>
                     <th>Số điện thoại</th>
-                    <th>Số lần quét</th>
+                    <th>Mã xác thực</th>
                     <th>Ngày kích hoạt</th>
                     <th></th>
                 </thead>
@@ -41,7 +41,7 @@
                             </td>
                             <td>{{ card.userName }}</td>
                             <td>{{ card.phoneNumber }}</td>
-                            <td></td>
+                            <td>{{ card.confirm_code }}</td>
                             <td></td>
                             <td>
                                 <div class="d-flex justify-content-center">
@@ -129,16 +129,14 @@
                 <thead>
                     <th>STT</th>
                     <th>Mã thẻ</th>
-                    <th>Mã QR</th>
+                    <th>Mã xác thực</th>
                     <th>Link mã QR</th>
                 </thead>
                 <tbody>
                     <tr v-for="(card, index) in listCardExport" :key="index">
                         <td>{{ index + 1 }}</td>
                         <td>{{ card.id }}</td>
-                        <td>
-                            <img :src="card.qrCode" alt="">
-                        </td>
+                        <td>{{ card.confirm_code }}</td>
                         <td>
                             {{ card.qrCode }}
                         </td>

@@ -126,7 +126,7 @@ export class CardDTO {
         this.avatar_img_url = card && card.avatar_img && card.avatar_img != "" ? getUrlImage(card.avatar_img)  : 'https://www.ro-spain.com/wp-content/uploads/2018/07/default-avatar.png'
         this.background_img = card && card.background_img && card.background_img != "" ? card.background_img : ''
         this.background_img_url = card && card.background_img && card.background_img != "" ? getUrlImage(card.background_img) : 'https://cover-talk.zadn.vn/0/f/3/a/1/4345cc7015c1bbcae0d24e8a26ec3ae5.jpg'
-
+        this.confirm_code = card && card.confirm_code ? card.confirm_code : '' 
         this.links = card && card.links ? card.links : null
     }
 

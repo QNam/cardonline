@@ -57,7 +57,8 @@ class CardController extends Controller
                 $tmp = [
                     'id' => $value,
                     'theme' => 1,
-                    'userName' => 'Người dùng ' . $value
+                    'userName' => 'Người dùng ' . $value,
+                    'confirm_code' => rand(100000, 999999),
                 ];
 
                 array_push($params, $tmp);
