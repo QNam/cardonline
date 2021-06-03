@@ -74,6 +74,10 @@ export default {
 
         async onAvatarChanged(event) {
             const image = event.target.files[0]
+            if(image.size >= 1500000) {
+                this.$notify({ type: 'warning', message: 'Ảnh không quá 1.5MB', duration: 1500 })
+                return
+            }
             this.imageEdit = URL.createObjectURL(image)
 
             this.modalEditImage = true

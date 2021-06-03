@@ -6725,10 +6725,25 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             switch (_context2.prev = _context2.next) {
               case 0:
                 image = event.target.files[0];
+
+                if (!(image.size >= 1500000)) {
+                  _context2.next = 4;
+                  break;
+                }
+
+                _this2.$notify({
+                  type: 'warning',
+                  message: 'Ảnh không quá 1.5MB',
+                  duration: 1500
+                });
+
+                return _context2.abrupt("return");
+
+              case 4:
                 _this2.imageEdit = URL.createObjectURL(image);
                 _this2.modalEditImage = true;
 
-              case 3:
+              case 6:
               case "end":
                 return _context2.stop();
             }
@@ -6828,6 +6843,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     onBackgroundChange: function onBackgroundChange(event) {
       var image = event.target.files[0];
+
+      if (image.size >= 1500000) {
+        this.$notify({
+          type: 'warning',
+          message: 'Ảnh không quá 1.5MB',
+          duration: 1500
+        });
+        return;
+      }
+
       this.imageEdit = URL.createObjectURL(image);
       this.modalEditImage = true;
     },
