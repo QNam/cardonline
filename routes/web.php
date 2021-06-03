@@ -23,7 +23,7 @@ Route::group(['middleware' => ['web']], function () {
     })->name('Login');
 
     Route::post('/login', 'App\Http\Controllers\AuthController@login')->name('UserLogin');
-    Route::get('/logout', 'App\Http\Controllers\AuthController@logout')->name('UserLogin');
+    Route::get('/logout', 'App\Http\Controllers\AuthController@logout')->name('UserLogout');
     
 
     Route::get('/register',  function(){
