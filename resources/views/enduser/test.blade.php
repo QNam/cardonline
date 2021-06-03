@@ -54,11 +54,15 @@
 																<div class="row">
 																	<div class="col-sm-12 col-md-6" style="padding-right: 15px;">
 																		<h6>Thẻ cá nhân thông minh</h6>
-																		<img src="{{ asset('imgs/prod1.jpg') }}" class="img-fluid" alt="">
+																		<a href="https://shopee.vn/product/453514978/4790348140/" class="d-block">
+																			<img src="{{ asset('imgs/prod1.png') }}" class="img-fluid" alt="">
+																		</a>
 																	</div>
 																	<div class="col-sm-12 col-md-6" style="padding-left: 15px;">
 																		<h6>Sticket thông minh</h6>
-																		<img src="{{ asset('imgs/prod2.png') }}" class="img-fluid" alt="">
+																		<a href="https://shopee.vn/Sticker-th%C3%B4ng-minh-FUKI-Th%E1%BA%BB-c%C3%A1-nh%C3%A2n-th%C3%B4ng-minh-i.453514978.4390465814" class="d-block">
+																			<img src="{{ asset('imgs/prod2.png') }}" class="img-fluid" alt="">
+																		</a>
 																	</div>
 																</div>
 															</li>
@@ -236,14 +240,14 @@
 						<div class="col-sm-12 col-md-6 wow slideInRight" data-wow-duration=".5s">
 							<div class="row">
 								<div class="col-sm-12 col-md-6">
-									<a href="https://shopee.vn/product/453514978/4790348140/" class="d-block">
-										<img src="{{ asset('imgs/prod1.jpg') }}" class="img-fluid" alt="">
-									</a>
+									{{-- <a href="https://shopee.vn/product/453514978/4790348140/" class="d-block"> --}}
+										<img src="{{ asset('imgs/prod1.png') }}" class="img-fluid" alt="">
+									{{-- </a> --}}
 								</div>	
 								<div class="col-sm-12 col-md-6">
-									<a href="https://shopee.vn/Sticker-th%C3%B4ng-minh-FUKI-Th%E1%BA%BB-c%C3%A1-nh%C3%A2n-th%C3%B4ng-minh-i.453514978.4390465814" class="d-block">
+									{{-- <a href="https://shopee.vn/Sticker-th%C3%B4ng-minh-FUKI-Th%E1%BA%BB-c%C3%A1-nh%C3%A2n-th%C3%B4ng-minh-i.453514978.4390465814" class="d-block"> --}}
 										<img src="{{ asset('imgs/prod2.png') }}" class="img-fluid" alt="">
-									</a>
+									{{-- </a> --}}
 								</div>
 							</div>
 						</div>

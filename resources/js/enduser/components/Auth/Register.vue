@@ -13,8 +13,8 @@
                         <span class="error" v-if="!emailUnique">Email đã được sử dụng ! </span>
                     </div>
                     <div class="form-group mt-3">
-                        <label for="">Username</label>
-                        <input type="text" class="form-control" placeholder="Username" :class="{'form-control-error': submited && !$v.userName.required}" v-model.trim="$v.userName.$model">
+                        <label for="">Họ tên</label>
+                        <input type="text" class="form-control" placeholder="Họ tên" :class="{'form-control-error': submited && !$v.userName.required}" v-model.trim="$v.userName.$model">
                         <span class="error" v-if="submited && !$v.userName.required">Họ tên không được bỏ trống ! </span>
                     </div>
                     <div class="form-group mt-3">

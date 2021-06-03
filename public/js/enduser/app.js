@@ -51847,7 +51847,7 @@ var render = function() {
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "form-group mt-3" }, [
-              _c("label", { attrs: { for: "" } }, [_vm._v("Username")]),
+              _c("label", { attrs: { for: "" } }, [_vm._v("Họ tên")]),
               _vm._v(" "),
               _c("input", {
                 directives: [
@@ -51864,7 +51864,7 @@ var render = function() {
                   "form-control-error":
                     _vm.submited && !_vm.$v.userName.required
                 },
-                attrs: { type: "text", placeholder: "Username" },
+                attrs: { type: "text", placeholder: "Họ tên" },
                 domProps: { value: _vm.$v.userName.$model },
                 on: {
                   input: function($event) {
