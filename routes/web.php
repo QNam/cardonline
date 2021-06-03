@@ -31,12 +31,23 @@ Route::group(['middleware' => ['web']], function () {
     })->name('EditUser');
 });
 
+Route::get('/quantri/login',  function(){
+    return view('admin/login');
+})->name('AdminLogin');
 
+Route::get('/quantri/logout', 'App\Http\Controllers\Admin\LoginController@logout')->name('AdminLogout');
+
+Route::post('/quantri/login', 'App\Http\Controllers\Admin\LoginController@login')->name('DoAdminLogin');
+
+
+Route::group(['middleware' => ['admin.checkLogin']], function () {
+    Route::get('/quantri', App\Http\Controllers\Admin\DashboardController::class)->name('AdminSPA');
+    Route::get('/quantri/{any?}', App\Http\Controllers\Admin\DashboardController::class);
+});
 
 Route::get('/saveToPhone/{id}', 'App\Http\Controllers\CardController@saveProfileToPhone')->name('SaveToPhone');
 
 // Route::post('/register', 'App\Http\Controllers\AuthController@register');
-Route::get('/quantri/{any?}', App\Http\Controllers\Admin\DashboardController::class);
 
 Route::get('/{any?}', 'App\Http\Controllers\CardController@profile')->name('Profile');
 
