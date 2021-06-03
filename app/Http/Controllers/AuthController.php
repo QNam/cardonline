@@ -16,17 +16,28 @@ class AuthController extends Controller
         $cardContent = Card::where('email', $request->email)->first();
 
         if(!$cardContent) {
-            return $this->sendUnauthorized();
+            $request->session()->flash('LOGIN_STATUS', 'Tài khoản hoặc mật khẩu không chính xác !');
+            return redirect()->back();
         }
 
         if(!Hash::check($request->password, $cardContent->password)) {
-            return $this->sendUnauthorized();
+            $request->session()->flash('LOGIN_STATUS', 'Tài khoản hoặc mật khẩu không chính xác !');
+            return redirect()->back();
         }
 
         Auth::login($cardContent, true);
         $cardAsArr = $cardContent->toArray();
         unset($cardAsArr['password']);
-        return $this->sendSuccess(['data' => $cardAsArr]);
+
+        return redirect()->route('EditUser', ['id' => $cardAsArr['id']]);
+    }
+
+    public function logout(Request $request) {
+        if(Auth::check()) {
+            Auth::logout();
+        }
+
+        return redirect()->back();
     }
 
     public function register(RegisterRequest $request) {
