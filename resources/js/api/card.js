@@ -97,6 +97,15 @@ export function checkCardIsExists(data) {
     return http.post('/card/exists', params)
 }
 
+export function checkConfirmCode(data) {
+    const params = {
+        cardId: data.cardId,
+        confirmCode: data.confirmCode
+    }
+
+    return http.post('/card/checkConfirmCode', params)
+}
+
 export function removeCard(cardId) {
     const params = {
         id: cardId

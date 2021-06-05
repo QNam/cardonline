@@ -246,6 +246,28 @@ class CardController extends Controller
         }
     }
 
+    public function checkConfirmCode(Request $request) {
+        $card = new Card();
+        $cardId = $request->cardId;
+        $confirmCode = $request->confirmCode;
+        if(!$cardId ||!$confirmCode) {
+            $this->sendBadRequest();
+        }
+
+        try {
+            $exists = $card->where('id', $cardId)
+                        ->where('confirm_code', $confirmCode)
+                        ->exists();
+
+            $rep = [
+                'exists' => $exists
+            ];
+            return $this->sendSuccess($rep);
+        } catch (\Exception $e) {
+            return $this->sendServerError($e);
+        }
+    }
+
     public function profile(Request $request, $alias) {
         $card = new Card();
         $cardContent = $card->where('id', $alias)->first();

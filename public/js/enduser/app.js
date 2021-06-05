@@ -6447,6 +6447,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -6456,9 +6465,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       userName: '',
       cardId: '',
       password: '',
+      confirmCode: '',
       submited: false,
       emailUnique: true,
       cardIdExists: true,
+      confirmCodeExists: true,
       loadingSubmit: false
     };
   },
@@ -6477,6 +6488,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_2__.required,
       maxLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_2__.maxLength)(125)
     },
+    confirmCode: {
+      required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_2__.required
+    },
     password: {
       required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_2__.required,
       maxLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_2__.maxLength)(125)
@@ -6492,7 +6506,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _this = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-        var cardIdExists, emailExists, params;
+        var cardIdExists, emailExists, confirmCode, params;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
@@ -6511,62 +6525,71 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 return _context.abrupt("return", false);
 
               case 6:
-                _context.next = 8;
+                _context.prev = 6;
+                _context.next = 9;
                 return _this.checkCardIsExists(_this.cardId);
 
-              case 8:
+              case 9:
                 cardIdExists = _context.sent;
-                _context.next = 11;
+                _context.next = 12;
                 return _this.checkCardIsExists(_this.email, 'email');
 
-              case 11:
+              case 12:
                 emailExists = _context.sent;
+                _context.next = 15;
+                return (0,_api_card__WEBPACK_IMPORTED_MODULE_1__.checkConfirmCode)({
+                  cardId: _this.cardId,
+                  confirmCode: _this.confirmCode
+                });
+
+              case 15:
+                confirmCode = _context.sent;
                 _this.cardIdExists = cardIdExists;
                 _this.emailUnique = !emailExists;
+                _this.confirmCodeExists = confirmCode.data.data.exists;
 
-                if (!(!_this.cardIdExists || !_this.emailUnique)) {
-                  _context.next = 17;
+                if (!(!_this.cardIdExists || !_this.emailUnique || !_this.confirmCodeExists)) {
+                  _context.next = 22;
                   break;
                 }
 
                 _this.loadingSubmit = false;
                 return _context.abrupt("return", false);
 
-              case 17:
+              case 22:
                 params = {
                   cardId: _this.cardId,
                   userName: _this.userName,
                   email: _this.email,
                   password: _this.password
                 };
-                _context.prev = 18;
-                _context.next = 21;
+                _context.next = 25;
                 return (0,_api_card__WEBPACK_IMPORTED_MODULE_1__.register)(params);
 
-              case 21:
+              case 25:
                 _this.$router.push({
                   name: 'Login'
                 });
 
                 _this.loadingSubmit = false;
-                _context.next = 29;
+                _context.next = 33;
                 break;
 
-              case 25:
-                _context.prev = 25;
-                _context.t0 = _context["catch"](18);
+              case 29:
+                _context.prev = 29;
+                _context.t0 = _context["catch"](6);
                 console.log(_context.t0);
                 _this.loadingSubmit = false; // this.$notify({
                 //     type: 'error',
                 //     message: 'Có lỗi xảy ra! Vui lòng thử lại sau.'
                 // });
 
-              case 29:
+              case 33:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[18, 25]]);
+        }, _callee, null, [[6, 29]]);
       }))();
     },
     checkCardIsExists: function checkCardIsExists(value) {
@@ -7538,6 +7561,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "register": () => (/* binding */ register),
 /* harmony export */   "login": () => (/* binding */ login),
 /* harmony export */   "checkCardIsExists": () => (/* binding */ checkCardIsExists),
+/* harmony export */   "checkConfirmCode": () => (/* binding */ checkConfirmCode),
 /* harmony export */   "removeCard": () => (/* binding */ removeCard),
 /* harmony export */   "removeCardLink": () => (/* binding */ removeCardLink),
 /* harmony export */   "CardDTO": () => (/* binding */ CardDTO)
@@ -7634,6 +7658,13 @@ function checkCardIsExists(data) {
     value: data.value
   };
   return _axios__WEBPACK_IMPORTED_MODULE_0__.default.post('/card/exists', params);
+}
+function checkConfirmCode(data) {
+  var params = {
+    cardId: data.cardId,
+    confirmCode: data.confirmCode
+  };
+  return _axios__WEBPACK_IMPORTED_MODULE_0__.default.post('/card/checkConfirmCode', params);
 }
 function removeCard(cardId) {
   var params = {
@@ -51887,56 +51918,115 @@ var render = function() {
                 ? _c("span", { staticClass: "error" }, [
                     _vm._v("Họ tên không được bỏ trống ! ")
                   ])
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.submited && !_vm.$v.userName.minLength
+                ? _c("span", { staticClass: "error" }, [
+                    _vm._v("Họ tên lớn hơn 4 ký tự ! ")
+                  ])
                 : _vm._e()
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "form-group mt-3" }, [
-              _c("label", { attrs: { for: "" } }, [_vm._v("Mã số thẻ")]),
-              _vm._v(" "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model.trim",
-                    value: _vm.$v.cardId.$model,
-                    expression: "$v.cardId.$model",
-                    modifiers: { trim: true }
-                  }
-                ],
-                staticClass: "form-control",
-                class: {
-                  "form-control-error": _vm.submited && !_vm.$v.cardId.required
-                },
-                attrs: { type: "text", placeholder: "Card Number" },
-                domProps: { value: _vm.$v.cardId.$model },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
+            _c("div", { staticClass: "row" }, [
+              _c("div", { staticClass: "col-md-6 form-group mt-3" }, [
+                _c("label", { attrs: { for: "" } }, [_vm._v("Mã số thẻ")]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model.trim",
+                      value: _vm.$v.cardId.$model,
+                      expression: "$v.cardId.$model",
+                      modifiers: { trim: true }
                     }
-                    _vm.$set(
-                      _vm.$v.cardId,
-                      "$model",
-                      $event.target.value.trim()
-                    )
+                  ],
+                  staticClass: "form-control",
+                  class: {
+                    "form-control-error":
+                      _vm.submited && !_vm.$v.cardId.required
                   },
-                  blur: function($event) {
-                    return _vm.$forceUpdate()
+                  attrs: { type: "text", placeholder: "Card Number" },
+                  domProps: { value: _vm.$v.cardId.$model },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(
+                        _vm.$v.cardId,
+                        "$model",
+                        $event.target.value.trim()
+                      )
+                    },
+                    blur: function($event) {
+                      return _vm.$forceUpdate()
+                    }
                   }
-                }
-              }),
+                }),
+                _vm._v(" "),
+                _vm.submited && !_vm.$v.cardId.required
+                  ? _c("span", { staticClass: "error" }, [
+                      _vm._v("Mã số thẻ không được bỏ trống ! ")
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
+                !_vm.cardIdExists
+                  ? _c("span", { staticClass: "error" }, [
+                      _vm._v("Mã số thẻ không đúng hoặc đã được sử dụng ! ")
+                    ])
+                  : _vm._e()
+              ]),
               _vm._v(" "),
-              _vm.submited && !_vm.$v.cardId.required
-                ? _c("span", { staticClass: "error" }, [
-                    _vm._v("Mã số thẻ không được bỏ trống ! ")
-                  ])
-                : _vm._e(),
-              _vm._v(" "),
-              !_vm.cardIdExists
-                ? _c("span", { staticClass: "error" }, [
-                    _vm._v("Mã số thẻ không đúng hoặc đã được sử dụng ! ")
-                  ])
-                : _vm._e()
+              _c("div", { staticClass: "col-md-6 form-group mt-3" }, [
+                _c("label", { attrs: { for: "" } }, [_vm._v("Mã xác nhận")]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model.trim",
+                      value: _vm.$v.confirmCode.$model,
+                      expression: "$v.confirmCode.$model",
+                      modifiers: { trim: true }
+                    }
+                  ],
+                  staticClass: "form-control",
+                  class: {
+                    "form-control-error":
+                      _vm.submited && !_vm.$v.confirmCode.required
+                  },
+                  attrs: { type: "text", placeholder: "Mã xác nhận" },
+                  domProps: { value: _vm.$v.confirmCode.$model },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(
+                        _vm.$v.confirmCode,
+                        "$model",
+                        $event.target.value.trim()
+                      )
+                    },
+                    blur: function($event) {
+                      return _vm.$forceUpdate()
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _vm.submited && !_vm.$v.confirmCode.required
+                  ? _c("span", { staticClass: "error" }, [
+                      _vm._v("Mã xác nhận không được bỏ trống ! ")
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
+                !_vm.confirmCodeExists
+                  ? _c("span", { staticClass: "error" }, [
+                      _vm._v("Mã xác nhận không chính xác !")
+                    ])
+                  : _vm._e()
+              ])
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "form-group mt-3" }, [

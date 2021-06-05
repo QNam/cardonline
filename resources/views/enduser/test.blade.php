@@ -45,7 +45,7 @@
 										<div class="container-fluid c-gutter-0">
 											<div class="row">
 												<div class="col-xs-12 col-sm-6">
-													<div class="menu-part-1">
+													<div class="menu-part-1" style="background-color: #7A8084">
 														<ul class="nav menu-side-click">
 															<li class="menu-title">
 																<a href="/">Sản phẩm</a>
@@ -80,7 +80,7 @@
 													</div>
 												</div>
 												<div class="col-xs-12 col-sm-6">
-													<div class="menu-part-3 menu-side-click">
+													<div class="menu-part-3 menu-side-click"  style="background-color: #9FA2A5">
 														<!-- main side nav start -->
 														<nav class="mainmenu_side_wrapper">
 															<ul class="nav menu-click">
@@ -226,7 +226,7 @@
 				</div>
 			</div>
 
-			<div class="block-home bg-yellow">
+			<div class="block-home bg-white">
 				<div class="container">
 					<div class="row">
 						<div class="col-sm-12 col-md-5 h-100 wow slideInLeft" data-wow-duration=".5s">
@@ -255,7 +255,7 @@
 				</div>
 			</div>
 
-			<div class="block-home bg-blue">
+			<div class="block-home bg-white">
 				<div class="container">
 					<div class="row">
 						<div class="col-sm-12 col-md-4 h-100">
@@ -273,7 +273,7 @@
 				</div>
 			</div>
 
-			<div class="block-home bg-green">
+			<div class="block-home bg-white">
 				<div class="container">
 					<div class="row">
 						<div class="col-sm-12 col-md-5 h-100 wow slideInLeft" data-wow-duration=".5s">
@@ -312,7 +312,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="block-home bg-green">
+			<div class="block-home bg-white">
 				<div class="container">
 					<div class="row">
 						<div class="col-sm-12 col-md-5 h-100 wow slideInLeft" data-wow-duration=".5s">

@@ -16,12 +16,21 @@
                         <label for="">Họ tên</label>
                         <input type="text" class="form-control" placeholder="Họ tên" :class="{'form-control-error': submited && !$v.userName.required}" v-model.trim="$v.userName.$model">
                         <span class="error" v-if="submited && !$v.userName.required">Họ tên không được bỏ trống ! </span>
+                        <span class="error" v-if="submited && !$v.userName.minLength">Họ tên lớn hơn 4 ký tự ! </span>
                     </div>
-                    <div class="form-group mt-3">
-                        <label for="">Mã số thẻ</label>
-                        <input type="text" class="form-control" placeholder="Card Number" :class="{'form-control-error': submited && !$v.cardId.required}" v-model.trim="$v.cardId.$model">
-                        <span class="error" v-if="submited && !$v.cardId.required">Mã số thẻ không được bỏ trống ! </span>
-                        <span class="error" v-if="!cardIdExists">Mã số thẻ không đúng hoặc đã được sử dụng ! </span>
+                    <div class="row">
+                        <div class="col-md-6 form-group mt-3">
+                            <label for="">Mã số thẻ</label>
+                            <input type="text" class="form-control" placeholder="Card Number" :class="{'form-control-error': submited && !$v.cardId.required}" v-model.trim="$v.cardId.$model">
+                            <span class="error" v-if="submited && !$v.cardId.required">Mã số thẻ không được bỏ trống ! </span>
+                            <span class="error" v-if="!cardIdExists">Mã số thẻ không đúng hoặc đã được sử dụng ! </span>
+                        </div>
+                        <div class="col-md-6 form-group mt-3">
+                            <label for="">Mã xác nhận</label>
+                            <input type="text" class="form-control" placeholder="Mã xác nhận" :class="{'form-control-error': submited && !$v.confirmCode.required}" v-model.trim="$v.confirmCode.$model">
+                            <span class="error" v-if="submited && !$v.confirmCode.required">Mã xác nhận không được bỏ trống ! </span>
+                            <span class="error" v-if="!confirmCodeExists">Mã xác nhận không chính xác !</span>
+                        </div>
                     </div>
                     <div class="form-group mt-3">
                         <label for="">Mật khẩu</label>
@@ -46,7 +55,7 @@
 
 <script>
 import { required, minLength, maxLength, email } from 'vuelidate/lib/validators'
-import { checkCardIsExists, register } from '../../../api/card'
+import { checkCardIsExists, checkConfirmCode, register } from '../../../api/card'
 
 export default {
     data() {
@@ -55,10 +64,12 @@ export default {
             userName: '',
             cardId: '',
             password: '',
+            confirmCode: '',
 
             submited: false,
             emailUnique: true,
             cardIdExists: true,
+            confirmCodeExists: true,
 
             loadingSubmit: false
         }
@@ -77,6 +88,9 @@ export default {
         cardId: {
             required,
             maxLength: maxLength(125),
+        },
+        confirmCode: {
+            required,
         },
         password: {
             required,
@@ -100,26 +114,27 @@ export default {
                 this.loadingSubmit = false
                 return false
             } 
-
-            const cardIdExists = await this.checkCardIsExists(this.cardId)
-            const emailExists = await this.checkCardIsExists(this.email, 'email')
-            
-            this.cardIdExists = cardIdExists
-            this.emailUnique = !emailExists
-
-            if(!this.cardIdExists || !this.emailUnique) {
-                this.loadingSubmit = false
-                return false
-            }
-
-            const params = {
-                cardId: this.cardId,
-                userName: this.userName,
-                email: this.email,
-                password: this.password,
-            }
-
             try {
+                const cardIdExists = await this.checkCardIsExists(this.cardId)
+                const emailExists = await this.checkCardIsExists(this.email, 'email')
+                const confirmCode = await checkConfirmCode({cardId: this.cardId, confirmCode: this.confirmCode})
+
+                this.cardIdExists = cardIdExists
+                this.emailUnique = !emailExists
+                this.confirmCodeExists = confirmCode.data.data.exists
+
+                if(!this.cardIdExists || !this.emailUnique || !this.confirmCodeExists) {
+                    this.loadingSubmit = false
+                    return false
+                }
+
+                const params = {
+                    cardId: this.cardId,
+                    userName: this.userName,
+                    email: this.email,
+                    password: this.password,
+                }
+
                 await register(params)
 
                 this.$router.push({ name: 'Login' })
