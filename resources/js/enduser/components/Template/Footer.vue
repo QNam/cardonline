@@ -5,9 +5,8 @@
             <div class="footer__wrap flex-wrap">
                 <p class="flex-grow-1">Copyright © 2021</p>
                 <ul class="flex-grow-2">
-                    <li><a href="">Home</a></li>
-                    <li><a href="">Blog</a></li>
-                    <li><a href="">Shop</a></li>
+                    <li ><a  href="/">Home</a></li>
+                    <li ><a  href="https://shopee.vn/fuki40">Shop</a></li>
                 </ul>
             </div>
         </div>

@@ -7,10 +7,9 @@
                         <img src="/static/imgs/logo.png" alt="" style="width: 120px">
                     </a>
                     <ul>
-                        <li><a href=""><i class="fab fa-facebook-f"></i></a></li>
-                        <li><a href=""><i class="fab fa-youtube"></i></a></li>
-                        <li><a href=""><i class="fab fa-instagram"></i></a></li>
-                        <li><a href="" class="goToShop">Go to shop </a></li>
+                        <li><a  href="https://www.facebook.com/fuki4.0"><i class="fab fa-facebook-f"></i></a></li>
+                        <li><a  href="https://www.instagram.com/fuki4.0/"><i class="fab fa-instagram"></i></a></li>
+                        <li><a  href="https://shopee.vn/fuki40" class="goToShop">Go to shop </a></li>
                     </ul>
                 </div>
             </div>
@@ -18,7 +17,7 @@
         <nav class="navbar--mobile">
             <div class="container">
                 <div class="navbar--mobile__wrap">
-                    <a href="">
+                    <a href="/">
                         <img src="/static/imgs/logo.png" alt="" style="width: 120px">
                     </a>
                     <li class="nav-item dropdown">
@@ -26,10 +25,9 @@
                             <i class="fas fa-bars" aria-hidden="true"></i>
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbar--mobile">
-                        <li><a class="dropdown-item" href="#"><i class="fab fa-facebook-f me-2"></i> Facebook</a></li>
-                        <li><a class="dropdown-item" href="#"><i class="fab fa-youtube me-2"></i> Youtube</a></li>
-                        <li><a class="dropdown-item" href="#"><i class="fab fa-instagram me-2"></i> Instagram</a></li>
-                        <li><a class="dropdown-item" href="#"><span class="me-2"></span>  Go to shop</a></li>
+                            <li><a class="dropdown-item" href="https://www.facebook.com/fuki4.0"><i class="fab fa-facebook-f me-2"></i> Facebook</a></li>
+                            <li><a class="dropdown-item" href="https://www.instagram.com/fuki4.0/"><i class="fab fa-instagram me-2"></i> Instargram</a></li>
+                            <li><a class="dropdown-item" href="https://shopee.vn/fuki40"><span class="me-2"></span>  Go to shop</a></li>
                         </ul>
                     </li>
                 </div>

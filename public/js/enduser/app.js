@@ -6456,6 +6456,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -6465,6 +6471,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       userName: '',
       cardId: '',
       password: '',
+      repeatPassword: '',
       confirmCode: '',
       submited: false,
       emailUnique: true,
@@ -6493,7 +6500,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     password: {
       required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_2__.required,
+      minLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_2__.minLength)(6),
       maxLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_2__.maxLength)(125)
+    },
+    repeatPassword: {
+      sameAsPassword: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_2__.sameAs)('password')
     }
   },
   mounted: function mounted() {
@@ -7404,7 +7415,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({});
 
 /***/ }),
@@ -7420,8 +7430,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-//
-//
 //
 //
 //
@@ -51837,7 +51845,7 @@ var render = function() {
                 ],
                 staticClass: "form-control",
                 class: {
-                  "form-control-error": _vm.submited && !_vm.$v.email.required
+                  "form-control-error": _vm.submited && !_vm.$v.email.$invalid
                 },
                 attrs: { type: "text", placeholder: "Email" },
                 domProps: { value: _vm.$v.email.$model },
@@ -51889,7 +51897,7 @@ var render = function() {
                 staticClass: "form-control",
                 class: {
                   "form-control-error":
-                    _vm.submited && !_vm.$v.userName.required
+                    _vm.submited && !_vm.$v.userName.$invalid
                 },
                 attrs: { type: "text", placeholder: "Họ tên" },
                 domProps: { value: _vm.$v.userName.$model },
@@ -51940,7 +51948,7 @@ var render = function() {
                   staticClass: "form-control",
                   class: {
                     "form-control-error":
-                      _vm.submited && !_vm.$v.cardId.required
+                      _vm.submited && !_vm.$v.cardId.$invalid
                   },
                   attrs: { type: "text", placeholder: "Card Number" },
                   domProps: { value: _vm.$v.cardId.$model },
@@ -51990,7 +51998,7 @@ var render = function() {
                   staticClass: "form-control",
                   class: {
                     "form-control-error":
-                      _vm.submited && !_vm.$v.confirmCode.required
+                      _vm.submited && !_vm.$v.confirmCode.$invalid
                   },
                   attrs: { type: "text", placeholder: "Mã xác nhận" },
                   domProps: { value: _vm.$v.confirmCode.$model },
@@ -52041,7 +52049,7 @@ var render = function() {
                 staticClass: "form-control",
                 class: {
                   "form-control-error":
-                    _vm.submited && !_vm.$v.password.required
+                    _vm.submited && !_vm.$v.password.$invalid
                 },
                 attrs: { type: "password", placeholder: "Password" },
                 domProps: { value: _vm.$v.password.$model },
@@ -52062,9 +52070,61 @@ var render = function() {
                 }
               }),
               _vm._v(" "),
+              _vm.submited && !_vm.$v.password.minLength
+                ? _c("span", { staticClass: "error" }, [
+                    _vm._v("Mật khẩu lớn hơn 6 ký tự ! ")
+                  ])
+                : _vm._e(),
+              _vm._v(" "),
               _vm.submited && !_vm.$v.password.required
                 ? _c("span", { staticClass: "error" }, [
                     _vm._v("Mật khẩu không được bỏ trống ! ")
+                  ])
+                : _vm._e()
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group mt-3" }, [
+              _c("label", { attrs: { for: "" } }, [
+                _vm._v("Xác nhận mật khẩu")
+              ]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model.trim",
+                    value: _vm.$v.repeatPassword.$model,
+                    expression: "$v.repeatPassword.$model",
+                    modifiers: { trim: true }
+                  }
+                ],
+                staticClass: "form-control",
+                class: {
+                  "form-control-error":
+                    _vm.submited && !_vm.$v.repeatPassword.$invalid
+                },
+                attrs: { type: "password", placeholder: "Password" },
+                domProps: { value: _vm.$v.repeatPassword.$model },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(
+                      _vm.$v.repeatPassword,
+                      "$model",
+                      $event.target.value.trim()
+                    )
+                  },
+                  blur: function($event) {
+                    return _vm.$forceUpdate()
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _vm.submited && !_vm.$v.repeatPassword.sameAsPassword
+                ? _c("span", { staticClass: "error" }, [
+                    _vm._v(" Mật khẩu không khớp! ")
                   ])
                 : _vm._e()
             ]),
@@ -52087,16 +52147,7 @@ var render = function() {
             ])
           ]),
           _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "authForm__footer mt-3" },
-            [
-              _c("router-link", { attrs: { to: { name: "Login" } } }, [
-                _vm._v("Đăng nhập")
-              ])
-            ],
-            1
-          )
+          _vm._m(1)
         ])
       ])
     ])
@@ -52109,6 +52160,14 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("span", { staticClass: "d-none me-1" }, [
       _c("i", { staticClass: "fas fa-circle-notch fa-spin" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "authForm__footer mt-3" }, [
+      _c("a", { attrs: { href: "/login" } }, [_vm._v("Đăng nhập")])
     ])
   }
 ]
@@ -52969,11 +53028,13 @@ var staticRenderFns = [
             ]),
             _vm._v(" "),
             _c("ul", { staticClass: "flex-grow-2" }, [
-              _c("li", [_c("a", { attrs: { href: "" } }, [_vm._v("Home")])]),
+              _c("li", [_c("a", { attrs: { href: "/" } }, [_vm._v("Home")])]),
               _vm._v(" "),
-              _c("li", [_c("a", { attrs: { href: "" } }, [_vm._v("Blog")])]),
-              _vm._v(" "),
-              _c("li", [_c("a", { attrs: { href: "" } }, [_vm._v("Shop")])])
+              _c("li", [
+                _c("a", { attrs: { href: "https://shopee.vn/fuki40" } }, [
+                  _vm._v("Shop")
+                ])
+              ])
             ])
           ])
         ])
@@ -53023,27 +53084,30 @@ var staticRenderFns = [
             _vm._v(" "),
             _c("ul", [
               _c("li", [
-                _c("a", { attrs: { href: "" } }, [
-                  _c("i", { staticClass: "fab fa-facebook-f" })
-                ])
+                _c(
+                  "a",
+                  { attrs: { href: "https://www.facebook.com/fuki4.0" } },
+                  [_c("i", { staticClass: "fab fa-facebook-f" })]
+                )
               ]),
               _vm._v(" "),
               _c("li", [
-                _c("a", { attrs: { href: "" } }, [
-                  _c("i", { staticClass: "fab fa-youtube" })
-                ])
+                _c(
+                  "a",
+                  { attrs: { href: "https://www.instagram.com/fuki4.0/" } },
+                  [_c("i", { staticClass: "fab fa-instagram" })]
+                )
               ]),
               _vm._v(" "),
               _c("li", [
-                _c("a", { attrs: { href: "" } }, [
-                  _c("i", { staticClass: "fab fa-instagram" })
-                ])
-              ]),
-              _vm._v(" "),
-              _c("li", [
-                _c("a", { staticClass: "goToShop", attrs: { href: "" } }, [
-                  _vm._v("Go to shop ")
-                ])
+                _c(
+                  "a",
+                  {
+                    staticClass: "goToShop",
+                    attrs: { href: "https://shopee.vn/fuki40" }
+                  },
+                  [_vm._v("Go to shop ")]
+                )
               ])
             ])
           ])
@@ -53053,7 +53117,7 @@ var staticRenderFns = [
       _c("nav", { staticClass: "navbar--mobile" }, [
         _c("div", { staticClass: "container" }, [
           _c("div", { staticClass: "navbar--mobile__wrap" }, [
-            _c("a", { attrs: { href: "" } }, [
+            _c("a", { attrs: { href: "/" } }, [
               _c("img", {
                 staticStyle: { width: "120px" },
                 attrs: { src: "/static/imgs/logo.png", alt: "" }
@@ -53090,7 +53154,10 @@ var staticRenderFns = [
                   _c("li", [
                     _c(
                       "a",
-                      { staticClass: "dropdown-item", attrs: { href: "#" } },
+                      {
+                        staticClass: "dropdown-item",
+                        attrs: { href: "https://www.facebook.com/fuki4.0" }
+                      },
                       [
                         _c("i", { staticClass: "fab fa-facebook-f me-2" }),
                         _vm._v(" Facebook")
@@ -53101,21 +53168,13 @@ var staticRenderFns = [
                   _c("li", [
                     _c(
                       "a",
-                      { staticClass: "dropdown-item", attrs: { href: "#" } },
-                      [
-                        _c("i", { staticClass: "fab fa-youtube me-2" }),
-                        _vm._v(" Youtube")
-                      ]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("li", [
-                    _c(
-                      "a",
-                      { staticClass: "dropdown-item", attrs: { href: "#" } },
+                      {
+                        staticClass: "dropdown-item",
+                        attrs: { href: "https://www.instagram.com/fuki4.0/" }
+                      },
                       [
                         _c("i", { staticClass: "fab fa-instagram me-2" }),
-                        _vm._v(" Instagram")
+                        _vm._v(" Instargram")
                       ]
                     )
                   ]),
@@ -53123,7 +53182,10 @@ var staticRenderFns = [
                   _c("li", [
                     _c(
                       "a",
-                      { staticClass: "dropdown-item", attrs: { href: "#" } },
+                      {
+                        staticClass: "dropdown-item",
+                        attrs: { href: "https://shopee.vn/fuki40" }
+                      },
                       [
                         _c("span", { staticClass: "me-2" }),
                         _vm._v("  Go to shop")

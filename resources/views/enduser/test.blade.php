@@ -306,7 +306,7 @@
 						<div class="col-sm-12 col-md-1"></div>
 						<div class="col-sm-12 col-md-6  wow slideInRight" data-wow-duration=".5s">
 							<div class="row">
-								<img src="{{ asset('imgs/home4.png') }}" alt="">
+								<img src="{{ asset('imgs/home4.png') }}" class="img-fluid" alt="">
 							</div>
 						</div>
 					</div>
@@ -325,7 +325,7 @@
 						<div class="col-sm-12 col-md-1"></div>
 						<div class="col-sm-12 col-md-6  wow slideInRight" data-wow-duration=".5s">
 							<div class="row">
-								<img src="{{ asset('imgs/home5.png') }}" alt="">
+								<img src="{{ asset('imgs/home5.png') }}" class="img-fluid" alt="">
 							</div>
 						</div>
 					</div>
@@ -410,11 +410,14 @@
 			background-color: #d0f2c0;
 		}
 		footer {
-			background-color: #d0f0be;
+			/* background-color: #d0f0be; */
 			padding: 80px 0px;
 		}
+		footer a {
+			color: #fff;
+		}
 		footer p {
-			color: #333333;
+			color: #fff;
 			margin: 0;
 		}
 	</style>

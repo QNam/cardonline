@@ -298,10 +298,10 @@
                                 <img  src="{{ asset('/static/imgs/logo.png') }}" alt="" style="width: 120px;">
                             </a>
                             <ul>
-                                <li><a  href=""><i class="fab fa-facebook-f"></i></a></li>
-                                <li><a  href=""><i class="fab fa-youtube"></i></a></li>
-                                <li><a  href=""><i class="fab fa-instagram"></i></a></li>
-                                <li><a  href="" class="goToShop">Go to shop </a>
+                                <li><a  href="https://www.facebook.com/fuki4.0"><i class="fab fa-facebook-f"></i></a></li>
+                                {{-- <li><a  href=""><i class="fab fa-youtube"></i></a></li> --}}
+                                <li><a  href="https://www.instagram.com/fuki4.0/"><i class="fab fa-instagram"></i></a></li>
+                                <li><a  href="https://shopee.vn/fuki40" class="goToShop">Go to shop </a>
                                 </li>
                             </ul>
                         </div>
@@ -374,9 +374,9 @@
                         <div class="footer__wrap flex-wrap">
                             <p  class="flex-grow-1">Copyright © 2021</p>
                             <ul  class="flex-grow-2">
-                                <li ><a  href="">Home</a></li>
-                                <li ><a  href="">Blog</a></li>
-                                <li ><a  href="">Shop</a></li>
+                                <li ><a  href="/">Home</a></li>
+                                {{-- <li ><a  href="">Blog</a></li> --}}
+                                <li ><a  href="https://shopee.vn/fuki40">Shop</a></li>
                             </ul>
                         </div>
                     </div>
