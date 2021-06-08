@@ -11,7 +11,7 @@ Vue.use(Router);
 const router = new Router({
     mode: 'history',
     routes: [
-        { path: '/login', name: 'Login', component: Login},
+        // { path: '/login', name: 'Login', component: Login},
         { path: '/register', name: 'Register', component: Register},
         { path: '/edit/:id', name: 'EditCard', component: EditCard},
     ]
