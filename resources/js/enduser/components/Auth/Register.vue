@@ -137,7 +137,7 @@ export default {
 
                 await register(params)
 
-                this.$router.push({ name: 'Login' })
+                window.location.href = '/login'
                 this.loadingSubmit = false
             } catch($e) {
                 console.log($e)
