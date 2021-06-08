@@ -6567,10 +6567,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 return (0,_api_card__WEBPACK_IMPORTED_MODULE_1__.register)(params);
 
               case 25:
-                _this.$router.push({
-                  name: 'Login'
-                });
-
+                window.location.href = '/login';
                 _this.loadingSubmit = false;
                 _context.next = 33;
                 break;
@@ -6943,6 +6940,8 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//
+//
 //
 //
 //
@@ -7829,11 +7828,8 @@ __webpack_require__.r(__webpack_exports__);
 vue__WEBPACK_IMPORTED_MODULE_3__.default.use(vue_router__WEBPACK_IMPORTED_MODULE_4__.default);
 var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__.default({
   mode: 'history',
-  routes: [{
-    path: '/login',
-    name: 'Login',
-    component: _components_Auth_Login__WEBPACK_IMPORTED_MODULE_0__.default
-  }, {
+  routes: [// { path: '/login', name: 'Login', component: Login},
+  {
     path: '/register',
     name: 'Register',
     component: _components_Auth_Register__WEBPACK_IMPORTED_MODULE_1__.default
@@ -52645,80 +52641,90 @@ var render = function() {
                               _c(
                                 "div",
                                 { staticClass: "qncard mb-4" },
-                                _vm._l(_vm.cardContent.links, function(
-                                  link,
-                                  key
-                                ) {
-                                  return _c(
-                                    "div",
-                                    {
-                                      key: key,
-                                      staticClass:
-                                        "sociallItem mb-4 rounded-3 px-4 py-3 shadow d-flex align-items-center justify-content-between",
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.openEditSocialLink(link)
-                                        }
-                                      }
-                                    },
-                                    [
+                                [
+                                  _vm._l(_vm.cardContent.links, function(
+                                    link,
+                                    key
+                                  ) {
+                                    return [
                                       _vm.listSocial &&
                                       _vm.listSocial[link.type]
-                                        ? [
-                                            _c("img", {
-                                              staticStyle: {
-                                                width: "35px",
-                                                height: "35px"
-                                              },
-                                              attrs: {
-                                                src:
-                                                  _vm.listSocial[link.type]
-                                                    .thumb,
-                                                alt: ""
+                                        ? _c(
+                                            "div",
+                                            {
+                                              key: key,
+                                              staticClass:
+                                                "sociallItem mb-4 rounded-3 px-4 py-3 shadow d-flex align-items-center justify-content-between",
+                                              on: {
+                                                click: function($event) {
+                                                  return _vm.openEditSocialLink(
+                                                    link
+                                                  )
+                                                }
                                               }
-                                            }),
-                                            _vm._v(" "),
-                                            _c("h5", [
-                                              _vm._v(
-                                                _vm._s(
-                                                  _vm.listSocial[link.type].name
-                                                )
-                                              )
-                                            ]),
-                                            _vm._v(" "),
-                                            !_vm.loadingRemoveLink[
-                                              link.link_id
-                                            ] ||
-                                            Object.keys(_vm.loadingRemoveLink)
-                                              .length == 0
-                                              ? _c("van-icon", {
-                                                  attrs: { name: "cross" },
-                                                  on: {
-                                                    click: function($event) {
-                                                      $event.stopPropagation()
-                                                      $event.preventDefault()
-                                                      return _vm.removeSocialLink(
-                                                        link
-                                                      )
-                                                    }
+                                            },
+                                            [
+                                              [
+                                                _c("img", {
+                                                  staticStyle: {
+                                                    width: "35px",
+                                                    height: "35px"
+                                                  },
+                                                  attrs: {
+                                                    src:
+                                                      _vm.listSocial[link.type]
+                                                        .thumb,
+                                                    alt: ""
                                                   }
-                                                })
-                                              : _vm._e(),
-                                            _vm._v(" "),
-                                            _vm.loadingRemoveLink[
-                                              link.link_id
-                                            ] === true
-                                              ? _c("van-loading", {
-                                                  attrs: { type: "spinner" }
-                                                })
-                                              : _vm._e()
-                                          ]
+                                                }),
+                                                _vm._v(" "),
+                                                _c("h5", [
+                                                  _vm._v(
+                                                    _vm._s(
+                                                      _vm.listSocial[link.type]
+                                                        .name
+                                                    )
+                                                  )
+                                                ]),
+                                                _vm._v(" "),
+                                                !_vm.loadingRemoveLink[
+                                                  link.link_id
+                                                ] ||
+                                                Object.keys(
+                                                  _vm.loadingRemoveLink
+                                                ).length == 0
+                                                  ? _c("van-icon", {
+                                                      attrs: { name: "cross" },
+                                                      on: {
+                                                        click: function(
+                                                          $event
+                                                        ) {
+                                                          $event.stopPropagation()
+                                                          $event.preventDefault()
+                                                          return _vm.removeSocialLink(
+                                                            link
+                                                          )
+                                                        }
+                                                      }
+                                                    })
+                                                  : _vm._e(),
+                                                _vm._v(" "),
+                                                _vm.loadingRemoveLink[
+                                                  link.link_id
+                                                ] === true
+                                                  ? _c("van-loading", {
+                                                      attrs: { type: "spinner" }
+                                                    })
+                                                  : _vm._e()
+                                              ]
+                                            ],
+                                            2
+                                          )
                                         : _vm._e()
-                                    ],
-                                    2
-                                  )
-                                }),
-                                0
+                                    ]
+                                  })
+                                ],
+                                2
                               )
                             ],
                         _vm._v(" "),

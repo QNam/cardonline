@@ -297,42 +297,48 @@ class CardController extends Controller
         if( in_array($cardContent->theme,$themeAllow) ) {
             $themeId = $cardContent->theme;
         }
+        $cardContent->link_show = env('APP_URL_SHOW', '/') . $cardContent->id;
+        $cardContent->link = env('APP_URL', '/') . $cardContent->id;
 
         $view = 'enduser/profile/profile' . $themeId;
         $cardLink = $cardContent->links()->get();
-        
+        $cardLinkArr = [];
         $count = 0;
+
         forEach($cardLink as &$link) {
-            $link->name = \Config::get('variable.social_data.' . $link->type . '.name');
-            $link->thumb = \Config::get('variable.social_data.' . $link->type . '.thumb');
-            $count++;
+            if(\Config::get('variable.social_data.' . $link->type . '.name')) {
+                $tmp = $link;
+                $tmp['name'] = \Config::get('variable.social_data.' . $link->type . '.name');
+                $tmp['thumb'] = \Config::get('variable.social_data.' . $link->type . '.thumb');
+                array_push($cardLinkArr, $tmp);
+                $count++;
+            }
         }
 
         $cardLinkEmail = [
             "link_id" => $count,
             "type" => "gmail",
-            "link" => $cardContent['gmail'],
+            "link" => 'mailto:' . $cardContent['email'],
             "card_id" => $cardContent['id'],
             "name" => \Config::get('variable.social_data.gmail.name'),
             "thumb" => \Config::get('variable.social_data.gmail.thumb')
         ];
-        
-        $cardLink->push($cardLinkEmail);
+        array_push($cardLinkArr, $cardLinkEmail);
 
-        if($cardContent['phoneNumber']) {
-            $cardLinkPhone = [
-                "link_id" => $count + 1,
-                "type" => "phone",
-                "link" => $cardContent['phoneNumber'],
-                "card_id" => $cardContent['id'],
-                "name" => \Config::get('variable.social_data.phone.name'),
-                "thumb" => \Config::get('variable.social_data.phone.thumb')
-            ];
+        // if($cardContent['phoneNumber']) {
+        //     $cardLinkPhone = [
+        //         "link_id" => $count + 1,
+        //         "type" => "phone",
+        //         "link" => $cardContent['phoneNumber'],
+        //         "card_id" => $cardContent['id'],
+        //         "name" => \Config::get('variable.social_data.phone.name'),
+        //         "thumb" => \Config::get('variable.social_data.phone.thumb')
+        //     ];
+            
+        //     array_push($cardLinkArr, $cardLinkPhone);
+        // }
 
-            $cardLink->push($cardLinkPhone);
-        }
-
-        return view($view, ['card' => $cardContent, 'cardLink' => $cardLink]);
+        return view($view, ['card' => $cardContent, 'cardLink' => $cardLinkArr]);
     }
 
     public function saveProfileToPhone(Request $request) {

@@ -80,20 +80,22 @@
 
                     <template v-else>
                     <div class="qncard mb-4">
-                        <div class="sociallItem mb-4 rounded-3 px-4 py-3 shadow d-flex align-items-center justify-content-between" 
-                            v-for="link, key in cardContent.links" 
-                            :key="key"
-                            @click="openEditSocialLink(link)"
-                        >
-                        <template v-if="listSocial && listSocial[link.type]">
-                            <img :src="listSocial[link.type].thumb" style="width: 35px; height: 35px" alt="">
-                            <h5>{{ listSocial[link.type].name }}</h5>
-                            <van-icon v-if="!loadingRemoveLink[link.link_id] || Object.keys(loadingRemoveLink).length == 0" 
-                                        name="cross" 
-                                        v-on:click.stop.prevent="removeSocialLink(link)" />
-                            <van-loading v-if="loadingRemoveLink[link.link_id] === true" type="spinner" />
+                        <template v-for="link, key in cardContent.links">
+                            <div class="sociallItem mb-4 rounded-3 px-4 py-3 shadow d-flex align-items-center justify-content-between"  
+                                :key="key"
+                                v-if="listSocial && listSocial[link.type]"
+                                @click="openEditSocialLink(link)"
+                            >
+                                <template>
+                                    <img :src="listSocial[link.type].thumb" style="width: 35px; height: 35px" alt="">
+                                    <h5>{{ listSocial[link.type].name }}</h5>
+                                    <van-icon v-if="!loadingRemoveLink[link.link_id] || Object.keys(loadingRemoveLink).length == 0" 
+                                                name="cross" 
+                                                v-on:click.stop.prevent="removeSocialLink(link)" />
+                                    <van-loading v-if="loadingRemoveLink[link.link_id] === true" type="spinner" />
+                                </template>
+                            </div>
                         </template>
-                        </div>
                     </div> 
 
                     </template>
