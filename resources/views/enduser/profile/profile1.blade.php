@@ -116,15 +116,17 @@
                      @endif
                      @endif
                      @endforeach
+                     <br><br>
+                  </div>
+
+                  <div class="row" style="margin: 0; margin-bottom: 80px">
+                     <div class="col-md-8 col-xs-12 col-lg-8" style="margin: 0 auto; display: block">
+                        <div id="create1" class="PoweredBy" style="margin-top: 20px;"><strong> <a target="_blank" href="https://shopee.vn/Th%E1%BA%BB-c%C3%A1-nh%C3%A2n-th%C3%B4ng-minh-FUKI-4.0-Card-Visit-th%C3%B4ng-minh-danh-thi%E1%BA%BFp-th%C3%B4ng-minh-i.453514978.4790348140" class="PoweredBy shadow" style=" background-color: black; color: white; padding: 10px">Sở hữu thẻ FUKI 4.0 ngay</a></strong></div>
+                     </div>
                   </div>
                </div>
                <!-- show nothing -->
-               <br><br>
-               <div class="row" style="margin: 0; margin-bottom: 80px">
-                  <div class="col-md-8 col-xs-12 col-lg-8" style="margin: 0 auto; display: block">
-                      <div id="create1" class="PoweredBy" style="margin-top: 20px;"><strong> <a target="_blank" href="https://shopee.vn/Th%E1%BA%BB-c%C3%A1-nh%C3%A2n-th%C3%B4ng-minh-FUKI-4.0-Card-Visit-th%C3%B4ng-minh-danh-thi%E1%BA%BFp-th%C3%B4ng-minh-i.453514978.4790348140" class="PoweredBy shadow" style=" background-color: black; color: white; padding: 10px">Sở hữu thẻ FUKI 4.0 ngay</a></strong></div>
-                  </div>
-              </div>
+               
             </div>
          </div>
       </div>
