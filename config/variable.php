@@ -99,7 +99,7 @@ return [
             'uri' => '',
             'appType' => 'social',
             'appTypeName' => 'Liên kết',
-            'showType' => 'iconDirect',
+            'showType' => 'card',
         ],
         'zalo' => [
             'show' => true,
