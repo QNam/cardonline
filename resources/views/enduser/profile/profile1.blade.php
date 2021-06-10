@@ -73,26 +73,11 @@
                      </a>
                      @endif
                   </div>
-                  <div onclick="copyToClipboard()" class="flex-row" style="font-size: 18px !important; color: grey; text-align: center; width: 100%; padding-top: 0px; margin-bottom: 14px; font-family: proxima-nova, Arial, Helvetica, sans-serif; font-weight: 400; font-style: normal;">
+                  <div onclick="copyToClipboard('{{ $card->link }}')" class="flex-row" style="font-size: 18px !important; color: grey; text-align: center; width: 100%; padding-top: 0px; margin-bottom: 14px; font-family: proxima-nova, Arial, Helvetica, sans-serif; font-weight: 400; font-style: normal;">
                      <a id="nameWebviewA" style="text-align: center">{{ $card->link_show }}</a> 
                      <!--<a style="background-color: black; height: 50px; width: 100px"></a>-->
                   </div>
                   <p id="username" hidden>{{ $card->link }}</p>
-                  <script>
-                     function copyToClipboard() {
-                        const str = document.getElementById('username').innerText;
-                        const el = document.createElement('textarea');
-                        el.value = str;
-                        el.setAttribute('readonly', '');
-                        el.style.position = 'absolute';
-                        el.style.left = '-9999px';
-                        document.body.appendChild(el);
-                        el.select();
-                        document.execCommand('copy');
-                        document.body.removeChild(el);
-                        alert('Link copied!');
-                     }
-                  </script>
                   <div class="flex-row px-3" style="font-size: 18px !important; color: grey; text-align: center; width: 100%; padding-top: 0px; margin-bottom: 14px; font-family: proxima-nova, Arial, Helvetica, sans-serif; font-weight: 400; font-style: normal;">
                      <a id="nameWebviewA" style="text-align: center; color: #212529">{{ $card->descr }}</a> 
                   </div>        
@@ -105,17 +90,32 @@
            
                <div id="ProfileWrapper">
                   <div class="flex-row" style="text-align: center; padding-top: 1px; overflow: hidden;">
-                    @foreach ($cardLink as $link)
-                    @if($link && $link['type'])
-                     <div class="grid-square-normal">
-                        <a rel="noopener" target="_blank" href="{{ $link['link'] }}" class="socialTitles d-block">
-                        <img alt="{{ $card->userName }}" class="shadow" style="width: 100%; height: 100%;" 
-                            src="{{ $link['thumb'] }}">
-                            {{ $link['name'] }}
-                        </a>
-                    </div>
-                    @endif
-                    @endforeach
+                     @foreach ($cardLink as $link)
+                     @if($link && $link['type'])
+                     @if($link['showType'] == 'iconDirect')
+                        <div class="grid-square-normal">
+                           <a rel="noopener" target="_blank" href="{{ $link['link'] }}" class="socialTitles d-block">
+                           <img alt="{{ $card->userName }}" class="shadow" style="width: 100%; height: 100%;" 
+                              src="{{ $link['thumb'] }}">
+                              {{ $link['name'] }}
+                           </a>
+                        </div>
+                     @endif
+                     @if($link['showType'] == 'card')
+                        <div style="background-color: white; position: relative; border-radius: 30px; width: 85%; display: block; margin: 0 auto; margin-top: 25px; margin-bottom: 10px; height: 120px;" 
+                           class="grid-square-video shadow">
+                           <img class="shadow" 
+                              alt="{{ $link['name'] }}" 
+                              style="width: 90px; height: 90px; margin-top: 15px; margin-left: 10px; float: left; margin-right: 20px; border-radius: 30px" 
+                              src="{{ $link['thumb'] }}">
+                           <p style="width: 90%; padding-top: 10px; margin-bottom: 0px; padding-bottom: 8px; line-height: 22px; text-align: left; font-size: 16px; font-weight: 700">
+                              {{ $link['name'] }}
+                           </p>
+                           <p onclick="copyToClipboard('{{ $link['link'] }}')" style="height: 27px; width: 90%; padding-top: 0px; margin-bottom: 0px; line-height: 18px; text-align: left; font-size: 14px; font-weight: 400">{{ $link['link'] }} </p>
+                        </div>
+                     @endif
+                     @endif
+                     @endforeach
                   </div>
                </div>
                <!-- show nothing -->
@@ -137,5 +137,20 @@
       <script type="text/javascript" src="https://poplme.co/assets/plugins/notify/notify.js"></script>
       <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
       <script type="text/javascript" src="https://poplme.co/assets/frontend/js/custom.js"></script>
+      <script>
+         function copyToClipboard(str) {
+            // const str = document.getElementById('username').innerText;
+            const el = document.createElement('textarea');
+            el.value = str;
+            el.setAttribute('readonly', '');
+            el.style.position = 'absolute';
+            el.style.left = '-9999px';
+            document.body.appendChild(el);
+            el.select();
+            document.execCommand('copy');
+            document.body.removeChild(el);
+            alert('Đã coppy!');
+         }
+      </script>
    </body>
 </html>

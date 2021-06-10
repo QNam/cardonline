@@ -310,20 +310,23 @@ class CardController extends Controller
                 $tmp = $link;
                 $tmp['name'] = \Config::get('variable.social_data.' . $link->type . '.name');
                 $tmp['thumb'] = \Config::get('variable.social_data.' . $link->type . '.thumb');
+                $tmp['appType'] = \Config::get('variable.social_data.' . $link->type . '.appType');
+                $tmp['appTypeName'] = \Config::get('variable.social_data.' . $link->type . '.appTypeName');
+                $tmp['showType'] = \Config::get('variable.social_data.' . $link->type . '.showType');
                 array_push($cardLinkArr, $tmp);
                 $count++;
             }
         }
 
-        $cardLinkEmail = [
-            "link_id" => $count,
-            "type" => "gmail",
-            "link" => 'mailto:' . $cardContent['email'],
-            "card_id" => $cardContent['id'],
-            "name" => \Config::get('variable.social_data.gmail.name'),
-            "thumb" => \Config::get('variable.social_data.gmail.thumb')
-        ];
-        array_push($cardLinkArr, $cardLinkEmail);
+        // $cardLinkEmail = [
+        //     "link_id" => $count,
+        //     "type" => "gmail",
+        //     "link" => 'mailto:' . $cardContent['email'],
+        //     "card_id" => $cardContent['id'],
+        //     "name" => \Config::get('variable.social_data.gmail.name'),
+        //     "thumb" => \Config::get('variable.social_data.gmail.thumb')
+        // ];
+        // array_push($cardLinkArr, $cardLinkEmail);
 
         // if($cardContent['phoneNumber']) {
         //     $cardLinkPhone = [

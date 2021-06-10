@@ -112,7 +112,7 @@
                                 <div class="d-flex">
                                     <input ref="editSocialLink" type="text" 
                                         class="ps-0 rounded-0 form-control border-start-0 border-end-0 border-top-0 " 
-                                        placeholder="Đường dẫn"
+                                        :placeholder="isBank ? 'Số tài khoản' : 'Đường dẫn, Số điện thoại, Email,...'"
                                         :value="socialEdit.link"
                                         @change="$store.commit('SET_SOCIAL_EDIT', {link: $event.target.value})" 
                                     >
@@ -124,7 +124,7 @@
                             </div>
                             <div class="row mt-4">
                                 <template v-for="(social, skey) in listSocial"> 
-                                    <a class="col-2 mb-4 cusor-pointer" v-if="social.show" :key="skey" @click.stop="onSelectSocial(skey)">
+                                    <a class="col-3 mb-4 cusor-pointer" v-if="social.show" :key="skey" @click.stop="onSelectSocial(skey)">
                                         <img :src="social.thumb" class="img-fluid" alt="">
                                     </a>
                                 </template>
@@ -174,6 +174,10 @@ export default {
             cardContent: state => state.card.cardContent,
             socialEdit: state => state.card.socialEdit
         }),
+
+        isBank() {
+            return this.listSocial && this.listSocial[this.socialEdit.type] && this.socialEdit.type && this.listSocial[this.socialEdit.type]['appType'] == 'bank'
+        }
     },
     methods: {
         goToProfile() {

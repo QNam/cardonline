@@ -3,7 +3,7 @@
       <nav class="navbar">
             <div class="container">
                 <div class="navbar__wrap">
-                    <a href="" class="navbar__logo">
+                    <a href="/" class="navbar__logo">
                         <img src="/static/imgs/logo.png" alt="" style="width: 120px">
                     </a>
                     <ul>

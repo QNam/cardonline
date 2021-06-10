@@ -7119,14 +7119,18 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     this.getCardInfo();
     this.listSocial = JSON.parse(window.SOCIAL_NETWORKS);
   },
-  computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_7__.mapState)({
+  computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_7__.mapState)({
     cardContent: function cardContent(state) {
       return state.card.cardContent;
     },
     socialEdit: function socialEdit(state) {
       return state.card.socialEdit;
     }
-  })),
+  })), {}, {
+    isBank: function isBank() {
+      return this.listSocial && this.listSocial[this.socialEdit.type] && this.socialEdit.type && this.listSocial[this.socialEdit.type]['appType'] == 'bank';
+    }
+  }),
   methods: {
     goToProfile: function goToProfile() {
       window.location.href = this.cardContent.url;
@@ -52861,7 +52865,9 @@ var render = function() {
                                       "ps-0 rounded-0 form-control border-start-0 border-end-0 border-top-0 ",
                                     attrs: {
                                       type: "text",
-                                      placeholder: "Đường dẫn"
+                                      placeholder: _vm.isBank
+                                        ? "Số tài khoản"
+                                        : "Đường dẫn, Số điện thoại, Email,..."
                                     },
                                     domProps: { value: _vm.socialEdit.link },
                                     on: {
@@ -52914,7 +52920,7 @@ var render = function() {
                                             {
                                               key: skey,
                                               staticClass:
-                                                "col-2 mb-4 cusor-pointer",
+                                                "col-3 mb-4 cusor-pointer",
                                               on: {
                                                 click: function($event) {
                                                   $event.stopPropagation()
@@ -53075,7 +53081,7 @@ var staticRenderFns = [
       _c("nav", { staticClass: "navbar" }, [
         _c("div", { staticClass: "container" }, [
           _c("div", { staticClass: "navbar__wrap" }, [
-            _c("a", { staticClass: "navbar__logo", attrs: { href: "" } }, [
+            _c("a", { staticClass: "navbar__logo", attrs: { href: "/" } }, [
               _c("img", {
                 staticStyle: { width: "120px" },
                 attrs: { src: "/static/imgs/logo.png", alt: "" }
