@@ -53309,8 +53309,8 @@ var render = function() {
           src: _vm.img,
           "stencil-props": {
             handlers: {},
-            movable: false,
-            resizable: false
+            movable: true,
+            resizable: true
           },
           "stencil-size": _vm.stencilSize,
           "image-restriction": "stencil"

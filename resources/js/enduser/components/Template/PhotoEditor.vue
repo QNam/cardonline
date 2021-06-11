@@ -9,8 +9,8 @@
         :src="img"
         :stencil-props="{
             handlers: {},
-            movable: false,
-            resizable: false,
+            movable: true,
+            resizable: true,
         }"
         :stencil-size="stencilSize"
         image-restriction="stencil"
