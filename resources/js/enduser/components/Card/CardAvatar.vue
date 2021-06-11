@@ -5,7 +5,7 @@
             <label class="profileEdit_avatar__upload" for="uploadAvatar">
                 <i class="fas fa-camera"></i>
             </label>
-            <input type="file" id="uploadAvatar" class="d-none" @change="onAvatarChanged">
+            <input type="file" id="uploadAvatar" class="d-none" @input="onAvatarChanged">
         </div>
         <van-popup v-model="modalEditImage" position="top" :style="{ height: '100%', width: '100%' }">
             <van-nav-bar

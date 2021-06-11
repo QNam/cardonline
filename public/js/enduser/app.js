@@ -52279,7 +52279,7 @@ var render = function() {
         _c("input", {
           staticClass: "d-none",
           attrs: { type: "file", id: "uploadAvatar" },
-          on: { change: _vm.onAvatarChanged }
+          on: { input: _vm.onAvatarChanged }
         })
       ]),
       _vm._v(" "),
@@ -52401,7 +52401,7 @@ var render = function() {
           _c("input", {
             staticClass: "d-none",
             attrs: { type: "file", id: "uploadBackground" },
-            on: { change: _vm.onBackgroundChange }
+            on: { input: _vm.onBackgroundChange }
           }),
           _vm._v(" "),
           _vm._m(0)

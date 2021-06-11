@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="profile_sum mb-4" :style="{'background-image': 'url(' + cardContent.background_img_url + ')'}">
-            <input type="file" id="uploadBackground" class="d-none" @change="onBackgroundChange">
+            <input type="file" id="uploadBackground" class="d-none" @input="onBackgroundChange">
             <div class="d-flex align-items-center justify-content-between">
                 <label for="uploadBackground" class="d-inline-block profileEdit_bg">
                     <i class="fas fa-camera me-1"></i> Chỉnh sửa ảnh bìa
