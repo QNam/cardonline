@@ -108,10 +108,10 @@
                               alt="{{ $link['name'] }}" 
                               style="width: 90px; height: 90px; margin-top: 15px; margin-left: 10px; float: left; margin-right: 20px; border-radius: 30px" 
                               src="{{ $link['thumb'] }}">
-                           <p style="width: 90%; padding-top: 10px; margin-bottom: 0px; padding-bottom: 8px; line-height: 22px; text-align: left; font-size: 20px; font-weight: 700">
+                           <p style="width: 90%; padding-top: 10px; margin-bottom: 0px; padding-bottom: 8px; line-height: 22px; text-align: left; font-size: 18px; font-weight: 700">
                               {{ $link['name'] }}
                            </p>
-                           <p onclick="copyToClipboard('{{ $link['link'] }}')" style="height: 27px; width: 90%; padding-top: 0px; margin-bottom: 0px; line-height: 18px; text-align: left; font-size: 20px; font-weight: 400">{{ $link['link'] }} </p>
+                           <p onclick="copyToClipboard('{{ $link['link'] }}')" style="height: 27px; width: 90%; padding-top: 0px; margin-bottom: 0px; line-height: 18px; text-align: left; font-size: 18px; word-break: break-all; font-weight: 400">{{ $link['link'] }} </p>
                         </div>
                      @endif
                      @endif
