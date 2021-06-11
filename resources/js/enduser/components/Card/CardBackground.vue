@@ -54,7 +54,11 @@ export default {
         }),
     },
     mounted() {
+        let backgroundCache = localStorage.getItem('FUKI_BACKGROUND')
         
+        if(backgroundCache) {
+            this.$store.commit('SET_BACKGROUND_IMAGE_URL', backgroundCache)
+        }
     },
     methods: {
         onClickLeftMDEditImage() {

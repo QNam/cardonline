@@ -23,6 +23,22 @@ export default {
             state.cardContent.avatar_img_url = img
         },
 
+        setAvatarToLocalStorage({state}, avatarImage) {
+            localStorage.setItem("FUKI_AVATAR", avatarImage);
+        },
+
+        getAvatarToLocalStorage() {
+            return localStorage.getItem("FUKI_AVATAR");
+        },
+
+        setBackgroundToLocalStorage({state}, image) {
+            localStorage.setItem("FUKI_BACKGROUND", image);
+        },
+
+        getBackgroundToLocalStorage() {
+            return localStorage.getItem("FUKI_BACKGROUND");
+        },
+
         async uploadBackground({state}, image) {
             const rep = await uploadImageBase64(image)
             const data = rep.data.data
@@ -33,11 +49,12 @@ export default {
             state.cardContent.background_img_url = img
         },
 
-        async getCardInfo({commit}, params) {
+        async getCardInfo({commit, dispatch, state}, params) {
             const rep = await getCardById(params.id)
             const data = rep.data.data
-
             commit('SET_CARD_CONTENT', data)
+            dispatch('setAvatarToLocalStorage', state.cardContent.avatar_img_url)
+            dispatch('setBackgroundToLocalStorage', state.cardContent.background_img_url)
         },
 
         async saveCard({state}) {
@@ -75,6 +92,14 @@ export default {
 
         SET_CARD_LINKS(state, payload) { 
             state.cardContent.links = payload
+        },
+
+        SET_AVATAR_IMAGE_URL(state, payload) { 
+            state.cardContent.avatar_img_url = payload
+        },
+
+        SET_BACKGROUND_IMAGE_URL(state, payload) { 
+            state.cardContent.background_img_url = payload
         },
 
         PUSH_CARD_LINKS(state, payload) {

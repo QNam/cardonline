@@ -50,6 +50,15 @@ export default {
             loadingSave: false
         }
     },
+    
+    mounted() {
+        let avartarCache = localStorage.getItem('FUKI_AVATAR')
+
+        if(avartarCache) {
+            this.$store.commit('SET_AVATAR_IMAGE_URL', avartarCache)
+        }
+    },
+
     computed: {
         ...mapState({
             cardContent: state => state.card.cardContent,

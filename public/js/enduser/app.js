@@ -6710,6 +6710,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       loadingSave: false
     };
   },
+  mounted: function mounted() {
+    var avartarCache = localStorage.getItem('FUKI_AVATAR');
+
+    if (avartarCache) {
+      this.$store.commit('SET_AVATAR_IMAGE_URL', avartarCache);
+    }
+  },
   computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapState)({
     cardContent: function cardContent(state) {
       return state.card.cardContent;
@@ -6867,7 +6874,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       return state.card.cardContent;
     }
   })),
-  mounted: function mounted() {},
+  mounted: function mounted() {
+    var backgroundCache = localStorage.getItem('FUKI_BACKGROUND');
+
+    if (backgroundCache) {
+      this.$store.commit('SET_BACKGROUND_IMAGE_URL', backgroundCache);
+    }
+  },
   methods: {
     onClickLeftMDEditImage: function onClickLeftMDEditImage() {
       this.modalEditImage = false;
@@ -7943,14 +7956,28 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee);
       }))();
     },
-    uploadBackground: function uploadBackground(_ref2, image) {
+    setAvatarToLocalStorage: function setAvatarToLocalStorage(_ref2, avatarImage) {
+      var state = _ref2.state;
+      localStorage.setItem("FUKI_AVATAR", avatarImage);
+    },
+    getAvatarToLocalStorage: function getAvatarToLocalStorage() {
+      return localStorage.getItem("FUKI_AVATAR");
+    },
+    setBackgroundToLocalStorage: function setBackgroundToLocalStorage(_ref3, image) {
+      var state = _ref3.state;
+      localStorage.setItem("FUKI_BACKGROUND", image);
+    },
+    getBackgroundToLocalStorage: function getBackgroundToLocalStorage() {
+      return localStorage.getItem("FUKI_BACKGROUND");
+    },
+    uploadBackground: function uploadBackground(_ref4, image) {
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
         var state, rep, data, img;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
-                state = _ref2.state;
+                state = _ref4.state;
                 _context2.next = 3;
                 return (0,_api_image__WEBPACK_IMPORTED_MODULE_1__.uploadImageBase64)(image);
 
@@ -7970,14 +7997,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee2);
       }))();
     },
-    getCardInfo: function getCardInfo(_ref3, params) {
+    getCardInfo: function getCardInfo(_ref5, params) {
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
-        var commit, rep, data;
+        var commit, dispatch, state, rep, data;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
           while (1) {
             switch (_context3.prev = _context3.next) {
               case 0:
-                commit = _ref3.commit;
+                commit = _ref5.commit, dispatch = _ref5.dispatch, state = _ref5.state;
                 _context3.next = 3;
                 return (0,_api_card__WEBPACK_IMPORTED_MODULE_2__.getCardById)(params.id);
 
@@ -7985,8 +8012,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 rep = _context3.sent;
                 data = rep.data.data;
                 commit('SET_CARD_CONTENT', data);
+                dispatch('setAvatarToLocalStorage', state.cardContent.avatar_img_url);
+                dispatch('setBackgroundToLocalStorage', state.cardContent.background_img_url);
 
-              case 6:
+              case 8:
               case "end":
                 return _context3.stop();
             }
@@ -7994,14 +8023,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee3);
       }))();
     },
-    saveCard: function saveCard(_ref4) {
+    saveCard: function saveCard(_ref6) {
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4() {
         var state, params;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
           while (1) {
             switch (_context4.prev = _context4.next) {
               case 0:
-                state = _ref4.state;
+                state = _ref6.state;
                 params = {
                   id: state.cardContent.id,
                   userName: state.cardContent.userName,
@@ -8042,6 +8071,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     SET_CARD_LINKS: function SET_CARD_LINKS(state, payload) {
       state.cardContent.links = payload;
+    },
+    SET_AVATAR_IMAGE_URL: function SET_AVATAR_IMAGE_URL(state, payload) {
+      state.cardContent.avatar_img_url = payload;
+    },
+    SET_BACKGROUND_IMAGE_URL: function SET_BACKGROUND_IMAGE_URL(state, payload) {
+      state.cardContent.background_img_url = payload;
     },
     PUSH_CARD_LINKS: function PUSH_CARD_LINKS(state, payload) {
       state.cardContent.links.push({
