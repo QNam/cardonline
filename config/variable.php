@@ -105,10 +105,10 @@ return [
             'show' => true,
             'thumb' => '/static/imgs/zalo.png',
             'name' => 'Zalo',
-            'uri' => '',
+            'uri' => 'https://zalo.me/',
             'appType' => 'social',
             'appTypeName' => 'Liên kết',
-            'showType' => 'card',
+            'showType' => 'iconDirect',
         ],
         
         'facebook' => [
