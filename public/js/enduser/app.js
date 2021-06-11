@@ -6727,66 +6727,48 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.modalEditImage = false;
     },
     saveImage: function saveImage() {
-      var _this = this;
-
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                _this.loadingSave = true;
-                _context.next = 3;
-                return _this.$store.dispatch('uploadAvatar', _this.imageCroped);
-
-              case 3:
-                _this.loadingSave = false;
-                _this.modalEditImage = false;
-
-              case 5:
-              case "end":
-                return _context.stop();
-            }
-          }
-        }, _callee);
-      }))();
+      this.loadingSave = true;
+      this.$store.dispatch('uploadAvatar', this.imageCroped);
+      this.loadingSave = false;
+      this.modalEditImage = false;
     },
     onChangePhotoEditor: function onChangePhotoEditor(img) {
       this.imageCroped = img;
     },
     onAvatarChanged: function onAvatarChanged(event) {
-      var _this2 = this;
+      var _this = this;
 
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
         var image;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
           while (1) {
-            switch (_context2.prev = _context2.next) {
+            switch (_context.prev = _context.next) {
               case 0:
                 image = event.target.files[0];
 
                 if (!(image.size >= 1500000)) {
-                  _context2.next = 4;
+                  _context.next = 4;
                   break;
                 }
 
-                _this2.$notify({
+                _this.$notify({
                   type: 'warning',
                   message: 'Ảnh không quá 1.5MB',
                   duration: 1500
                 });
 
-                return _context2.abrupt("return");
+                return _context.abrupt("return");
 
               case 4:
-                _this2.imageEdit = URL.createObjectURL(image);
-                _this2.modalEditImage = true;
+                _this.imageEdit = URL.createObjectURL(image);
+                _this.modalEditImage = true;
 
               case 6:
               case "end":
-                return _context2.stop();
+                return _context.stop();
             }
           }
-        }, _callee2);
+        }, _callee);
       }))();
     }
   }
@@ -6805,16 +6787,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _Template_PhotoEditor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Template/PhotoEditor */ "./resources/js/enduser/components/Template/PhotoEditor.vue");
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-
-
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
+/* harmony import */ var _Template_PhotoEditor__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Template/PhotoEditor */ "./resources/js/enduser/components/Template/PhotoEditor.vue");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -6855,7 +6829,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
-    PhotoEditor: _Template_PhotoEditor__WEBPACK_IMPORTED_MODULE_1__.default
+    PhotoEditor: _Template_PhotoEditor__WEBPACK_IMPORTED_MODULE_0__.default
   },
   data: function data() {
     return {
@@ -6869,7 +6843,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }
     };
   },
-  computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapState)({
+  computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapState)({
     cardContent: function cardContent(state) {
       return state.card.cardContent;
     }
@@ -6901,28 +6875,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.modalEditImage = true;
     },
     saveImage: function saveImage() {
-      var _this = this;
-
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                _this.loadingSave = true;
-                _context.next = 3;
-                return _this.$store.dispatch('uploadBackground', _this.imageCroped);
-
-              case 3:
-                _this.loadingSave = false;
-                _this.modalEditImage = false;
-
-              case 5:
-              case "end":
-                return _context.stop();
-            }
-          }
-        }, _callee);
-      }))();
+      this.loadingSave = true;
+      this.$store.dispatch('uploadBackground', this.imageCroped);
+      this.loadingSave = false;
+      this.modalEditImage = false;
     },
     onChangePhotoEditor: function onChangePhotoEditor(img) {
       this.imageCroped = img;
@@ -7937,18 +7893,18 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context.prev = _context.next) {
               case 0:
                 state = _ref.state;
-                _context.next = 3;
+                state.cardContent.avatar_img_url = image;
+                _context.next = 4;
                 return (0,_api_image__WEBPACK_IMPORTED_MODULE_1__.uploadImageBase64)(image);
 
-              case 3:
+              case 4:
                 rep = _context.sent;
                 data = rep.data.data;
                 (0,_api_card__WEBPACK_IMPORTED_MODULE_2__.saveCardAvatar)(state.cardContent.id, data.img);
-                img = (0,_ultis__WEBPACK_IMPORTED_MODULE_3__.getUrlImage)(data.img);
-                state.cardContent.avatar_img = data.img;
-                state.cardContent.avatar_img_url = img;
+                img = (0,_ultis__WEBPACK_IMPORTED_MODULE_3__.getUrlImage)(data.img); // state.cardContent.avatar_img = data.img
+                // state.cardContent.avatar_img_url = img
 
-              case 9:
+              case 8:
               case "end":
                 return _context.stop();
             }
@@ -7978,18 +7934,18 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context2.prev = _context2.next) {
               case 0:
                 state = _ref4.state;
-                _context2.next = 3;
+                state.cardContent.background_img_url = image;
+                _context2.next = 4;
                 return (0,_api_image__WEBPACK_IMPORTED_MODULE_1__.uploadImageBase64)(image);
 
-              case 3:
+              case 4:
                 rep = _context2.sent;
                 data = rep.data.data;
                 (0,_api_card__WEBPACK_IMPORTED_MODULE_2__.saveCardBackground)(state.cardContent.id, data.img);
-                img = (0,_ultis__WEBPACK_IMPORTED_MODULE_3__.getUrlImage)(data.img);
-                state.cardContent.background_img = data.img;
-                state.cardContent.background_img_url = img;
+                img = (0,_ultis__WEBPACK_IMPORTED_MODULE_3__.getUrlImage)(data.img); // state.cardContent.background_img = data.img
+                // state.cardContent.background_img_url = img
 
-              case 9:
+              case 8:
               case "end":
                 return _context2.stop();
             }

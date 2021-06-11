@@ -55,7 +55,7 @@ export default {
     },
     mounted() {
         let backgroundCache = localStorage.getItem('FUKI_BACKGROUND')
-        
+
         if(backgroundCache) {
             this.$store.commit('SET_BACKGROUND_IMAGE_URL', backgroundCache)
         }
@@ -76,9 +76,9 @@ export default {
             this.modalEditImage = true
         },
 
-        async saveImage() {
+        saveImage() {
             this.loadingSave = true
-            await this.$store.dispatch('uploadBackground', this.imageCroped)
+            this.$store.dispatch('uploadBackground', this.imageCroped)
             this.loadingSave = false
             this.modalEditImage = false
         },
