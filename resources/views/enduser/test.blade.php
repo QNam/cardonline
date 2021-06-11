@@ -85,7 +85,7 @@
 														<nav class="mainmenu_side_wrapper">
 															<ul class="nav menu-click">
 																<li><a href="/">Trang chủ</a></li>
-																<li><a href="">Tính nâng</a></li>
+																<li><a href="">Tính năng</a></li>
 																<li><a href="">Khuyến mãi</a></li>
 																{{-- <li class="active">
 																	<a href="https://html.modernwebtemplates.com/way2go/index.html">Home</a>
