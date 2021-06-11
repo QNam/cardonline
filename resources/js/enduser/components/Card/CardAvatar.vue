@@ -5,7 +5,7 @@
             <label class="profileEdit_avatar__upload" for="uploadAvatar">
                 <i class="fas fa-camera"></i>
             </label>
-            <input type="file" id="uploadAvatar" class="d-none" @input="onAvatarChanged">
+            <input type="file" ref="uploadAvatar" id="uploadAvatar" class="d-none" @change="onAvatarChanged">
         </div>
         <van-popup v-model="modalEditImage" position="top" :style="{ height: '100%', width: '100%' }">
             <van-nav-bar
@@ -66,6 +66,7 @@ export default {
     },
     methods: {
         onClickLeftMDEditImage() {
+            this.$refs.uploadAvatar.value = null
             this.modalEditImage = false
         },
 
@@ -84,7 +85,7 @@ export default {
         async onAvatarChanged(event) {
             const image = event.target.files[0]
             if(image.size >= 1500000) {
-                this.$notify({ type: 'warning', message: 'Ảnh không quá 1.5MB', duration: 1500 })
+                this.$notify({ type: 'error', message: 'Ảnh không quá 1.5MB', duration: 1500 })
                 return
             }
             this.imageEdit = URL.createObjectURL(image)

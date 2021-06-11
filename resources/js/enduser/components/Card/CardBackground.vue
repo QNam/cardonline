@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="profile_sum mb-4" :style="{'background-image': 'url(' + cardContent.background_img_url + ')'}">
-            <input type="file" id="uploadBackground" class="d-none" @input="onBackgroundChange">
+            <input type="file"  ref="uploadBg" id="uploadBackground" class="d-none" @change="onBackgroundChange">
             <div class="d-flex align-items-center justify-content-between">
                 <label for="uploadBackground" class="d-inline-block profileEdit_bg">
                     <i class="fas fa-camera me-1"></i> Chỉnh sửa ảnh bìa
@@ -62,13 +62,14 @@ export default {
     },
     methods: {
         onClickLeftMDEditImage() {
+            this.$refs.uploadBg.value = null
             this.modalEditImage = false
         },
 
         onBackgroundChange(event) {
             const image = event.target.files[0]
             if(image.size >= 1500000) {
-                this.$notify({ type: 'warning', message: 'Ảnh không quá 1.5MB', duration: 1500 })
+                this.$notify({ type: 'error', message: 'Ảnh không quá 1.5MB', duration: 1500 })
                 return
             }
             this.imageEdit = URL.createObjectURL(image)
@@ -86,7 +87,8 @@ export default {
         onChangePhotoEditor(img) {
             this.imageCroped = img
         }
-    }
+    },
+
 }
 </script>
 

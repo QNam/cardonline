@@ -6724,6 +6724,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   })),
   methods: {
     onClickLeftMDEditImage: function onClickLeftMDEditImage() {
+      this.$refs.uploadAvatar.value = null;
       this.modalEditImage = false;
     },
     saveImage: function saveImage() {
@@ -6752,7 +6753,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                 }
 
                 _this.$notify({
-                  type: 'warning',
+                  type: 'error',
                   message: 'Ảnh không quá 1.5MB',
                   duration: 1500
                 });
@@ -6857,6 +6858,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   methods: {
     onClickLeftMDEditImage: function onClickLeftMDEditImage() {
+      this.$refs.uploadBg.value = null;
       this.modalEditImage = false;
     },
     onBackgroundChange: function onBackgroundChange(event) {
@@ -6864,7 +6866,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
       if (image.size >= 1500000) {
         this.$notify({
-          type: 'warning',
+          type: 'error',
           message: 'Ảnh không quá 1.5MB',
           duration: 1500
         });
@@ -52277,9 +52279,10 @@ var render = function() {
         _vm._m(0),
         _vm._v(" "),
         _c("input", {
+          ref: "uploadAvatar",
           staticClass: "d-none",
           attrs: { type: "file", id: "uploadAvatar" },
-          on: { input: _vm.onAvatarChanged }
+          on: { change: _vm.onAvatarChanged }
         })
       ]),
       _vm._v(" "),
@@ -52399,9 +52402,10 @@ var render = function() {
         },
         [
           _c("input", {
+            ref: "uploadBg",
             staticClass: "d-none",
             attrs: { type: "file", id: "uploadBackground" },
-            on: { input: _vm.onBackgroundChange }
+            on: { change: _vm.onBackgroundChange }
           }),
           _vm._v(" "),
           _vm._m(0)
