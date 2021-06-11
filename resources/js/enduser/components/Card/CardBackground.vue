@@ -62,14 +62,14 @@ export default {
     },
     methods: {
         onClickLeftMDEditImage() {
-            this.$refs.uploadBg.value = null
+            // this.$refs.uploadBg.value = null
             this.modalEditImage = false
         },
 
         onBackgroundChange(event) {
             const image = event.target.files[0]
             if(image.size >= 1500000) {
-                this.$notify({ type: 'error', message: 'Ảnh không quá 1.5MB', duration: 1500 })
+                this.$notify({ type: 'danger', message: 'Ảnh không quá 1.5MB', duration: 1500 })
                 return
             }
             this.imageEdit = URL.createObjectURL(image)

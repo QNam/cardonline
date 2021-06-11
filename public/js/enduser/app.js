@@ -6724,7 +6724,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   })),
   methods: {
     onClickLeftMDEditImage: function onClickLeftMDEditImage() {
-      this.$refs.uploadAvatar.value = null;
+      // this.$refs.uploadAvatar.value = null
       this.modalEditImage = false;
     },
     saveImage: function saveImage() {
@@ -6753,7 +6753,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                 }
 
                 _this.$notify({
-                  type: 'error',
+                  type: 'danger',
                   message: 'Ảnh không quá 1.5MB',
                   duration: 1500
                 });
@@ -6858,7 +6858,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   methods: {
     onClickLeftMDEditImage: function onClickLeftMDEditImage() {
-      this.$refs.uploadBg.value = null;
+      // this.$refs.uploadBg.value = null
       this.modalEditImage = false;
     },
     onBackgroundChange: function onBackgroundChange(event) {
@@ -6866,7 +6866,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
       if (image.size >= 1500000) {
         this.$notify({
-          type: 'error',
+          type: 'danger',
           message: 'Ảnh không quá 1.5MB',
           duration: 1500
         });
