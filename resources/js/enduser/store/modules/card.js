@@ -14,7 +14,7 @@ export default {
 
     actions: {
         async uploadAvatar({state}, image) {
-            // state.cardContent.avatar_img_url = image
+            state.cardContent.avatar_img_url = image
 
             const rep = await uploadImageBase64(image)
             const data = rep.data.data
@@ -42,7 +42,7 @@ export default {
         },
 
         async uploadBackground({state}, image) {
-            // state.cardContent.background_img_url = image
+            state.cardContent.background_img_url = image
 
             const rep = await uploadImageBase64(image)
             const data = rep.data.data
