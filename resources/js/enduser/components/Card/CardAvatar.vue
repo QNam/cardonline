@@ -70,9 +70,9 @@ export default {
             this.modalEditImage = false
         },
 
-        saveImage() {
+        async saveImage() {
             this.loadingSave = true
-            this.$store.dispatch('uploadAvatar', this.imageCroped)
+            await this.$store.dispatch('uploadAvatar', this.imageCroped)
             this.loadingSave = false
             this.modalEditImage = false
 

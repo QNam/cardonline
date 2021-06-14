@@ -94,7 +94,7 @@ return [
         ],
         'momo' => [
             'show' => true,
-            'thumb' => '/static/imgs/momo.png',
+            'thumb' => '/static/imgs/momo.jpg',
             'name' => 'Momo',
             'uri' => 'https://nhantien.momo.vn/',
             'appType' => 'social',
@@ -103,7 +103,7 @@ return [
         ],
         'zalo' => [
             'show' => true,
-            'thumb' => '/static/imgs/zalo.png',
+            'thumb' => '/static/imgs/zalo.jpg',
             'name' => 'Zalo',
             'uri' => 'https://zalo.me/',
             'appType' => 'social',

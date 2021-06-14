@@ -77,9 +77,9 @@ export default {
             this.modalEditImage = true
         },
 
-        saveImage() {
+        async saveImage() {
             this.loadingSave = true
-            this.$store.dispatch('uploadBackground', this.imageCroped)
+            await this.$store.dispatch('uploadBackground', this.imageCroped)
             this.loadingSave = false
             this.modalEditImage = false
         },

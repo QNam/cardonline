@@ -14,15 +14,15 @@ export default {
 
     actions: {
         async uploadAvatar({state}, image) {
-            state.cardContent.avatar_img_url = image
+            // state.cardContent.avatar_img_url = image
 
             const rep = await uploadImageBase64(image)
             const data = rep.data.data
             saveCardAvatar(state.cardContent.id, data.img)
             const img = getUrlImage(data.img)
 
-            // state.cardContent.avatar_img = data.img
-            // state.cardContent.avatar_img_url = img
+            state.cardContent.avatar_img = data.img
+            state.cardContent.avatar_img_url = img
         },
 
         setAvatarToLocalStorage({state}, avatarImage) {
@@ -42,15 +42,15 @@ export default {
         },
 
         async uploadBackground({state}, image) {
-            state.cardContent.background_img_url = image
+            // state.cardContent.background_img_url = image
 
             const rep = await uploadImageBase64(image)
             const data = rep.data.data
             saveCardBackground(state.cardContent.id, data.img)
             const img = getUrlImage(data.img)
 
-            // state.cardContent.background_img = data.img
-            // state.cardContent.background_img_url = img
+            state.cardContent.background_img = data.img
+            state.cardContent.background_img_url = img
         },
 
         async getCardInfo({commit, dispatch, state}, params) {
