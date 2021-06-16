@@ -1,6 +1,21 @@
 import http from '../axios'
 import {toQrcode, getUrlImage} from '../ultis'
 
+export function checkAccountToForgetPassword(data) {
+    return http.post('/card/checkAccountToForgetPassword', {
+        email: data.email,
+        confirm_code: data.confirm_code
+    })
+}
+
+export function forgetPassword(data) {
+    return http.post('/card/forgetPassword', {
+        email: data.email,
+        confirm_code: data.confirm_code,
+        password: data.password
+    })
+}
+
 export function getListCard(data) {
     return http.get('/card/getList', {
         params: { 

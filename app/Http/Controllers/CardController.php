@@ -8,6 +8,7 @@ use App\Models\Card;
 use App\Models\CardLinks;
 use JeroenDesloovere\VCard\VCard;
 use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Hash;
 
 class CardController extends Controller
 {
@@ -94,7 +95,6 @@ class CardController extends Controller
             ];
             return $this->sendSuccess($rep);
         } catch (\Exception $e) {   
-            dd($e);         
             $rep = [
                 'success' => false,
                 'data' => []
@@ -246,6 +246,22 @@ class CardController extends Controller
         }
     }
 
+    public function checkAccountToForgetPassword(Request $request) {
+        $card = new Card();
+
+        try {
+            $exists = $card->where('email', $request->email)->where('confirm_code', $request->confirm_code)->exists();
+
+            $rep = [
+                'exists' => $exists
+            ];
+
+            return $this->sendSuccess($rep);
+        } catch (\Exception $e) {
+            return $this->sendServerError($e);
+        }
+    }
+
     public function checkConfirmCode(Request $request) {
         $card = new Card();
         $cardId = $request->cardId;
@@ -383,6 +399,26 @@ class CardController extends Controller
                 return $this->sendNotFoundRequest();
             }
         } catch (\Exception $e) {
+            return $this->sendServerError($e);
+        }
+    }
+
+    public function forgetPassword(Request $request) {
+        $card = new Card();
+
+        try {
+            $card->where('email', $request->email)->where('confirm_code', $request->confirm_code)->update(['password' => Hash::make($request->password)]);
+
+            $rep = [
+                'success' => true,
+                'data' => []
+            ];
+            return $this->sendSuccess($rep);
+        } catch (\Exception $e) {
+            $rep = [
+                'success' => false,
+                'data' => []
+            ];
             return $this->sendServerError($e);
         }
     }

@@ -1,40 +1,47 @@
 <template>
     <div>
-        <div class="profile_sum mb-4" :style="{'background-image': 'url(' + cardContent.background_img_url + ')'}">
-            <input type="file"  ref="uploadBg" id="uploadBackground" class="d-none" @change="onBackgroundChange">
-            <div class="d-flex align-items-center justify-content-between">
-                <label for="uploadBackground" class="d-inline-block profileEdit_bg">
-                    <i class="fas fa-camera me-1"></i> Chỉnh sửa ảnh bìa
-                </label>
+            <div class="profile_sum mb-4" :style="{'background-image': 'url(' + cardContent.background_img_url + ')'}">
+                <input type="file"  ref="uploadBg" id="uploadBackground" class="d-none" @change="onBackgroundChange">
+                <div class="d-flex align-items-center justify-content-between">
+                    <label for="uploadBackground" class="d-inline-block profileEdit_bg">
+                        <i class="fas fa-camera me-1"></i> Chỉnh sửa ảnh bìa
+                    </label>
+                </div>
             </div>
-        </div>
-        <van-popup v-model="modalEditImage" position="top" :style="{ height: '100%', width: '100%' }">
-            <van-nav-bar
-                title="Chỉnh sửa ảnh bìa"
-                left-text="Hủy"
-                right-text="Lưu"
-                left-arrow
-                @click-left="onClickLeftMDEditImage"
-            >
-            <template #right>
-                    <van-loading v-if="loadingSave" type="spinner" color="#1989fa" />
-                    <a v-else @click.stop="saveImage">
-                        <span class="van-nav-bar__text">Lưu</span>
-                    </a>
-            </template>
-            </van-nav-bar>
-            <photo-editor :stencilSize="stencilSize" :img="imageEdit" @change="onChangePhotoEditor"/>
-        </van-popup>
+            <van-popup v-model="modalEditImage" position="top" :style="{ height: '100%', width: '100%' }">
+                <template v-if="loadingSave">
+                    <loading-full />
+                </template>
+                <template v-else>
+                    <van-nav-bar
+                        title="Chỉnh sửa ảnh bìa"
+                        left-text="Hủy"
+                        right-text="Lưu"
+                        left-arrow
+                        @click-left="onClickLeftMDEditImage"
+                    >
+                    <template #right>
+                            <van-loading v-if="loadingSave" type="spinner" color="#1989fa" />
+                            <a v-else @click.stop="saveImage">
+                                <span class="van-nav-bar__text">Lưu</span>
+                            </a>
+                    </template>
+                    </van-nav-bar>
+                    <photo-editor :stencilSize="stencilSize" :img="imageEdit" @change="onChangePhotoEditor"/>\
+                </template>
+            </van-popup>
     </div>
 </template>
 
 <script>
 import PhotoEditor from '../Template/PhotoEditor'
 import { mapActions, mapState } from 'vuex'
+import LoadingFull from '../Loading/LoadingFull'
 
 export default {
     components: {
-        PhotoEditor
+        PhotoEditor,
+        LoadingFull
     },
     data() {
         return {
@@ -62,7 +69,7 @@ export default {
     },
     methods: {
         onClickLeftMDEditImage() {
-            // this.$refs.uploadBg.value = null
+            this.$refs.uploadBg.value = null
             this.modalEditImage = false
         },
 

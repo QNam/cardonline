@@ -8,21 +8,26 @@
             <input type="file" ref="uploadAvatar" id="uploadAvatar" class="d-none" @change="onAvatarChanged">
         </div>
         <van-popup v-model="modalEditImage" position="top" :style="{ height: '100%', width: '100%' }">
-            <van-nav-bar
-                title="Chỉnh sửa ảnh đại diện"
-                left-text="Hủy"
-                right-text="Lưu"
-                left-arrow
-                @click-left="onClickLeftMDEditImage"
-            >
-            <template #right>
-                    <van-loading v-if="loadingSave" type="spinner" color="#1989fa" />
-                    <a v-else @click.stop="saveImage">
-                        <span class="van-nav-bar__text">Lưu</span>
-                    </a>
+            <template v-if="loadingSave">
+                <loading-full />
             </template>
-            </van-nav-bar>
-            <photo-editor :img="imageEdit" @change="onChangePhotoEditor"/>
+            <template v-else>
+                <van-nav-bar
+                    title="Chỉnh sửa ảnh đại diện"
+                    left-text="Hủy"
+                    right-text="Lưu"
+                    left-arrow
+                    @click-left="onClickLeftMDEditImage"
+                >
+                <template #right>
+                        <van-loading v-if="loadingSave" type="spinner" color="#1989fa" />
+                        <a v-else @click.stop="saveImage">
+                            <span class="van-nav-bar__text">Lưu</span>
+                        </a>
+                </template>
+                </van-nav-bar>
+                <photo-editor :img="imageEdit" @change="onChangePhotoEditor"/>
+            </template>
         </van-popup>
     </div>
 </template>
@@ -66,7 +71,7 @@ export default {
     },
     methods: {
         onClickLeftMDEditImage() {
-            // this.$refs.uploadAvatar.value = null
+            this.$refs.uploadAvatar.value = null
             this.modalEditImage = false
         },
 

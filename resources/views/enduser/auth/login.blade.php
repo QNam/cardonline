@@ -362,7 +362,7 @@
                                 </div>
                             </form>
                             <div class="authForm__footer mt-3">
-                                <a  href="" style="visibility: hidden;">Quên mật khẩu</a> 
+                                <a  href="{{ route('ForgetPassword') }}">Quên mật khẩu</a> 
                                 <a href="{{ route('Register') }}" class="">Tạo tài khoản mới</a></div>
                         </div>
                     </div>

@@ -35,3 +35,5 @@ Route::post('/card/saveBackground', 'App\Http\Controllers\CardController@saveBac
 Route::post('/card/removeLink', 'App\Http\Controllers\CardController@removeCardLink');
 Route::post('/card/genCard', 'App\Http\Controllers\CardController@genCard');
 Route::post('/card/checkConfirmCode', 'App\Http\Controllers\CardController@checkConfirmCode');
+Route::post('/card/checkAccountToForgetPassword', 'App\Http\Controllers\CardController@checkAccountToForgetPassword');
+Route::post('/card/forgetPassword', 'App\Http\Controllers\CardController@forgetPassword');

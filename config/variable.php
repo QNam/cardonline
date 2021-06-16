@@ -248,6 +248,15 @@ return [
             'appTypeName' => 'Ngân hàng',
             'showType' => 'card',
         ],
+        'bidv' => [
+            'show' => true,
+            'thumb' => '/static/imgs/bank/bidv.jpg',
+            'name' => 'BIDV',
+            'uri' => '',
+            'appType' => 'bank',
+            'appTypeName' => 'Ngân hàng',
+            'showType' => 'card',
+        ],
         'vietcombank' => [
             'show' => true,
             'thumb' => '/static/imgs/bank/vietcombank.png',
