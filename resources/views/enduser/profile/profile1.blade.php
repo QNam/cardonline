@@ -51,7 +51,7 @@
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css"/>
    </head>
-   <body class="bodyBusiness">
+   <body class="bodyBusiness" style="{{ $card->background_color ? "background-color: " . $card->background_color : ''  }}">
       <div class="container">
          <div class="row">
             <div class="col-md-3 col-xs-12 col-lg-3"></div>

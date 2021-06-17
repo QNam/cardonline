@@ -6819,7 +6819,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _Template_PhotoEditor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Template/PhotoEditor */ "./resources/js/enduser/components/Template/PhotoEditor.vue");
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _Loading_LoadingFull__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Loading/LoadingFull */ "./resources/js/enduser/components/Loading/LoadingFull.vue");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -6868,6 +6869,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 
 
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     img: {
@@ -6876,7 +6878,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }
   },
   components: {
-    PhotoEditor: _Template_PhotoEditor__WEBPACK_IMPORTED_MODULE_1__.default
+    PhotoEditor: _Template_PhotoEditor__WEBPACK_IMPORTED_MODULE_1__.default,
+    LoadingFull: _Loading_LoadingFull__WEBPACK_IMPORTED_MODULE_2__.default
   },
   data: function data() {
     return {
@@ -6894,7 +6897,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.$store.commit('SET_AVATAR_IMAGE_URL', avartarCache);
     }
   },
-  computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapState)({
+  computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_3__.mapState)({
     cardContent: function cardContent(state) {
       return state.card.cardContent;
     }
@@ -7291,6 +7294,23 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -7312,7 +7332,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       selectSocialNetwork: false,
       loadingRemoveLink: {},
       loadingSave: false,
-      loadingFetch: true
+      loadingFetch: false,
+      settingTab: 1
     };
   },
   mounted: function mounted() {
@@ -7780,6 +7801,7 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "saveBackgroundBase64": () => (/* binding */ saveBackgroundBase64),
 /* harmony export */   "checkAccountToForgetPassword": () => (/* binding */ checkAccountToForgetPassword),
 /* harmony export */   "forgetPassword": () => (/* binding */ forgetPassword),
 /* harmony export */   "getListCard": () => (/* binding */ getListCard),
@@ -7806,6 +7828,12 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
 
+function saveBackgroundBase64(data) {
+  return _axios__WEBPACK_IMPORTED_MODULE_0__.default.post('/card/saveBackgroundBase64', {
+    image: data.image,
+    id: data.id
+  });
+}
 function checkAccountToForgetPassword(data) {
   return _axios__WEBPACK_IMPORTED_MODULE_0__.default.post('/card/checkAccountToForgetPassword', {
     email: data.email,
@@ -7877,6 +7905,10 @@ function storeCard(data) {
     params.links = data.links;
   }
 
+  if (data && data.background_color) {
+    params.background_color = data.background_color;
+  }
+
   return _axios__WEBPACK_IMPORTED_MODULE_0__.default.post('/card', params);
 }
 function register(data) {
@@ -7937,6 +7969,7 @@ var CardDTO = /*#__PURE__*/function () {
     this.activeTime = card && card.activeTime ? card.activeTime : '';
     this.qrCode = (0,_ultis__WEBPACK_IMPORTED_MODULE_1__.toQrcode)("http://cardonline.local/" + this.id);
     this.avatar_img = card && card.avatar_img && card.avatar_img != "" ? card.avatar_img : '';
+    this.background_color = card && card.background_color && card.background_color != "" ? card.background_color : null;
     this.avatar_img_url = card && card.avatar_img && card.avatar_img != "" ? (0,_ultis__WEBPACK_IMPORTED_MODULE_1__.getUrlImage)(card.avatar_img) : 'https://www.ro-spain.com/wp-content/uploads/2018/07/default-avatar.png';
     this.background_img = card && card.background_img && card.background_img != "" ? card.background_img : '';
     this.background_img_url = card && card.background_img && card.background_img != "" ? (0,_ultis__WEBPACK_IMPORTED_MODULE_1__.getUrlImage)(card.background_img) : 'https://cover-talk.zadn.vn/0/f/3/a/1/4345cc7015c1bbcae0d24e8a26ec3ae5.jpg';
@@ -8226,17 +8259,19 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 state = _ref4.state;
                 state.cardContent.background_img_url = image;
                 _context2.next = 4;
-                return (0,_api_image__WEBPACK_IMPORTED_MODULE_1__.uploadImageBase64)(image);
+                return (0,_api_card__WEBPACK_IMPORTED_MODULE_2__.saveBackgroundBase64)({
+                  id: state.cardContent.id,
+                  image: image
+                });
 
               case 4:
                 rep = _context2.sent;
                 data = rep.data.data;
-                (0,_api_card__WEBPACK_IMPORTED_MODULE_2__.saveCardBackground)(state.cardContent.id, data.img);
-                img = (0,_ultis__WEBPACK_IMPORTED_MODULE_3__.getUrlImage)(data.img);
-                state.cardContent.background_img = data.img;
+                img = (0,_ultis__WEBPACK_IMPORTED_MODULE_3__.getUrlImage)(data.background_img);
+                state.cardContent.background_img = data.background_img;
                 state.cardContent.background_img_url = img;
 
-              case 10:
+              case 9:
               case "end":
                 return _context2.stop();
             }
@@ -8285,6 +8320,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   email: state.cardContent.email,
                   descr: state.cardContent.descr,
                   background_img: state.cardContent.background_img,
+                  background_color: state.cardContent.background_color,
                   avatar_img: state.cardContent.avatar_img,
                   links: state.cardContent.links
                 };
@@ -8305,6 +8341,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   getters: {},
   mutations: {
+    SET_BACKGROUND_COLOR: function SET_BACKGROUND_COLOR(state, payload) {
+      state.cardContent.background_color = payload;
+    },
     SET_CARD_CONTENT: function SET_CARD_CONTENT(state, payload) {
       state.cardContent = new _api_card__WEBPACK_IMPORTED_MODULE_2__.CardDTO(payload);
 
@@ -8769,7 +8808,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.profileEdit__social[data-v-26959832] {\n    margin-top: 50px;\n    padding: 16px;\n}\n.profileEdit[data-v-26959832] {\n    padding-bottom: 40px;\n    /* background-color: #F9FAFC; */\n}\n.profileEdit__back[data-v-26959832] {\n    -webkit-text-stroke: 2px #fff; /* width and color */\n}\n.profileEdit_name[data-v-26959832] {\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    margin-bottom: 40px;\n}\n.profileEdit_name input[data-v-26959832] {\n    border: none;\n    outline: none;\n    background-color: transparent;\n    text-align: center;\n    font-size: 24px;\n}\n.profileEdit_name input[data-v-26959832]:focus {\n    border-bottom: 2px solid rgb(145, 143, 143);\n}\n.form-control.form-control-custom[data-v-26959832] {\n    background: #FFFFFF;\n    padding: 8px 0px;\n    border: none;\n    border-top: 1px solid #dedee0;\n    box-sizing: border-box;\n    border-radius: 0;\n    font-weight: bold;\n    font-size: 18px;\n    color: #333333d9;\n}\n.form-control[data-v-26959832]:focus {\n    outline: none;\n    box-shadow: none;\n    border-color: #dedee0;\n}\n.form-group label[data-v-26959832]{\n    font-style: normal;\n    font-weight: 500;\n    font-size: 16px;\n    line-height: 19px;\n\n    /* anvuinew/gray80 */\n\n    color: #646D84;\n}\n.profileEdit__save button[data-v-26959832] {\n    /* align-items: center;\n    justify-content: center; */\n    padding: 4px 24px;\n    border-radius: 4px;\n    background-color: rgb(57 117 237);\n    color: #fff;\n    font-weight: 700;\n    border: none;\n}\n.profile_sum .dropdown  button[data-v-26959832]{\n    border-radius: 50%;\n    width: 32px;\n    height: 32px;\n    background-color: #fff;\n    border: none;\n}\n.loadingSave[data-v-26959832] {\n    opacity: .5;\n    pointer-events: none;\n}\n.loadingSave span[data-v-26959832] {\n    display: inline!important;\n}\n.loadingSave span i[data-v-26959832] {\n    color: #fff;\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.profileEdit__social[data-v-26959832] {\n    /* margin-top: 50px; */\n    /* padding: 16px; */\n}\n.profileEdit[data-v-26959832] {\n    padding-bottom: 40px;\n    /* background-color: #F9FAFC; */\n}\n.profileEdit__back[data-v-26959832] {\n    -webkit-text-stroke: 2px #fff; /* width and color */\n}\n.profileEdit_name[data-v-26959832] {\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    margin-bottom: 40px;\n}\n.profileEdit_name input[data-v-26959832] {\n    border: none;\n    outline: none;\n    background-color: transparent;\n    text-align: center;\n    font-size: 24px;\n}\n.profileEdit_name input[data-v-26959832]:focus {\n    border-bottom: 2px solid rgb(145, 143, 143);\n}\n.form-control.form-control-custom[data-v-26959832] {\n    background: #FFFFFF;\n    padding: 8px 0px;\n    border: none;\n    border-top: 1px solid #dedee0;\n    box-sizing: border-box;\n    border-radius: 0;\n    font-weight: bold;\n    font-size: 18px;\n    color: #333333d9;\n}\n.form-control[data-v-26959832]:focus {\n    outline: none;\n    box-shadow: none;\n    border-color: #dedee0;\n}\n.form-group label[data-v-26959832]{\n    font-style: normal;\n    font-weight: 500;\n    font-size: 16px;\n    line-height: 19px;\n\n    /* anvuinew/gray80 */\n\n    color: #646D84;\n}\n.profileEdit__save button[data-v-26959832] {\n    /* align-items: center;\n    justify-content: center; */\n    padding: 4px 24px;\n    border-radius: 4px;\n    background-color: rgb(57 117 237);\n    color: #fff;\n    font-weight: 700;\n    border: none;\n}\n.profile_sum .dropdown  button[data-v-26959832]{\n    border-radius: 50%;\n    width: 32px;\n    height: 32px;\n    background-color: #fff;\n    border: none;\n}\n.loadingSave[data-v-26959832] {\n    opacity: .5;\n    pointer-events: none;\n}\n.loadingSave span[data-v-26959832] {\n    display: inline!important;\n}\n.loadingSave span i[data-v-26959832] {\n    color: #fff;\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -53157,512 +53196,616 @@ var render = function() {
   return _c(
     "main",
     [
-      _vm.loadingFetch
-        ? [_c("loading-full")]
-        : _c(
-            "div",
-            { staticClass: "profileEdit" },
-            [
-              _vm.tab == 1
-                ? [
-                    _c("van-nav-bar", {
-                      attrs: {
-                        title: "Chỉnh sửa trang cá nhân",
-                        "left-text": "Back",
-                        "left-arrow": "",
-                        fixed: ""
+      _vm.loadingFetch ? [_c("loading-full")] : _vm._e(),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "profileEdit", attrs: { loading: _vm.loadingFetch } },
+        [
+          _vm.tab == 1
+            ? [
+                _c("van-nav-bar", {
+                  attrs: {
+                    title: "Chỉnh sửa trang cá nhân",
+                    "left-text": "Back",
+                    "left-arrow": "",
+                    fixed: ""
+                  },
+                  on: { "click-left": _vm.onClickLeftNavbar },
+                  scopedSlots: _vm._u(
+                    [
+                      {
+                        key: "right",
+                        fn: function() {
+                          return [
+                            _vm.loadingSave
+                              ? _c("van-loading", {
+                                  attrs: { type: "spinner", color: "#1989fa" }
+                                })
+                              : _c(
+                                  "a",
+                                  {
+                                    on: {
+                                      click: function($event) {
+                                        $event.stopPropagation()
+                                        return _vm.saveCard($event)
+                                      }
+                                    }
+                                  },
+                                  [
+                                    _c(
+                                      "span",
+                                      { staticClass: "van-nav-bar__text" },
+                                      [_vm._v("Lưu")]
+                                    )
+                                  ]
+                                )
+                          ]
+                        },
+                        proxy: true
+                      }
+                    ],
+                    null,
+                    false,
+                    3315892202
+                  )
+                }),
+                _vm._v(" "),
+                _c("card-background"),
+                _vm._v(" "),
+                _vm.cardContent && _vm.cardContent.id
+                  ? [_c("card-avatar")]
+                  : _vm._e(),
+                _vm._v(" "),
+                _c("div", { staticClass: "profileEdit_name" }, [
+                  _c("input", {
+                    staticClass: "mt-3",
+                    attrs: { type: "text" },
+                    domProps: { value: _vm.cardContent.userName },
+                    on: {
+                      change: function($event) {
+                        return _vm.$store.commit(
+                          "SET_CARD_NAME",
+                          $event.target.value
+                        )
+                      }
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "container pb-5" }, [
+                  _c("div", { staticClass: "form-group mb-3" }, [
+                    _c("label", { staticClass: "mb-2", attrs: { for: "" } }, [
+                      _vm._v("Email")
+                    ]),
+                    _vm._v(" "),
+                    _c("input", {
+                      staticClass: "form-control form-control-custom",
+                      attrs: { type: "text" },
+                      domProps: { value: _vm.cardContent.email },
+                      on: {
+                        change: function($event) {
+                          return _vm.$store.commit(
+                            "SET_CARD_EMAIL",
+                            $event.target.value
+                          )
+                        }
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group mb-3" }, [
+                    _c("label", { staticClass: "mb-2", attrs: { for: "" } }, [
+                      _vm._v("Số điện thoại")
+                    ]),
+                    _vm._v(" "),
+                    _c("input", {
+                      staticClass: "form-control form-control-custom",
+                      attrs: { type: "text" },
+                      domProps: { value: _vm.cardContent.phoneNumber },
+                      on: {
+                        change: function($event) {
+                          return _vm.$store.commit(
+                            "SET_CARD_PHONE_NUMBER",
+                            $event.target.value
+                          )
+                        }
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group mb-4" }, [
+                    _c("label", { staticClass: "mb-2", attrs: { for: "" } }, [
+                      _vm._v("Mô tả bản thân")
+                    ]),
+                    _vm._v(" "),
+                    _c("textarea", {
+                      staticClass: "form-control form-control-custom",
+                      domProps: { value: _vm.cardContent.descr },
+                      on: {
+                        change: function($event) {
+                          return _vm.$store.commit(
+                            "SET_CARD_DESC",
+                            $event.target.value
+                          )
+                        }
+                      }
+                    })
+                  ])
+                ]),
+                _vm._v(" "),
+                _c(
+                  "van-popup",
+                  {
+                    model: {
+                      value: _vm.showQr,
+                      callback: function($$v) {
+                        _vm.showQr = $$v
                       },
-                      on: { "click-left": _vm.onClickLeftNavbar },
-                      scopedSlots: _vm._u(
-                        [
+                      expression: "showQr"
+                    }
+                  },
+                  [
+                    _c("img", {
+                      attrs: { src: _vm.cardContent.qrCode, alt: "" }
+                    })
+                  ]
+                ),
+                _vm._v(" "),
+                _c("img", {
+                  staticClass: "d-none",
+                  attrs: { src: _vm.cardContent.qrCode, alt: "cache" }
+                }),
+                _vm._v(" "),
+                _c(
+                  "van-tabbar",
+                  {
+                    model: {
+                      value: _vm.tab,
+                      callback: function($$v) {
+                        _vm.tab = $$v
+                      },
+                      expression: "tab"
+                    }
+                  },
+                  [
+                    _c("van-tabbar-item", {
+                      attrs: { name: "1", icon: "home-o" }
+                    }),
+                    _vm._v(" "),
+                    _c("van-tabbar-item", {
+                      attrs: { name: "1", icon: "qr" },
+                      on: {
+                        click: function($event) {
+                          _vm.showQr = true
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("van-tabbar-item", {
+                      attrs: { name: "2", icon: "setting-o" }
+                    }),
+                    _vm._v(" "),
+                    _c("van-tabbar-item", {
+                      attrs: { icon: "user-o" },
+                      on: { click: _vm.goToProfile }
+                    })
+                  ],
+                  1
+                )
+              ]
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.tab == 2
+            ? [
+                _c("van-nav-bar", {
+                  attrs: {
+                    title: "Cài đặt",
+                    "left-text": "Back",
+                    "left-arrow": "",
+                    fixed: ""
+                  },
+                  on: {
+                    "click-left": function($event) {
+                      _vm.tab = 1
+                    }
+                  },
+                  scopedSlots: _vm._u(
+                    [
+                      {
+                        key: "right",
+                        fn: function() {
+                          return [
+                            _vm.loadingSave
+                              ? _c("van-loading", {
+                                  attrs: { type: "spinner", color: "#1989fa" }
+                                })
+                              : _c(
+                                  "a",
+                                  {
+                                    on: {
+                                      click: function($event) {
+                                        $event.stopPropagation()
+                                        return _vm.saveCard($event)
+                                      }
+                                    }
+                                  },
+                                  [
+                                    _c(
+                                      "span",
+                                      { staticClass: "van-nav-bar__text" },
+                                      [_vm._v("Lưu")]
+                                    )
+                                  ]
+                                )
+                          ]
+                        },
+                        proxy: true
+                      }
+                    ],
+                    null,
+                    false,
+                    3315892202
+                  )
+                }),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticStyle: { "margin-top": "50px" } },
+                  [
+                    _c(
+                      "van-collapse",
+                      {
+                        attrs: { accordion: "" },
+                        model: {
+                          value: _vm.settingTab,
+                          callback: function($$v) {
+                            _vm.settingTab = $$v
+                          },
+                          expression: "settingTab"
+                        }
+                      },
+                      [
+                        _c(
+                          "van-collapse-item",
+                          { attrs: { title: "Giao diện", name: "1" } },
+                          [
+                            _c(
+                              "div",
+                              {
+                                staticClass:
+                                  "px-2 d-flex align-items-center justify-content-between"
+                              },
+                              [
+                                _c("label", { attrs: { for: "" } }, [
+                                  _vm._v("Màu nền")
+                                ]),
+                                _vm._v(" "),
+                                _c("input", {
+                                  attrs: { type: "color" },
+                                  domProps: {
+                                    value: _vm.cardContent.background_color
+                                  },
+                                  on: {
+                                    change: function($event) {
+                                      return _vm.$store.commit(
+                                        "SET_BACKGROUND_COLOR",
+                                        $event.target.value
+                                      )
+                                    }
+                                  }
+                                })
+                              ]
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "van-collapse-item",
                           {
-                            key: "right",
-                            fn: function() {
-                              return [
-                                _vm.loadingSave
-                                  ? _c("van-loading", {
+                            attrs: { title: "Liên kết  mạng xã hội", name: "2" }
+                          },
+                          [
+                            _c(
+                              "div",
+                              { staticClass: "profileEdit__social" },
+                              [
+                                _vm.cardContent.links.length <= 0
+                                  ? _c("van-empty", {
                                       attrs: {
-                                        type: "spinner",
-                                        color: "#1989fa"
+                                        description:
+                                          "Chưa có liên kết MXH nào !"
                                       }
                                     })
-                                  : _c(
-                                      "a",
-                                      {
-                                        on: {
-                                          click: function($event) {
-                                            $event.stopPropagation()
-                                            return _vm.saveCard($event)
-                                          }
-                                        }
-                                      },
-                                      [
-                                        _c(
-                                          "span",
-                                          { staticClass: "van-nav-bar__text" },
-                                          [_vm._v("Lưu")]
-                                        )
-                                      ]
-                                    )
-                              ]
-                            },
-                            proxy: true
-                          }
-                        ],
-                        null,
-                        false,
-                        3315892202
-                      )
-                    }),
-                    _vm._v(" "),
-                    _c("card-background"),
-                    _vm._v(" "),
-                    _vm.cardContent && _vm.cardContent.id
-                      ? [_c("card-avatar")]
-                      : _vm._e(),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "profileEdit_name" }, [
-                      _c("input", {
-                        staticClass: "mt-3",
-                        attrs: { type: "text" },
-                        domProps: { value: _vm.cardContent.userName },
-                        on: {
-                          change: function($event) {
-                            return _vm.$store.commit(
-                              "SET_CARD_NAME",
-                              $event.target.value
-                            )
-                          }
-                        }
-                      })
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "container pb-5" }, [
-                      _c("div", { staticClass: "form-group mb-3" }, [
-                        _c(
-                          "label",
-                          { staticClass: "mb-2", attrs: { for: "" } },
-                          [_vm._v("Email")]
-                        ),
-                        _vm._v(" "),
-                        _c("input", {
-                          staticClass: "form-control form-control-custom",
-                          attrs: { type: "text" },
-                          domProps: { value: _vm.cardContent.email },
-                          on: {
-                            change: function($event) {
-                              return _vm.$store.commit(
-                                "SET_CARD_EMAIL",
-                                $event.target.value
-                              )
-                            }
-                          }
-                        })
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "form-group mb-3" }, [
-                        _c(
-                          "label",
-                          { staticClass: "mb-2", attrs: { for: "" } },
-                          [_vm._v("Số điện thoại")]
-                        ),
-                        _vm._v(" "),
-                        _c("input", {
-                          staticClass: "form-control form-control-custom",
-                          attrs: { type: "text" },
-                          domProps: { value: _vm.cardContent.phoneNumber },
-                          on: {
-                            change: function($event) {
-                              return _vm.$store.commit(
-                                "SET_CARD_PHONE_NUMBER",
-                                $event.target.value
-                              )
-                            }
-                          }
-                        })
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "form-group mb-4" }, [
-                        _c(
-                          "label",
-                          { staticClass: "mb-2", attrs: { for: "" } },
-                          [_vm._v("Mô tả bản thân")]
-                        ),
-                        _vm._v(" "),
-                        _c("textarea", {
-                          staticClass: "form-control form-control-custom",
-                          domProps: { value: _vm.cardContent.descr },
-                          on: {
-                            change: function($event) {
-                              return _vm.$store.commit(
-                                "SET_CARD_DESC",
-                                $event.target.value
-                              )
-                            }
-                          }
-                        })
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c(
-                      "van-popup",
-                      {
-                        model: {
-                          value: _vm.showQr,
-                          callback: function($$v) {
-                            _vm.showQr = $$v
-                          },
-                          expression: "showQr"
-                        }
-                      },
-                      [
-                        _c("img", {
-                          attrs: { src: _vm.cardContent.qrCode, alt: "" }
-                        })
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c("img", {
-                      staticClass: "d-none",
-                      attrs: { src: _vm.cardContent.qrCode, alt: "cache" }
-                    }),
-                    _vm._v(" "),
-                    _c(
-                      "van-tabbar",
-                      {
-                        model: {
-                          value: _vm.tab,
-                          callback: function($$v) {
-                            _vm.tab = $$v
-                          },
-                          expression: "tab"
-                        }
-                      },
-                      [
-                        _c("van-tabbar-item", {
-                          attrs: { name: "1", icon: "home-o" }
-                        }),
-                        _vm._v(" "),
-                        _c("van-tabbar-item", {
-                          attrs: { name: "1", icon: "qr" },
-                          on: {
-                            click: function($event) {
-                              _vm.showQr = true
-                            }
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c("van-tabbar-item", {
-                          attrs: { name: "2", icon: "setting-o" }
-                        }),
-                        _vm._v(" "),
-                        _c("van-tabbar-item", {
-                          attrs: { icon: "user-o" },
-                          on: { click: _vm.goToProfile }
-                        })
-                      ],
-                      1
-                    )
-                  ]
-                : _vm._e(),
-              _vm._v(" "),
-              _vm.tab == 2
-                ? [
-                    _c("van-nav-bar", {
-                      attrs: {
-                        title: "Chỉnh sửa liên kết MXH",
-                        "left-text": "Back",
-                        "left-arrow": "",
-                        fixed: ""
-                      },
-                      on: {
-                        "click-left": function($event) {
-                          _vm.tab = 1
-                        }
-                      },
-                      scopedSlots: _vm._u(
-                        [
-                          {
-                            key: "right",
-                            fn: function() {
-                              return undefined
-                            },
-                            proxy: true
-                          }
-                        ],
-                        null,
-                        false,
-                        3743218793
-                      )
-                    }),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "profileEdit__social" },
-                      [
-                        _vm.cardContent.links.length <= 0
-                          ? _c("van-empty", {
-                              attrs: {
-                                description: "Chưa có liên kết MXH nào !"
-                              }
-                            })
-                          : [
-                              _c(
-                                "div",
-                                { staticClass: "qncard mb-4" },
-                                [
-                                  _vm._l(_vm.cardContent.links, function(
-                                    link,
-                                    key
-                                  ) {
-                                    return [
-                                      _vm.listSocial &&
-                                      _vm.listSocial[link.type]
-                                        ? _c(
-                                            "div",
-                                            {
-                                              key: key,
-                                              staticClass:
-                                                "sociallItem mb-4 rounded-3 px-4 py-3 shadow d-flex align-items-center justify-content-between",
-                                              on: {
-                                                click: function($event) {
-                                                  return _vm.openEditSocialLink(
-                                                    link
-                                                  )
-                                                }
-                                              }
-                                            },
-                                            [
-                                              [
-                                                _c("img", {
-                                                  staticStyle: {
-                                                    width: "35px",
-                                                    height: "35px"
-                                                  },
-                                                  attrs: {
-                                                    src:
-                                                      _vm.listSocial[link.type]
-                                                        .thumb,
-                                                    alt: ""
-                                                  }
-                                                }),
-                                                _vm._v(" "),
-                                                _c("h5", [
-                                                  _vm._v(
-                                                    _vm._s(
-                                                      _vm.listSocial[link.type]
-                                                        .name
+                                  : [
+                                      _c(
+                                        "div",
+                                        { staticClass: "qncard mb-4" },
+                                        [
+                                          _vm._l(
+                                            _vm.cardContent.links,
+                                            function(link, key) {
+                                              return [
+                                                _vm.listSocial &&
+                                                _vm.listSocial[link.type]
+                                                  ? _c(
+                                                      "div",
+                                                      {
+                                                        key: key,
+                                                        staticClass:
+                                                          "sociallItem mb-4 rounded-3 px-4 py-3 shadow d-flex align-items-center justify-content-between",
+                                                        on: {
+                                                          click: function(
+                                                            $event
+                                                          ) {
+                                                            return _vm.openEditSocialLink(
+                                                              link
+                                                            )
+                                                          }
+                                                        }
+                                                      },
+                                                      [
+                                                        [
+                                                          _c("img", {
+                                                            staticStyle: {
+                                                              width: "35px",
+                                                              height: "35px"
+                                                            },
+                                                            attrs: {
+                                                              src:
+                                                                _vm.listSocial[
+                                                                  link.type
+                                                                ].thumb,
+                                                              alt: ""
+                                                            }
+                                                          }),
+                                                          _vm._v(" "),
+                                                          _c("h5", [
+                                                            _vm._v(
+                                                              _vm._s(
+                                                                _vm.listSocial[
+                                                                  link.type
+                                                                ].name
+                                                              )
+                                                            )
+                                                          ]),
+                                                          _vm._v(" "),
+                                                          !_vm
+                                                            .loadingRemoveLink[
+                                                            link.link_id
+                                                          ] ||
+                                                          Object.keys(
+                                                            _vm.loadingRemoveLink
+                                                          ).length == 0
+                                                            ? _c("van-icon", {
+                                                                attrs: {
+                                                                  name: "cross"
+                                                                },
+                                                                on: {
+                                                                  click: function(
+                                                                    $event
+                                                                  ) {
+                                                                    $event.stopPropagation()
+                                                                    $event.preventDefault()
+                                                                    return _vm.removeSocialLink(
+                                                                      link
+                                                                    )
+                                                                  }
+                                                                }
+                                                              })
+                                                            : _vm._e(),
+                                                          _vm._v(" "),
+                                                          _vm.loadingRemoveLink[
+                                                            link.link_id
+                                                          ] === true
+                                                            ? _c(
+                                                                "van-loading",
+                                                                {
+                                                                  attrs: {
+                                                                    type:
+                                                                      "spinner"
+                                                                  }
+                                                                }
+                                                              )
+                                                            : _vm._e()
+                                                        ]
+                                                      ],
+                                                      2
                                                     )
+                                                  : _vm._e()
+                                              ]
+                                            }
+                                          )
+                                        ],
+                                        2
+                                      )
+                                    ],
+                                _vm._v(" "),
+                                _c(
+                                  "van-button",
+                                  {
+                                    staticClass: " w-100",
+                                    attrs: { color: "#1989fa" },
+                                    on: {
+                                      click: function($event) {
+                                        _vm.selectSocialNetwork = true
+                                      }
+                                    }
+                                  },
+                                  [
+                                    _c("b", { staticClass: "text-light" }, [
+                                      _vm._v("Thêm liên kết")
+                                    ])
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "van-popup",
+                                  {
+                                    style: { height: "70%" },
+                                    attrs: { round: "", position: "bottom" },
+                                    on: {
+                                      closed: function($event) {
+                                        return _vm.$store.commit(
+                                          "RESET_SOCIAL_EDIT"
+                                        )
+                                      }
+                                    },
+                                    model: {
+                                      value: _vm.selectSocialNetwork,
+                                      callback: function($$v) {
+                                        _vm.selectSocialNetwork = $$v
+                                      },
+                                      expression: "selectSocialNetwork"
+                                    }
+                                  },
+                                  [
+                                    _c("div", { staticClass: "px-3 pt-4" }, [
+                                      _c(
+                                        "div",
+                                        {
+                                          staticClass:
+                                            "d-flex align-items-center justify-content-between"
+                                        },
+                                        [
+                                          _c("h4", [_vm._v("Mạng xã hội")]),
+                                          _vm._v(" "),
+                                          _vm.listSocial &&
+                                          _vm.listSocial[_vm.socialEdit.type] &&
+                                          _vm.socialEdit.type
+                                            ? _c("img", {
+                                                staticStyle: {
+                                                  width: "30px",
+                                                  height: "30px"
+                                                },
+                                                attrs: {
+                                                  src:
+                                                    _vm.listSocial[
+                                                      _vm.socialEdit.type
+                                                    ].thumb,
+                                                  alt: ""
+                                                }
+                                              })
+                                            : _vm._e()
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _c("div", { staticClass: "mt-4" }, [
+                                        _c("div", { staticClass: "d-flex" }, [
+                                          _c("input", {
+                                            ref: "editSocialLink",
+                                            staticClass:
+                                              "ps-0 rounded-0 form-control border-start-0 border-end-0 border-top-0 ",
+                                            attrs: {
+                                              type: "text",
+                                              placeholder: _vm.isBank
+                                                ? "Số tài khoản"
+                                                : "Đường dẫn, Số điện thoại, Email,..."
+                                            },
+                                            domProps: {
+                                              value: _vm.socialEdit.link
+                                            },
+                                            on: {
+                                              change: function($event) {
+                                                return _vm.$store.commit(
+                                                  "SET_SOCIAL_EDIT",
+                                                  { link: $event.target.value }
+                                                )
+                                              }
+                                            }
+                                          }),
+                                          _vm._v(" "),
+                                          _c(
+                                            "div",
+                                            [
+                                              _vm.loadingSave
+                                                ? _c("van-loading", {
+                                                    attrs: {
+                                                      type: "spinner",
+                                                      color: "#1989fa"
+                                                    }
+                                                  })
+                                                : _c(
+                                                    "span",
+                                                    {
+                                                      staticClass:
+                                                        "van-nav-bar__text cursor-pointer",
+                                                      on: {
+                                                        click:
+                                                          _vm.saveSocicalLink
+                                                      }
+                                                    },
+                                                    [_vm._v("Lưu")]
                                                   )
-                                                ]),
-                                                _vm._v(" "),
-                                                !_vm.loadingRemoveLink[
-                                                  link.link_id
-                                                ] ||
-                                                Object.keys(
-                                                  _vm.loadingRemoveLink
-                                                ).length == 0
-                                                  ? _c("van-icon", {
-                                                      attrs: { name: "cross" },
+                                            ],
+                                            1
+                                          )
+                                        ])
+                                      ]),
+                                      _vm._v(" "),
+                                      _c(
+                                        "div",
+                                        { staticClass: "row mt-4" },
+                                        [
+                                          _vm._l(_vm.listSocial, function(
+                                            social,
+                                            skey
+                                          ) {
+                                            return [
+                                              social.show
+                                                ? _c(
+                                                    "a",
+                                                    {
+                                                      key: skey,
+                                                      staticClass:
+                                                        "col-3 mb-4 cusor-pointer",
                                                       on: {
                                                         click: function(
                                                           $event
                                                         ) {
                                                           $event.stopPropagation()
-                                                          $event.preventDefault()
-                                                          return _vm.removeSocialLink(
-                                                            link
+                                                          return _vm.onSelectSocial(
+                                                            skey
                                                           )
                                                         }
                                                       }
-                                                    })
-                                                  : _vm._e(),
-                                                _vm._v(" "),
-                                                _vm.loadingRemoveLink[
-                                                  link.link_id
-                                                ] === true
-                                                  ? _c("van-loading", {
-                                                      attrs: { type: "spinner" }
-                                                    })
-                                                  : _vm._e()
-                                              ]
-                                            ],
-                                            2
-                                          )
-                                        : _vm._e()
-                                    ]
-                                  })
-                                ],
-                                2
-                              )
-                            ],
-                        _vm._v(" "),
-                        _c(
-                          "van-button",
-                          {
-                            staticClass: " w-100",
-                            attrs: { color: "#1989fa" },
-                            on: {
-                              click: function($event) {
-                                _vm.selectSocialNetwork = true
-                              }
-                            }
-                          },
-                          [
-                            _c("b", { staticClass: "text-light" }, [
-                              _vm._v("Thêm liên kết")
-                            ])
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "van-popup",
-                          {
-                            style: { height: "70%" },
-                            attrs: { round: "", position: "bottom" },
-                            on: {
-                              closed: function($event) {
-                                return _vm.$store.commit("RESET_SOCIAL_EDIT")
-                              }
-                            },
-                            model: {
-                              value: _vm.selectSocialNetwork,
-                              callback: function($$v) {
-                                _vm.selectSocialNetwork = $$v
-                              },
-                              expression: "selectSocialNetwork"
-                            }
-                          },
-                          [
-                            _c("div", { staticClass: "px-3 pt-4" }, [
-                              _c(
-                                "div",
-                                {
-                                  staticClass:
-                                    "d-flex align-items-center justify-content-between"
-                                },
-                                [
-                                  _c("h4", [_vm._v("Mạng xã hội")]),
-                                  _vm._v(" "),
-                                  _vm.listSocial &&
-                                  _vm.listSocial[_vm.socialEdit.type] &&
-                                  _vm.socialEdit.type
-                                    ? _c("img", {
-                                        staticStyle: {
-                                          width: "30px",
-                                          height: "30px"
-                                        },
-                                        attrs: {
-                                          src:
-                                            _vm.listSocial[_vm.socialEdit.type]
-                                              .thumb,
-                                          alt: ""
-                                        }
-                                      })
-                                    : _vm._e()
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c("div", { staticClass: "mt-4" }, [
-                                _c("div", { staticClass: "d-flex" }, [
-                                  _c("input", {
-                                    ref: "editSocialLink",
-                                    staticClass:
-                                      "ps-0 rounded-0 form-control border-start-0 border-end-0 border-top-0 ",
-                                    attrs: {
-                                      type: "text",
-                                      placeholder: _vm.isBank
-                                        ? "Số tài khoản"
-                                        : "Đường dẫn, Số điện thoại, Email,..."
-                                    },
-                                    domProps: { value: _vm.socialEdit.link },
-                                    on: {
-                                      change: function($event) {
-                                        return _vm.$store.commit(
-                                          "SET_SOCIAL_EDIT",
-                                          { link: $event.target.value }
-                                        )
-                                      }
-                                    }
-                                  }),
-                                  _vm._v(" "),
-                                  _c(
-                                    "div",
-                                    [
-                                      _vm.loadingSave
-                                        ? _c("van-loading", {
-                                            attrs: {
-                                              type: "spinner",
-                                              color: "#1989fa"
-                                            }
-                                          })
-                                        : _c(
-                                            "span",
-                                            {
-                                              staticClass:
-                                                "van-nav-bar__text cursor-pointer",
-                                              on: { click: _vm.saveSocicalLink }
-                                            },
-                                            [_vm._v("Lưu")]
-                                          )
-                                    ],
-                                    1
-                                  )
-                                ])
-                              ]),
-                              _vm._v(" "),
-                              _c(
-                                "div",
-                                { staticClass: "row mt-4" },
-                                [
-                                  _vm._l(_vm.listSocial, function(
-                                    social,
-                                    skey
-                                  ) {
-                                    return [
-                                      social.show
-                                        ? _c(
-                                            "a",
-                                            {
-                                              key: skey,
-                                              staticClass:
-                                                "col-3 mb-4 cusor-pointer",
-                                              on: {
-                                                click: function($event) {
-                                                  $event.stopPropagation()
-                                                  return _vm.onSelectSocial(
-                                                    skey
+                                                    },
+                                                    [
+                                                      _c("img", {
+                                                        staticClass:
+                                                          "img-fluid",
+                                                        attrs: {
+                                                          src: social.thumb,
+                                                          alt: ""
+                                                        }
+                                                      })
+                                                    ]
                                                   )
-                                                }
-                                              }
-                                            },
-                                            [
-                                              _c("img", {
-                                                staticClass: "img-fluid",
-                                                attrs: {
-                                                  src: social.thumb,
-                                                  alt: ""
-                                                }
-                                              })
+                                                : _vm._e()
                                             ]
-                                          )
-                                        : _vm._e()
-                                    ]
-                                  })
-                                ],
-                                2
-                              )
-                            ])
+                                          })
+                                        ],
+                                        2
+                                      )
+                                    ])
+                                  ]
+                                )
+                              ],
+                              2
+                            )
                           ]
                         )
                       ],
-                      2
+                      1
                     )
-                  ]
-                : _vm._e()
-            ],
-            2
-          )
+                  ],
+                  1
+                )
+              ]
+            : _vm._e()
+        ],
+        2
+      )
     ],
     2
   )

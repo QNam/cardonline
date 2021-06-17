@@ -26,6 +26,7 @@ class Card extends Authenticatable {
         'created_at',
         'updated_at',
         'background_img',
+        'background_color',
         'avatar_img',
     ];
 

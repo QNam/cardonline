@@ -6,9 +6,11 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Card;
 use App\Models\CardLinks;
+use App\Http\Ultis\MediaService;
 use JeroenDesloovere\VCard\VCard;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class CardController extends Controller
 {
@@ -126,8 +128,25 @@ class CardController extends Controller
         }
     }
 
-    public function saveBackground(Request $request) {
+    public function saveBackgroundBase64(Request $request) {
         $card = new Card();
+        $mediaService = new MediaService();
+
+        $img = $mediaService->uploadImageBase64($request->image);
+        $params = [
+            'background_img' => $img,
+        ];
+        
+        try {
+            $card->where('id', $request->id)->update($params);
+            
+            return $this->sendSuccess($params);
+        } catch (\Exception $e) {
+            return $this->sendServerError($e);
+        }
+    }
+
+    public function saveBackground(Request $request) {
         $params = [
             'background_img' => $request->background_img,
         ];
@@ -179,6 +198,7 @@ class CardController extends Controller
             'phoneNumber' => $request->phoneNumber,
             'descr' => $request->descr,
             'background_img' => $request->background_img,
+            'background_color' => $request->background_color,
             'avatar_img' => $request->avatar_img
         ];
 

@@ -28,7 +28,7 @@ class MediaController extends Controller
         
         $image = str_replace($replace, '', $image_64); 
         $image = str_replace(' ', '+', $image); 
-        $imageName = time() . '.' . $extension;
+        $imageName = rand() . "-" . time() . '.' . $extension;
         
         Storage::disk('imageUser')->put($imageName, base64_decode($image));
 

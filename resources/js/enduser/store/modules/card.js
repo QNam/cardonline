@@ -1,5 +1,5 @@
-import { uploadImage, uploadImageBase64 } from '../../../api/image'
-import { getCardById, CardDTO, storeCard, saveCardAvatar, saveCardBackground, removeCardLink} from '../../../api/card'
+import { uploadImageBase64 } from '../../../api/image'
+import { getCardById, CardDTO, storeCard, saveCardAvatar, saveBackgroundBase64} from '../../../api/card'
 import { getUrlImage } from '../../../ultis'
 
 export default {
@@ -43,13 +43,12 @@ export default {
 
         async uploadBackground({state}, image) {
             state.cardContent.background_img_url = image
-
-            const rep = await uploadImageBase64(image)
+            
+            const rep = await saveBackgroundBase64({ id: state.cardContent.id, image });
             const data = rep.data.data
-            saveCardBackground(state.cardContent.id, data.img)
-            const img = getUrlImage(data.img)
+            const img = getUrlImage(data.background_img)
 
-            state.cardContent.background_img = data.img
+            state.cardContent.background_img = data.background_img
             state.cardContent.background_img_url = img
         },
 
@@ -69,6 +68,7 @@ export default {
                 email: state.cardContent.email,
                 descr: state.cardContent.descr,
                 background_img: state.cardContent.background_img,
+                background_color: state.cardContent.background_color,
                 avatar_img: state.cardContent.avatar_img,
                 links: state.cardContent.links
             }
@@ -82,6 +82,10 @@ export default {
     },
     
     mutations: {
+        SET_BACKGROUND_COLOR(state, payload) {
+            state.cardContent.background_color = payload
+        },
+
         SET_CARD_CONTENT(state, payload) {
             state.cardContent = new CardDTO(payload)
             if(!state.cardContent.links) {

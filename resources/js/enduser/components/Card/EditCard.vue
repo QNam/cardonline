@@ -3,7 +3,7 @@
         <template v-if="loadingFetch">
             <loading-full />
         </template>
-        <div v-else class="profileEdit">
+        <div :loading="loadingFetch" class="profileEdit">
             <template v-if="tab == 1">
                 <van-nav-bar
                     title="Chỉnh sửa trang cá nhân"
@@ -66,71 +66,88 @@
             
             <template v-if="tab == 2">
                 <van-nav-bar
-                    title="Chỉnh sửa liên kết MXH"
+                    title="Cài đặt"
                     left-text="Back"
                     left-arrow
                     fixed
                     @click-left="tab = 1"
                 >
                 <template #right>
+                    <van-loading v-if="loadingSave" type="spinner" color="#1989fa" />
+                    <a  v-else @click.stop="saveCard">
+                        <span class="van-nav-bar__text">Lưu</span>
+                    </a>
                 </template>
                 </van-nav-bar>
-                <div class="profileEdit__social">
-                    <van-empty v-if="cardContent.links.length <= 0" description="Chưa có liên kết MXH nào !" />
-
-                    <template v-else>
-                    <div class="qncard mb-4">
-                        <template v-for="link, key in cardContent.links">
-                            <div class="sociallItem mb-4 rounded-3 px-4 py-3 shadow d-flex align-items-center justify-content-between"  
-                                :key="key"
-                                v-if="listSocial && listSocial[link.type]"
-                                @click="openEditSocialLink(link)"
-                            >
-                                <template>
-                                    <img :src="listSocial[link.type].thumb" style="width: 35px; height: 35px" alt="">
-                                    <h5>{{ listSocial[link.type].name }}</h5>
-                                    <van-icon v-if="!loadingRemoveLink[link.link_id] || Object.keys(loadingRemoveLink).length == 0" 
-                                                name="cross" 
-                                                v-on:click.stop.prevent="removeSocialLink(link)" />
-                                    <van-loading v-if="loadingRemoveLink[link.link_id] === true" type="spinner" />
-                                </template>
+                <div style="margin-top: 50px">
+                    <van-collapse v-model="settingTab" accordion>
+                        <van-collapse-item title="Giao diện" name="1">
+                            <div class="px-2 d-flex align-items-center justify-content-between">
+                                <label for="">Màu nền</label>
+                                <input type="color" :value="cardContent.background_color" @change="$store.commit('SET_BACKGROUND_COLOR', $event.target.value)">
                             </div>
-                        </template>
-                    </div> 
+                        </van-collapse-item>
 
-                    </template>
-                    <van-button color="#1989fa" class=" w-100" @click="selectSocialNetwork = true"> <b class="text-light">Thêm liên kết</b></van-button>
-                    
-                    <van-popup @closed="$store.commit('RESET_SOCIAL_EDIT')" v-model="selectSocialNetwork" round position="bottom" :style="{ height: '70%' }" >
-                        <div class="px-3 pt-4">
-                            <div class="d-flex align-items-center justify-content-between">
-                                <h4>Mạng xã hội</h4>
-                                <img v-if="listSocial && listSocial[socialEdit.type] && socialEdit.type" :src="listSocial[socialEdit.type].thumb" style="width: 30px; height: 30px" alt="">
-                            </div>
-                            
-                            <div class="mt-4">
-                                <div class="d-flex">
-                                    <input ref="editSocialLink" type="text" 
-                                        class="ps-0 rounded-0 form-control border-start-0 border-end-0 border-top-0 " 
-                                        :placeholder="isBank ? 'Số tài khoản' : 'Đường dẫn, Số điện thoại, Email,...'"
-                                        :value="socialEdit.link"
-                                        @change="$store.commit('SET_SOCIAL_EDIT', {link: $event.target.value})" 
-                                    >
-                                    <div>
-                                        <van-loading v-if="loadingSave" type="spinner" color="#1989fa" />
-                                        <span v-else class="van-nav-bar__text cursor-pointer" @click="saveSocicalLink">Lưu</span>
-                                    </div>
+                        <van-collapse-item title="Liên kết  mạng xã hội" name="2">
+                            <div class="profileEdit__social">
+                                <van-empty v-if="cardContent.links.length <= 0" description="Chưa có liên kết MXH nào !" />
+
+                                <template v-else>
+                                <div class="qncard mb-4">
+                                    <template v-for="link, key in cardContent.links">
+                                        <div class="sociallItem mb-4 rounded-3 px-4 py-3 shadow d-flex align-items-center justify-content-between"  
+                                            :key="key"
+                                            v-if="listSocial && listSocial[link.type]"
+                                            @click="openEditSocialLink(link)"
+                                        >
+                                            <template>
+                                                <img :src="listSocial[link.type].thumb" style="width: 35px; height: 35px" alt="">
+                                                <h5>{{ listSocial[link.type].name }}</h5>
+                                                <van-icon v-if="!loadingRemoveLink[link.link_id] || Object.keys(loadingRemoveLink).length == 0" 
+                                                            name="cross" 
+                                                            v-on:click.stop.prevent="removeSocialLink(link)" />
+                                                <van-loading v-if="loadingRemoveLink[link.link_id] === true" type="spinner" />
+                                            </template>
+                                        </div>
+                                    </template>
                                 </div> 
-                            </div>
-                            <div class="row mt-4">
-                                <template v-for="(social, skey) in listSocial"> 
-                                    <a class="col-3 mb-4 cusor-pointer" v-if="social.show" :key="skey" @click.stop="onSelectSocial(skey)">
-                                        <img :src="social.thumb" class="img-fluid" alt="">
-                                    </a>
+
                                 </template>
+                                <van-button color="#1989fa" class=" w-100" @click="selectSocialNetwork = true"> <b class="text-light">Thêm liên kết</b></van-button>
+                                
+                                <van-popup @closed="$store.commit('RESET_SOCIAL_EDIT')" v-model="selectSocialNetwork" round position="bottom" :style="{ height: '70%' }" >
+                                    <div class="px-3 pt-4">
+                                        <div class="d-flex align-items-center justify-content-between">
+                                            <h4>Mạng xã hội</h4>
+                                            <img v-if="listSocial && listSocial[socialEdit.type] && socialEdit.type" :src="listSocial[socialEdit.type].thumb" style="width: 30px; height: 30px" alt="">
+                                        </div>
+                                        
+                                        <div class="mt-4">
+                                            <div class="d-flex">
+                                                <input ref="editSocialLink" type="text" 
+                                                    class="ps-0 rounded-0 form-control border-start-0 border-end-0 border-top-0 " 
+                                                    :placeholder="isBank ? 'Số tài khoản' : 'Đường dẫn, Số điện thoại, Email,...'"
+                                                    :value="socialEdit.link"
+                                                    @change="$store.commit('SET_SOCIAL_EDIT', {link: $event.target.value})" 
+                                                >
+                                                <div>
+                                                    <van-loading v-if="loadingSave" type="spinner" color="#1989fa" />
+                                                    <span v-else class="van-nav-bar__text cursor-pointer" @click="saveSocicalLink">Lưu</span>
+                                                </div>
+                                            </div> 
+                                        </div>
+                                        <div class="row mt-4">
+                                            <template v-for="(social, skey) in listSocial"> 
+                                                <a class="col-3 mb-4 cusor-pointer" v-if="social.show" :key="skey" @click.stop="onSelectSocial(skey)">
+                                                    <img :src="social.thumb" class="img-fluid" alt="">
+                                                </a>
+                                            </template>
+                                        </div>
+                                    </div>
+                                </van-popup>
                             </div>
-                        </div>
-                    </van-popup>
+                        </van-collapse-item>
+                    </van-collapse>
                 </div>
             </template>
             
@@ -162,7 +179,8 @@ export default {
             selectSocialNetwork: false,
             loadingRemoveLink: {},
             loadingSave: false,
-            loadingFetch: true,
+            loadingFetch: false,
+            settingTab: 1, 
         }
     },
     mounted() {
@@ -318,8 +336,8 @@ export default {
 </style>
 <style scoped>
 .profileEdit__social {
-    margin-top: 50px;
-    padding: 16px;
+    /* margin-top: 50px; */
+    /* padding: 16px; */
 }
 
 .profileEdit {

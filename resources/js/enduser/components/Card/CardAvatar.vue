@@ -35,6 +35,7 @@
 <script>
 import PhotoEditor from '../Template/PhotoEditor'
 import { mapState, mapActions } from 'vuex'
+import LoadingFull from '../Loading/LoadingFull'
 
 export default {
     props: {
@@ -44,7 +45,8 @@ export default {
         }
     },
     components: {
-        PhotoEditor
+        PhotoEditor,
+        LoadingFull
     },
     data() {
         return {
