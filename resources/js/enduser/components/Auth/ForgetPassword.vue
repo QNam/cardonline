@@ -51,10 +51,10 @@ import { checkAccountToForgetPassword, forgetPassword } from '../../../api/card'
 export default {
     data() {
         return {
-            email: 'namdoanquoc.1998@gmail.com',
-            password: '123123',
-            repeatPassword: '123123',
-            confirmCode: '13123',
+            email: '',
+            password: '',
+            repeatPassword: '',
+            confirmCode: '',
 
             submited: false,
             cardIdExists: true,
