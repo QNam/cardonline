@@ -70,7 +70,9 @@ export default {
                 background_img: state.cardContent.background_img,
                 background_color: state.cardContent.background_color,
                 avatar_img: state.cardContent.avatar_img,
-                links: state.cardContent.links
+                links: state.cardContent.links,
+                theme: state.cardContent.theme,
+                iconTheme: state.cardContent.iconTheme
             }
             
             return await storeCard(params)
@@ -82,6 +84,14 @@ export default {
     },
     
     mutations: {
+        SET_THEME(state, payload) {
+            state.cardContent.theme = payload
+        },
+
+        SET_ICON_THEME(state, payload) {
+            state.cardContent.iconTheme = payload
+        },
+
         SET_BACKGROUND_COLOR(state, payload) {
             state.cardContent.background_color = payload
         },
@@ -148,7 +158,7 @@ export default {
                 state.socialEdit.type = payload.type
             }
 
-            if(payload.link) {
+            if(typeof payload.link != "undefined") {
                 state.socialEdit.link = payload.link
             }
         },

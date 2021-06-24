@@ -88,6 +88,62 @@
                             </div>
                         </van-collapse-item>
 
+                        <van-collapse-item title="Bố cục" name="3">
+                            <div class="px-2 d-flex align-items-center justify-content-between">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <a href="javascript:;" 
+                                            :class="{'rounded-lg shadow': cardContent.theme == 1}" 
+                                            @click="$store.commit('SET_THEME', 1)" 
+                                            class="d-block">
+                                            <img src="/static/themes/thumb1.png" class="img-fluid" style="max-height: 328px" alt="">
+                                        </a>
+                                    </div>
+                                    <div class="col-6">
+                                        <a href="javascript:;" 
+                                            :class="{'rounded-lg shadow': cardContent.theme == 2}" 
+                                            @click="$store.commit('SET_THEME', 2)" 
+                                            class="d-block">
+                                                <img src="/static/themes/thumb2.png" class="img-fluid" style="max-height: 328px" alt="">
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </van-collapse-item>
+
+                        <van-collapse-item title="Icons" name="4">
+                            <div class="px-2 d-flex align-items-center justify-content-between">
+                                <div class="row">
+                                    <!-- <div class="col-6 mb-2">
+                                        <a href="" class="d-block">
+                                            <img src="/static/icons/icon1.png" class="img-fluid" style="max-height: 328px" alt="">
+                                        </a>
+                                    </div>
+                                    <div class="col-6 mb-2">
+                                        <a href="" class="d-block">
+                                            <img src="/static/icons/icon2.png" class="img-fluid" style="max-height: 328px" alt="">
+                                        </a>
+                                    </div> -->
+                                    <div class="col-6 mb-2">
+                                        <a href="javascript:;" 
+                                            :class="{'rounded-lg shadow': cardContent.iconTheme == 1}" 
+                                            @click="$store.commit('SET_ICON_THEME', 1)" 
+                                            class="d-block">
+                                            <img src="/static/icons/icon3.png" class="img-fluid" style="max-height: 328px" alt="">
+                                        </a>
+                                    </div>
+                                    <div class="col-6 mb-2">
+                                        <a href="javascript:;" 
+                                            :class="{'rounded-lg shadow': cardContent.iconTheme == 2}" 
+                                            @click="$store.commit('SET_ICON_THEME', 2)"
+                                            class="d-block">
+                                            <img src="/static/icons/icon4.png" class="img-fluid" style="max-height: 328px" alt="">
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </van-collapse-item>
+
                         <van-collapse-item title="Liên kết  mạng xã hội" name="2">
                             <div class="profileEdit__social">
                                 <van-empty v-if="cardContent.links.length <= 0" description="Chưa có liên kết MXH nào !" />

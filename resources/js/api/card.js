@@ -24,12 +24,24 @@ export function forgetPassword(data) {
 }
 
 export function getListCard(data) {
+    let params = { 
+        getForExport: data.getForExport,
+        page: data.page,
+        limit: data.limit
+    }
+    
+    if(data.fullName) {
+        params.fullName = data.fullName
+    }
+    if(data.email) {
+        params.email = data.email
+    }
+    if(data.id) {
+        params.id = data.id
+    }
+
     return http.get('/card/getList', {
-        params: { 
-            getForExport: data.getForExport,
-            page: data.page,
-            limit: data.limit
-        }
+        params
     })
 }
 
@@ -63,34 +75,38 @@ export function saveCardBackground(id, imageName) {
 }
 
 export function storeCard(data) {
-    const params = {
-        id: data.id,
-        userName: data.userName,
-        phoneNumber: data.phoneNumber,
-        email: data.email,
-    }
+    // const params = {
+    //     id: data.id,
+    //     userName: data.userName,
+    //     phoneNumber: data.phoneNumber,
+    //     email: data.email,
+    // }
 
-    if(data && data.descr) {
-        params.descr = data.descr
-    }
+    // if(data && data.descr) {
+    //     params.descr = data.descr
+    // }
 
-    if(data && data.background_img) {
-        params.background_img = data.background_img
-    }
+    // if(data && data.theme) {
+    //     params.theme = data.theme
+    // }
 
-    if(data && data.avatar_img) {
-        params.avatar_img = data.avatar_img
-    }
+    // if(data && data.background_img) {
+    //     params.background_img = data.background_img
+    // }
 
-    if(data && data.links) {
-        params.links = data.links
-    }
+    // if(data && data.avatar_img) {
+    //     params.avatar_img = data.avatar_img
+    // }
 
-    if(data && data.background_color) {
-        params.background_color = data.background_color
-    }
+    // if(data && data.links) {
+    //     params.links = data.links
+    // }
 
-    return http.post('/card', params)
+    // if(data && data.background_color) {
+    //     params.background_color = data.background_color
+    // }
+
+    return http.post('/card', data)
 }
 
 export function register(data) {
@@ -154,6 +170,8 @@ export class CardDTO {
         this.phoneNumber = card && card.phoneNumber ? card.phoneNumber : ''
         this.email = card && card.email ? card.email : ''
         this.descr = card && card.descr ? card.descr : ''
+        this.theme = card && card.theme ? card.theme : 1
+        this.iconTheme = card && card.iconTheme ? card.iconTheme : 1
         this.scanNumber = card && card.scanNumber ? card.scanNumber : ''
         this.activeTime = card && card.activeTime ? card.activeTime : ''
         this.qrCode = toQrcode(process.env.MIX_APP_URL + this.id)

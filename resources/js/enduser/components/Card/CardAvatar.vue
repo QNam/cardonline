@@ -82,7 +82,7 @@ export default {
             await this.$store.dispatch('uploadAvatar', this.imageCroped)
             this.loadingSave = false
             this.modalEditImage = false
-
+            this.$refs.uploadAvatar.value = null
         },
         
         onChangePhotoEditor(img) {

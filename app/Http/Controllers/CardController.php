@@ -20,6 +20,9 @@ class CardController extends Controller
         $limit = $request->limit ? $request->limit : 15;
         $page = $request->page ? $request->page : 15;
         $getForExport = $request->getForExport ? $request->getForExport : false;
+        $id = $request->id;
+        $email = $request->email;
+        $fullName = $request->fullName;
 
         if($getForExport) {
             $listCard = $card->where('email', null)->get();
@@ -29,7 +32,24 @@ class CardController extends Controller
                 'data' => $listCard,
             ];
         } else {
-            $listCard = $card->paginate($limit, ['*'], 'page', $page);
+            $condition = [];
+            if($id) {
+                array_push($condition, ['id', 'LIKE', '%' . $id . '%']);
+            }
+
+            if($email) {
+                array_push($condition, ['email', 'LIKE', '%' . $email . '%']);
+            }
+
+            if($fullName) {
+                array_push($condition, ['userName', 'LIKE', '%' . $fullName . '%']);
+            }
+
+            if( count($condition) > 0) {
+                $listCard = $card->where($condition)->paginate($limit, ['*'], 'page', $page);
+            } else {
+                $listCard = $card->paginate($limit, ['*'], 'page', $page);
+            }
 
             $paginationInfo = [
                 'total' => $listCard->total(),
@@ -194,12 +214,14 @@ class CardController extends Controller
 
         $param = [
             'userName' => $request->userName,
+            'theme' => $request->theme,
             'email' => $request->email,
             'phoneNumber' => $request->phoneNumber,
             'descr' => $request->descr,
             'background_img' => $request->background_img,
             'background_color' => $request->background_color,
-            'avatar_img' => $request->avatar_img
+            'avatar_img' => $request->avatar_img,
+            'iconTheme' => $request->iconTheme
         ];
 
         try {
@@ -307,7 +329,6 @@ class CardController extends Controller
     public function profile(Request $request, $alias) {
         $card = new Card();
         $cardContent = $card->where('id', $alias)->first();
-        $themeAllow = [1];
         $themeId = 1;
 
         if(!$cardContent) { 
@@ -330,54 +351,46 @@ class CardController extends Controller
             $cardContent['background_img'] = env('MIX_APP_UPLOADFILE_URL') . $cardContent['background_img'];
         }
 
-        if( in_array($cardContent->theme,$themeAllow) ) {
-            $themeId = $cardContent->theme;
-        }
         $cardContent->link_show = env('APP_URL_SHOW', '/') . $cardContent->id;
         $cardContent->link = env('APP_URL', '/') . $cardContent->id;
 
+        $themeId = $cardContent->theme ? $cardContent->theme : 1;
+        $iconTheme = $cardContent->iconTheme ? $cardContent->iconTheme : 1;
         $view = 'enduser/profile/profile' . $themeId;
         $cardLink = $cardContent->links()->get();
         $cardLinkArr = [];
-        $count = 0;
 
-        forEach($cardLink as &$link) {
+        forEach($cardLink as $link) {
             if(\Config::get('variable.social_data.' . $link->type . '.name')) {
                 $tmp = $link;
+                $thumbTemp = \Config::get('variable.social_data.' . $link->type . '.thumb');
                 $tmp['name'] = \Config::get('variable.social_data.' . $link->type . '.name');
-                $tmp['thumb'] = \Config::get('variable.social_data.' . $link->type . '.thumb');
+                $tmp['thumb'] = sprintf($thumbTemp, $iconTheme );
                 $tmp['appType'] = \Config::get('variable.social_data.' . $link->type . '.appType');
                 $tmp['appTypeName'] = \Config::get('variable.social_data.' . $link->type . '.appTypeName');
                 $tmp['showType'] = \Config::get('variable.social_data.' . $link->type . '.showType');
+                
                 array_push($cardLinkArr, $tmp);
-                $count++;
             }
         }
 
-        // $cardLinkEmail = [
-        //     "link_id" => $count,
-        //     "type" => "gmail",
-        //     "link" => 'mailto:' . $cardContent['email'],
-        //     "card_id" => $cardContent['id'],
-        //     "name" => \Config::get('variable.social_data.gmail.name'),
-        //     "thumb" => \Config::get('variable.social_data.gmail.thumb')
-        // ];
-        // array_push($cardLinkArr, $cardLinkEmail);
-
-        // if($cardContent['phoneNumber']) {
-        //     $cardLinkPhone = [
-        //         "link_id" => $count + 1,
-        //         "type" => "phone",
-        //         "link" => $cardContent['phoneNumber'],
-        //         "card_id" => $cardContent['id'],
-        //         "name" => \Config::get('variable.social_data.phone.name'),
-        //         "thumb" => \Config::get('variable.social_data.phone.thumb')
-        //     ];
-            
-        //     array_push($cardLinkArr, $cardLinkPhone);
-        // }
-
         return view($view, ['card' => $cardContent, 'cardLink' => $cardLinkArr]);
+    }
+
+    public function editProfile(Request $request, $id) {
+        $card = new Card();
+        $cardContent = $card->where('id', $id)->first();
+
+        if(!$cardContent) { 
+            return redirect()->route('Register');
+        }
+        $iconTheme = $cardContent->iconTheme ? $cardContent->iconTheme : 1;
+        $listSocial = config('variable.social_data');
+        forEach($listSocial as &$link) {    
+            $link['thumb'] = sprintf($link['thumb'], $iconTheme);
+        }
+
+        return view('enduser/app', [ 'listSocial' => $listSocial]);
     }
 
     public function saveProfileToPhone(Request $request) {

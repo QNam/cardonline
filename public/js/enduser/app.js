@@ -6293,10 +6293,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
-      email: 'namdoanquoc.1998@gmail.com',
-      password: '123123',
-      repeatPassword: '123123',
-      confirmCode: '13123',
+      email: '',
+      password: '',
+      repeatPassword: '',
+      confirmCode: '',
       submited: false,
       cardIdExists: true,
       loadingSubmit: false
@@ -6922,8 +6922,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
               case 3:
                 _this.loadingSave = false;
                 _this.modalEditImage = false;
+                _this.$refs.uploadAvatar.value = null;
 
-              case 5:
+              case 6:
               case "end":
                 return _context.stop();
             }
@@ -7105,8 +7106,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
               case 3:
                 _this.loadingSave = false;
                 _this.modalEditImage = false;
+                _this.$refs.uploadBg.value = null;
 
-              case 5:
+              case 6:
               case "end":
                 return _context.stop();
             }
@@ -7154,6 +7156,62 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -7848,12 +7906,26 @@ function forgetPassword(data) {
   });
 }
 function getListCard(data) {
+  var params = {
+    getForExport: data.getForExport,
+    page: data.page,
+    limit: data.limit
+  };
+
+  if (data.fullName) {
+    params.fullName = data.fullName;
+  }
+
+  if (data.email) {
+    params.email = data.email;
+  }
+
+  if (data.id) {
+    params.id = data.id;
+  }
+
   return _axios__WEBPACK_IMPORTED_MODULE_0__.default.get('/card/getList', {
-    params: {
-      getForExport: data.getForExport,
-      page: data.page,
-      limit: data.limit
-    }
+    params: params
   });
 }
 function getCardById(id) {
@@ -7882,34 +7954,31 @@ function saveCardBackground(id, imageName) {
   });
 }
 function storeCard(data) {
-  var params = {
-    id: data.id,
-    userName: data.userName,
-    phoneNumber: data.phoneNumber,
-    email: data.email
-  };
-
-  if (data && data.descr) {
-    params.descr = data.descr;
-  }
-
-  if (data && data.background_img) {
-    params.background_img = data.background_img;
-  }
-
-  if (data && data.avatar_img) {
-    params.avatar_img = data.avatar_img;
-  }
-
-  if (data && data.links) {
-    params.links = data.links;
-  }
-
-  if (data && data.background_color) {
-    params.background_color = data.background_color;
-  }
-
-  return _axios__WEBPACK_IMPORTED_MODULE_0__.default.post('/card', params);
+  // const params = {
+  //     id: data.id,
+  //     userName: data.userName,
+  //     phoneNumber: data.phoneNumber,
+  //     email: data.email,
+  // }
+  // if(data && data.descr) {
+  //     params.descr = data.descr
+  // }
+  // if(data && data.theme) {
+  //     params.theme = data.theme
+  // }
+  // if(data && data.background_img) {
+  //     params.background_img = data.background_img
+  // }
+  // if(data && data.avatar_img) {
+  //     params.avatar_img = data.avatar_img
+  // }
+  // if(data && data.links) {
+  //     params.links = data.links
+  // }
+  // if(data && data.background_color) {
+  //     params.background_color = data.background_color
+  // }
+  return _axios__WEBPACK_IMPORTED_MODULE_0__.default.post('/card', data);
 }
 function register(data) {
   var params = {
@@ -7965,6 +8034,8 @@ var CardDTO = /*#__PURE__*/function () {
     this.phoneNumber = card && card.phoneNumber ? card.phoneNumber : '';
     this.email = card && card.email ? card.email : '';
     this.descr = card && card.descr ? card.descr : '';
+    this.theme = card && card.theme ? card.theme : 1;
+    this.iconTheme = card && card.iconTheme ? card.iconTheme : 1;
     this.scanNumber = card && card.scanNumber ? card.scanNumber : '';
     this.activeTime = card && card.activeTime ? card.activeTime : '';
     this.qrCode = (0,_ultis__WEBPACK_IMPORTED_MODULE_1__.toQrcode)("http://cardonline.local/" + this.id);
@@ -8322,7 +8393,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   background_img: state.cardContent.background_img,
                   background_color: state.cardContent.background_color,
                   avatar_img: state.cardContent.avatar_img,
-                  links: state.cardContent.links
+                  links: state.cardContent.links,
+                  theme: state.cardContent.theme,
+                  iconTheme: state.cardContent.iconTheme
                 };
                 _context4.next = 4;
                 return (0,_api_card__WEBPACK_IMPORTED_MODULE_2__.storeCard)(params);
@@ -8341,6 +8414,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   getters: {},
   mutations: {
+    SET_THEME: function SET_THEME(state, payload) {
+      state.cardContent.theme = payload;
+    },
+    SET_ICON_THEME: function SET_ICON_THEME(state, payload) {
+      state.cardContent.iconTheme = payload;
+    },
     SET_BACKGROUND_COLOR: function SET_BACKGROUND_COLOR(state, payload) {
       state.cardContent.background_color = payload;
     },
@@ -8398,7 +8477,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         state.socialEdit.type = payload.type;
       }
 
-      if (payload.link) {
+      if (typeof payload.link != "undefined") {
         state.socialEdit.link = payload.link;
       }
     }
@@ -53495,6 +53574,176 @@ var render = function() {
                                     }
                                   }
                                 })
+                              ]
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "van-collapse-item",
+                          { attrs: { title: "Bố cục", name: "3" } },
+                          [
+                            _c(
+                              "div",
+                              {
+                                staticClass:
+                                  "px-2 d-flex align-items-center justify-content-between"
+                              },
+                              [
+                                _c("div", { staticClass: "row" }, [
+                                  _c("div", { staticClass: "col-6" }, [
+                                    _c(
+                                      "a",
+                                      {
+                                        staticClass: "d-block",
+                                        class: {
+                                          "rounded-lg shadow":
+                                            _vm.cardContent.theme == 1
+                                        },
+                                        attrs: { href: "javascript:;" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.$store.commit(
+                                              "SET_THEME",
+                                              1
+                                            )
+                                          }
+                                        }
+                                      },
+                                      [
+                                        _c("img", {
+                                          staticClass: "img-fluid",
+                                          staticStyle: {
+                                            "max-height": "328px"
+                                          },
+                                          attrs: {
+                                            src: "/static/themes/thumb1.png",
+                                            alt: ""
+                                          }
+                                        })
+                                      ]
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "col-6" }, [
+                                    _c(
+                                      "a",
+                                      {
+                                        staticClass: "d-block",
+                                        class: {
+                                          "rounded-lg shadow":
+                                            _vm.cardContent.theme == 2
+                                        },
+                                        attrs: { href: "javascript:;" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.$store.commit(
+                                              "SET_THEME",
+                                              2
+                                            )
+                                          }
+                                        }
+                                      },
+                                      [
+                                        _c("img", {
+                                          staticClass: "img-fluid",
+                                          staticStyle: {
+                                            "max-height": "328px"
+                                          },
+                                          attrs: {
+                                            src: "/static/themes/thumb2.png",
+                                            alt: ""
+                                          }
+                                        })
+                                      ]
+                                    )
+                                  ])
+                                ])
+                              ]
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "van-collapse-item",
+                          { attrs: { title: "Icons", name: "4" } },
+                          [
+                            _c(
+                              "div",
+                              {
+                                staticClass:
+                                  "px-2 d-flex align-items-center justify-content-between"
+                              },
+                              [
+                                _c("div", { staticClass: "row" }, [
+                                  _c("div", { staticClass: "col-6 mb-2" }, [
+                                    _c(
+                                      "a",
+                                      {
+                                        staticClass: "d-block",
+                                        class: {
+                                          "rounded-lg shadow":
+                                            _vm.cardContent.iconTheme == 1
+                                        },
+                                        attrs: { href: "javascript:;" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.$store.commit(
+                                              "SET_ICON_THEME",
+                                              1
+                                            )
+                                          }
+                                        }
+                                      },
+                                      [
+                                        _c("img", {
+                                          staticClass: "img-fluid",
+                                          staticStyle: {
+                                            "max-height": "328px"
+                                          },
+                                          attrs: {
+                                            src: "/static/icons/icon3.png",
+                                            alt: ""
+                                          }
+                                        })
+                                      ]
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "col-6 mb-2" }, [
+                                    _c(
+                                      "a",
+                                      {
+                                        staticClass: "d-block",
+                                        class: {
+                                          "rounded-lg shadow":
+                                            _vm.cardContent.iconTheme == 2
+                                        },
+                                        attrs: { href: "javascript:;" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.$store.commit(
+                                              "SET_ICON_THEME",
+                                              2
+                                            )
+                                          }
+                                        }
+                                      },
+                                      [
+                                        _c("img", {
+                                          staticClass: "img-fluid",
+                                          staticStyle: {
+                                            "max-height": "328px"
+                                          },
+                                          attrs: {
+                                            src: "/static/icons/icon4.png",
+                                            alt: ""
+                                          }
+                                        })
+                                      ]
+                                    )
+                                  ])
+                                ])
                               ]
                             )
                           ]

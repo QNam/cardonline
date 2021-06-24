@@ -2,31 +2,45 @@
     <div class="cardIndex">
         <div class="row">
             <div class="col-2">
-                <el-input v-model="filter.cardId"  placeholder="Mã thẻ"></el-input>
+                <label for="" class="d-block">Mã thẻ</label>
+                <el-input v-model="filter.id" @change="getListCard"></el-input>
+            </div>
+            <div class="col-2">
+                <label for="" class="d-block">Họ tên</label>
+                <el-input v-model="filter.fullName" @change="getListCard"></el-input>
+            </div>
+            <div class="col-2">
+                <label for="" class="d-block">Email</label>
+                <el-input v-model="filter.email" @change="getListCard"></el-input>
+            </div>
+            <div class="col-2">
+                <label for="" class="invisible d-block">invisible</label>
+                <el-button type="primary" @click="getListCard"><i class="fa fa-search me-2" aria-hidden="true"></i>Lọc</el-button>
             </div>
             <div class="col">
+                <label for="" class="invisible d-block">invisible</label>
                 <div class="text-end">
                     <el-button type="success" @click="exportExcel"><i class="fa fa-plus me-2" aria-hidden="true"></i>Xuất Excel</el-button>
                     <el-button type="primary" @click="toggleGenCard = true"><i class="fa fa-plus me-2" aria-hidden="true"></i>Tự động tạo thẻ</el-button>
-                    <el-button type="primary" @click="openFormCard(null)"><i class="fa fa-plus me-2" aria-hidden="true"></i>Thêm thẻ</el-button>
+                    <!-- <el-button type="primary" @click="openFormCard(null)"><i class="fa fa-plus me-2" aria-hidden="true"></i>Thêm thẻ</el-button> -->
                 </div>  
             </div>
         </div>
 
         <div class="mt-5">
-            <table class="el-table el-table--fit el-table--enable-row-hover el-table--enable-row-transition">
+            <table class="el-table el-table--fit el-table--border el-table--enable-row-hover el-table--enable-row-transition">
                 <thead>
-                    <th>Mã thẻ</th>
-                    <th>Chủ thẻ</th>
-                    <th>Số điện thoại</th>
-                    <th>Mã xác thực</th>
-                    <th>Ngày kích hoạt</th>
-                    <th></th>
+                    <th class="px-2">Mã thẻ</th>
+                    <th class="px-2">Chủ thẻ</th>
+                    <th class="px-2">Số điện thoại</th>
+                    <th class="px-2">Mã xác thực</th>
+                    <th class="px-2">Ngày kích hoạt</th>
+                    <th class="px-2"></th>
                 </thead>
                 <tbody v-if="listCard.length > 0" v-loading="loadGetCard">
                     <template v-for="(card, index) in listCard">    
                         <tr :key="index">
-                            <td>
+                            <td class="px-2">
                                 <el-popover
                                 placement="right"
                                 trigger="click">
@@ -39,14 +53,14 @@
                                 
                                 <span class="ms-1">{{ card.id }}</span>
                             </td>
-                            <td>{{ card.userName }}</td>
-                            <td>{{ card.phoneNumber }}</td>
-                            <td>{{ card.confirm_code }}</td>
-                            <td></td>
-                            <td>
+                            <td class="px-2">{{ card.userName }}</td>
+                            <td class="px-2">{{ card.phoneNumber }}</td>
+                            <td class="px-2">{{ card.confirm_code }}</td>
+                            <td class="px-2"></td>
+                            <td class="px-2">
                                 <div class="d-flex justify-content-center">
-                                    <el-button size="mini" icon="el-icon-s-promotion"></el-button>
-                                    <el-button @click="openFormCard(card)" class="me-2" size="mini" icon="el-icon-edit" type="warning"></el-button>
+                                    <el-button size="mini" class="me-2" icon="el-icon-s-promotion"></el-button>
+                                    <!-- <el-button @click="openFormCard(card)" class="me-2" size="mini" icon="el-icon-edit" type="warning"></el-button> -->
                                     <el-popconfirm
                                         confirm-button-text='OK'
                                         cancel-button-text='No, Thanks'   
@@ -60,9 +74,9 @@
                         </tr>
                     </template>
                 </tbody>
-                <tbody v-else> 
+                <tbody v-loading="loadGetCard" v-else> 
                     <tr>
-                        <td colspan="6" class="text-center">Hiện chưa có thẻ nào hoạt động</td>
+                        <td colspan="6" class="text-center">Không tìm thấy dữ liệu !</td>
                     </tr>
                 </tbody>
             </table>
@@ -164,6 +178,9 @@ export default {
                 page: 1,
                 limit: 15,
                 totalPage: 1,
+                fullName: null,
+                email: null,
+                id: null,
             },
             genCard: {
                 from: null,
@@ -186,6 +203,17 @@ export default {
                     page: this.filter.page,
                     limit: this.filter.limit
                 }
+
+                if(this.filter.fullName) {
+                    params.fullName = this.filter.fullName
+                }
+                if(this.filter.email) {
+                    params.email = this.filter.email
+                }
+                if(this.filter.id) {
+                    params.id = this.filter.id
+                }
+
                 const response = await cardApi.getListCard(params);
                 const data = response.data.data
                 const pagination = response.data.pagination
@@ -206,8 +234,9 @@ export default {
             const params = {
                 page: 0,
                 limit: 1000000,
-                getForExport: true
+                getForExport: true,
             }
+
             const response = await cardApi.getListCard(params);
             const data = response.data.data
 

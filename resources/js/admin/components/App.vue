@@ -9,8 +9,9 @@
                 </div>
                 <div class="sidebar__content p-4 pt-5">
                     <h1><a href="index.html" class="logo">Alice</a></h1>
-                    <ul class="sidebar__menu">
-                        <li><router-link :to="{name: 'Dashboard'}">Trang chủ</router-link></li>
+                    <ul class="sidebar__menu ps-0">
+                        <li><router-link :to="{name: 'CardIndex'}">Quản lý thẻ</router-link></li>
+                        <!-- <li><router-link :to="{name: 'Dashboard'}">Trang chủ</router-link></li>
                         <li><router-link :to="{name: 'CardIndex'}">Quản trị viên</router-link></li>
                         <li>
                             <router-link :to="{name: 'CardIndex'}">
@@ -24,7 +25,7 @@
                             </ul>
                         </li>
                         <li><router-link :to="{name: 'CardIndex'}">Tin tức</router-link></li>
-                        <li><router-link :to="{name: 'CardIndex'}">Cài đặt</router-link></li>
+                        <li><router-link :to="{name: 'CardIndex'}">Cài đặt</router-link></li> -->
                     </ul>
                 </div>
             </nav>

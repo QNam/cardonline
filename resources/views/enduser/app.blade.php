@@ -14,11 +14,22 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Cabin:400,500,600,700&display=swap&subset=vietnamese">
     <script>
-        var SOCIAL_NETWORKS = '{!! json_encode(config('variable.social_data')) !!}'
+        var SOCIAL_NETWORKS = '{!! json_encode($listSocial) !!}'
     </script>
 </head>
 <body>
-    <div id="app"></div>
+    <div class="container">
+        <div id="app"></div>
+    </div>
+
+    {{-- <style>
+        .container {
+            max-width: 480px;
+            margin: 0 auto;
+            position: relative;
+        }
+    </style> --}}
+    
     <link rel="stylesheet" href="{{ mix('css/enduser.css') }}">
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
     

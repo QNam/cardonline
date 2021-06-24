@@ -89,6 +89,7 @@ export default {
             await this.$store.dispatch('uploadBackground', this.imageCroped)
             this.loadingSave = false
             this.modalEditImage = false
+            this.$refs.uploadBg.value = null
         },
 
         onChangePhotoEditor(img) {

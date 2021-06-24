@@ -94,9 +94,12 @@
                      @if($link && $link['type'])
                      @if($link['showType'] == 'iconDirect')
                         <div class="grid-square-normal">
-                           <a rel="noopener" target="_blank" href="{{ $link['link'] }}" class="socialTitles d-block">
-                           <img alt="{{ $card->userName }}" class="shadow" style="width: 100%; height: 100%;" 
-                              src="{{ $link['thumb'] }}">
+                           <a rel="noopener" target="_blank" 
+                              href="{{ $link['link'] }}" 
+                              class="socialTitles d-block">
+                              <div>
+                                 <img alt="{{ $card->userName }}" style="width: 100%; height: 100%;" src="{{ $link['thumb'] }}">
+                              </div>
                               {{ $link['name'] }}
                            </a>
                         </div>
@@ -104,7 +107,7 @@
                      @if($link['showType'] == 'card')
                         <div style="background-color: white; position: relative; border-radius: 30px; width: 85%; display: block; margin: 0 auto; margin-top: 25px; margin-bottom: 10px; height: 120px;" 
                            class="grid-square-video shadow">
-                           <img class="shadow" 
+                           <img 
                               alt="{{ $link['name'] }}" 
                               style="width: 90px; height: 90px; margin-top: 15px; margin-left: 10px; float: left; margin-right: 20px; border-radius: 30px" 
                               src="{{ $link['thumb'] }}">
@@ -174,7 +177,7 @@
             el.select();
             document.execCommand('copy');
             document.body.removeChild(el);
-            alert('Đã coppy!');
+            alert('Đã copy!');
          }
       </script>
    </body>

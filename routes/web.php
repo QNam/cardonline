@@ -36,9 +36,7 @@ Route::group(['middleware' => ['web']], function () {
 });
 
 Route::group(['middleware' => ['user.checkLogin', 'web']], function () {
-    Route::get('/edit/{id}',  function(){
-        return view('enduser/app');
-    })->name('EditUser');
+    Route::get('/edit/{id}', 'App\Http\Controllers\CardController@editProfile')->name('EditUser');
 });
 // -----------------------------------------------------------------
 Route::get('/quantri/login',  function(){
