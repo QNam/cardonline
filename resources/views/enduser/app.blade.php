@@ -14,7 +14,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Cabin:400,500,600,700&display=swap&subset=vietnamese">
     <script>
+        @if( isset($listSocial))
         var SOCIAL_NETWORKS = '{!! json_encode($listSocial) !!}'
+        @endif
     </script>
 </head>
 <body>
