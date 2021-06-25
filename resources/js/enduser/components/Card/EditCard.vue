@@ -93,7 +93,7 @@
                                 <div class="row">
                                     <div class="col-6">
                                         <a href="javascript:;" 
-                                            :class="{'rounded-lg shadow': cardContent.theme == 1}" 
+                                            :class="{'rounded-lg themeSelected': cardContent.theme == 1}" 
                                             @click="$store.commit('SET_THEME', 1)" 
                                             class="d-block">
                                             <img src="/static/themes/thumb1.png" class="img-fluid" style="max-height: 328px" alt="">
@@ -101,7 +101,7 @@
                                     </div>
                                     <div class="col-6">
                                         <a href="javascript:;" 
-                                            :class="{'rounded-lg shadow': cardContent.theme == 2}" 
+                                            :class="{'rounded-lg themeSelected': cardContent.theme == 2}" 
                                             @click="$store.commit('SET_THEME', 2)" 
                                             class="d-block">
                                                 <img src="/static/themes/thumb2.png" class="img-fluid" style="max-height: 328px" alt="">
@@ -126,7 +126,7 @@
                                     </div> -->
                                     <div class="col-6 mb-2">
                                         <a href="javascript:;" 
-                                            :class="{'rounded-lg shadow': cardContent.iconTheme == 1}" 
+                                            :class="{'rounded-lg themeSelected': cardContent.iconTheme == 1}" 
                                             @click="$store.commit('SET_ICON_THEME', 1)" 
                                             class="d-block">
                                             <img src="/static/icons/icon3.png" class="img-fluid" style="max-height: 328px" alt="">
@@ -134,7 +134,7 @@
                                     </div>
                                     <div class="col-6 mb-2">
                                         <a href="javascript:;" 
-                                            :class="{'rounded-lg shadow': cardContent.iconTheme == 2}" 
+                                            :class="{'rounded-lg themeSelected': cardContent.iconTheme == 2}" 
                                             @click="$store.commit('SET_ICON_THEME', 2)"
                                             class="d-block">
                                             <img src="/static/icons/icon4.png" class="img-fluid" style="max-height: 328px" alt="">
@@ -391,6 +391,11 @@ export default {
 } */
 </style>
 <style scoped>
+.themeSelected {
+    border-color: #80bdff;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgb(0 123 255 / 25%);
+}
 .profileEdit__social {
     /* margin-top: 50px; */
     /* padding: 16px; */

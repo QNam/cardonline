@@ -8887,7 +8887,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.profileEdit__social[data-v-26959832] {\n    /* margin-top: 50px; */\n    /* padding: 16px; */\n}\n.profileEdit[data-v-26959832] {\n    padding-bottom: 40px;\n    /* background-color: #F9FAFC; */\n}\n.profileEdit__back[data-v-26959832] {\n    -webkit-text-stroke: 2px #fff; /* width and color */\n}\n.profileEdit_name[data-v-26959832] {\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    margin-bottom: 40px;\n}\n.profileEdit_name input[data-v-26959832] {\n    border: none;\n    outline: none;\n    background-color: transparent;\n    text-align: center;\n    font-size: 24px;\n}\n.profileEdit_name input[data-v-26959832]:focus {\n    border-bottom: 2px solid rgb(145, 143, 143);\n}\n.form-control.form-control-custom[data-v-26959832] {\n    background: #FFFFFF;\n    padding: 8px 0px;\n    border: none;\n    border-top: 1px solid #dedee0;\n    box-sizing: border-box;\n    border-radius: 0;\n    font-weight: bold;\n    font-size: 18px;\n    color: #333333d9;\n}\n.form-control[data-v-26959832]:focus {\n    outline: none;\n    box-shadow: none;\n    border-color: #dedee0;\n}\n.form-group label[data-v-26959832]{\n    font-style: normal;\n    font-weight: 500;\n    font-size: 16px;\n    line-height: 19px;\n\n    /* anvuinew/gray80 */\n\n    color: #646D84;\n}\n.profileEdit__save button[data-v-26959832] {\n    /* align-items: center;\n    justify-content: center; */\n    padding: 4px 24px;\n    border-radius: 4px;\n    background-color: rgb(57 117 237);\n    color: #fff;\n    font-weight: 700;\n    border: none;\n}\n.profile_sum .dropdown  button[data-v-26959832]{\n    border-radius: 50%;\n    width: 32px;\n    height: 32px;\n    background-color: #fff;\n    border: none;\n}\n.loadingSave[data-v-26959832] {\n    opacity: .5;\n    pointer-events: none;\n}\n.loadingSave span[data-v-26959832] {\n    display: inline!important;\n}\n.loadingSave span i[data-v-26959832] {\n    color: #fff;\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.themeSelected[data-v-26959832] {\n    border-color: #80bdff;\n    outline: 0;\n    box-shadow: 0 0 0 0.2rem rgb(0 123 255 / 25%);\n}\n.profileEdit__social[data-v-26959832] {\n    /* margin-top: 50px; */\n    /* padding: 16px; */\n}\n.profileEdit[data-v-26959832] {\n    padding-bottom: 40px;\n    /* background-color: #F9FAFC; */\n}\n.profileEdit__back[data-v-26959832] {\n    -webkit-text-stroke: 2px #fff; /* width and color */\n}\n.profileEdit_name[data-v-26959832] {\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    margin-bottom: 40px;\n}\n.profileEdit_name input[data-v-26959832] {\n    border: none;\n    outline: none;\n    background-color: transparent;\n    text-align: center;\n    font-size: 24px;\n}\n.profileEdit_name input[data-v-26959832]:focus {\n    border-bottom: 2px solid rgb(145, 143, 143);\n}\n.form-control.form-control-custom[data-v-26959832] {\n    background: #FFFFFF;\n    padding: 8px 0px;\n    border: none;\n    border-top: 1px solid #dedee0;\n    box-sizing: border-box;\n    border-radius: 0;\n    font-weight: bold;\n    font-size: 18px;\n    color: #333333d9;\n}\n.form-control[data-v-26959832]:focus {\n    outline: none;\n    box-shadow: none;\n    border-color: #dedee0;\n}\n.form-group label[data-v-26959832]{\n    font-style: normal;\n    font-weight: 500;\n    font-size: 16px;\n    line-height: 19px;\n\n    /* anvuinew/gray80 */\n\n    color: #646D84;\n}\n.profileEdit__save button[data-v-26959832] {\n    /* align-items: center;\n    justify-content: center; */\n    padding: 4px 24px;\n    border-radius: 4px;\n    background-color: rgb(57 117 237);\n    color: #fff;\n    font-weight: 700;\n    border: none;\n}\n.profile_sum .dropdown  button[data-v-26959832]{\n    border-radius: 50%;\n    width: 32px;\n    height: 32px;\n    background-color: #fff;\n    border: none;\n}\n.loadingSave[data-v-26959832] {\n    opacity: .5;\n    pointer-events: none;\n}\n.loadingSave span[data-v-26959832] {\n    display: inline!important;\n}\n.loadingSave span i[data-v-26959832] {\n    color: #fff;\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -53597,7 +53597,7 @@ var render = function() {
                                       {
                                         staticClass: "d-block",
                                         class: {
-                                          "rounded-lg shadow":
+                                          "rounded-lg themeSelected":
                                             _vm.cardContent.theme == 1
                                         },
                                         attrs: { href: "javascript:;" },
@@ -53631,7 +53631,7 @@ var render = function() {
                                       {
                                         staticClass: "d-block",
                                         class: {
-                                          "rounded-lg shadow":
+                                          "rounded-lg themeSelected":
                                             _vm.cardContent.theme == 2
                                         },
                                         attrs: { href: "javascript:;" },
@@ -53682,7 +53682,7 @@ var render = function() {
                                       {
                                         staticClass: "d-block",
                                         class: {
-                                          "rounded-lg shadow":
+                                          "rounded-lg themeSelected":
                                             _vm.cardContent.iconTheme == 1
                                         },
                                         attrs: { href: "javascript:;" },
@@ -53716,7 +53716,7 @@ var render = function() {
                                       {
                                         staticClass: "d-block",
                                         class: {
-                                          "rounded-lg shadow":
+                                          "rounded-lg themeSelected":
                                             _vm.cardContent.iconTheme == 2
                                         },
                                         attrs: { href: "javascript:;" },
