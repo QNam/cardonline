@@ -53,7 +53,7 @@
                         </div>
                         @endif
                         @if($link['showType'] == 'card')
-                        <div class="profile__social__item" onclick="copyToClipboard({{ $link['link'] }})">
+                        <div class="profile__social__item" onclick="copyToClipboard('{{ $link['link'] }}')">
                             <div>
                                 <img src="{{ $link['thumb'] }}" alt="">
                             </div>
