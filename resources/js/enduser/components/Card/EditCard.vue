@@ -44,10 +44,15 @@
                             class="form-control form-control-custom">
                     </div>
                     <div class="form-group mb-4">
-                        <label for="" class="mb-2">Mô tả bản thân</label>
+                        <label for="" class="mb-2 d-flex w-100 align-items-center justify-content-between">
+                            <span>Mô tả bản thân</span>
+                            <small class="text-muted" v-if="cardContent.descr.length <= 250">{{ cardContent.descr.length }}/250</small>
+                        </label>
                         <textarea class="form-control form-control-custom" 
+                            :maxlength="250"
+                            :rows="descInputHeight"
                             :value="cardContent.descr" 
-                            @change="$store.commit('SET_CARD_DESC', $event.target.value)"></textarea>
+                            @input="$store.commit('SET_CARD_DESC', $event.target.value)"></textarea>
                     </div>
                 </div>
 
@@ -150,22 +155,27 @@
 
                                 <template v-else>
                                 <div class="qncard mb-4">
-                                    <template v-for="link, key in cardContent.links">
-                                        <div class="sociallItem mb-4 rounded-3 px-4 py-3 shadow d-flex align-items-center justify-content-between"  
-                                            :key="key"
-                                            v-if="listSocial && listSocial[link.type]"
-                                            @click="openEditSocialLink(link)"
-                                        >
-                                            <template>
-                                                <img :src="listSocial[link.type].thumb" style="width: 35px; height: 35px" alt="">
-                                                <h5>{{ listSocial[link.type].name }}</h5>
-                                                <van-icon v-if="!loadingRemoveLink[link.link_id] || Object.keys(loadingRemoveLink).length == 0" 
-                                                            name="cross" 
-                                                            v-on:click.stop.prevent="removeSocialLink(link)" />
-                                                <van-loading v-if="loadingRemoveLink[link.link_id] === true" type="spinner" />
-                                            </template>
-                                        </div>
-                                    </template>
+                                    <draggable 
+                                        :move="onCardLinkMove"
+                                        :list="cardContent.links"
+                                        group="social">
+                                        <template v-for="link, key in cardContent.links">
+                                            <div class="sociallItem mb-4 rounded-3 px-4 py-3 shadow d-flex align-items-center justify-content-between"  
+                                                :key="key"
+                                                v-if="listSocial && listSocial[link.type]"
+                                                @click="openEditSocialLink(link)"
+                                            >
+                                                <template>
+                                                    <img :src="listSocial[link.type].thumb" style="width: 35px; height: 35px" alt="">
+                                                    <h5>{{ listSocial[link.type].name }}</h5>
+                                                    <van-icon v-if="!loadingRemoveLink[link.link_id] || Object.keys(loadingRemoveLink).length == 0" 
+                                                                name="cross" 
+                                                                v-on:click.stop.prevent="removeSocialLink(link)" />
+                                                    <van-loading v-if="loadingRemoveLink[link.link_id] === true" type="spinner" />
+                                                </template>
+                                            </div>
+                                        </template>
+                                    </draggable>
                                 </div> 
 
                                 </template>
@@ -220,12 +230,14 @@ import CardAvatar from './CardAvatar'
 import CardBackground from './CardBackground'
 import LoadingFull from '../Loading/LoadingFull'
 import { mapActions, mapState } from 'vuex'
+import draggable from 'vuedraggable'
 
 export default {
     components: {
         CardAvatar,
         CardBackground,
-        LoadingFull
+        LoadingFull,
+        draggable
     },
     data() {
         return {
@@ -237,10 +249,12 @@ export default {
             loadingSave: false,
             loadingFetch: false,
             settingTab: 1, 
+            sortSocial: []
         }
     },
-    mounted() {
-        this.getCardInfo()
+    async mounted() {
+        await this.getCardInfo()
+        this.sortSocial = this.cardContent.links
         this.listSocial = JSON.parse(window.SOCIAL_NETWORKS)
     },
     computed: {
@@ -249,11 +263,20 @@ export default {
             socialEdit: state => state.card.socialEdit
         }),
 
+        descInputHeight() {
+            let row = Math.floor(this.cardContent.descr.length / 35)
+
+            return row <= 8 && row >= 0  ? row + 2 : 5
+        },
+
         isBank() {
             return this.listSocial && this.listSocial[this.socialEdit.type] && this.socialEdit.type && this.listSocial[this.socialEdit.type]['appType'] == 'bank'
         }
     },
     methods: {
+        onCardLinkMove() {
+            //dung xoa
+        },
         goToProfile() {
             window.location.href = this.cardContent.url
         },
@@ -303,16 +326,18 @@ export default {
                 const link = {
                     card_id: this.cardContent.id,
                     link: this.socialEdit.link,
-                    type: this.socialEdit.type
+                    type: this.socialEdit.type,
+                    sort: 0
                 }
                 this.$store.commit('PUSH_CARD_LINKS', link)
             } else {
-                const links = this.cardContent.links.map( val => {
+                const links = this.cardContent.links.map( (val, key) => {
                     if(val.link_id == this.socialEdit.id) {
-                        val.card_id = this.cardContent.id,
-                        val.link = this.socialEdit.link,
+                        val.card_id = this.cardContent.id
+                        val.link = this.socialEdit.link
                         val.type = this.socialEdit.type
                     }
+                    val.sort = key
 
                     return val
                 })
@@ -329,25 +354,6 @@ export default {
             this.loadingFetch = true
             await this.$store.dispatch('getCardInfo', {id: cardId})
             this.loadingFetch = false
-        },
-
-        async onBackgroundChanged(event) {
-            const image = event.target.files[0]
-            const rep = await uploadImage({image})
-            saveCardBackground(this.cardContent.id, rep.data.data.img)
-            const img = getUrlImage(rep.data.data.img)
-
-            this.cardContent.background_img = rep.data.data.img
-            this.cardContent.background_img_url = img
-        },
-
-        async saveCardAvatar(data) {
-            const rep = await uploadImageBase64(data.img)
-            saveCardAvatar(this.cardContent.id, rep.data.data.img)
-            const img = getUrlImage(rep.data.data.img)
-
-            this.cardContent.avatar_img = rep.data.data.img
-            this.cardContent.avatar_img_url = img
         },
 
         async saveCard() {

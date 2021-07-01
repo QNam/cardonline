@@ -19,7 +19,14 @@
                 <img src="{{ $card->avatar_img }}" alt="">
             </div>
             <div class="profile__content" style="{{ $card->background_color ? "background-color: " . $card->background_color : ''  }}">
-                <h1>{{ $card->userName }}</h1>
+                <h1>
+                    {{ $card->userName }}
+                    @if($card->tick)
+                    <a  href="javascript:;" class="ml-1">
+                        <img src="{{ asset('static/icon/verified-blue.png') }}" width="28px" style="padding-bottom: 4px;"/></h2>
+                    </a>
+                    @endif
+                </h1>
                 <div class="profile__desc">
                     {{ $card->descr }}
                 </div>

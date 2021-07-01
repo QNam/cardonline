@@ -74,6 +74,15 @@ export default {
                 theme: state.cardContent.theme,
                 iconTheme: state.cardContent.iconTheme
             }
+
+            if(state.cardContent.links) {
+                params.link = state.cardContent.links.map((link, key) => {
+                    let val = link
+                    val.sort = key
+
+                    return val
+                })
+            }
             
             return await storeCard(params)
         }
@@ -124,7 +133,8 @@ export default {
             state.cardContent.links.push({
                 card_id: payload.card_id,
                 link: payload.link,
-                type: payload.type
+                type: payload.type,
+                sort: payload.sort
             })
         },
 
@@ -149,7 +159,6 @@ export default {
         },
 
         SET_SOCIAL_EDIT(state, payload) {
-            console.log(payload)
             if(payload.id) {
                 state.socialEdit.id = payload.id
             }

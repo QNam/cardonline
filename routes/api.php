@@ -38,3 +38,7 @@ Route::post('/card/genCard', 'App\Http\Controllers\CardController@genCard');
 Route::post('/card/checkConfirmCode', 'App\Http\Controllers\CardController@checkConfirmCode');
 Route::post('/card/checkAccountToForgetPassword', 'App\Http\Controllers\CardController@checkAccountToForgetPassword');
 Route::post('/card/forgetPassword', 'App\Http\Controllers\CardController@forgetPassword');
+
+Route::post('/card/updateTickCard', 'App\Http\Controllers\CardController@updateTickCard');
+
+Route::post('/card/storeOneCard', 'App\Http\Controllers\CardController@storeOneCard');

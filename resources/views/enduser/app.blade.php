@@ -23,14 +23,6 @@
     <div class="container">
         <div id="app"></div>
     </div>
-
-    {{-- <style>
-        .container {
-            max-width: 480px;
-            margin: 0 auto;
-            position: relative;
-        }
-    </style> --}}
     
     <link rel="stylesheet" href="{{ mix('css/enduser.css') }}">
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">

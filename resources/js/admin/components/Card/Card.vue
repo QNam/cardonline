@@ -20,7 +20,8 @@
             <div class="col">
                 <label for="" class="invisible d-block">invisible</label>
                 <div class="text-end">
-                    <el-button type="success" @click="exportExcel"><i class="fa fa-plus me-2" aria-hidden="true"></i>Xuất Excel</el-button>
+                    <el-button type="success" @click="exportExcel"><i class="fa fa-file me-2" aria-hidden="true"></i>Xuất Excel</el-button>
+                    <el-button type="primary" @click="openFormCard"><i class="fa fa-plus me-2" aria-hidden="true"></i>Thêm thẻ</el-button>
                     <el-button type="primary" @click="toggleGenCard = true"><i class="fa fa-plus me-2" aria-hidden="true"></i>Tự động tạo thẻ</el-button>
                     <!-- <el-button type="primary" @click="openFormCard(null)"><i class="fa fa-plus me-2" aria-hidden="true"></i>Thêm thẻ</el-button> -->
                 </div>  
@@ -32,9 +33,11 @@
                 <thead>
                     <th class="px-2">Mã thẻ</th>
                     <th class="px-2">Chủ thẻ</th>
+                    <th class="px-2">Email</th>
                     <th class="px-2">Số điện thoại</th>
                     <th class="px-2">Mã xác thực</th>
-                    <th class="px-2">Ngày kích hoạt</th>
+                    <th class="px-2 text-center">Tick xanh</th>
+                    <!-- <th class="px-2">Ngày kích hoạt</th> -->
                     <th class="px-2"></th>
                 </thead>
                 <tbody v-if="listCard.length > 0" v-loading="loadGetCard">
@@ -54,12 +57,21 @@
                                 <span class="ms-1">{{ card.id }}</span>
                             </td>
                             <td class="px-2">{{ card.userName }}</td>
+                            <td class="px-2">{{ card.email }}</td>
                             <td class="px-2">{{ card.phoneNumber }}</td>
                             <td class="px-2">{{ card.confirm_code }}</td>
-                            <td class="px-2"></td>
+                            <td class="px-2 text-center">
+                                <template v-if="typeof tickLoader[card.id] !== 'undefined' && tickLoader[card.id]">
+                                    <i class="fas fa-circle-notch fa-spin"></i>
+                                </template>
+                                <template v-else>
+                                    <el-checkbox v-model="card.tick" @change="onChangeTick(card)"></el-checkbox>
+                                </template>
+                            </td>
+                            <!-- <td class="px-2"></td> -->
                             <td class="px-2">
                                 <div class="d-flex justify-content-center">
-                                    <el-button size="mini" class="me-2" icon="el-icon-s-promotion"></el-button>
+                                    <!-- <el-button size="mini" class="me-2" icon="el-icon-s-promotion"></el-button> -->
                                     <!-- <el-button @click="openFormCard(card)" class="me-2" size="mini" icon="el-icon-edit" type="warning"></el-button> -->
                                     <el-popconfirm
                                         confirm-button-text='OK'
@@ -90,33 +102,16 @@
                 :click-handler="paginateCard"
             /> 
         </div>
-
-        <el-dialog v-loading="loadSaveCard" :visible.sync="toogleFormCard">
+        
+        <el-dialog v-loading="loadSaveCard" width="400px" :visible.sync="toogleFormCard">
             <div slot="title">
-                <h5>{{cardSelected && cardSelected.id ? 'Cập nhật thẻ' : 'Thêm thẻ mới'}}</h5>
+                <h5>Thêm thẻ mới</h5>
             </div>
             <div>
-                <el-form :model="cardSelected" ref="formSaveCard" label-width="120px">
-                    <el-form-item label="Mã thẻ" prop="id" required>
-                        <el-input v-model="cardSelected.id"></el-input>
-                    </el-form-item>
-                    <div class="row">
-                        <div class="col-12">
-                            <el-form-item label="Họ tên"  prop="userName" required>
-                                <el-input v-model="cardSelected.userName"></el-input>
-                            </el-form-item>
-                        </div>
-                        <div class="col-12">
-                            <el-form-item label="Email" prop="email">
-                                <el-input v-model="cardSelected.email"></el-input>
-                            </el-form-item>
-                        </div>
-                    </div>
-                        
-                    <el-form-item label="Số điện thoại" prop="phoneNumber">
-                        <el-input v-model="cardSelected.phoneNumber"></el-input>
-                    </el-form-item>
-                </el-form>
+                <div class="form-group">
+                    <label for="" class="d-block">Mã thẻ</label>
+                    <el-input v-model="cardSelected.id"></el-input>
+                </div>
             </div>
             <span slot="footer" class="dialog-footer">
                 <el-button @click="toogleFormCard = false">Hủy</el-button>
@@ -189,13 +184,28 @@ export default {
             listCard: [],
             listCardExport: [],
             loadGetCard: false,
-            loadSaveCard: false
+            loadSaveCard: false,
+            tickLoader:{}
         }
     },
     mounted() {
         this.getListCard()
     },
+    computed: {
+        
+    },
     methods: {
+        async onChangeTick(card) {
+            let tmp = _.cloneDeep(this.tickLoader)
+            tmp[card.id] = true
+            this.tickLoader = tmp
+            await cardApi.changeTick(card)
+
+            tmp = _.cloneDeep(this.tickLoader)
+            tmp[card.id] = false
+            this.tickLoader = tmp
+        },
+
         async getListCard() {
             this.loadGetCard = true
             try {
@@ -250,11 +260,7 @@ export default {
             this.getListCard()
         },
 
-        openFormCard(card = null) {
-            if(card) {
-                this.cardSelected = _.cloneDeep(card)
-            }
-
+        openFormCard() {
             this.toogleFormCard = true
         },
 
@@ -316,33 +322,38 @@ export default {
             }, 2000)
         },
 
-        saveCard() {
-            this.$refs.formSaveCard.validate( async (valid) => {
-                if(valid) {
-                    this.loadSaveCard = true
-                    try {
-                        const rep = await cardApi.storeCard(this.cardSelected)
-                        const status = rep.data.success
+        async saveCard() {
+            if(!this.cardSelected.id) {
+                this.$notify.error({
+                    title: 'Error',
+                    message: 'Mã thẻ không được bỏ trống !'
+                });
 
-                        this.loadSaveCard = false
-                        this.toogleFormCard = false
-                        this.getListCard()
-                        
-                        if(status) {
-                            this.$notify.success({
-                                title: 'Success',
-                                message: 'Lưu thành công !'
-                            });
-                        }
-                    } catch (error) {
-                        this.loadSaveCard = false
-                        this.$notify.error({
-                            title: 'Error',
-                            message: 'Có lỗi xảy ra vui lòng thử lại sau !'
-                        });
-                    }
+                return
+            }
+
+            this.loadSaveCard = true
+            try {
+                const rep = await cardApi.createCardSimple(this.cardSelected)
+                const status = rep.data.success
+
+                this.loadSaveCard = false
+                this.toogleFormCard = false
+                this.getListCard()
+                
+                if(status) {
+                    this.$notify.success({
+                        title: 'Success',
+                        message: 'Lưu thành công !'
+                    });
                 }
-            })
+            } catch (error) {
+                this.loadSaveCard = false
+                this.$notify.error({
+                    title: 'Error',
+                    message: 'Có lỗi xảy ra hoặc đã có thẻ trùng ID. Vui lòng thử lại sau !'
+                });
+            }
         }
     }
 }

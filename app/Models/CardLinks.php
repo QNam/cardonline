@@ -16,5 +16,6 @@ class CardLinks extends Model
         'link',
         'card_id',
         'link_id',
+        'sort',
     ];
 }

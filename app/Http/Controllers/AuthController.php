@@ -71,6 +71,7 @@ class AuthController extends Controller
             'userName' => $request->userName,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'active_date' => time()
         ];
 
         try {

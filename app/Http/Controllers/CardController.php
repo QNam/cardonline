@@ -188,6 +188,30 @@ class CardController extends Controller
         }
     }
 
+    public function storeOneCard(Request $request) {
+        if(!$request->id) {
+            return $this->sendBadRequest([]);
+        }
+
+        $card = new Card();
+        try {
+            $param = [
+                'id' => $request->id,
+                'theme' => 1,
+                'userName' => 'Người dùng FUKI',
+                'confirm_code' => rand(100000, 999999),           
+            ];
+            
+            $user = Card::create($param);
+            
+
+            return $this->sendSuccess($user);
+        } catch (\Exception $e) {
+            return $this->sendServerError($e);
+        }
+
+    }
+
     public function removeCardLink(Request $request) {
         $cardLink = new CardLinks();
         try {
@@ -208,6 +232,9 @@ class CardController extends Controller
     }
 
     public function storeCard(Request $request) {
+        if(!$request->id) {
+            return $this->sendBadRequest([]);
+        }
         $card = new Card();
         $cardLink = new CardLinks();
         $param = [];
@@ -225,10 +252,14 @@ class CardController extends Controller
         ];
 
         try {
-            Card::updateOrCreate(
-                ['id' => $request->id],
-                $param
-            );
+            $cardExists = $card->where('id', $request->id)->exists();
+            if($cardExists) {
+                $card->where('id', $request->id)->update($param);
+            } else {
+                $param['id'] =  $request->id;
+                Card::create($param);
+            }
+            
 
             //BUG WHEN LINKS IS EMPTY !!!
             if($request->links) {
@@ -237,7 +268,8 @@ class CardController extends Controller
                     $tmp = [
                         'card_id' => $request->id,
                         'type' => $value['type'],
-                        'link' => $value['link']
+                        'link' => $value['link'],
+                        'sort' => $value['sort']
                     ];
 
                     array_push($linksInsert, $tmp);
@@ -247,18 +279,10 @@ class CardController extends Controller
                 $cardLink->insert($linksInsert);
             }
 
-            $rep = [
-                'success' => true,
-                'data' => $param
-            ];
+            return $this->sendSuccess([]);
         } catch (\Exception $e) {
-            $rep = [
-                'success' => false,
-                'data' => []
-            ];
+            return $this->sendServerError($e);
         }
-
-        return response()->json($rep);
     }
 
     public function cardIsExists(Request $request) {
@@ -339,6 +363,8 @@ class CardController extends Controller
             return redirect()->route('Register', ['id' => $cardContent['id']]);
         }
 
+        $card->where('id', $alias)->update(['view' => \DB::raw('view+1')]);
+
         if(!$cardContent['avatar_img'] || $cardContent['avatar_img'] == "") {
             $cardContent['avatar_img'] = 'https://www.ro-spain.com/wp-content/uploads/2018/07/default-avatar.png';
         } else {
@@ -357,7 +383,7 @@ class CardController extends Controller
         $themeId = $cardContent->theme ? $cardContent->theme : 1;
         $iconTheme = $cardContent->iconTheme ? $cardContent->iconTheme : 1;
         $view = 'enduser/profile/profile' . $themeId;
-        $cardLink = $cardContent->links()->get();
+        $cardLink = $cardContent->links()->orderBy('sort', 'asc')->get();
         $cardLinkArr = [];
 
         forEach($cardLink as $link) {
@@ -423,9 +449,15 @@ class CardController extends Controller
             $card = new Card();
 
             $cardContent = $card->where('id', $request->id)->first();
-            $cardLink = $cardContent->links()->get();
+            $cardLink = $cardContent->links()->orderBy('sort', 'asc')->get();
+            foreach($cardLink as $key => &$link) {
+                $link['sort'] = $key;
+            }
             $cardContent['links'] = $cardLink;
 
+            unset($cardContent['password']);
+            unset($cardContent['confirm_code']);
+            unset($cardContent['remember_token']);
             if($cardContent) {
                 return $this->sendSuccess($cardContent);
             } else {
@@ -452,6 +484,21 @@ class CardController extends Controller
                 'success' => false,
                 'data' => []
             ];
+            return $this->sendServerError($e);
+        }
+    }
+
+    public function updateTickCard(Request $request) {
+        $card = new Card();
+        $params = [
+            'tick' => $request->tick
+        ];
+        
+        try {
+            $card->where('id', $request->id)->update($params);
+            
+            return $this->sendSuccess([]);
+        } catch (\Exception $e) {
             return $this->sendServerError($e);
         }
     }

@@ -23,6 +23,12 @@ export function forgetPassword(data) {
     })
 }
 
+export function createCardSimple(data) {
+    return http.post('/card/storeOneCard', {
+        id: data.id
+    })
+}
+
 export function getListCard(data) {
     let params = { 
         getForExport: data.getForExport,
@@ -57,6 +63,13 @@ export function genCard(params) {
     return http.post('/card/genCard', { 
         from: params.from,
         to: params.to,
+    })
+}
+
+export function changeTick(params) {
+    return http.post('/card/updateTickCard', { 
+        id: params.id,
+        tick: params.tick ? 1 : 0,
     })
 }
 
@@ -182,12 +195,14 @@ export class CardDTO {
         this.background_img_url = card && card.background_img && card.background_img != "" ? getUrlImage(card.background_img) : 'https://cover-talk.zadn.vn/0/f/3/a/1/4345cc7015c1bbcae0d24e8a26ec3ae5.jpg'
         this.confirm_code = card && card.confirm_code ? card.confirm_code : '' 
         this.links = card && card.links ? card.links : null
+        this.tick = card && card.tick && card.tick == 1  ? true : false
     }
 
     static setDefaultLinksFormat(links = null) {
         return {
             type: links && links.type ? links.type : "",
-            link: links && links.link ? links.link : ""
+            link: links && links.link ? links.link : "",
+            sort: links && links.sort ? links.sort : 0
         }
     }
 }
