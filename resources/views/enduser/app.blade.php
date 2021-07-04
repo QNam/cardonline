@@ -17,6 +17,9 @@
         @if( isset($listSocial))
         var SOCIAL_NETWORKS = '{!! json_encode($listSocial) !!}'
         @endif
+        @if( Auth::user() )
+        var ACCESS_TOKEN = '{{ session('access_token') }}'
+        @endif
     </script>
     <script>window.Laravel = {csrfToken: '{{ csrf_token() }}'}</script>
 </head>

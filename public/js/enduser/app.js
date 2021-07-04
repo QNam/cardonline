@@ -8085,9 +8085,10 @@ function uploadImage(params) {
     }
   });
 }
-function uploadImageBase64(img) {
+function uploadImageBase64(img, id) {
   return http.post('/media/uploadImageBase64', {
-    image: img
+    image: img,
+    id: id
   });
 }
 
@@ -8108,7 +8109,8 @@ var axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 
 axios.defaults.headers.common = {
   'X-Requested-With': 'XMLHttpRequest',
-  'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+  // 'X-CSRF-TOKEN' : document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+  'X-CSRF-TOKEN': window.ACCESS_TOKEN
 };
 var http = axios.create({
   baseURL: "http://cardonline.local/api/" // headers: {'X-Requested-With': 'XMLHttpRequest', 'X-CSRF-TOKEN': window.Laravel.csrfToken},
@@ -8290,7 +8292,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 state = _ref.state;
                 state.cardContent.avatar_img_url = image;
                 _context.next = 4;
-                return (0,_api_image__WEBPACK_IMPORTED_MODULE_1__.uploadImageBase64)(image);
+                return (0,_api_image__WEBPACK_IMPORTED_MODULE_1__.uploadImageBase64)(image, state.cardContent.id);
 
               case 4:
                 rep = _context.sent;

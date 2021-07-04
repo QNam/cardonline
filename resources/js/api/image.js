@@ -9,8 +9,9 @@ export function uploadImage(params) {
     })
 }
 
-export function uploadImageBase64(img) {
+export function uploadImageBase64(img, id) {
     return http.post('/media/uploadImageBase64', {
-        image: img
+        image: img,
+        id
     })
 }

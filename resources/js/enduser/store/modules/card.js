@@ -16,7 +16,7 @@ export default {
         async uploadAvatar({state}, image) {
             state.cardContent.avatar_img_url = image
 
-            const rep = await uploadImageBase64(image)
+            const rep = await uploadImageBase64(image, state.cardContent.id)
             const data = rep.data.data
             saveCardAvatar(state.cardContent.id, data.img)
             const img = getUrlImage(data.img)

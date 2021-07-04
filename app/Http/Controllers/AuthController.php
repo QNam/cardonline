@@ -24,8 +24,11 @@ class AuthController extends Controller
             $request->session()->flash('LOGIN_STATUS', 'Tài khoản hoặc mật khẩu không chính xác !');
             return redirect()->back();
         }
-
+        $access_token = Hash::make($cardContent->id.'namdzdzbodoiqua');
+        session(['access_token' => $access_token]);
+        
         Auth::login($cardContent, true);
+        
         $cardAsArr = $cardContent->toArray();
         unset($cardAsArr['password']);
         unset($cardAsArr['confirm_code']);
@@ -44,7 +47,7 @@ class AuthController extends Controller
     public function register(RegisterRequest $request) {
         $card = new Card();
         $emailExists = Card::checkEmailExists($request->email);
-        $cardIdExists = Card::checkCardExists($request->id);
+        $cardIdExists = Card::checkCardExists($request->id, $request->confirm_code);
 
         if($emailExists) {
             $rep = [

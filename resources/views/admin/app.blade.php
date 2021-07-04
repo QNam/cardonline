@@ -8,6 +8,12 @@
     <title>Document</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900">
     <link href="{{ mix('css/app.css') }}" type="text/css" rel="stylesheet" />
+
+    @if( session()->has('adminInfo') )
+    <script>
+        var ACCESS_TOKEN = '9144961542asdvnamdzbodoiqua'
+    </script>
+    @endif
 </head>
 <body>
     <div id="app"></div>

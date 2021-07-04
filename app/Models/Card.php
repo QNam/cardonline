@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 // use Tymon\JWTAuth\Contracts\JWTSubject;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Hash;
 
 class Card extends Authenticatable {
     use HasFactory;
@@ -37,8 +38,13 @@ class Card extends Authenticatable {
         return $this->hasMany(CardLinks::class);
     }
 
-    static public function checkCardExists($cardId) {
-        return Card::where('id', $cardId)->exists();
+    static public function checkCardExists($cardId, $confirm_code = null) {
+        if(!$confirm_code) {
+            return Card::where('id', $cardId)->exists();
+        }
+
+        return Card::where('id', $cardId)->where('confirm_code', $confirm_code)->exists();
+        
     }
 
     static public function checkEmailExists($email) {

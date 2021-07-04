@@ -17,8 +17,14 @@ class UserCheckLogin
      */
     public function handle(Request $request, Closure $next)
     {
+        
         $user = Auth::user();
         if (!Auth::check() || $user->id != $request->id) {
+            return redirect()->route('Login');
+        }
+
+        if(!session('access_token')) {
+            Auth::logout();
             return redirect()->route('Login');
         }
 
