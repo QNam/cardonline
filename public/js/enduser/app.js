@@ -8106,11 +8106,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 var axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 
+axios.defaults.headers.common = {
+  'X-Requested-With': 'XMLHttpRequest',
+  'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+};
 var http = axios.create({
-  baseURL: "http://cardonline.local/api/",
-  headers: {
-    'X-Requested-With': 'XMLHttpRequest'
-  }
+  baseURL: "http://cardonline.local/api/" // headers: {'X-Requested-With': 'XMLHttpRequest', 'X-CSRF-TOKEN': window.Laravel.csrfToken},
+
 });
 window.http = http;
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (http);

@@ -28,6 +28,7 @@ class AuthController extends Controller
         Auth::login($cardContent, true);
         $cardAsArr = $cardContent->toArray();
         unset($cardAsArr['password']);
+        unset($cardAsArr['confirm_code']);
 
         return redirect()->route('EditUser', ['id' => $cardAsArr['id']]);
     }

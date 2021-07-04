@@ -24,7 +24,7 @@ Route::post('/card/login', 'App\Http\Controllers\AuthController@Login');
 Route::post('/card/exists', 'App\Http\Controllers\CardController@cardIsExists');
 Route::get('/card/getList', 'App\Http\Controllers\CardController@getListCard');
 
-Route::group(['middleware' => ['web', 'admin.checkLogin']], function () {
+Route::group(['middleware' => ['webNotCsrf', 'admin.checkLogin']], function () {
     Route::post('/card/remove', 'App\Http\Controllers\CardController@removeCard');
     Route::post('/card/updateTickCard', 'App\Http\Controllers\CardController@updateTickCard');
     Route::post('/card/storeOneCard', 'App\Http\Controllers\CardController@storeOneCard');
@@ -32,7 +32,7 @@ Route::group(['middleware' => ['web', 'admin.checkLogin']], function () {
 });
 
 Route::get('/card/getById', 'App\Http\Controllers\CardController@getById');
-Route::group(['middleware' => ['web', 'user.checkLogin']], function () {
+Route::group(['middleware' => ['webNotCsrf', 'user.checkLogin']], function () {
     Route::post('/card', 'App\Http\Controllers\CardController@storeCard');
     Route::post('/media/uploadImage', 'App\Http\Controllers\MediaController@uploadImage');
     Route::post('/media/uploadImageBase64', 'App\Http\Controllers\MediaController@uploadImageBase64');
