@@ -25,21 +25,22 @@ Route::post('/card/exists', 'App\Http\Controllers\CardController@cardIsExists');
 Route::get('/card/getList', 'App\Http\Controllers\CardController@getListCard');
 
 Route::group(['middleware' => ['webNotCsrf', 'admin.checkLogin']], function () {
-    Route::post('/card/remove', 'App\Http\Controllers\CardController@removeCard');
+    Route::post('/card/removeBloBla', 'App\Http\Controllers\CardController@removeCard');
     Route::post('/card/updateTickCard', 'App\Http\Controllers\CardController@updateTickCard');
     Route::post('/card/storeOneCard', 'App\Http\Controllers\CardController@storeOneCard');
     Route::post('/card/genCard', 'App\Http\Controllers\CardController@genCard');
 });
 
 Route::get('/card/getById', 'App\Http\Controllers\CardController@getById');
-Route::group(['middleware' => ['webNotCsrf', 'user.checkLogin']], function () {
+
+Route::middleware(['webNotCsrf', 'user.checkLogin'])->group(function () {
+    Route::post('/media/uploadImageBase64', 'App\Http\Controllers\MediaController@uploadImageBase64');
     Route::post('/card', 'App\Http\Controllers\CardController@storeCard');
     Route::post('/media/uploadImage', 'App\Http\Controllers\MediaController@uploadImage');
-    Route::post('/media/uploadImageBase64', 'App\Http\Controllers\MediaController@uploadImageBase64');
     Route::post('/card/saveAvatar', 'App\Http\Controllers\CardController@saveAvatar');
     Route::post('/card/saveBackground', 'App\Http\Controllers\CardController@saveBackground');
     Route::post('/card/saveBackgroundBase64', 'App\Http\Controllers\CardController@saveBackgroundBase64');
-    Route::post('/card/removeLink', 'App\Http\Controllers\CardController@removeCardLink');
+    Route::post('/card/removeLinkABABAB', 'App\Http\Controllers\CardController@removeCardLink');
 });
 
 Route::post('/card/checkConfirmCode', 'App\Http\Controllers\CardController@checkConfirmCode');

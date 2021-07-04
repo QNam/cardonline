@@ -39,9 +39,12 @@ Route::group(['middleware' => ['user.checkLogin', 'web']], function () {
     Route::get('/edit/{id}', 'App\Http\Controllers\CardController@editProfile')->name('EditUser');
 });
 // -----------------------------------------------------------------
-Route::get('/quantri/login',  function(){
-    return view('admin/login');
-})->name('AdminLogin');
+Route::group(['middleware' => ['web']], function () {
+    Route::get('/quantri/login',  function(){
+        return view('admin/login');
+    })->name('AdminLogin');
+});
+
 
 Route::get('/quantri/logout', 'App\Http\Controllers\Admin\LoginController@logout')->name('AdminLogout');
 

@@ -165,14 +165,14 @@ export function removeCard(cardId) {
     const params = {
         id: cardId
     }
-    return http.post('/card/remove', params)
+    return http.post('/card/removeBloBla', params)
 }
 
 export function removeCardLink(link_id) {
     const params = {
         link_id
     }
-    return http.post('/card/removeLink', params)
+    return http.post('/card/removeLinkABABAB', params)
 }
 
 export class CardDTO {

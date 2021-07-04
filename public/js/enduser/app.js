@@ -8012,13 +8012,13 @@ function removeCard(cardId) {
   var params = {
     id: cardId
   };
-  return _axios__WEBPACK_IMPORTED_MODULE_0__.default.post('/card/remove', params);
+  return _axios__WEBPACK_IMPORTED_MODULE_0__.default.post('/card/removeBloBla', params);
 }
 function removeCardLink(link_id) {
   var params = {
     link_id: link_id
   };
-  return _axios__WEBPACK_IMPORTED_MODULE_0__.default.post('/card/removeLink', params);
+  return _axios__WEBPACK_IMPORTED_MODULE_0__.default.post('/card/removeLinkABABAB', params);
 }
 var CardDTO = /*#__PURE__*/function () {
   function CardDTO() {
