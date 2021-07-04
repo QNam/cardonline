@@ -31,8 +31,8 @@ Route::group(['middleware' => ['web', 'admin.checkLogin']], function () {
     Route::post('/card/genCard', 'App\Http\Controllers\CardController@genCard');
 });
 
+Route::get('/card/getById', 'App\Http\Controllers\CardController@getById');
 Route::group(['middleware' => ['web', 'user.checkLogin']], function () {
-    Route::get('/card/getById', 'App\Http\Controllers\CardController@getById');
     Route::post('/card', 'App\Http\Controllers\CardController@storeCard');
     Route::post('/media/uploadImage', 'App\Http\Controllers\MediaController@uploadImage');
     Route::post('/media/uploadImageBase64', 'App\Http\Controllers\MediaController@uploadImageBase64');
