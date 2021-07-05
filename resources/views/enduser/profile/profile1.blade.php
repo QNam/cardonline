@@ -61,7 +61,17 @@
                         </div>
                      @endif
                      @if($link['showType'] == 'card')
-                        <div style="background-color: white; position: relative; border-radius: 30px; width: 85%; display: block; margin: 0 auto; margin-top: 25px; margin-bottom: 10px; height: 120px;" 
+                        <div class="grid-square-normal">
+                           <a  onclick="copyToClipboard('{{ $link['link'] }}')" rel="noopener" 
+                              href="javascript:;" 
+                              class="socialTitles d-block">
+                              <div>
+                                 <img alt="{{ $card->userName }}" style="width: 100%; height: 100%;" src="{{ $link['thumb'] }}">
+                              </div>
+                              {{ $link['name'] }}
+                           </a>
+                        </div>
+                        {{-- <div style="background-color: white; position: relative; border-radius: 30px; width: 85%; display: block; margin: 0 auto; margin-top: 25px; margin-bottom: 10px; height: 120px;" 
                            class="grid-square-video shadow">
                            <img 
                               alt="{{ $link['name'] }}" 
@@ -71,7 +81,7 @@
                               {{ $link['name'] }}
                            </p>
                            <p onclick="copyToClipboard('{{ $link['link'] }}')" style="height: 27px; width: 90%; padding-top: 0px; margin-bottom: 0px; line-height: 18px; text-align: left; font-size: 18px; word-break: break-all; font-weight: 400">{{ $link['link'] }} </p>
-                        </div>
+                        </div> --}}
                      @endif
                      @endif
                      @endforeach

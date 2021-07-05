@@ -45,12 +45,12 @@
                 <div class="profile__socials">
                     @foreach ($cardLink as $link)
                         @if($link['showType'] == 'iconDirect')
-                        <div class="profile__social__item">
+                        <a class="profile__social__item" target="_blank" href="{{ $link['link'] }}">
                             <div>
                                 <img src="{{ $link['thumb'] }}" alt="">
                             </div>
-                            <a target="_blank" href="{{ $link['link'] }}">{{ $link['name'] }}</a>
-                        </div>
+                            <span>{{ $link['name'] }}</span>
+                        </a>
                         @endif
                         @if($link['showType'] == 'card')
                         <div class="profile__social__item" onclick="copyToClipboard('{{ $link['link'] }}')">
@@ -61,9 +61,19 @@
                         </div>
                         @endif
                     @endforeach
+                    <div class="row" style="margin: 0; margin-top: 80px">
+                        <div class="col-md-8 col-xs-12 col-lg-8" style="margin: 0 auto; display: block">
+                            <div id="create1" class="PoweredBy" style="margin-top: 20px; text-align:center"><strong> 
+                                <a target="_blank" href="https://shopee.vn/Th%E1%BA%BB-c%C3%A1-nh%C3%A2n-th%C3%B4ng-minh-FUKI-4.0-Card-Visit-th%C3%B4ng-minh-danh-thi%E1%BA%BFp-th%C3%B4ng-minh-i.453514978.4790348140" class="PoweredBy shadow" style=" background-color: black; color: white; padding: 10px;  border-radius: 8px">
+                                    Sở hữu thẻ FUKI 4.0 ngay</a></strong></div>
+                        </div>
+                    </div>
                 </div>
             </div>
+
+            
         </div>
+        
         @if(Auth::check() && Auth::user()->id == $card->id)
         <div class="editProfile">
             <a href="{{ route('EditUser', ['id' => $card->id]) }}"><i class="fas fa-pen" style="color: #fff"></i></a>

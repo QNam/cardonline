@@ -75,6 +75,7 @@ class Kernel extends HttpKernel
         'admin.checkLogin' => \App\Http\Middleware\AdminCheckLogin::class,
         'user.checkLogin' => \App\Http\Middleware\UserCheckLogin::class,
         'user.apiAuth' => \App\Http\Middleware\apiAuth::class,
+        'user.checkReferer' => \App\Http\Middleware\checkReferer::class,
         'user.apiCheckLogin' => \App\Http\Middleware\apiCheckLogin::class,
         'admin.apiAdminAuth' => \App\Http\Middleware\apiAdminAuth::class,
         

@@ -15,13 +15,10 @@ use Illuminate\Support\Facades\Auth;
 
 Route::group(['middleware' => ['web']], function () {
     Route::get('/', function () {
-        return view('enduser/test');
+        return view('enduser/home');
     });
 
-    Route::get('/login',  function(){
-        return view('enduser/auth/login');
-    })->name('Login');
-
+    Route::get('/login',  function(){ return view('enduser/auth/login'); })->name('Login');
     Route::post('/login', 'App\Http\Controllers\AuthController@login')->name('UserLogin');
     Route::get('/logout', 'App\Http\Controllers\AuthController@logout')->name('UserLogout');
     
