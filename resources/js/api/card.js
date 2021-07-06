@@ -168,9 +168,10 @@ export function removeCard(cardId) {
     return http.post('/card/removeBloBla', params)
 }
 
-export function removeCardLink(link_id) {
+export function removeCardLink(link_id, id) {
     const params = {
-        link_id
+        link_id,
+        id
     }
     return http.post('/card/removeLinkABABAB', params)
 }

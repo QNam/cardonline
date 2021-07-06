@@ -309,7 +309,7 @@ export default {
             this.loadingRemoveLink = tmp
             
             try {
-                await removeCardLink(link.link_id)
+                await removeCardLink(link.link_id, this.cardContent.id)
                 this.loadingRemoveLink = {}
                 const links = this.cardContent.links.filter( val => val.link_id != link.link_id)
                 this.$store.commit('SET_CARD_LINKS', links)

@@ -7486,7 +7486,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _this2.loadingRemoveLink = tmp;
                 _context2.prev = 3;
                 _context2.next = 6;
-                return (0,_api_card__WEBPACK_IMPORTED_MODULE_1__.removeCardLink)(link.link_id);
+                return (0,_api_card__WEBPACK_IMPORTED_MODULE_1__.removeCardLink)(link.link_id, _this2.cardContent.id);
 
               case 6:
                 _this2.loadingRemoveLink = {};
@@ -8014,9 +8014,10 @@ function removeCard(cardId) {
   };
   return _axios__WEBPACK_IMPORTED_MODULE_0__.default.post('/card/removeBloBla', params);
 }
-function removeCardLink(link_id) {
+function removeCardLink(link_id, id) {
   var params = {
-    link_id: link_id
+    link_id: link_id,
+    id: id
   };
   return _axios__WEBPACK_IMPORTED_MODULE_0__.default.post('/card/removeLinkABABAB', params);
 }

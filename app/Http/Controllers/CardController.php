@@ -68,6 +68,10 @@ class CardController extends Controller
         return response()->json($rep);
     }
 
+    function generateRandomString($length = 10) {
+        return substr(str_shuffle(str_repeat($x='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil($length/strlen($x)) )),1,$length);
+    }
+
     function genCard(Request $request) {
         $card = new Card();
         $from = $request->from;
@@ -81,7 +85,7 @@ class CardController extends Controller
                     'id' => $value,
                     'theme' => 1,
                     'userName' => 'Người dùng ' . $value,
-                    'confirm_code' => rand(100000, 999999),
+                    'confirm_code' => $this->generateRandomString(8),
                 ];
 
                 array_push($params, $tmp);
@@ -199,7 +203,7 @@ class CardController extends Controller
                 'id' => $request->id,
                 'theme' => 1,
                 'userName' => 'Người dùng FUKI',
-                'confirm_code' => rand(100000, 999999),           
+                'confirm_code' => $this->generateRandomString(8),           
             ];
             
             $user = Card::create($param);
