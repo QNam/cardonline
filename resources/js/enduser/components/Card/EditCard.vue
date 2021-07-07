@@ -1,5 +1,11 @@
 <template>
     <main>
+        <div class="d-none">
+            <img src="/static/themes/thumb1.png">
+            <img src="/static/themes/thumb2.png">
+            <img src="/static/icons/icon3.png">
+            <img src="/static/icons/icon4.png">
+        </div>
         <template v-if="loadingFetch">
             <loading-full />
         </template>
@@ -119,16 +125,6 @@
                         <van-collapse-item title="Icons" name="4">
                             <div class="px-2 d-flex align-items-center justify-content-between">
                                 <div class="row">
-                                    <!-- <div class="col-6 mb-2">
-                                        <a href="" class="d-block">
-                                            <img src="/static/icons/icon1.png" class="img-fluid" style="max-height: 328px" alt="">
-                                        </a>
-                                    </div>
-                                    <div class="col-6 mb-2">
-                                        <a href="" class="d-block">
-                                            <img src="/static/icons/icon2.png" class="img-fluid" style="max-height: 328px" alt="">
-                                        </a>
-                                    </div> -->
                                     <div class="col-6 mb-2">
                                         <a href="javascript:;" 
                                             :class="{'rounded-lg themeSelected': cardContent.iconTheme == 1}" 
@@ -168,9 +164,10 @@
                                                 <template>
                                                     <img :src="listSocial[link.type].thumb" style="width: 35px; height: 35px" alt="">
                                                     <h5>{{ listSocial[link.type].name }}</h5>
-                                                    <van-icon v-if="!loadingRemoveLink[link.link_id] || Object.keys(loadingRemoveLink).length == 0" 
-                                                                name="cross" 
-                                                                v-on:click.stop.prevent="removeSocialLink(link)" />
+                                                    <div v-on:click.stop.prevent="removeSocialLink(link)" 
+                                                        v-if="!loadingRemoveLink[link.link_id] || Object.keys(loadingRemoveLink).length == 0">
+                                                        <van-icon name="cross" />
+                                                    </div>
                                                     <van-loading v-if="loadingRemoveLink[link.link_id] === true" type="spinner" />
                                                 </template>
                                             </div>
