@@ -151,28 +151,27 @@
 
                                 <template v-else>
                                 <div class="qncard mb-4">
-                                    <draggable 
+                                    <!-- <draggable 
                                         :move="onCardLinkMove"
                                         :list="cardContent.links"
                                         group="social">
-                                        <template v-for="link, key in cardContent.links">
-                                            <div class="sociallItem mb-4 rounded-3 px-4 py-3 shadow d-flex align-items-center justify-content-between"  
-                                                :key="key"
-                                                v-if="listSocial && listSocial[link.type]"
-                                                @click="openEditSocialLink(link)"
-                                            >
-                                                <template>
-                                                    <img :src="listSocial[link.type].thumb + '?v=1.1'" style="width: 35px; height: 35px" alt="">
-                                                    <h5>{{ listSocial[link.type].name }}</h5>
-                                                    <div v-on:click.stop.prevent="removeSocialLink(link)" 
-                                                        v-if="!loadingRemoveLink[link.link_id] || Object.keys(loadingRemoveLink).length == 0">
-                                                        <van-icon name="cross" />
-                                                    </div>
-                                                    <van-loading v-if="loadingRemoveLink[link.link_id] === true" type="spinner" />
-                                                </template>
-                                            </div>
-                                        </template>
-                                    </draggable>
+                                    </draggable> -->
+                                    <template v-for="link, key in cardContent.links">
+                                        <div class="sociallItem mb-4 rounded-3 px-4 py-3 shadow d-flex align-items-center justify-content-between"  
+                                            :key="key"
+                                            v-if="listSocial && listSocial[link.type]"
+                                            @click="openEditSocialLink(link)" >
+                                            <template>
+                                                <img :src="listSocial[link.type].thumb + '?v=1.1'" style="width: 35px; height: 35px" alt="">
+                                                <h5>{{ listSocial[link.type].name }}</h5>
+                                                <div v-on:click.stop.prevent="removeSocialLink(link)" 
+                                                    v-if="!loadingRemoveLink[link.link_id] || Object.keys(loadingRemoveLink).length == 0">
+                                                    <van-icon name="cross" />
+                                                </div>
+                                                <van-loading v-if="loadingRemoveLink[link.link_id] === true" type="spinner" />
+                                            </template>
+                                        </div>
+                                    </template>
                                 </div> 
 
                                 </template>

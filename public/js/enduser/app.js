@@ -7379,7 +7379,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
 
 
 
@@ -57320,131 +57319,115 @@ var render = function() {
                                         "div",
                                         { staticClass: "qncard mb-4" },
                                         [
-                                          _c(
-                                            "draggable",
-                                            {
-                                              attrs: {
-                                                move: _vm.onCardLinkMove,
-                                                list: _vm.cardContent.links,
-                                                group: "social"
-                                              }
-                                            },
-                                            [
-                                              _vm._l(
-                                                _vm.cardContent.links,
-                                                function(link, key) {
-                                                  return [
-                                                    _vm.listSocial &&
-                                                    _vm.listSocial[link.type]
-                                                      ? _c(
-                                                          "div",
-                                                          {
-                                                            key: key,
-                                                            staticClass:
-                                                              "sociallItem mb-4 rounded-3 px-4 py-3 shadow d-flex align-items-center justify-content-between",
-                                                            on: {
-                                                              click: function(
-                                                                $event
-                                                              ) {
-                                                                return _vm.openEditSocialLink(
-                                                                  link
-                                                                )
-                                                              }
+                                          _vm._l(
+                                            _vm.cardContent.links,
+                                            function(link, key) {
+                                              return [
+                                                _vm.listSocial &&
+                                                _vm.listSocial[link.type]
+                                                  ? _c(
+                                                      "div",
+                                                      {
+                                                        key: key,
+                                                        staticClass:
+                                                          "sociallItem mb-4 rounded-3 px-4 py-3 shadow d-flex align-items-center justify-content-between",
+                                                        on: {
+                                                          click: function(
+                                                            $event
+                                                          ) {
+                                                            return _vm.openEditSocialLink(
+                                                              link
+                                                            )
+                                                          }
+                                                        }
+                                                      },
+                                                      [
+                                                        [
+                                                          _c("img", {
+                                                            staticStyle: {
+                                                              width: "35px",
+                                                              height: "35px"
+                                                            },
+                                                            attrs: {
+                                                              src:
+                                                                _vm.listSocial[
+                                                                  link.type
+                                                                ].thumb +
+                                                                "?v=1.1",
+                                                              alt: ""
                                                             }
-                                                          },
-                                                          [
-                                                            [
-                                                              _c("img", {
-                                                                staticStyle: {
-                                                                  width: "35px",
-                                                                  height: "35px"
-                                                                },
-                                                                attrs: {
-                                                                  src:
-                                                                    _vm
-                                                                      .listSocial[
-                                                                      link.type
-                                                                    ].thumb +
-                                                                    "?v=1.1",
-                                                                  alt: ""
-                                                                }
-                                                              }),
-                                                              _vm._v(" "),
-                                                              _c("h5", [
-                                                                _vm._v(
-                                                                  _vm._s(
-                                                                    _vm
-                                                                      .listSocial[
-                                                                      link.type
-                                                                    ].name
-                                                                  )
-                                                                )
-                                                              ]),
-                                                              _vm._v(" "),
-                                                              !_vm
-                                                                .loadingRemoveLink[
-                                                                link.link_id
-                                                              ] ||
-                                                              Object.keys(
-                                                                _vm.loadingRemoveLink
-                                                              ).length == 0
-                                                                ? _c(
-                                                                    "div",
-                                                                    {
-                                                                      on: {
-                                                                        click: function(
-                                                                          $event
-                                                                        ) {
-                                                                          $event.stopPropagation()
-                                                                          $event.preventDefault()
-                                                                          return _vm.removeSocialLink(
-                                                                            link
-                                                                          )
-                                                                        }
-                                                                      }
-                                                                    },
-                                                                    [
-                                                                      _c(
-                                                                        "van-icon",
-                                                                        {
-                                                                          attrs: {
-                                                                            name:
-                                                                              "cross"
-                                                                          }
-                                                                        }
+                                                          }),
+                                                          _vm._v(" "),
+                                                          _c("h5", [
+                                                            _vm._v(
+                                                              _vm._s(
+                                                                _vm.listSocial[
+                                                                  link.type
+                                                                ].name
+                                                              )
+                                                            )
+                                                          ]),
+                                                          _vm._v(" "),
+                                                          !_vm
+                                                            .loadingRemoveLink[
+                                                            link.link_id
+                                                          ] ||
+                                                          Object.keys(
+                                                            _vm.loadingRemoveLink
+                                                          ).length == 0
+                                                            ? _c(
+                                                                "div",
+                                                                {
+                                                                  on: {
+                                                                    click: function(
+                                                                      $event
+                                                                    ) {
+                                                                      $event.stopPropagation()
+                                                                      $event.preventDefault()
+                                                                      return _vm.removeSocialLink(
+                                                                        link
                                                                       )
-                                                                    ],
-                                                                    1
-                                                                  )
-                                                                : _vm._e(),
-                                                              _vm._v(" "),
-                                                              _vm
-                                                                .loadingRemoveLink[
-                                                                link.link_id
-                                                              ] === true
-                                                                ? _c(
-                                                                    "van-loading",
+                                                                    }
+                                                                  }
+                                                                },
+                                                                [
+                                                                  _c(
+                                                                    "van-icon",
                                                                     {
                                                                       attrs: {
-                                                                        type:
-                                                                          "spinner"
+                                                                        name:
+                                                                          "cross"
                                                                       }
                                                                     }
                                                                   )
-                                                                : _vm._e()
-                                                            ]
-                                                          ],
-                                                          2
-                                                        )
-                                                      : _vm._e()
-                                                  ]
-                                                }
-                                              )
-                                            ],
-                                            2
+                                                                ],
+                                                                1
+                                                              )
+                                                            : _vm._e(),
+                                                          _vm._v(" "),
+                                                          _vm.loadingRemoveLink[
+                                                            link.link_id
+                                                          ] === true
+                                                            ? _c(
+                                                                "van-loading",
+                                                                {
+                                                                  attrs: {
+                                                                    type:
+                                                                      "spinner"
+                                                                  }
+                                                                }
+                                                              )
+                                                            : _vm._e()
+                                                        ]
+                                                      ],
+                                                      2
+                                                    )
+                                                  : _vm._e()
+                                              ]
+                                            }
                                           )
                                         ],
-                                        1
+                                        2
                                       )
                                     ],
                                 _vm._v(" "),
