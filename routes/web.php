@@ -27,9 +27,9 @@ Route::group(['middleware' => ['web']], function () {
         return view('enduser/app');
     })->name('Register');
 
-    Route::get('/forget-password',  function(){
-        return view('enduser/app');
-    })->name('ForgetPassword');
+    // Route::get('/forget-password',  function(){
+    //     return view('enduser/app');
+    // })->name('ForgetPassword');
 });
 
 Route::group(['middleware' => ['user.checkLogin', 'web']], function () {

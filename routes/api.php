@@ -24,8 +24,8 @@ Route::group(['middleware' => ['user.checkReferer']], function () {
     Route::post('/card/login', 'App\Http\Controllers\AuthController@Login');
     Route::post('/card/exists', 'App\Http\Controllers\CardController@cardIsExists');
     Route::post('/card/checkConfirmCode', 'App\Http\Controllers\CardController@checkConfirmCode');
-    Route::post('/card/checkAccountToForgetPassword', 'App\Http\Controllers\CardController@checkAccountToForgetPassword');
-    Route::post('/card/forgetPassword', 'App\Http\Controllers\CardController@forgetPassword');
+    // Route::post('/card/checkAccountToForgetPassword', 'App\Http\Controllers\CardController@checkAccountToForgetPassword');
+    // Route::post('/card/forgetPassword', 'App\Http\Controllers\CardController@forgetPassword');
 });
 
 Route::group(['middleware' => ['admin.apiAdminAuth']], function () {
