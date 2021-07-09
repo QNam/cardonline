@@ -20,10 +20,10 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 
 Route::group(['middleware' => ['user.checkReferer']], function () {
-    Route::post('/card/register', 'App\Http\Controllers\AuthController@register');
+    // Route::post('/card/register', 'App\Http\Controllers\AuthController@register');
     Route::post('/card/login', 'App\Http\Controllers\AuthController@Login');
-    Route::post('/card/exists', 'App\Http\Controllers\CardController@cardIsExists');
-    Route::post('/card/checkConfirmCode', 'App\Http\Controllers\CardController@checkConfirmCode');
+    // Route::post('/card/exists', 'App\Http\Controllers\CardController@cardIsExists');
+    // Route::post('/card/checkConfirmCode', 'App\Http\Controllers\CardController@checkConfirmCode');
     // Route::post('/card/checkAccountToForgetPassword', 'App\Http\Controllers\CardController@checkAccountToForgetPassword');
     // Route::post('/card/forgetPassword', 'App\Http\Controllers\CardController@forgetPassword');
 });
