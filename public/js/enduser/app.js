@@ -57249,7 +57249,8 @@ var render = function() {
                                             "max-height": "328px"
                                           },
                                           attrs: {
-                                            src: "/static/icons/icon3.jpg",
+                                            src:
+                                              "/static/icons/icon3.jpg?v=1.1",
                                             alt: ""
                                           }
                                         })
@@ -57283,7 +57284,8 @@ var render = function() {
                                             "max-height": "328px"
                                           },
                                           attrs: {
-                                            src: "/static/icons/icon4.jpg",
+                                            src:
+                                              "/static/icons/icon4.jpg?v=1.1",
                                             alt: ""
                                           }
                                         })
@@ -57362,7 +57364,8 @@ var render = function() {
                                                                     _vm
                                                                       .listSocial[
                                                                       link.type
-                                                                    ].thumb,
+                                                                    ].thumb +
+                                                                    "?v=1.1",
                                                                   alt: ""
                                                                 }
                                                               }),

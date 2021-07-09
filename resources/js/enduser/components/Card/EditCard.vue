@@ -130,7 +130,7 @@
                                             :class="{'rounded-lg themeSelected': cardContent.iconTheme == 1}" 
                                             @click="$store.commit('SET_ICON_THEME', 1)" 
                                             class="d-block">
-                                            <img src="/static/icons/icon3.jpg" class="img-fluid" style="max-height: 328px" alt="">
+                                            <img src="/static/icons/icon3.jpg?v=1.1" class="img-fluid" style="max-height: 328px" alt="">
                                         </a>
                                     </div>
                                     <div class="col-6 mb-2">
@@ -138,7 +138,7 @@
                                             :class="{'rounded-lg themeSelected': cardContent.iconTheme == 2}" 
                                             @click="$store.commit('SET_ICON_THEME', 2)"
                                             class="d-block">
-                                            <img src="/static/icons/icon4.jpg" class="img-fluid" style="max-height: 328px" alt="">
+                                            <img src="/static/icons/icon4.jpg?v=1.1" class="img-fluid" style="max-height: 328px" alt="">
                                         </a>
                                     </div>
                                 </div>
@@ -162,7 +162,7 @@
                                                 @click="openEditSocialLink(link)"
                                             >
                                                 <template>
-                                                    <img :src="listSocial[link.type].thumb" style="width: 35px; height: 35px" alt="">
+                                                    <img :src="listSocial[link.type].thumb + '?v=1.1'" style="width: 35px; height: 35px" alt="">
                                                     <h5>{{ listSocial[link.type].name }}</h5>
                                                     <div v-on:click.stop.prevent="removeSocialLink(link)" 
                                                         v-if="!loadingRemoveLink[link.link_id] || Object.keys(loadingRemoveLink).length == 0">
