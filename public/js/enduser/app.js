@@ -6288,6 +6288,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -6573,6 +6574,7 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
+//
 //
 //
 //
@@ -55920,232 +55922,31 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "registerForm authForm" }, [
-    _c("div", { staticClass: "container" }, [
-      _c("div", { staticClass: "row justify-content-center" }, [
-        _c("div", { staticClass: "col-12 col-lg-6" }, [
-          _c("div", { staticClass: "authForm__wrap" }, [
-            _c("h3", { staticClass: "text-center mb-4" }, [
-              _vm._v("Quên mật khẩu")
-            ]),
-            _vm._v(" "),
-            !_vm.cardIdExists
-              ? _c("span", { staticClass: "error" }, [
-                  _vm._v(
-                    "Email hoặc mã xác nhận khi mua hàng không chính xác !"
-                  )
-                ])
-              : _vm._e(),
-            _vm._v(" "),
-            _c("div", { staticClass: "form-group" }, [
-              _c("label", { attrs: { for: "" } }, [_vm._v("Email")]),
-              _vm._v(" "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model.trim",
-                    value: _vm.$v.email.$model,
-                    expression: "$v.email.$model",
-                    modifiers: { trim: true }
-                  }
-                ],
-                staticClass: "form-control",
-                attrs: { type: "text", placeholder: "Email" },
-                domProps: { value: _vm.$v.email.$model },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.$set(_vm.$v.email, "$model", $event.target.value.trim())
-                  },
-                  blur: function($event) {
-                    return _vm.$forceUpdate()
-                  }
-                }
-              }),
-              _vm._v(" "),
-              _vm.submited && !_vm.$v.email.required
-                ? _c("span", { staticClass: "error" }, [
-                    _vm._v("Email không được bỏ trống !")
-                  ])
-                : _vm._e(),
-              _vm._v(" "),
-              _vm.submited && !_vm.$v.email.email && _vm.$v.email.required
-                ? _c("span", { staticClass: "error" }, [
-                    _vm._v("Email không đúng định dạng !")
-                  ])
-                : _vm._e()
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "form-group mt-3" }, [
-              _c("label", { attrs: { for: "" } }, [_vm._v("Mã xác nhận")]),
-              _vm._v(" "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model.trim",
-                    value: _vm.$v.confirmCode.$model,
-                    expression: "$v.confirmCode.$model",
-                    modifiers: { trim: true }
-                  }
-                ],
-                staticClass: "form-control",
-                attrs: { type: "text", placeholder: "Mã xác nhận" },
-                domProps: { value: _vm.$v.confirmCode.$model },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.$set(
-                      _vm.$v.confirmCode,
-                      "$model",
-                      $event.target.value.trim()
-                    )
-                  },
-                  blur: function($event) {
-                    return _vm.$forceUpdate()
-                  }
-                }
-              }),
-              _vm._v(" "),
-              _vm.submited && !_vm.$v.confirmCode.required
-                ? _c("span", { staticClass: "error" }, [
-                    _vm._v("Mã xác nhận không được bỏ trống ! ")
-                  ])
-                : _vm._e()
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "form-group mt-3" }, [
-              _c("label", { attrs: { for: "" } }, [_vm._v("Mật khẩu mới")]),
-              _vm._v(" "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model.trim",
-                    value: _vm.$v.password.$model,
-                    expression: "$v.password.$model",
-                    modifiers: { trim: true }
-                  }
-                ],
-                staticClass: "form-control",
-                attrs: { type: "password", placeholder: "Password" },
-                domProps: { value: _vm.$v.password.$model },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.$set(
-                      _vm.$v.password,
-                      "$model",
-                      $event.target.value.trim()
-                    )
-                  },
-                  blur: function($event) {
-                    return _vm.$forceUpdate()
-                  }
-                }
-              }),
-              _vm._v(" "),
-              _vm.submited && !_vm.$v.password.minLength
-                ? _c("span", { staticClass: "error" }, [
-                    _vm._v("Mật khẩu lớn hơn 6 ký tự ! ")
-                  ])
-                : _vm._e(),
-              _vm._v(" "),
-              _vm.submited && !_vm.$v.password.required
-                ? _c("span", { staticClass: "error" }, [
-                    _vm._v("Mật khẩu không được bỏ trống ! ")
-                  ])
-                : _vm._e()
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "form-group mt-3" }, [
-              _c("label", { attrs: { for: "" } }, [
-                _vm._v("Xác nhận mật khẩu")
-              ]),
-              _vm._v(" "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model.trim",
-                    value: _vm.$v.repeatPassword.$model,
-                    expression: "$v.repeatPassword.$model",
-                    modifiers: { trim: true }
-                  }
-                ],
-                staticClass: "form-control",
-                attrs: { type: "password", placeholder: "Password" },
-                domProps: { value: _vm.$v.repeatPassword.$model },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.$set(
-                      _vm.$v.repeatPassword,
-                      "$model",
-                      $event.target.value.trim()
-                    )
-                  },
-                  blur: function($event) {
-                    return _vm.$forceUpdate()
-                  }
-                }
-              }),
-              _vm._v(" "),
-              _vm.submited && !_vm.$v.repeatPassword.sameAsPassword
-                ? _c("span", { staticClass: "error" }, [
-                    _vm._v(" Mật khẩu không khớp! ")
-                  ])
-                : _vm._e()
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: " mt-5" }, [
-              _c(
-                "button",
-                {
-                  staticClass: "btn w-100 text-center",
-                  class: { "is-loading": _vm.loadingSubmit },
-                  on: { click: _vm.sendForgetPassword }
-                },
-                [
-                  _vm._m(0),
-                  _vm._v(
-                    "\n                            Đổi mật khẩu\n                        "
-                  )
-                ]
-              )
-            ])
-          ]),
-          _vm._v(" "),
-          _vm._m(1)
-        ])
-      ])
-    ])
-  ])
+  return _vm._m(0)
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("span", { staticClass: "d-none me-1" }, [
-      _c("i", { staticClass: "fas fa-circle-notch fa-spin" })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "authForm__footer mt-3" }, [
-      _c("a", { attrs: { href: "/login" } }, [_vm._v("Đăng nhập")])
+    return _c("div", { staticClass: "registerForm authForm" }, [
+      _c("div", { staticClass: "container" }, [
+        _c("div", { staticClass: "row justify-content-center" }, [
+          _c("div", { staticClass: "col-12 col-lg-6" }, [
+            _c("div", { staticClass: "authForm__wrap" }, [
+              _c("h3", { staticClass: "text-center" }, [
+                _vm._v(
+                  "FUKI4.0 đang bảo trì. Rất xin lỗi bạn vì sự bất tiện ! "
+                )
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "authForm__footer mt-3" }, [
+              _c("a", { attrs: { href: "/login" } }, [_vm._v("Đăng nhập")])
+            ])
+          ])
+        ])
+      ])
     ])
   }
 ]
@@ -56363,351 +56164,31 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "registerForm authForm" }, [
-    _c("div", { staticClass: "container" }, [
-      _c("div", { staticClass: "row justify-content-center" }, [
-        _c("div", { staticClass: "col-12 col-lg-6" }, [
-          _c("div", { staticClass: "authForm__wrap" }, [
-            _c("h3", { staticClass: "text-center mb-4" }, [_vm._v("Đăng ký")]),
-            _vm._v(" "),
-            _c("div", { staticClass: "form-group" }, [
-              _c("label", { attrs: { for: "" } }, [_vm._v("Email")]),
-              _vm._v(" "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model.trim",
-                    value: _vm.$v.email.$model,
-                    expression: "$v.email.$model",
-                    modifiers: { trim: true }
-                  }
-                ],
-                staticClass: "form-control",
-                class: {
-                  "form-control-error": _vm.submited && !_vm.$v.email.$invalid
-                },
-                attrs: { type: "text", placeholder: "Email" },
-                domProps: { value: _vm.$v.email.$model },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.$set(_vm.$v.email, "$model", $event.target.value.trim())
-                  },
-                  blur: function($event) {
-                    return _vm.$forceUpdate()
-                  }
-                }
-              }),
-              _vm._v(" "),
-              _vm.submited && !_vm.$v.email.required
-                ? _c("span", { staticClass: "error" }, [
-                    _vm._v("Email không được bỏ trống !")
-                  ])
-                : _vm._e(),
-              _vm._v(" "),
-              _vm.submited && !_vm.$v.email.email && _vm.$v.email.required
-                ? _c("span", { staticClass: "error" }, [
-                    _vm._v("Email không đúng định dạng !")
-                  ])
-                : _vm._e(),
-              _vm._v(" "),
-              !_vm.emailUnique
-                ? _c("span", { staticClass: "error" }, [
-                    _vm._v("Email đã được sử dụng ! ")
-                  ])
-                : _vm._e()
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "form-group mt-3" }, [
-              _c("label", { attrs: { for: "" } }, [_vm._v("Họ tên")]),
-              _vm._v(" "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model.trim",
-                    value: _vm.$v.userName.$model,
-                    expression: "$v.userName.$model",
-                    modifiers: { trim: true }
-                  }
-                ],
-                staticClass: "form-control",
-                class: {
-                  "form-control-error":
-                    _vm.submited && !_vm.$v.userName.$invalid
-                },
-                attrs: { type: "text", placeholder: "Họ tên" },
-                domProps: { value: _vm.$v.userName.$model },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.$set(
-                      _vm.$v.userName,
-                      "$model",
-                      $event.target.value.trim()
-                    )
-                  },
-                  blur: function($event) {
-                    return _vm.$forceUpdate()
-                  }
-                }
-              }),
-              _vm._v(" "),
-              _vm.submited && !_vm.$v.userName.required
-                ? _c("span", { staticClass: "error" }, [
-                    _vm._v("Họ tên không được bỏ trống ! ")
-                  ])
-                : _vm._e(),
-              _vm._v(" "),
-              _vm.submited && !_vm.$v.userName.minLength
-                ? _c("span", { staticClass: "error" }, [
-                    _vm._v("Họ tên lớn hơn 4 ký tự ! ")
-                  ])
-                : _vm._e()
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "row" }, [
-              _c("div", { staticClass: "col-md-6 form-group mt-3" }, [
-                _c("label", { attrs: { for: "" } }, [_vm._v("Mã số thẻ")]),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model.trim",
-                      value: _vm.$v.cardId.$model,
-                      expression: "$v.cardId.$model",
-                      modifiers: { trim: true }
-                    }
-                  ],
-                  staticClass: "form-control",
-                  class: {
-                    "form-control-error":
-                      _vm.submited && !_vm.$v.cardId.$invalid
-                  },
-                  attrs: { type: "text", placeholder: "Card Number" },
-                  domProps: { value: _vm.$v.cardId.$model },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(
-                        _vm.$v.cardId,
-                        "$model",
-                        $event.target.value.trim()
-                      )
-                    },
-                    blur: function($event) {
-                      return _vm.$forceUpdate()
-                    }
-                  }
-                }),
-                _vm._v(" "),
-                _vm.submited && !_vm.$v.cardId.required
-                  ? _c("span", { staticClass: "error" }, [
-                      _vm._v("Mã số thẻ không được bỏ trống ! ")
-                    ])
-                  : _vm._e(),
-                _vm._v(" "),
-                !_vm.cardIdExists
-                  ? _c("span", { staticClass: "error" }, [
-                      _vm._v("Mã số thẻ không đúng hoặc đã được sử dụng ! ")
-                    ])
-                  : _vm._e()
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-md-6 form-group mt-3" }, [
-                _c("label", { attrs: { for: "" } }, [_vm._v("Mã xác nhận")]),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model.trim",
-                      value: _vm.$v.confirmCode.$model,
-                      expression: "$v.confirmCode.$model",
-                      modifiers: { trim: true }
-                    }
-                  ],
-                  staticClass: "form-control",
-                  class: {
-                    "form-control-error":
-                      _vm.submited && !_vm.$v.confirmCode.$invalid
-                  },
-                  attrs: { type: "text", placeholder: "Mã xác nhận" },
-                  domProps: { value: _vm.$v.confirmCode.$model },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(
-                        _vm.$v.confirmCode,
-                        "$model",
-                        $event.target.value.trim()
-                      )
-                    },
-                    blur: function($event) {
-                      return _vm.$forceUpdate()
-                    }
-                  }
-                }),
-                _vm._v(" "),
-                _vm.submited && !_vm.$v.confirmCode.required
-                  ? _c("span", { staticClass: "error" }, [
-                      _vm._v("Mã xác nhận không được bỏ trống ! ")
-                    ])
-                  : _vm._e(),
-                _vm._v(" "),
-                !_vm.confirmCodeExists
-                  ? _c("span", { staticClass: "error" }, [
-                      _vm._v("Mã xác nhận không chính xác !")
-                    ])
-                  : _vm._e()
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "form-group mt-3" }, [
-              _c("label", { attrs: { for: "" } }, [_vm._v("Mật khẩu")]),
-              _vm._v(" "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model.trim",
-                    value: _vm.$v.password.$model,
-                    expression: "$v.password.$model",
-                    modifiers: { trim: true }
-                  }
-                ],
-                staticClass: "form-control",
-                class: {
-                  "form-control-error":
-                    _vm.submited && !_vm.$v.password.$invalid
-                },
-                attrs: { type: "password", placeholder: "Password" },
-                domProps: { value: _vm.$v.password.$model },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.$set(
-                      _vm.$v.password,
-                      "$model",
-                      $event.target.value.trim()
-                    )
-                  },
-                  blur: function($event) {
-                    return _vm.$forceUpdate()
-                  }
-                }
-              }),
-              _vm._v(" "),
-              _vm.submited && !_vm.$v.password.minLength
-                ? _c("span", { staticClass: "error" }, [
-                    _vm._v("Mật khẩu lớn hơn 6 ký tự ! ")
-                  ])
-                : _vm._e(),
-              _vm._v(" "),
-              _vm.submited && !_vm.$v.password.required
-                ? _c("span", { staticClass: "error" }, [
-                    _vm._v("Mật khẩu không được bỏ trống ! ")
-                  ])
-                : _vm._e()
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "form-group mt-3" }, [
-              _c("label", { attrs: { for: "" } }, [
-                _vm._v("Xác nhận mật khẩu")
-              ]),
-              _vm._v(" "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model.trim",
-                    value: _vm.$v.repeatPassword.$model,
-                    expression: "$v.repeatPassword.$model",
-                    modifiers: { trim: true }
-                  }
-                ],
-                staticClass: "form-control",
-                class: {
-                  "form-control-error":
-                    _vm.submited && !_vm.$v.repeatPassword.$invalid
-                },
-                attrs: { type: "password", placeholder: "Password" },
-                domProps: { value: _vm.$v.repeatPassword.$model },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.$set(
-                      _vm.$v.repeatPassword,
-                      "$model",
-                      $event.target.value.trim()
-                    )
-                  },
-                  blur: function($event) {
-                    return _vm.$forceUpdate()
-                  }
-                }
-              }),
-              _vm._v(" "),
-              _vm.submited && !_vm.$v.repeatPassword.sameAsPassword
-                ? _c("span", { staticClass: "error" }, [
-                    _vm._v(" Mật khẩu không khớp! ")
-                  ])
-                : _vm._e()
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: " mt-5" }, [
-              _c(
-                "button",
-                {
-                  staticClass: "btn w-100 text-center",
-                  class: { registerLoading: _vm.loadingSubmit },
-                  on: { click: _vm.register }
-                },
-                [
-                  _vm._m(0),
-                  _vm._v(
-                    "\n                            Đăng Ký\n                        "
-                  )
-                ]
-              )
-            ])
-          ]),
-          _vm._v(" "),
-          _vm._m(1)
-        ])
-      ])
-    ])
-  ])
+  return _vm._m(0)
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("span", { staticClass: "d-none me-1" }, [
-      _c("i", { staticClass: "fas fa-circle-notch fa-spin" })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "authForm__footer mt-3" }, [
-      _c("a", { attrs: { href: "/login" } }, [_vm._v("Đăng nhập")])
+    return _c("div", { staticClass: "registerForm authForm" }, [
+      _c("div", { staticClass: "container" }, [
+        _c("div", { staticClass: "row justify-content-center" }, [
+          _c("div", { staticClass: "col-12 col-lg-6" }, [
+            _c("div", { staticClass: "authForm__wrap" }, [
+              _c("h3", { staticClass: "text-center" }, [
+                _vm._v(
+                  "FUKI4.0 đang bảo trì. Rất xin lỗi bạn vì sự bất tiện ! "
+                )
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "authForm__footer mt-3" }, [
+              _c("a", { attrs: { href: "/login" } }, [_vm._v("Đăng nhập")])
+            ])
+          ])
+        ])
+      ])
     ])
   }
 ]

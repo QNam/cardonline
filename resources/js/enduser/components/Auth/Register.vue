@@ -4,7 +4,8 @@
         <div class="row justify-content-center">
             <div class="col-12 col-lg-6">
                 <div class="authForm__wrap">
-                    <h3 class="text-center mb-4">Đăng ký</h3>
+                    <h3 class="text-center">FUKI4.0 đang bảo trì. Rất xin lỗi bạn vì sự bất tiện ! </h3>
+                    <!-- <h3 class="text-center mb-4">Đăng ký</h3>
                     <div class="form-group">
                         <label for="">Email</label>
                         <input type="text" class="form-control" placeholder="Email" :class="{'form-control-error': submited && !$v.email.$invalid}" v-model.trim="$v.email.$model">
@@ -48,7 +49,7 @@
                             <span class="d-none me-1"><i class="fas fa-circle-notch fa-spin"></i></span>
                             Đăng Ký
                         </button>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="authForm__footer mt-3">
                     <a href="/login">Đăng nhập</a>

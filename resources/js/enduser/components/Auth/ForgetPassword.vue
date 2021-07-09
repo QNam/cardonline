@@ -4,7 +4,8 @@
         <div class="row justify-content-center">
             <div class="col-12 col-lg-6">
                 <div class="authForm__wrap">
-                    <h3 class="text-center mb-4">Quên mật khẩu</h3>
+                    <h3 class="text-center">FUKI4.0 đang bảo trì. Rất xin lỗi bạn vì sự bất tiện ! </h3>
+                    <!-- <h3 class="text-center mb-4">Quên mật khẩu</h3>
                     <span class="error" v-if="!cardIdExists">Email hoặc mã xác nhận khi mua hàng không chính xác !</span>
                     <div class="form-group">
                         <label for="">Email</label>
@@ -33,7 +34,7 @@
                             <span class="d-none me-1"><i class="fas fa-circle-notch fa-spin"></i></span>
                             Đổi mật khẩu
                         </button>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="authForm__footer mt-3">
                     <a href="/login">Đăng nhập</a>
