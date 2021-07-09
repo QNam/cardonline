@@ -57249,7 +57249,7 @@ var render = function() {
                                             "max-height": "328px"
                                           },
                                           attrs: {
-                                            src: "/static/icons/icon3.png",
+                                            src: "/static/icons/icon3.jpg",
                                             alt: ""
                                           }
                                         })
@@ -57283,7 +57283,7 @@ var render = function() {
                                             "max-height": "328px"
                                           },
                                           attrs: {
-                                            src: "/static/icons/icon4.png",
+                                            src: "/static/icons/icon4.jpg",
                                             alt: ""
                                           }
                                         })
@@ -57644,9 +57644,9 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("img", { attrs: { src: "/static/themes/thumb2.png" } }),
       _vm._v(" "),
-      _c("img", { attrs: { src: "/static/icons/icon3.png" } }),
+      _c("img", { attrs: { src: "/static/icons/icon3.jpg" } }),
       _vm._v(" "),
-      _c("img", { attrs: { src: "/static/icons/icon4.png" } })
+      _c("img", { attrs: { src: "/static/icons/icon4.jpg" } })
     ])
   }
 ]

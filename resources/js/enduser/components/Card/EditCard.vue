@@ -3,8 +3,8 @@
         <div class="d-none">
             <img src="/static/themes/thumb1.png">
             <img src="/static/themes/thumb2.png">
-            <img src="/static/icons/icon3.png">
-            <img src="/static/icons/icon4.png">
+            <img src="/static/icons/icon3.jpg">
+            <img src="/static/icons/icon4.jpg">
         </div>
         <template v-if="loadingFetch">
             <loading-full />
@@ -130,7 +130,7 @@
                                             :class="{'rounded-lg themeSelected': cardContent.iconTheme == 1}" 
                                             @click="$store.commit('SET_ICON_THEME', 1)" 
                                             class="d-block">
-                                            <img src="/static/icons/icon3.png" class="img-fluid" style="max-height: 328px" alt="">
+                                            <img src="/static/icons/icon3.jpg" class="img-fluid" style="max-height: 328px" alt="">
                                         </a>
                                     </div>
                                     <div class="col-6 mb-2">
@@ -138,7 +138,7 @@
                                             :class="{'rounded-lg themeSelected': cardContent.iconTheme == 2}" 
                                             @click="$store.commit('SET_ICON_THEME', 2)"
                                             class="d-block">
-                                            <img src="/static/icons/icon4.png" class="img-fluid" style="max-height: 328px" alt="">
+                                            <img src="/static/icons/icon4.jpg" class="img-fluid" style="max-height: 328px" alt="">
                                         </a>
                                     </div>
                                 </div>
