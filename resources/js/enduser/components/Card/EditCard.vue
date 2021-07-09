@@ -202,7 +202,7 @@
                                         <div class="row mt-4">
                                             <template v-for="(social, skey) in listSocial"> 
                                                 <a class="col-3 mb-4 cusor-pointer" v-if="social.show" :key="skey" @click.stop="onSelectSocial(skey)">
-                                                    <img :src="social.thumb" class="img-fluid" alt="">
+                                                    <img :src="social.thumb + '?v=1.1'" class="img-fluid" alt="">
                                                 </a>
                                             </template>
                                         </div>

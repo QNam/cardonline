@@ -57602,7 +57602,9 @@ var render = function() {
                                                         staticClass:
                                                           "img-fluid",
                                                         attrs: {
-                                                          src: social.thumb,
+                                                          src:
+                                                            social.thumb +
+                                                            "?v=1.1",
                                                           alt: ""
                                                         }
                                                       })
