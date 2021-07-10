@@ -57632,9 +57632,9 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("img", { attrs: { src: "/static/themes/thumb2.png" } }),
       _vm._v(" "),
-      _c("img", { attrs: { src: "/static/icons/icon3.jpg" } }),
+      _c("img", { attrs: { src: "/static/icons/icon3.jpg?v=1.1" } }),
       _vm._v(" "),
-      _c("img", { attrs: { src: "/static/icons/icon4.jpg" } })
+      _c("img", { attrs: { src: "/static/icons/icon4.jpg?v=1.1" } })
     ])
   }
 ]

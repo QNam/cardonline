@@ -28,7 +28,7 @@
                     @endif
                 </h1>
                 <div class="profile__desc">
-                    {{ $card->descr }}
+                    {!! str_replace(PHP_EOL,"<br>",$card->descr) !!}
                 </div>
                 @if(!empty($card->position)) 
                 <div class="profile__position">

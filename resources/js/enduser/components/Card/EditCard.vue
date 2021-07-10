@@ -3,8 +3,8 @@
         <div class="d-none">
             <img src="/static/themes/thumb1.png">
             <img src="/static/themes/thumb2.png">
-            <img src="/static/icons/icon3.jpg">
-            <img src="/static/icons/icon4.jpg">
+            <img src="/static/icons/icon3.jpg?v=1.1">
+            <img src="/static/icons/icon4.jpg?v=1.1">
         </div>
         <template v-if="loadingFetch">
             <loading-full />

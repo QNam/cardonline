@@ -35,7 +35,7 @@
                   </div>
                   <p id="username" hidden>{{ $card->link }}</p>
                   <div class="flex-row px-3" style="font-size: 18px !important; color: grey; text-align: center; width: 100%; padding-top: 0px; margin-bottom: 14px; font-family: proxima-nova, Arial, Helvetica, sans-serif; font-weight: 400; font-style: normal;">
-                     <a id="nameWebviewA" style="text-align: center; color: #212529">{{ $card->descr }}</a> 
+                     <a id="nameWebviewA" style="text-align: center; color: #212529">{!! str_replace(PHP_EOL,"<br>",$card->descr) !!}</a> 
                   </div>        
                </div>
              
