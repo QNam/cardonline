@@ -54,7 +54,7 @@
                               href="{{ $link['link'] }}" 
                               class="socialTitles d-block">
                               <div>
-                                 <img alt="{{ $card->userName }}" style="width: 100%; height: 100%;" src="{{ $link['thumb'] }}?v=1.1">
+                                 <img alt="{{ $card->userName }}" style="width: 100%; height: 100%;" src="{{ $link['thumb'] }}?v=1.2">
                               </div>
                               {{ $link['name'] }}
                            </a>
@@ -66,7 +66,7 @@
                               href="javascript:;" 
                               class="socialTitles d-block">
                               <div>
-                                 <img alt="{{ $card->userName }}" style="width: 100%; height: 100%;" src="{{ $link['thumb'] }}?v=1.1">
+                                 <img alt="{{ $card->userName }}" style="width: 100%; height: 100%;" src="{{ $link['thumb'] }}?v=1.2">
                               </div>
                               {{ $link['name'] }}
                            </a>

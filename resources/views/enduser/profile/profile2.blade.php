@@ -47,7 +47,7 @@
                         @if($link['showType'] == 'iconDirect')
                         <a class="profile__social__item" target="_blank" href="{{ $link['link'] }}">
                             <div>
-                                <img src="{{ $link['thumb'] }}?v=1.1" alt="">
+                                <img src="{{ $link['thumb'] }}?v=1.2" alt="">
                             </div>
                             <span>{{ $link['name'] }}</span>
                         </a>
@@ -55,7 +55,7 @@
                         @if($link['showType'] == 'card')
                         <div class="profile__social__item" onclick="copyToClipboard('{{ $link['link'] }}')">
                             <div>
-                                <img src="{{ $link['thumb'] }}?v=1.1" alt="">
+                                <img src="{{ $link['thumb'] }}?v=1.2" alt="">
                             </div>
                             <a href="javascript:;">{{ $link['name'] }}</a>
                         </div>

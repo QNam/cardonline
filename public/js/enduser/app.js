@@ -57249,7 +57249,7 @@ var render = function() {
                                           },
                                           attrs: {
                                             src:
-                                              "/static/icons/icon3.jpg?v=1.1",
+                                              "/static/icons/icon3.jpg?v=1.2",
                                             alt: ""
                                           }
                                         })
@@ -57284,7 +57284,7 @@ var render = function() {
                                           },
                                           attrs: {
                                             src:
-                                              "/static/icons/icon4.jpg?v=1.1",
+                                              "/static/icons/icon4.jpg?v=1.2",
                                             alt: ""
                                           }
                                         })
@@ -57353,7 +57353,7 @@ var render = function() {
                                                                 _vm.listSocial[
                                                                   link.type
                                                                 ].thumb +
-                                                                "?v=1.1",
+                                                                "?v=1.2",
                                                               alt: ""
                                                             }
                                                           }),
@@ -57587,7 +57587,7 @@ var render = function() {
                                                         attrs: {
                                                           src:
                                                             social.thumb +
-                                                            "?v=1.1",
+                                                            "?v=1.2",
                                                           alt: ""
                                                         }
                                                       })
@@ -57632,9 +57632,9 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("img", { attrs: { src: "/static/themes/thumb2.png" } }),
       _vm._v(" "),
-      _c("img", { attrs: { src: "/static/icons/icon3.jpg?v=1.1" } }),
+      _c("img", { attrs: { src: "/static/icons/icon3.jpg?v=1.2" } }),
       _vm._v(" "),
-      _c("img", { attrs: { src: "/static/icons/icon4.jpg?v=1.1" } })
+      _c("img", { attrs: { src: "/static/icons/icon4.jpg?v=1.2" } })
     ])
   }
 ]

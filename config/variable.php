@@ -103,7 +103,7 @@ return [
         // ],
         'pinterest' => [
             'show' => true,
-            'thumb' => '/static/icons/%s/pinterest.png',
+            'thumb' => '/static/icons/%s/pin.png',
             'name' => 'Pinterest',
             'uri' => '',
             'appType' => 'social',
@@ -131,7 +131,7 @@ return [
         
         'facebook' => [
             'show' => true,
-            'thumb' => '/static/icons/%s/facebook.png',
+            'thumb' => '/static/icons/%s/fb.png',
             'name' => 'Facebook',
             'uri' => 'https://www.facebook.com/',
             'appType' => 'social',
@@ -149,7 +149,7 @@ return [
         ],
         'instargram' => [
             'show' => true,
-            'thumb' => '/static/icons/%s/instagram.png',
+            'thumb' => '/static/icons/%s/insta.png',
             'name' => 'Instargram',
             'uri' => 'https://www.instagram.com/',
             'appType' => 'social',
@@ -203,7 +203,7 @@ return [
         ],
         'agribank' => [
             'show' => true,
-            'thumb' => '/static/icons/%s/agribank.png',
+            'thumb' => '/static/icons/%s/agri.png',
             'name' => 'Agribank',
             'uri' => '',
             'appType' => 'bank',
@@ -239,7 +239,7 @@ return [
         ],
         'techcombank' => [
             'show' => true,
-            'thumb' => '/static/icons/%s/tcb.png',
+            'thumb' => '/static/icons/%s/techcombank.png',
             'name' => 'Techcombank',
             'uri' => '',
             'appType' => 'bank',
@@ -257,7 +257,7 @@ return [
         ],
         'tpbank' => [
             'show' => true,
-            'thumb' => '/static/icons/%s/tpb.png',
+            'thumb' => '/static/icons/%s/tpbank.png',
             'name' => 'TP Bank',
             'uri' => '',
             'appType' => 'bank',
@@ -275,7 +275,7 @@ return [
         ],
         'viettinbank' => [
             'show' => true,
-            'thumb' => '/static/icons/%s/vtb.png',
+            'thumb' => '/static/icons/%s/viettin.png',
             'name' => 'Viettinbank',
             'uri' => '',
             'appType' => 'bank',
@@ -293,7 +293,7 @@ return [
         ],
         'vietcombank' => [
             'show' => true,
-            'thumb' => '/static/icons/%s/vcb.png',
+            'thumb' => '/static/icons/%s/vietcom.png',
             'name' => 'Vietcombank',
             'uri' => '',
             'appType' => 'bank',
@@ -302,7 +302,7 @@ return [
         ],
         'vpbank' => [
             'show' => true,
-            'thumb' => '/static/icons/%s/vpb.png',
+            'thumb' => '/static/icons/%s/vp.png',
             'name' => 'VP Bank',
             'uri' => '',
             'appType' => 'bank',
