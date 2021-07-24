@@ -29,10 +29,12 @@
                      </a>
                      @endif
                   </div>
+                  
                   <div onclick="copyToClipboard('{{ $card->link }}')" class="flex-row" style="font-size: 18px !important; color: grey; text-align: center; width: 100%; padding-top: 0px; margin-bottom: 14px; font-family: proxima-nova, Arial, Helvetica, sans-serif; font-weight: 400; font-style: normal;">
-                     <a id="nameWebviewA" style="text-align: center">{{ $card->link_show }}</a> 
+                     <a id="nameWebviewA" style="text-align: center">{{ $card->textIntro && $card->textIntro != "" ? $card->textIntro : $card->link_show }}</a> 
                      <!--<a style="background-color: black; height: 50px; width: 100px"></a>-->
                   </div>
+
                   <p id="username" hidden>{{ $card->link }}</p>
                   <div class="flex-row px-3" style="font-size: 18px !important; color: grey; text-align: center; width: 100%; padding-top: 0px; margin-bottom: 14px; font-family: proxima-nova, Arial, Helvetica, sans-serif; font-weight: 400; font-style: normal;">
                      <a id="nameWebviewA" style="text-align: center; color: #212529">{!! str_replace(PHP_EOL,"<br>",$card->descr) !!}</a> 
@@ -87,12 +89,14 @@
                      @endforeach
                      <br><br>
                   </div>
-
+                  
+                  @if($card->removeFooter == 0)
                   <div class="row" style="margin: 0; margin-bottom: 80px">
                      <div class="col-md-8 col-xs-12 col-lg-8" style="margin: 0 auto; display: block">
                         <div id="create1" class="PoweredBy" style="margin-top: 20px;"><strong> <a target="_blank" href="https://shopee.vn/Th%E1%BA%BB-c%C3%A1-nh%C3%A2n-th%C3%B4ng-minh-FUKI-4.0-Card-Visit-th%C3%B4ng-minh-danh-thi%E1%BA%BFp-th%C3%B4ng-minh-i.453514978.4790348140" class="PoweredBy shadow" style=" background-color: black; color: white; padding: 10px">Sở hữu thẻ FUKI 4.0 ngay</a></strong></div>
                      </div>
                   </div>
+                  @endif
                   
                   @if(Auth::check() && Auth::user()->id == $card->id)
                   <div class="editProfile">

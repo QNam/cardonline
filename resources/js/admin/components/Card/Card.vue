@@ -37,7 +37,8 @@
                     <th class="px-2">Số điện thoại</th>
                     <th class="px-2">Mã xác thực</th>
                     <th class="px-2 text-center">Tick xanh</th>
-                    <!-- <th class="px-2">Ngày kích hoạt</th> -->
+                    <th class="px-2 text-center">Xóa footer FUKI</th>
+                    <th class="px-2">Thay text link giới thiệu bằng</th>
                     <th class="px-2"></th>
                 </thead>
                 <tbody v-if="listCard.length > 0" v-loading="loadGetCard">
@@ -67,6 +68,17 @@
                                 <template v-else>
                                     <el-checkbox v-model="card.tick" @change="onChangeTick(card)"></el-checkbox>
                                 </template>
+                            </td>
+                            <td class="px-2 text-center">
+                                <template v-if="typeof removeFooterLoader[card.id] !== 'undefined' && removeFooterLoader[card.id]">
+                                    <i class="fas fa-circle-notch fa-spin"></i>
+                                </template>
+                                <template v-else>
+                                    <el-checkbox v-model="card.removeFooter" @change="onChangeRemoveFooter(card)"></el-checkbox>
+                                </template>
+                            </td>
+                            <td class="px-2 text-center">
+                                {{ card.textIntro }}
                             </td>
                             <!-- <td class="px-2"></td> -->
                             <td class="px-2">
@@ -108,9 +120,16 @@
                 <h5>Thêm thẻ mới</h5>
             </div>
             <div>
-                <div class="form-group">
+                <div class="form-group mb-3">
                     <label for="" class="d-block">Mã thẻ</label>
                     <el-input v-model="cardSelected.id"></el-input>
+                </div>
+                <div class="mb-3">
+                    <el-checkbox v-model="cardSelected.removeFooter">Xóa chân trang FUKI</el-checkbox>
+                </div>
+                <div class="form-group mb-3">
+                    <label for="">Thay text link giới thiệu bằng:</label>
+                    <el-input v-model="cardSelected.textIntro"></el-input>
                 </div>
             </div>
             <span slot="footer" class="dialog-footer">
@@ -123,9 +142,16 @@
             <div slot="title">
                 <h5>Tự động tạo thẻ</h5>
             </div>
-            <div class="d-flex">
+            <div class="d-flex mb-3">
                 <el-input type="number" class="me-3" v-model="genCard.from" placeholder="Từ"></el-input>
                 <el-input type="number" v-model="genCard.to" placeholder="Đến"></el-input>
+            </div>
+            <div class="d-flex mb-3">
+                <el-checkbox v-model="genCard.removeFooter">Xóa chân trang FUKI</el-checkbox>
+            </div>
+            <div class="form-group mb-3">
+                <label for="">Thay text link giới thiệu bằng:</label>
+                <el-input v-model="genCard.textIntro"></el-input>
             </div>
             <span slot="footer" class="dialog-footer">
                 <el-button @click="toggleGenCard = false">Hủy</el-button>
@@ -179,13 +205,16 @@ export default {
             },
             genCard: {
                 from: null,
-                to: null
+                to: null,
+                removeFooter: false,
+                textIntro: ""
             },
             listCard: [],
             listCardExport: [],
             loadGetCard: false,
             loadSaveCard: false,
-            tickLoader:{}
+            tickLoader:{},
+            removeFooterLoader: {}
         }
     },
     mounted() {
@@ -206,12 +235,23 @@ export default {
             this.tickLoader = tmp
         },
 
+        async onChangeRemoveFooter(card) {
+            let tmp = _.cloneDeep(this.tickLoader)
+            tmp[card.id] = true
+            this.removeFooterLoader = tmp
+            await cardApi.changeRemoveFooter(card)
+
+            tmp = _.cloneDeep(this.removeFooterLoader)
+            tmp[card.id] = false
+            this.removeFooterLoader = tmp
+        },
+
         async getListCard() {
             this.loadGetCard = true
             try {
                 const params = {
                     page: this.filter.page,
-                    limit: this.filter.limit
+                    limit: this.filter.limit,
                 }
 
                 if(this.filter.fullName) {
@@ -287,7 +327,9 @@ export default {
         async doGenCard() {
             let params = {
                 from: this.genCard.from,
-                to: this.genCard.to
+                to: this.genCard.to,
+                removeFooter: this.genCard.removeFooter,
+                textIntro: this.genCard.textIntro,
             }
             try {
                 await cardApi.genCard(params);
@@ -298,6 +340,7 @@ export default {
                 this.toggleGenCard = false
                 this.getListCard()
             } catch(e) {
+                console.log(e)
                 this.toggleGenCard = false
                 this.$notify.error({
                     title: 'Error',

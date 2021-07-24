@@ -86,6 +86,8 @@ class CardController extends Controller
                     'theme' => 1,
                     'userName' => 'Người dùng ' . $value,
                     'confirm_code' => $this->generateRandomString(8),
+                    'removeFooter' => $request->removeFooter,
+                    'textIntro' => $request->textIntro,
                 ];
 
                 array_push($params, $tmp);
@@ -203,9 +205,11 @@ class CardController extends Controller
                 'id' => $request->id,
                 'theme' => 1,
                 'userName' => 'Người dùng FUKI',
-                'confirm_code' => $this->generateRandomString(8),           
+                'confirm_code' => $this->generateRandomString(8),   
+                'removeFooter' => $request->removeFooter ? 1 : 0,
+                'textIntro' => $request->textIntro,        
             ];
-            
+            // dd($param);
             $user = Card::create($param);
             
 
@@ -403,7 +407,7 @@ class CardController extends Controller
                 array_push($cardLinkArr, $tmp);
             }
         }
-
+        // dd($cardContent);
         return view($view, ['card' => $cardContent, 'cardLink' => $cardLinkArr]);
     }
 
@@ -496,6 +500,21 @@ class CardController extends Controller
         $card = new Card();
         $params = [
             'tick' => $request->tick
+        ];
+        
+        try {
+            $card->where('id', $request->id)->update($params);
+            
+            return $this->sendSuccess([]);
+        } catch (\Exception $e) {
+            return $this->sendServerError($e);
+        }
+    }
+
+    public function updateRemoveFooter(Request $request) {
+        $card = new Card();
+        $params = [
+            'removeFooter' => (int)$request->removeFooter
         ];
         
         try {

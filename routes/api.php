@@ -32,6 +32,7 @@ Route::group(['middleware' => ['admin.apiAdminAuth']], function () {
     Route::get('/card/getList', 'App\Http\Controllers\CardController@getListCard');
     Route::post('/card/removeBloBla', 'App\Http\Controllers\CardController@removeCard');
     Route::post('/card/updateTickCard', 'App\Http\Controllers\CardController@updateTickCard');
+    Route::post('/card/updateRemoveFooter', 'App\Http\Controllers\CardController@updateRemoveFooter');
     Route::post('/card/storeOneCard', 'App\Http\Controllers\CardController@storeOneCard');
     Route::post('/card/genCard', 'App\Http\Controllers\CardController@genCard');
 });

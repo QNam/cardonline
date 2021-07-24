@@ -61,6 +61,7 @@
                         </div>
                         @endif
                     @endforeach
+                    @if($card->removeFooter == 0)
                     <div class="row" style="margin: 0; margin-top: 80px">
                         <div class="col-md-8 col-xs-12 col-lg-8" style="margin: 0 auto; display: block">
                             <div id="create1" class="PoweredBy" style="margin-top: 20px; text-align:center"><strong> 
@@ -68,6 +69,7 @@
                                     Sở hữu thẻ FUKI 4.0 ngay</a></strong></div>
                         </div>
                     </div>
+                    @endif
                 </div>
             </div>
 

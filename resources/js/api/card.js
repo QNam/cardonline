@@ -25,7 +25,9 @@ export function forgetPassword(data) {
 
 export function createCardSimple(data) {
     return http.post('/card/storeOneCard', {
-        id: data.id
+        id: data.id,
+        removeFooter: data.removeFooter,
+        textIntro: data.textIntro,
     })
 }
 
@@ -63,6 +65,8 @@ export function genCard(params) {
     return http.post('/card/genCard', { 
         from: params.from,
         to: params.to,
+        removeFooter: params.removeFooter,
+        textIntro: params.textIntro,
     })
 }
 
@@ -70,6 +74,13 @@ export function changeTick(params) {
     return http.post('/card/updateTickCard', { 
         id: params.id,
         tick: params.tick ? 1 : 0,
+    })
+}
+
+export function changeRemoveFooter(params) {
+    return http.post('/card/updateRemoveFooter', { 
+        id: params.id,
+        removeFooter: params.removeFooter ? 1 : 0,
     })
 }
 
@@ -197,6 +208,8 @@ export class CardDTO {
         this.confirm_code = card && card.confirm_code ? card.confirm_code : '' 
         this.links = card && card.links ? card.links : null
         this.tick = card && card.tick && card.tick == 1  ? true : false
+        this.removeFooter = card && card.removeFooter == 1 ? true : false,
+        this.textIntro = card && card.textIntro ? card.textIntro : ""
     }
 
     static setDefaultLinksFormat(links = null) {

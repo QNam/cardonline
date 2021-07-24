@@ -7850,6 +7850,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "getCardById": () => (/* binding */ getCardById),
 /* harmony export */   "genCard": () => (/* binding */ genCard),
 /* harmony export */   "changeTick": () => (/* binding */ changeTick),
+/* harmony export */   "changeRemoveFooter": () => (/* binding */ changeRemoveFooter),
 /* harmony export */   "saveCardAvatar": () => (/* binding */ saveCardAvatar),
 /* harmony export */   "saveCardBackground": () => (/* binding */ saveCardBackground),
 /* harmony export */   "storeCard": () => (/* binding */ storeCard),
@@ -7892,7 +7893,9 @@ function forgetPassword(data) {
 }
 function createCardSimple(data) {
   return _axios__WEBPACK_IMPORTED_MODULE_0__.default.post('/card/storeOneCard', {
-    id: data.id
+    id: data.id,
+    removeFooter: data.removeFooter,
+    textIntro: data.textIntro
   });
 }
 function getListCard(data) {
@@ -7928,13 +7931,21 @@ function getCardById(id) {
 function genCard(params) {
   return _axios__WEBPACK_IMPORTED_MODULE_0__.default.post('/card/genCard', {
     from: params.from,
-    to: params.to
+    to: params.to,
+    removeFooter: params.removeFooter,
+    textIntro: params.textIntro
   });
 }
 function changeTick(params) {
   return _axios__WEBPACK_IMPORTED_MODULE_0__.default.post('/card/updateTickCard', {
     id: params.id,
     tick: params.tick ? 1 : 0
+  });
+}
+function changeRemoveFooter(params) {
+  return _axios__WEBPACK_IMPORTED_MODULE_0__.default.post('/card/updateRemoveFooter', {
+    id: params.id,
+    removeFooter: params.removeFooter ? 1 : 0
   });
 }
 function saveCardAvatar(id, imageName) {
@@ -8044,6 +8055,7 @@ var CardDTO = /*#__PURE__*/function () {
     this.confirm_code = card && card.confirm_code ? card.confirm_code : '';
     this.links = card && card.links ? card.links : null;
     this.tick = card && card.tick && card.tick == 1 ? true : false;
+    this.removeFooter = card && card.removeFooter == 1 ? true : false, this.textIntro = card && card.textIntro ? card.textIntro : "";
   }
 
   _createClass(CardDTO, null, [{

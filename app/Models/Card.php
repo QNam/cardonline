@@ -30,7 +30,9 @@ class Card extends Authenticatable {
         'background_color',
         'iconTheme',
         'avatar_img',
-        'confirm_code'
+        'confirm_code',
+        'removeFooter',
+        'textIntro',
     ];
 
     public function links()
