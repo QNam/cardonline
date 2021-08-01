@@ -71,10 +71,29 @@
                     <van-tabbar-item name="1" icon="home-o"></van-tabbar-item>
                     <van-tabbar-item @click="showQr = true" name="1" icon="qr"></van-tabbar-item>
                     <van-tabbar-item name="2" icon="setting-o"></van-tabbar-item>
+                    <van-tabbar-item name="3" icon="question-o"></van-tabbar-item>
                     <van-tabbar-item @click="goToProfile" icon="user-o"></van-tabbar-item>
                 </van-tabbar>
             </template>
             
+            <template v-if="tab == 3">
+                <van-nav-bar
+                    title="Hướng dẫn"
+                    left-text="Back"
+                    left-arrow
+                    fixed
+                    @click-left="tab = 1"
+                >
+                <template #right>
+                </template>
+                </van-nav-bar>
+                <div style="margin-top: 60px">
+                    <a class="d-inline-block mb-2" href="/intro/Các dòng điện thoại tương thích.pdf" target="_BLANK">1. Các dòng điện thoại tương thích ?</a>
+                    <a class="d-inline-block mb-2" href="/intro/Hướng dẫn lấy và chèn link mạng xã hội.pdf" target="_BLANK">2. Hướng dẫn lấy và chèn link mạng xã hội ?</a>
+                    <a class="d-inline-block mb-2" href="/intro/Vùng dán Sticker khả dụng.jpg" target="_BLANK">3. Vùng dán Sticker khả dụng ?</a>
+                </div>
+            </template>
+
             <template v-if="tab == 2">
                 <van-nav-bar
                     title="Cài đặt"

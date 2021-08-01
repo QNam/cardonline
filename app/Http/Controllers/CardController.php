@@ -511,6 +511,21 @@ class CardController extends Controller
         }
     }
 
+    public function updateTextIntro(Request $request) {
+        $card = new Card();
+        $params = [
+            'textIntro' => $request->textIntro
+        ];
+        
+        try {
+            $card->where('id', $request->id)->update($params);
+            
+            return $this->sendSuccess([]);
+        } catch (\Exception $e) {
+            return $this->sendServerError($e);
+        }
+    }
+
     public function updateRemoveFooter(Request $request) {
         $card = new Card();
         $params = [

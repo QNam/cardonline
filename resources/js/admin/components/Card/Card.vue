@@ -78,7 +78,11 @@
                                 </template>
                             </td>
                             <td class="px-2 text-center">
-                                {{ card.textIntro }}
+                                <!-- {{ card.textIntro }} -->
+                                <div class="d-flex">
+                                    <el-input class="me-1" v-model="card.textIntro" @keyup.native.enter="saveTextIntro(card, $event.target.value)"></el-input>
+                                    <el-button @click="saveTextIntro(card, card.textIntro)">Lưu</el-button>
+                                </div>
                             </td>
                             <!-- <td class="px-2"></td> -->
                             <td class="px-2">
@@ -224,11 +228,33 @@ export default {
         
     },
     methods: {
+        async saveTextIntro(card, value) {
+            // card, event.target.value
+            try {
+                await cardApi.updateTextIntro(card.id, value)
+                this.$notify.success({
+                    message: 'Cập nhật thành công ! !'
+                });
+            } catch (error) {
+                this.$notify.error({
+                    title: 'Error',
+                    message: 'Có lỗi xảy ra vui lòng thử lại sau !'
+                });
+            }
+        },
+
         async onChangeTick(card) {
             let tmp = _.cloneDeep(this.tickLoader)
             tmp[card.id] = true
             this.tickLoader = tmp
-            await cardApi.changeTick(card)
+            try {
+                await cardApi.changeTick(card)
+            } catch (error) {
+                this.$notify.error({
+                    title: 'Error',
+                    message: 'Có lỗi xảy ra vui lòng thử lại sau !'
+                });
+            }
 
             tmp = _.cloneDeep(this.tickLoader)
             tmp[card.id] = false
@@ -239,7 +265,15 @@ export default {
             let tmp = _.cloneDeep(this.tickLoader)
             tmp[card.id] = true
             this.removeFooterLoader = tmp
-            await cardApi.changeRemoveFooter(card)
+            
+            try {
+                await cardApi.changeRemoveFooter(card)
+            } catch (error) {
+                this.$notify.error({
+                    title: 'Error',
+                    message: 'Có lỗi xảy ra vui lòng thử lại sau !'
+                });
+            }
 
             tmp = _.cloneDeep(this.removeFooterLoader)
             tmp[card.id] = false

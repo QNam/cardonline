@@ -77,6 +77,13 @@ export function changeTick(params) {
     })
 }
 
+export function updateTextIntro(id, textIntro) {
+    return http.post('/card/updateTextIntro', { 
+        id: id,
+        textIntro: textIntro,
+    })
+}
+
 export function changeRemoveFooter(params) {
     return http.post('/card/updateRemoveFooter', { 
         id: params.id,

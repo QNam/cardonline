@@ -7379,6 +7379,25 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -7850,6 +7869,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "getCardById": () => (/* binding */ getCardById),
 /* harmony export */   "genCard": () => (/* binding */ genCard),
 /* harmony export */   "changeTick": () => (/* binding */ changeTick),
+/* harmony export */   "updateTextIntro": () => (/* binding */ updateTextIntro),
 /* harmony export */   "changeRemoveFooter": () => (/* binding */ changeRemoveFooter),
 /* harmony export */   "saveCardAvatar": () => (/* binding */ saveCardAvatar),
 /* harmony export */   "saveCardBackground": () => (/* binding */ saveCardBackground),
@@ -7940,6 +7960,12 @@ function changeTick(params) {
   return _axios__WEBPACK_IMPORTED_MODULE_0__.default.post('/card/updateTickCard', {
     id: params.id,
     tick: params.tick ? 1 : 0
+  });
+}
+function updateTextIntro(id, textIntro) {
+  return _axios__WEBPACK_IMPORTED_MODULE_0__.default.post('/card/updateTextIntro', {
+    id: id,
+    textIntro: textIntro
   });
 }
 function changeRemoveFooter(params) {
@@ -57024,12 +57050,50 @@ var render = function() {
                     }),
                     _vm._v(" "),
                     _c("van-tabbar-item", {
+                      attrs: { name: "3", icon: "question-o" }
+                    }),
+                    _vm._v(" "),
+                    _c("van-tabbar-item", {
                       attrs: { icon: "user-o" },
                       on: { click: _vm.goToProfile }
                     })
                   ],
                   1
                 )
+              ]
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.tab == 3
+            ? [
+                _c("van-nav-bar", {
+                  attrs: {
+                    title: "Hướng dẫn",
+                    "left-text": "Back",
+                    "left-arrow": "",
+                    fixed: ""
+                  },
+                  on: {
+                    "click-left": function($event) {
+                      _vm.tab = 1
+                    }
+                  },
+                  scopedSlots: _vm._u(
+                    [
+                      {
+                        key: "right",
+                        fn: function() {
+                          return undefined
+                        },
+                        proxy: true
+                      }
+                    ],
+                    null,
+                    false,
+                    3743218793
+                  )
+                }),
+                _vm._v(" "),
+                _vm._m(1)
               ]
             : _vm._e(),
           _vm._v(" "),
@@ -57647,6 +57711,48 @@ var staticRenderFns = [
       _c("img", { attrs: { src: "/static/icons/icon3.jpg?v=1.2" } }),
       _vm._v(" "),
       _c("img", { attrs: { src: "/static/icons/icon4.jpg?v=1.2" } })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticStyle: { "margin-top": "60px" } }, [
+      _c(
+        "a",
+        {
+          staticClass: "d-inline-block mb-2",
+          attrs: {
+            href: "/intro/Các dòng điện thoại tương thích.pdf",
+            target: "_BLANK"
+          }
+        },
+        [_vm._v("1. Các dòng điện thoại tương thích ?")]
+      ),
+      _vm._v(" "),
+      _c(
+        "a",
+        {
+          staticClass: "d-inline-block mb-2",
+          attrs: {
+            href: "/intro/Hướng dẫn lấy và chèn link mạng xã hội.pdf",
+            target: "_BLANK"
+          }
+        },
+        [_vm._v("2. Hướng dẫn lấy và chèn link mạng xã hội ?")]
+      ),
+      _vm._v(" "),
+      _c(
+        "a",
+        {
+          staticClass: "d-inline-block mb-2",
+          attrs: {
+            href: "/intro/Vùng dán Sticker khả dụng.jpg",
+            target: "_BLANK"
+          }
+        },
+        [_vm._v("3. Vùng dán Sticker khả dụng ?")]
+      )
     ])
   }
 ]
