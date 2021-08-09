@@ -7754,7 +7754,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  data: function data() {
+    return {
+      logo: window.LOGO
+    };
+  }
+});
 
 /***/ }),
 
@@ -57865,140 +57871,139 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", [
+    _c("nav", { staticClass: "navbar" }, [
+      _c("div", { staticClass: "container" }, [
+        _c("div", { staticClass: "navbar__wrap" }, [
+          _c("a", { staticClass: "navbar__logo", attrs: { href: "/" } }, [
+            _c("img", {
+              staticStyle: { width: "120px" },
+              attrs: { src: _vm.logo, alt: "" }
+            })
+          ]),
+          _vm._v(" "),
+          _vm._m(0)
+        ])
+      ])
+    ]),
+    _vm._v(" "),
+    _c("nav", { staticClass: "navbar--mobile" }, [
+      _c("div", { staticClass: "container" }, [
+        _c("div", { staticClass: "navbar--mobile__wrap" }, [
+          _c("a", { attrs: { href: "/" } }, [
+            _c("img", {
+              staticStyle: { width: "120px" },
+              attrs: { src: _vm.logo, alt: "" }
+            })
+          ]),
+          _vm._v(" "),
+          _vm._m(1)
+        ])
+      ])
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", [
-      _c("nav", { staticClass: "navbar" }, [
-        _c("div", { staticClass: "container" }, [
-          _c("div", { staticClass: "navbar__wrap" }, [
-            _c("a", { staticClass: "navbar__logo", attrs: { href: "/" } }, [
-              _c("img", {
-                staticStyle: { width: "120px" },
-                attrs: { src: "/static/imgs/logo.png", alt: "" }
-              })
-            ]),
-            _vm._v(" "),
-            _c("ul", [
-              _c("li", [
-                _c(
-                  "a",
-                  { attrs: { href: "https://www.facebook.com/fuki4.0" } },
-                  [_c("i", { staticClass: "fab fa-facebook-f" })]
-                )
-              ]),
-              _vm._v(" "),
-              _c("li", [
-                _c(
-                  "a",
-                  { attrs: { href: "https://www.instagram.com/fuki4.0/" } },
-                  [_c("i", { staticClass: "fab fa-instagram" })]
-                )
-              ]),
-              _vm._v(" "),
-              _c("li", [
-                _c(
-                  "a",
-                  {
-                    staticClass: "goToShop",
-                    attrs: { href: "https://shopee.vn/fuki40" }
-                  },
-                  [_vm._v("Go to shop ")]
-                )
-              ])
-            ])
-          ])
+    return _c("ul", [
+      _c("li", [
+        _c("a", { attrs: { href: "https://www.facebook.com/fuki4.0" } }, [
+          _c("i", { staticClass: "fab fa-facebook-f" })
         ])
       ]),
       _vm._v(" "),
-      _c("nav", { staticClass: "navbar--mobile" }, [
-        _c("div", { staticClass: "container" }, [
-          _c("div", { staticClass: "navbar--mobile__wrap" }, [
-            _c("a", { attrs: { href: "/" } }, [
-              _c("img", {
-                staticStyle: { width: "120px" },
-                attrs: { src: "/static/imgs/logo.png", alt: "" }
-              })
-            ]),
-            _vm._v(" "),
-            _c("li", { staticClass: "nav-item dropdown" }, [
-              _c(
-                "a",
-                {
-                  staticClass: "nav-link",
-                  attrs: {
-                    href: "#",
-                    id: "navbar--mobile",
-                    "data-bs-toggle": "dropdown",
-                    "aria-expanded": "false"
-                  }
-                },
-                [
-                  _c("i", {
-                    staticClass: "fas fa-bars",
-                    attrs: { "aria-hidden": "true" }
-                  })
-                ]
-              ),
-              _vm._v(" "),
-              _c(
-                "ul",
-                {
-                  staticClass: "dropdown-menu",
-                  attrs: { "aria-labelledby": "navbar--mobile" }
-                },
-                [
-                  _c("li", [
-                    _c(
-                      "a",
-                      {
-                        staticClass: "dropdown-item",
-                        attrs: { href: "https://www.facebook.com/fuki4.0" }
-                      },
-                      [
-                        _c("i", { staticClass: "fab fa-facebook-f me-2" }),
-                        _vm._v(" Facebook")
-                      ]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("li", [
-                    _c(
-                      "a",
-                      {
-                        staticClass: "dropdown-item",
-                        attrs: { href: "https://www.instagram.com/fuki4.0/" }
-                      },
-                      [
-                        _c("i", { staticClass: "fab fa-instagram me-2" }),
-                        _vm._v(" Instargram")
-                      ]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("li", [
-                    _c(
-                      "a",
-                      {
-                        staticClass: "dropdown-item",
-                        attrs: { href: "https://shopee.vn/fuki40" }
-                      },
-                      [
-                        _c("span", { staticClass: "me-2" }),
-                        _vm._v("  Go to shop")
-                      ]
-                    )
-                  ])
-                ]
-              )
-            ])
-          ])
+      _c("li", [
+        _c("a", { attrs: { href: "https://www.instagram.com/fuki4.0/" } }, [
+          _c("i", { staticClass: "fab fa-instagram" })
         ])
+      ]),
+      _vm._v(" "),
+      _c("li", [
+        _c(
+          "a",
+          {
+            staticClass: "goToShop",
+            attrs: { href: "https://shopee.vn/fuki40" }
+          },
+          [_vm._v("Go to shop ")]
+        )
       ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", { staticClass: "nav-item dropdown" }, [
+      _c(
+        "a",
+        {
+          staticClass: "nav-link",
+          attrs: {
+            href: "#",
+            id: "navbar--mobile",
+            "data-bs-toggle": "dropdown",
+            "aria-expanded": "false"
+          }
+        },
+        [
+          _c("i", {
+            staticClass: "fas fa-bars",
+            attrs: { "aria-hidden": "true" }
+          })
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "ul",
+        {
+          staticClass: "dropdown-menu",
+          attrs: { "aria-labelledby": "navbar--mobile" }
+        },
+        [
+          _c("li", [
+            _c(
+              "a",
+              {
+                staticClass: "dropdown-item",
+                attrs: { href: "https://www.facebook.com/fuki4.0" }
+              },
+              [
+                _c("i", { staticClass: "fab fa-facebook-f me-2" }),
+                _vm._v(" Facebook")
+              ]
+            )
+          ]),
+          _vm._v(" "),
+          _c("li", [
+            _c(
+              "a",
+              {
+                staticClass: "dropdown-item",
+                attrs: { href: "https://www.instagram.com/fuki4.0/" }
+              },
+              [
+                _c("i", { staticClass: "fab fa-instagram me-2" }),
+                _vm._v(" Instargram")
+              ]
+            )
+          ]),
+          _vm._v(" "),
+          _c("li", [
+            _c(
+              "a",
+              {
+                staticClass: "dropdown-item",
+                attrs: { href: "https://shopee.vn/fuki40" }
+              },
+              [_c("span", { staticClass: "me-2" }), _vm._v("  Go to shop")]
+            )
+          ])
+        ]
+      )
     ])
   }
 ]

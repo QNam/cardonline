@@ -22,6 +22,7 @@
         @endif
     </script>
     <script>window.Laravel = {csrfToken: '{{ csrf_token() }}'}</script>
+    <script>window.LOGO = '{{ \App\Helpers\AppHelper::instance()->getLogo() }}'</script>
 </head>
 <body>
     <div class="container">

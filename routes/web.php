@@ -15,7 +15,11 @@ use Illuminate\Support\Facades\Auth;
 
 Route::group(['middleware' => ['web']], function () {
     Route::get('/', function () {
+        $config = \Config::get('sites.SITES_NOT_HOME');
         
+        if(in_array($_SERVER['SERVER_NAME'], $config)) {
+            return redirect()->route('Login');
+        }
         return view('enduser/home');
     });
 

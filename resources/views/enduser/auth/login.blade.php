@@ -295,7 +295,7 @@
                     <div class="container">
                         <div class="navbar__wrap">
                             <a  href="/" class="navbar__logo">
-                                <img  src="{{ asset('/static/imgs/logo.png') }}" alt="" style="width: 120px;">
+                                <img  src="{{ \App\Helpers\AppHelper::instance()->getLogo() }}" alt="" style="max-width: 120px; height: auto">
                             </a>
                             <ul>
                                 <li><a  href="https://www.facebook.com/fuki4.0"><i class="fab fa-facebook-f"></i></a></li>
@@ -310,7 +310,7 @@
                 <nav  class="navbar--mobile">
                     <div class="container">
                         <div class="navbar--mobile__wrap"><a  href="">
-                            <img src="{{ asset('/static/imgs/logo.png') }}" alt="" style="width: 120px;"></a>
+                            <img src="{{ \App\Helpers\AppHelper::instance()->getLogo() }}" alt="" style="width: 120px;"></a>
                             <li class="nav-item dropdown">
                                 <a  href="#" id="navbar--mobile" 
                                     data-bs-toggle="dropdown" aria-expanded="false"

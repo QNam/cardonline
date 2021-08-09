@@ -4,7 +4,7 @@
             <div class="container">
                 <div class="navbar__wrap">
                     <a href="/" class="navbar__logo">
-                        <img src="/static/imgs/logo.png" alt="" style="width: 120px">
+                        <img :src="logo" alt="" style="width: 120px">
                     </a>
                     <ul>
                         <li><a  href="https://www.facebook.com/fuki4.0"><i class="fab fa-facebook-f"></i></a></li>
@@ -18,7 +18,7 @@
             <div class="container">
                 <div class="navbar--mobile__wrap">
                     <a href="/">
-                        <img src="/static/imgs/logo.png" alt="" style="width: 120px">
+                        <img :src="logo" alt="" style="width: 120px">
                     </a>
                     <li class="nav-item dropdown">
                         <a class="nav-link" href="#" id="navbar--mobile" data-bs-toggle="dropdown" aria-expanded="false">
@@ -38,7 +38,11 @@
 
 <script>
 export default {
-
+    data() {
+        return {
+            logo: window.LOGO
+        }
+    }
 }
 </script>
 
