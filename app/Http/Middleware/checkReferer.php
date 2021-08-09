@@ -16,11 +16,12 @@ class checkReferer
      */
     public function handle(Request $request, Closure $next)
     {
-        $referer = $request->headers->get('referer');
-        if($referer && strpos($referer, env('APP_URL')) !== false) {
-            return $next($request);
-        }
+        return $next($request);
+        // $referer = $request->headers->get('referer');
+        // if($referer && strpos($referer, env('APP_URL')) !== false) {
+        //     return $next($request);
+        // }
 
-        return response()->json(['code' => 401, 'message' => 'Unauthorized'],401);
+        // return response()->json(['code' => 401, 'message' => 'Unauthorized'],401);
     }
 }

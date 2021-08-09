@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Auth;
 
 Route::group(['middleware' => ['web']], function () {
     Route::get('/', function () {
+        
         return view('enduser/home');
     });
 
