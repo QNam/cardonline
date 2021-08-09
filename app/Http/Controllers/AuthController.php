@@ -44,6 +44,20 @@ class AuthController extends Controller
         return redirect()->back();
     }
 
+    public function registerIndex(Request $request) {
+        
+        if($request->id && !$request->code && $request->id >= 500611 && $request->id <= 501528) {
+            $card = Card::where('id', $request->id)->first();
+            if($card) {
+                return redirect()->route('Register', ['code' => $card->confirm_code, 'id' => $request->id]);
+            }
+        }
+        
+
+        return view('enduser/app');
+        // 500611 - 
+    }
+
     public function register(RegisterRequest $request) {
         $card = new Card();
         $emailExists = Card::checkEmailExists($request->email);

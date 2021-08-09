@@ -6684,6 +6684,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   mounted: function mounted() {
     if (this.$route.query && typeof this.$route.query.id !== 'undefined') {
       this.cardId = this.$route.query.id;
+      this.confirmCode = this.$route.query.code;
     }
   },
   methods: {

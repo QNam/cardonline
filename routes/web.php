@@ -24,10 +24,10 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/logout', 'App\Http\Controllers\AuthController@logout')->name('UserLogout');
     
 
-    Route::get('/register',  function(){
-        return view('enduser/app');
-    })->name('Register');
-
+    Route::get('/register',  'App\Http\Controllers\AuthController@registerIndex')->name('Register');
+    // function(){
+    //     return view('enduser/app');
+    // }
     // Route::get('/forget-password',  function(){
     //     return view('enduser/app');
     // })->name('ForgetPassword');
