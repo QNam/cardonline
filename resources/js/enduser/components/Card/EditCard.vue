@@ -293,7 +293,7 @@ export default {
             //dung xoa
         },
         goToProfile() {
-            window.location.href = this.cardContent.url
+            window.location.href = '/' + this.cardContent.id
         },
 
         onSelectSocial(social) {

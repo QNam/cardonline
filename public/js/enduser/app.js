@@ -7470,7 +7470,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     onCardLinkMove: function onCardLinkMove() {//dung xoa
     },
     goToProfile: function goToProfile() {
-      window.location.href = this.cardContent.url;
+      window.location.href = '/' + this.cardContent.id;
     },
     onSelectSocial: function onSelectSocial(social) {
       this.$store.commit('SET_SOCIAL_EDIT', {
