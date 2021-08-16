@@ -10,6 +10,7 @@ return [
     'SITES_NOT_HOME' => [
         'namkay.com',
         'luxury40.com',
+        'luxury50.com',
         // 'cardonline.local',
     ]
 ];
