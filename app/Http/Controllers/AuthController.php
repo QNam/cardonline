@@ -46,12 +46,12 @@ class AuthController extends Controller
 
     public function registerIndex(Request $request) {
         
-        if($request->id && !$request->code && $request->id >= 500000 && $request->id <= 509999) {
-            $card = Card::where('id', $request->id)->first();
-            if($card) {
-                return redirect()->route('Register', ['code' => $card->confirm_code, 'id' => $request->id]);
-            }
-        }
+        // if($request->id && !$request->code && $request->id >= 500000 && $request->id <= 509999) {
+        //     $card = Card::where('id', $request->id)->first();
+        //     if($card) {
+        //         return redirect()->route('Register', ['code' => $card->confirm_code, 'id' => $request->id]);
+        //     }
+        // }
         
 
         return view('enduser/app');
